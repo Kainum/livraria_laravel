@@ -4,7 +4,13 @@
     <title>Gêneros</title>
 </head>
 <body>
-    <h1>Gênero: {{ $nome }}</h1>
+    <h1>Gêneros</h1>
+    <ul>
+        @foreach ($generos as $gen)
+            <li>{{ $gen->nome }}</li>
+            <li>{{ $gen->imagem }}</li>
+        @endforeach
+    </ul>
     view para apresentar os generos.
 </body>
 </html>

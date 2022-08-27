@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genero;
 use Illuminate\Http\Request;
 
 class GenerosController extends Controller
 {
 
-    public function index () {
-        $nome = "Johnny Depp";
-        return view("generos", ['nome'=>$nome]);
+    public function getAll () {
+        $list = Genero::All();
+        return view('generos', ['generos'=>$list]);
     }
 }

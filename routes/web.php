@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('browse', [GenerosController::class, 'index']);
+Route::get('browse', [GenerosController::class, 'getAll']);
