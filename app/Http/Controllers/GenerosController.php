@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 class GenerosController extends Controller
 {
 
-    public function getAll () {
+    public function index () {
         $list = Genero::All();
-        return view('generos', ['generos'=>$list]);
+        return view('generos.index', ['item_list'=>$list]);
+    }
+
+    public function create () {
+        return view('generos.create');
     }
 }
