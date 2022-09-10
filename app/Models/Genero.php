@@ -9,6 +9,8 @@ class Genero extends Model
 {
     use HasFactory;
     protected $table = "generos";
-
-    
+    protected $fillable = [
+        'nome',
+        'imagem',
+    ];
 }

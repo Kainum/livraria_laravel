@@ -16,4 +16,11 @@ class GenerosController extends Controller
     public function create () {
         return view('generos.create');
     }
+
+    public function store (Request $request) {
+        $new_item = $request->all();
+        Genero::create($new_item);
+
+        return redirect('admin/generos');
+    }
 }

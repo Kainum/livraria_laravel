@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'generos'], function () {
         Route::get('/',         [GenerosController::class, 'index']);
         Route::get('/create',   [GenerosController::class, 'create']);
+        Route::post('/store',   [GenerosController::class, 'store']);
     });
 });
 
