@@ -1,6 +1,6 @@
 @extends('master', ['model_title' => 'Layout'])
 @section('content')
-    <h2>Novo Gênero</h2>
+    <h2>Editando Gênero {{ $genero->nome }}</h2>
 
     @if ($errors->any())
         <ul class="alert alert-danger">
@@ -10,18 +10,18 @@
         </ul>
     @endif
 
-    {!! Form::open(['route'=>'admin.generos.store']) !!}
+    {!! Form::open(['route'=>["admin.generos.update", 'id'=>$genero->id],'method'=>'put']) !!}
         <div class="form-group">
             {!! Form::label('nome', 'Nome: ') !!}
-            {!! Form::text('nome', null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::text('nome', $genero->nome, ['class'=>'form-control', 'required']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('imagem', 'URL imagem: ') !!}
-            {!! Form::text('imagem', null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::text('imagem', $genero->imagem, ['class'=>'form-control', 'required']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Criar', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Salvar alteração', ['class'=>'btn btn-primary']) !!}
             {!! Form::reset('Limpar', ['class'=>'btn btn-default']) !!}
         </div>
     {!! Form::close() !!}

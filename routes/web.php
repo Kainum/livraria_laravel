@@ -36,10 +36,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 
-    Route::group(['prefix' => 'generos'], function () {
-        Route::get('/',         [GenerosController::class, 'index']);
-        Route::get('/create',   [GenerosController::class, 'create']);
-        Route::post('/store',   [GenerosController::class, 'store']);
+    Route::group(['prefix' => 'generos', 'where'=>['id'=>'[0-9]+']], function () {
+        Route::get('/',         [GenerosController::class, 'index'])->name('admin.generos');
+        Route::get('/create',   [GenerosController::class, 'create'])->name('admin.generos.create');
+        Route::post('/store',   [GenerosController::class, 'store'])->name('admin.generos.store');
+        Route::get('/{id}/destroy', [GenerosController::class,  'destroy'])->name('admin.generos.destroy');
+        Route::get('/{id}/edit',    [GenerosController::class,  'edit'])->name('admin.generos.edit');
+        Route::put('/{id}/update',  [GenerosController::class,  'update'])->name('admin.generos.update');
     });
 });
 
