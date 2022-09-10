@@ -42,5 +42,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
+Route::get('/layout', function () {
+    return view('layout_admin');
+});
+
 
 require __DIR__.'/auth.php';
