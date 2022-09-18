@@ -4,6 +4,9 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\GenerosController;
+use App\Http\Controllers\EditorasController;
+use App\Http\Controllers\LivrosController;
+use App\Http\Controllers\ColecoesController;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -43,6 +46,33 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/{id}/destroy', [GenerosController::class,  'destroy'])->name('admin.generos.destroy');
         Route::get('/{id}/edit',    [GenerosController::class,  'edit'])->name('admin.generos.edit');
         Route::put('/{id}/update',  [GenerosController::class,  'update'])->name('admin.generos.update');
+    });
+
+    Route::group(['prefix' => 'editoras', 'where'=>['id'=>'[0-9]+']], function () {
+        Route::get('/',         [EditorasController::class, 'index'])->name('admin.editoras');
+        Route::get('/create',   [EditorasController::class, 'create'])->name('admin.editoras.create');
+        Route::post('/store',   [EditorasController::class, 'store'])->name('admin.editoras.store');
+        Route::get('/{id}/destroy', [EditorasController::class,  'destroy'])->name('admin.editoras.destroy');
+        Route::get('/{id}/edit',    [EditorasController::class,  'edit'])->name('admin.editoras.edit');
+        Route::put('/{id}/update',  [EditorasController::class,  'update'])->name('admin.editoras.update');
+    });
+
+    Route::group(['prefix' => 'livros', 'where'=>['id'=>'[0-9]+']], function () {
+        Route::get('/',         [LivrosController::class, 'index'])->name('admin.livros');
+        Route::get('/create',   [LivrosController::class, 'create'])->name('admin.livros.create');
+        Route::post('/store',   [LivrosController::class, 'store'])->name('admin.livros.store');
+        Route::get('/{id}/destroy', [LivrosController::class,  'destroy'])->name('admin.livros.destroy');
+        Route::get('/{id}/edit',    [LivrosController::class,  'edit'])->name('admin.livros.edit');
+        Route::put('/{id}/update',  [LivrosController::class,  'update'])->name('admin.livros.update');
+    });
+
+    Route::group(['prefix' => 'colecoes', 'where'=>['id'=>'[0-9]+']], function () {
+        Route::get('/',         [ColecoesController::class, 'index'])->name('admin.colecoes');
+        Route::get('/create',   [ColecoesController::class, 'create'])->name('admin.colecoes.create');
+        Route::post('/store',   [ColecoesController::class, 'store'])->name('admin.colecoes.store');
+        Route::get('/{id}/destroy', [ColecoesController::class,  'destroy'])->name('admin.colecoes.destroy');
+        Route::get('/{id}/edit',    [ColecoesController::class,  'edit'])->name('admin.colecoes.edit');
+        Route::put('/{id}/update',  [ColecoesController::class,  'update'])->name('admin.colecoes.update');
     });
 });
 

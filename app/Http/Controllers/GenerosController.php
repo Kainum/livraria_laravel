@@ -10,7 +10,7 @@ class GenerosController extends Controller
 {
 
     public function index () {
-        $list = Genero::All();
+        $list = Genero::orderBy('nome')->paginate(5);
         return view('generos.index', ['item_list'=>$list]);
     }
 
