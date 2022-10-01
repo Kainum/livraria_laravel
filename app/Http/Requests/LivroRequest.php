@@ -26,7 +26,7 @@ class LivroRequest extends FormRequest
         return [
             'titulo'=>'required|max:100',
             'resumo'=>'max:500',
-            'isbn'=>'min:17|max:17',
+            'isbn'=>'min:14|max:14',
             'autor'=>'max:100',
             'data_lancamento'=>'date',
             'editora_id'=>'required',

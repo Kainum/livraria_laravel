@@ -10,7 +10,7 @@
         </ul>
     @endif
 
-    {!! Form::open(['route'=>'admin.livros.store']) !!}
+    {!! Form::open(['route'=>'admin.livros.store', 'files'=>true]) !!}
         <div class="form-group">
             {!! Form::label('titulo', 'Título: ') !!}
             {!! Form::text('titulo', null, ['class'=>'form-control', 'required']) !!}
@@ -24,8 +24,8 @@
             {!! Form::text('autor', null, ['class'=>'form-control', 'required']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('imagem', 'URL imagem: ') !!}
-            {!! Form::text('imagem', null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::label('file', 'Arquivo de imagem: ') !!}
+            {!! Form::file('file', null, ['class'=>'form-control', 'required']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('resumo', 'Resumo: ') !!}
@@ -48,12 +48,12 @@
             {!! Form::number('qtd_estoque', null, ['class'=>'form-control', 'required']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('colecao', 'Coleção: ') !!}
-            {!! Form::select('colecao', \App\Models\Colecao::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::label('colecao_id', 'Coleção: ') !!}
+            {!! Form::select('colecao_id', \App\Models\Colecao::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('editora', 'Editora: ') !!}
-            {!! Form::select('editora', \App\Models\Editora::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::label('editora_id', 'Editora: ') !!}
+            {!! Form::select('editora_id', \App\Models\Editora::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}
         </div>
         <div class="form-group">
             {!! Form::submit('Criar', ['class'=>'btn btn-primary']) !!}

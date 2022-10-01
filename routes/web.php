@@ -7,6 +7,7 @@ use App\Http\Controllers\GenerosController;
 use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\ColecoesController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Routing\RouteGroup;
 
@@ -32,6 +33,8 @@ Route::get('/dashboard', function () {
 Route::get('/browse', [GenerosController::class, 'index']);
 
 Route::get('/search', [SearchController::class, 'getAll']);
+
+Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
 Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
     Route::get('/',         [SearchController::class, 'getAll']);
