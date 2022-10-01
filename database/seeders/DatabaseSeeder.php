@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             AdminsSeeder::class,
             EditoraSeeder::class,
             GeneroSeeder::class,
+            ColecaoSeeder::class,
+            LivroSeeder::class,
         ]);
     }
 }

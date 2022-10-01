@@ -7,6 +7,7 @@ use App\Http\Controllers\GenerosController;
 use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\ColecoesController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -29,6 +30,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/browse', [GenerosController::class, 'index']);
+
+Route::get('/search', [SearchController::class, 'getAll']);
+
+Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::get('/',         [SearchController::class, 'getAll']);
+    Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
+});
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('login',     [AdminAuthController::class, 'showLoginForm'])->name('admin.login');

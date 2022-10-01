@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('titulo', 100);
             $table->string('resumo', 500);
-            $table->string('isbn', 17);
+            $table->string('isbn', 14);
             $table->string('autor', 100);
             $table->string('imagem');
             $table->date('data_lancamento');

@@ -10,11 +10,11 @@ class ColecoesController extends Controller
 {
     public function index () {
         $list = Colecao::orderBy('nome')->paginate(5);
-        return view('colecaos.index', ['item_list'=>$list]);
+        return view('colecoes.index', ['item_list'=>$list]);
     }
 
     public function create () {
-        return view('colecaos.create');
+        return view('colecoes.create');
     }
 
     public function store (ColecaoRequest $request) {

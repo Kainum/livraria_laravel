@@ -63,6 +63,7 @@
 
 <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
+<script src="https://kit.fontawesome.com/af7b79f679.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
