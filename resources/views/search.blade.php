@@ -5,7 +5,7 @@
         @foreach ($item_list as $item)
             <div class="col-6 col-sm-4 col-xl-3 mb-4">
                 <a href="{{ route('produto.view', ['id'=>$item->id]) }}">
-                    <img class="img-fluid" src="{{ route('image.show', ['image_path'=>$item->imagem]) }}">
+                    <img class="img-fluid" src="{{ route('image.show', ['image_path'=>$item->imagem, 'image_type'=>'livros']) }}">
                 </a>
                 <a href="{{ route('produto.view', ['id'=>$item->id]) }}">
                     <h4>{{ $item->titulo }}</h4>
