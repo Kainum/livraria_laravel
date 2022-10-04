@@ -1,4 +1,4 @@
-@extends('master', ['model_title' => 'Layout'])
+@extends('master_admin', ['model_title' => 'Livros'])
 @section('content')
     <h2>Editando Livro {{ $livro->nome }}</h2>
 
@@ -60,7 +60,7 @@
             {!! Form::select('editora_id', \App\Models\Editora::orderBy('nome')->pluck('nome', 'id')->toArray(), $livro->editora_id, ['class'=>'form-control', 'required']) !!}
         </div>
         <div class="form-group">
-            {!! Form::submit('Editar Ator', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
             {!! Form::reset('Limpar', ['class'=>'btn btn-default']) !!}
         </div>
     {!! Form::close() !!}

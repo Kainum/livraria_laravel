@@ -1,4 +1,4 @@
-@extends('master', ['model_title' => 'Layout'])
+@extends('master_admin', ['model_title' => 'Editoras'])
 @section('content')
     <h2>Nova Editora</h2>
 

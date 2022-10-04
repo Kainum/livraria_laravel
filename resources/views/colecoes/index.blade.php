@@ -1,7 +1,5 @@
-@extends('master', ['model_title' => 'Layout'])
+@extends('master_admin', ['model_title' => 'Coleções'])
 @section('content')
-    <h1>Coleções</h1>
-    <table class=""></table>
     <table class="table table-centered table-nowrap mb-0 rounded">
         <thead class="thead-light">
             <tr>

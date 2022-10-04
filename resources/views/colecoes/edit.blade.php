@@ -1,4 +1,4 @@
-@extends('master', ['model_title' => 'Layout'])
+@extends('master_admin', ['model_title' => 'Coleções'])
 @section('content')
     <h2>Editando Coleção {{ $colecao->nome }}</h2>
 
@@ -17,7 +17,7 @@
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Salvar alteração', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
             {!! Form::reset('Limpar', ['class'=>'btn btn-default']) !!}
         </div>
     {!! Form::close() !!}

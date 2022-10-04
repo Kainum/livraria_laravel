@@ -1,14 +1,13 @@
-@extends('master', ['model_title' => 'Layout'])
+@extends('master_admin', ['model_title' => 'Livros'])
 @section('content')
-    <h1>Livros</h1>
-    <table class=""></table>
     <table class="table table-centered table-nowrap mb-0 rounded">
         <thead class="thead-light">
             <tr>
                 <th class="border-0 rounded-start">Título</th>
                 <th class="border-0">ISBN</th>
                 <th class="border-0">Editora</th>
-                <th class="border-0 rounded-end">Coleção</th>
+                <th class="border-0">Coleção</th>
+                <th class="border-0 rounded-end">Ações</th>
             </tr>
         </thead>
         <tbody>

@@ -1,4 +1,4 @@
-@extends('master', ['model_title' => 'Layout'])
+@extends('master_admin', ['model_title' => 'Gêneros'])
 @section('content')
     <h2>Editando Gênero {{ $genero->nome }}</h2>
 
@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Salvar alteração', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
             {!! Form::reset('Limpar', ['class'=>'btn btn-default']) !!}
         </div>
     {!! Form::close() !!}
