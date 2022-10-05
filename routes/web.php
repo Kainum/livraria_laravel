@@ -34,7 +34,7 @@ Route::get('/browse', [GenerosController::class, 'index']);
 
 Route::get('/search', [SearchController::class, 'getAll']);
 
-Route::get('/image/{image_type}/{image_path}', [ImageController::class, 'show'])->name('image.show');
+Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
 Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
     Route::get('/',         [SearchController::class, 'getAll']);

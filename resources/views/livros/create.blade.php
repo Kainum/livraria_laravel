@@ -1,4 +1,7 @@
-@extends('master_admin', ['model_title' => 'Livros'])
+@extends('master_admin', [
+    'model_title' => 'Livros',
+    'page_title' => 'Criar Livro',
+    ])
 @section('content')
     <h2>Novo Livro</h2>
 

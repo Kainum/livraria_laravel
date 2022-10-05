@@ -1,4 +1,7 @@
-@extends('master_admin', ['model_title' => 'Gêneros'])
+@extends('master_admin', [
+    'model_title' => 'Gêneros',
+    'page_title' => 'Listar Gêneros',
+    ])
 @section('content')
     <table class="table table-centered table-nowrap mb-0 rounded">
         <thead class="thead-light">

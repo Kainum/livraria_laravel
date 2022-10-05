@@ -1,4 +1,7 @@
-@extends('master_admin', ['model_title' => 'Coleções'])
+@extends('master_admin', [
+    'model_title' => 'Coleções',
+    'page_title' => 'Criar Coleção',
+    ])
 @section('content')
     <h2>Nova Coleção</h2>
 
