@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\GenerosController;
 use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivrosController;
@@ -90,6 +91,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/layout', function () {
     return view('layout_admin');
 });
+
+Route::post('/', [CartController::class, 'store'])->name('cart.store');
 
 
 require __DIR__.'/auth.php';
