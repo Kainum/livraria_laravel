@@ -33,7 +33,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/browse', [GenerosController::class, 'index']);
 
-Route::get('/search', [SearchController::class, 'getAll']);
+Route::get('/search', [SearchController::class, 'getAll'])->name('search');
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
@@ -92,7 +92,8 @@ Route::get('/layout', function () {
     return view('layout_admin');
 });
 
-Route::post('/', [CartController::class, 'store'])->name('cart.store');
+Route::get('/cart', [CartController::class, 'cartPage'])->name('cart.page');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 
 
 require __DIR__.'/auth.php';

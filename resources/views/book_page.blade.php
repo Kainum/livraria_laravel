@@ -51,8 +51,6 @@
                     <div class="form-group">
                         {{ Form::submit('Adicionar ao Carrinho', ['class'=>'btn btn-success']) }}
                     </div>
-                    
-                    
                 {{ Form::close() }}
             </div>
         </div>

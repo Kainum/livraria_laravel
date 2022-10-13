@@ -3,7 +3,7 @@
     'page_title' => 'Editar Livro',
     ])
 @section('content')
-    <h2>Editando Livro {{ $livro->nome }}</h2>
+    <h2>Editando Livro {{ $livro->titulo }}</h2>
 
     @if ($errors->any())
         <ul class="alert alert-danger">
