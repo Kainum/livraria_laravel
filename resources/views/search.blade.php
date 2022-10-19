@@ -12,14 +12,16 @@
                         ]) }}">
                 </a>
                 <a href="{{ route('produto.view', ['id'=>$item->id]) }}">
-                    <h4>{{ $item->titulo }}</h4>
+                    {{ $item->titulo }}
                 </a>
-                <div class="row align-items-center">
-                    <span class="col-7">R${{ $item->preco }}</span>
-                    <button class="btn btn-success col-4 float-right" type="button">
-                        <i class="fa-solid fa-cart-shopping" style="color:white"></i>
-                    </button>
-                </div>
+                {{ Form::open(['route'=>['produto.view', 'id'=>$item->id],'method'=>'get']) }}
+                    <div class="row align-items-center">
+                        <span class="col-7">R${{ $item->preco }}</span>
+                        <button class="btn btn-success col-4 float-right" type="submit">
+                            <i class="fa-solid fa-cart-shopping" style="color:white"></i>
+                        </button>
+                    </div>
+                {{ Form::close() }}
             </div>
         @endforeach
     </div>

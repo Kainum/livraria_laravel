@@ -30,4 +30,22 @@ class CartController extends Controller
         );
         return redirect()->route('cart.page')->with('message', 'Adicionado com sucesso.');
     }
+
+
+    public function cartAdd ($rowId) {
+        $atual_qtd = Cart::get($rowId)->qty;
+        Cart::update($rowId, ['qty' => $atual_qtd+1]);
+        return redirect()->route('cart.page');
+    }
+
+    public function cartSub ($rowId) {
+        $atual_qtd = Cart::get($rowId)->qty;
+        Cart::update($rowId, ['qty' => $atual_qtd-1]);
+        return redirect()->route('cart.page');
+    }
+
+    public function cartExclude ($rowId) {
+        Cart::remove($rowId);
+        return redirect()->route('cart.page');
+    }
 }

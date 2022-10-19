@@ -92,8 +92,15 @@ Route::get('/layout', function () {
     return view('layout_admin');
 });
 
-Route::get('/cart', [CartController::class, 'cartPage'])->name('cart.page');
-Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::group(['prefix' => 'cart', ], function () {
+    Route::get('/',             [CartController::class, 'cartPage'])->name('cart.page');
+    Route::post('/',            [CartController::class, 'store'])->name('cart.store');
+    Route::get('/{rowId}/add',    [CartController::class, 'cartAdd'])->name('cart.add');
+    Route::get('/{rowId}/sub',    [CartController::class, 'cartSub'])->name('cart.sub');
+    Route::get('/{rowId}/exclude', [CartController::class, 'cartExclude'])->name('cart.exclude');
+});
+
+
 
 
 require __DIR__.'/auth.php';

@@ -3,7 +3,11 @@
     <div class="row">
         <div class="col-12 col-md-6 mb-4">
             <div class="col-12 mb-4">
-                <img src="{{ $item->imagem }}">
+                <img class="img-fluid" src="{{ route('image.show', [
+                        'image_path'=>$item->imagem,
+                        'width'=>400,
+                        'height'=>640,
+                        ]) }}">
             </div>
             <div class="col-12 mb-4">
                 <h4>Detalhes do Produto</h4>
