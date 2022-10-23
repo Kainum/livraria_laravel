@@ -8,8 +8,17 @@ use Illuminate\Http\Request;
 
 class ColecoesController extends Controller
 {
-    public function index () {
-        $list = Colecao::orderBy('nome')->paginate(5);
+    public function index (Request $filtro) {
+        $paginate_value = 10;
+
+        $filtragem = $filtro->get('desc_filtro');
+        if ($filtragem == null)
+            $list = Colecao::orderBy('nome')->paginate($paginate_value);
+        else
+            $list = Colecao::where('nome', 'like', '%'.$filtragem.'%')
+                            ->orderBy('nome')
+                            ->paginate($paginate_value)
+                            ->setpath('colecoes?desc_filtro='.$filtragem);
         return view('colecoes.index', ['item_list'=>$list]);
     }
 

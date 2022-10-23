@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'generos', 'where'=>['id'=>'[0-9]+']], function () {
-        Route::get('/',         [GenerosController::class, 'index'])->name('admin.generos');
+        Route::any('/',         [GenerosController::class, 'index'])->name('admin.generos');
         Route::get('/create',   [GenerosController::class, 'create'])->name('admin.generos.create');
         Route::post('/store',   [GenerosController::class, 'store'])->name('admin.generos.store');
         Route::get('/{id}/destroy', [GenerosController::class,  'destroy'])->name('admin.generos.destroy');
@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'editoras', 'where'=>['id'=>'[0-9]+']], function () {
-        Route::get('/',         [EditorasController::class, 'index'])->name('admin.editoras');
+        Route::any('/',         [EditorasController::class, 'index'])->name('admin.editoras');
         Route::get('/create',   [EditorasController::class, 'create'])->name('admin.editoras.create');
         Route::post('/store',   [EditorasController::class, 'store'])->name('admin.editoras.store');
         Route::get('/{id}/destroy', [EditorasController::class,  'destroy'])->name('admin.editoras.destroy');
@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'livros', 'where'=>['id'=>'[0-9]+']], function () {
-        Route::get('/',         [LivrosController::class, 'index'])->name('admin.livros');
+        Route::any('/',         [LivrosController::class, 'index'])->name('admin.livros');
         Route::get('/create',   [LivrosController::class, 'create'])->name('admin.livros.create');
         Route::post('/store',   [LivrosController::class, 'store'])->name('admin.livros.store');
         Route::get('/{id}/destroy', [LivrosController::class,  'destroy'])->name('admin.livros.destroy');
@@ -80,7 +80,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'colecoes', 'where'=>['id'=>'[0-9]+']], function () {
-        Route::get('/',         [ColecoesController::class, 'index'])->name('admin.colecoes');
+        Route::any('/',         [ColecoesController::class, 'index'])->name('admin.colecoes');
         Route::get('/create',   [ColecoesController::class, 'create'])->name('admin.colecoes.create');
         Route::post('/store',   [ColecoesController::class, 'store'])->name('admin.colecoes.store');
         Route::get('/{id}/destroy', [ColecoesController::class,  'destroy'])->name('admin.colecoes.destroy');

@@ -9,8 +9,17 @@ use Illuminate\Http\Request;
 class GenerosController extends Controller
 {
 
-    public function index () {
-        $list = Genero::orderBy('nome')->paginate(5);
+    public function index (Request $filtro) {
+        $paginate_value = 10;
+
+        $filtragem = $filtro->get('desc_filtro');
+        if ($filtragem == null)
+            $list = Genero::orderBy('nome')->paginate($paginate_value);
+        else
+            $list = Genero::where('nome', 'like', '%'.$filtragem.'%')
+                            ->orderBy('nome')
+                            ->paginate($paginate_value)
+                            ->setpath('generos?desc_filtro='.$filtragem);
         return view('generos.index', ['item_list'=>$list]);
     }
 

@@ -9,8 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class LivrosController extends Controller
 {
-    public function index () {
-        $list = Livro::orderBy('titulo')->paginate(5);
+    public function index (Request $filtro) {
+        $paginate_value = 10;
+
+        $filtragem = $filtro->get('desc_filtro');
+        if ($filtragem == null)
+            $list = Livro::orderBy('titulo')->paginate($paginate_value);
+        else
+            $list = Livro::where('titulo', 'like', '%'.$filtragem.'%')
+                            ->orderBy('titulo')
+                            ->paginate($paginate_value)
+                            ->setpath('livros?desc_filtro='.$filtragem);
         return view('livros.index', ['item_list'=>$list]);
     }
 

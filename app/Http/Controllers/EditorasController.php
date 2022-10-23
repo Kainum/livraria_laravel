@@ -9,8 +9,17 @@ use Illuminate\Http\Request;
 class EditorasController extends Controller
 {
 
-    public function index () {
-        $list = Editora::orderBy('nome')->paginate(5);
+    public function index (Request $filtro) {
+        $paginate_value = 10;
+
+        $filtragem = $filtro->get('desc_filtro');
+        if ($filtragem == null)
+            $list = Editora::orderBy('nome')->paginate($paginate_value);
+        else
+            $list = Editora::where('nome', 'like', '%'.$filtragem.'%')
+                            ->orderBy('nome')
+                            ->paginate($paginate_value)
+                            ->setpath('editoras?desc_filtro='.$filtragem);
         return view('editoras.index', ['item_list'=>$list]);
     }
 

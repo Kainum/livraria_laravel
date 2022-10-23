@@ -1,6 +1,7 @@
 @extends('master_admin', [
     'model_title' => 'Coleções',
     'page_title' => 'Listar Coleções',
+    'search_route' => 'admin.colecoes',
     ])
 @section('content')
     <table class="table table-centered table-nowrap mb-0 rounded">

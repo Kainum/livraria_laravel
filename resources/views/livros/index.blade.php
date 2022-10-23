@@ -1,6 +1,7 @@
 @extends('master_admin', [
     'model_title' => 'Livros',
     'page_title' => 'Listar Livros',
+    'search_route' => 'admin.livros',
     ])
 @section('content')
     <table class="table table-centered table-nowrap mb-0 rounded">
