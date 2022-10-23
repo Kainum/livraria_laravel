@@ -8,6 +8,7 @@ use App\Http\Controllers\GenerosController;
 use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\ColecoesController;
+use App\Http\Controllers\CorreiosController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Routing\RouteGroup;
@@ -100,7 +101,7 @@ Route::group(['prefix' => 'cart', ], function () {
     Route::get('/{rowId}/exclude', [CartController::class, 'cartExclude'])->name('cart.exclude');
 });
 
-
+Route::get('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
 
 
 require __DIR__.'/auth.php';

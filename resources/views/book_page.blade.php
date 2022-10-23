@@ -57,8 +57,38 @@
                     </div>
                 {{ Form::close() }}
             </div>
+            <div class="container col-12">
+                <div data-role="collapsible" role="tab" data-collapsible="true" aria-selected="true" aria-expanded="true" class="allow active">
+                    <h4>Calcular Frete</h4>
+                </div>
+                <div>
+                    {{ Form::open(['route'=>'correios.frete', 'class'=>'form-inline']) }}
+                        {{ Form::text('cepDestino', null, ['class'=>'form-control', 'required', 'maxlength'=>"9", 'placeholder'=>"_____-___"]) }}
+                        {{ Form::submit('Calcular', ['class'=>'btn btn-primary'])}}
+                        <a target="_blank" href="https://buscacepinter.correios.com.br/app/endereco/index.php">Não sei meu CEP</a>
+                    {{ Form::close() }}
+                    <div id="tabela-fretes">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Transportadora</th>
+                                    <th>Custo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Correio pac - 10 dias</td>
+                                    <td>R$0,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Correio sedex - 7 dias</td>
+                                    <td>R$43,52</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        
     </div>
 @stop
