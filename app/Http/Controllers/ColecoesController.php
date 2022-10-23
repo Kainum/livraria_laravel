@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ColecaoRequest;
 use App\Models\Colecao;
+use App\Models\GeneroColecao;
 use Illuminate\Http\Request;
 
 class ColecoesController extends Controller
@@ -27,8 +28,17 @@ class ColecoesController extends Controller
     }
 
     public function store (ColecaoRequest $request) {
-        $new_item = $request->all();
-        Colecao::create($new_item);
+
+
+        $new_item = Colecao::create(['nome'=>$request->get('nome'),]);
+        $generos = $request->generos;
+
+        foreach($generos as $gen => $value) {
+            GeneroColecao::create([
+                                'genero_id'=>$generos[$gen],
+                                'colecao_id'=>$new_item->id,
+                                ]);
+        }
 
         return redirect()->route('admin.colecoes');
     }

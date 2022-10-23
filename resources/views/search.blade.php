@@ -2,6 +2,9 @@
 @section('content')
     <h2>Mangás</h2>
     <div class="row col-12">
+        @if (count($item_list) === 0)
+            <div>Sem resultados</div>
+        @endif
         @foreach ($item_list as $item)
             <div class="col-6 col-sm-4 col-xl-3 mb-4">
                 <a href="{{ route('produto.view', ['id'=>$item->id]) }}">

@@ -2,14 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Colecao;
+use App\Models\Genero;
 use App\Models\Livro;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function getAll () {
-        $list = Livro::orderBy('titulo')->paginate(6);
+    public function getLivros (Request $filtro) {
+        $paginate_value = 12;
+
+        $filtragem = $filtro->get('pesquisa');
+        if ($filtragem == null)
+            $list = Livro::orderBy('titulo')->paginate($paginate_value);
+        else
+            $list = Livro::where('titulo', 'like', '%'.$filtragem.'%')
+                            ->orderBy('titulo')
+                            ->paginate($paginate_value)
+                            ->setpath('search?pesquisa='.$filtragem);
+
         return view('search', ['item_list'=>$list]);
+    }
+
+    public function getGeneros () {
+        $paginate_value = 12;
+        $list = Genero::orderBy('nome')->paginate($paginate_value);
+
+        return view('browse', ['item_list'=>$list]);
+    }
+
+    public function getColecoes ($id) {
+        $paginate_value = 12;
+        $list = Colecao::orderBy('nome')->paginate($paginate_value);
+
+        return view('browse', ['item_list'=>$list]);
     }
 
     public function view($id) {

@@ -9,6 +9,7 @@
             <tr>
                 <th class="border-0 rounded-start">#</th>
                 <th class="border-0">Nome</th>
+                <th class="border-0">Gêneros</th>
                 <th class="border-0 rounded-end">Ações</th>
             </tr>
         </thead>
@@ -17,6 +18,11 @@
             <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->nome }}</td>
+                <td>
+                    @foreach ($item->generos as $gen)
+                        <li>{{ $gen->genero->nome }}</li>
+                    @endforeach
+                </td>
                 <td>
                     <a href="{{ route('admin.colecoes.edit',     ['id'=>$item->id]) }}" class="btn btn-success">Editar</a>
                     <a href="{{ route('admin.colecoes.destroy',  ['id'=>$item->id]) }}" class="btn btn-danger">Remover</a>

@@ -13,4 +13,8 @@ class Genero extends Model
         'nome',
         'imagem',
     ];
+
+    public function colecoes() {
+        return $this->hasMany(GeneroColecao::class);
+    }
 }

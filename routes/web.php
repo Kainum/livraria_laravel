@@ -32,9 +32,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/browse', [GenerosController::class, 'index']);
+Route::get('/browse',       [SearchController::class, 'getGeneros']);
+Route::get('/browse/{id}',  [SearchController::class, 'getColecoes']);
 
-Route::get('/search', [SearchController::class, 'getAll'])->name('search');
+Route::any('/search', [SearchController::class, 'getLivros'])->name('search');
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 

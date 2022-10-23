@@ -17,4 +17,8 @@ class Colecao extends Model
     public function livros() {
         return $this->hasMany(Livro::class);
     }
+
+    public function generos() {
+        return $this->hasMany(GeneroColecao::class);
+    }
 }

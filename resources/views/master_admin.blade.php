@@ -337,19 +337,6 @@
       <div class="col-12 mb-4">
         <div class="card border-0 shadow components-section">
           <div class="card-body">
-            {{ Form::open(['name'=>'form_name', 'route'=>$search_route]) }}
-              <div class="sidebar-form">
-                <div class="input-group">
-                  <input type="text" name="desc_filtro" class="form-control" style="width: 80% !important;" placeholder="Pesquisa...">
-                  <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-default">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </span>
-                </div>
-              </div>
-            {{ Form::close() }}
-            <br>
             @yield('content')
           </div>
         </div>
@@ -421,7 +408,12 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   <!-- Volt JS -->
-  <script src="{{ url('volt/assets/js/volt.js') }}"></script>    
+  <script src="{{ url('volt/assets/js/volt.js') }}"></script>
+
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+  @yield('js')
 </body>
 
 </html>
