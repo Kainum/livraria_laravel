@@ -32,8 +32,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/browse',       [SearchController::class, 'getGeneros']);
-Route::get('/browse/{id}',  [SearchController::class, 'getColecoes']);
+Route::get('/browse',       [SearchController::class, 'getGeneros'])->name('browse');
+Route::get('/browse/{id}',  [SearchController::class, 'getColecoes'])->name('browse.colecoes');;
 
 Route::any('/search', [SearchController::class, 'getLivros'])->name('search');
 

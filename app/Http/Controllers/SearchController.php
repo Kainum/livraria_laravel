@@ -33,9 +33,10 @@ class SearchController extends Controller
 
     public function getColecoes ($id) {
         $paginate_value = 12;
-        $list = Colecao::orderBy('nome')->paginate($paginate_value);
-
-        return view('browse', ['item_list'=>$list]);
+        $genero = Genero::find($id);
+        $list = $genero->colecoes;
+        
+        return view('browse_colecoes', ['item_list'=>$list]);
     }
 
     public function view($id) {
