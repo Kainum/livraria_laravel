@@ -11,6 +11,7 @@ use App\Http\Controllers\ColecoesController;
 use App\Http\Controllers\CorreiosController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\WishListController;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -32,17 +33,28 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/browse',       [SearchController::class, 'getGeneros'])->name('browse');
-Route::get('/browse/{id}',  [SearchController::class, 'getColecoes'])->name('browse.colecoes');;
+Route::group(['prefix' => 'wishlist', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::get('/',     [WishListController::class, 'view'])->name('wishlist');
+    Route::post('/add/{id}',[WishListController::class, 'addWishList'])->name('wishlist.add');
+    Route::get('/rem/{id}', [WishListController::class, 'removeWishList'])->name('wishlist.remove');
+});
+
+Route::group(['prefix' => 'browse', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::get('/',     [SearchController::class, 'getGeneros'])->name('browse');
+    Route::get('/{id}', [SearchController::class, 'getColecoes'])->name('browse.colecoes');;
+});
+
+
 
 Route::any('/search', [SearchController::class, 'getLivros'])->name('search');
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
 Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
-    Route::get('/',         [SearchController::class, 'getAll']);
+    Route::get('/',         function () { return redirect()->route('search'); });
     Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
 });
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('login',     [AdminAuthController::class, 'showLoginForm'])->name('admin.login');

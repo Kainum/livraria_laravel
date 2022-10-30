@@ -10,6 +10,11 @@
                         ]) }}">
             </div>
             <div class="col-12 mb-4">
+                {{ Form::open(['route'=>['wishlist.add', 'id'=>$item->id]]) }}
+                    <div class="form-group">
+                        {{ Form::submit('Add Lista de Desejos', ['class'=>'btn btn-danger']) }}
+                    </div>
+                {{ Form::close() }}
                 <h4>Detalhes do Produto</h4>
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <tbody>

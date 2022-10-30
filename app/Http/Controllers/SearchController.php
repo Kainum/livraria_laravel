@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+
     public function getLivros (Request $filtro) {
         $paginate_value = 12;
 
@@ -43,4 +44,5 @@ class SearchController extends Controller
         $item = Livro::find($id);
         return view('book_page', compact('item'));
     }
+
 }

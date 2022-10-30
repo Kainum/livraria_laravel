@@ -17,9 +17,10 @@ class ColecaoSeeder extends Seeder
     {
         Colecao::create(['nome' => 'Dragon Ball']);
         Colecao::create(['nome' => 'Dr. Stone']);
+        Colecao::create(['nome' => 'Spy x Family']);
         Colecao::create(['nome' => 'Harry Potter']);
         Colecao::create(['nome' => 'Turma da Mônica']);
         Colecao::create(['nome' => 'Naruto']);
-        Colecao::create(['nome' => 'Spy x Family']);
+        
     }
 }

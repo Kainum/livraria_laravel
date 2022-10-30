@@ -27,5 +27,6 @@
                 {{ Form::close() }}
             </div>
         @endforeach
+        {{ $item_list->links() }}
     </div>
 @stop
