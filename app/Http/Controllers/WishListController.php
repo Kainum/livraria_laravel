@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\WishListItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishListController extends Controller
 {
     public function view() {
-        $list = User::find(1)->wishListItems;
+        $list = Auth::guard('web')->user()->wishListItems;
         return view('wishlist', ['item_list'=>$list]);
     }
 
     public function addWishList($id) {
-        $user_id = 1;
+        $user_id = Auth::guard('web')->user()->id;
         WishListItem::create([
             'user_id'=>$user_id,
             'livro_id'=>$id,

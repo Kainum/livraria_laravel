@@ -29,15 +29,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::group(['prefix' => 'wishlist', 'where'=>['id'=>'[0-9]+']], function () {
-    Route::get('/',     [WishListController::class, 'view'])->name('wishlist');
-    Route::post('/add/{id}',[WishListController::class, 'addWishList'])->name('wishlist.add');
-    Route::get('/rem/{id}', [WishListController::class, 'removeWishList'])->name('wishlist.remove');
+    Route::group(['prefix' => 'wishlist', 'where'=>['id'=>'[0-9]+']], function () {
+        Route::get('/',     [WishListController::class, 'view'])->name('wishlist');
+        Route::post('/add/{id}',[WishListController::class, 'addWishList'])->name('wishlist.add');
+        Route::get('/rem/{id}', [WishListController::class, 'removeWishList'])->name('wishlist.remove');
+    });
+
 });
+
 
 Route::group(['prefix' => 'browse', 'where'=>['id'=>'[0-9]+']], function () {
     Route::get('/',     [SearchController::class, 'getGeneros'])->name('browse');
