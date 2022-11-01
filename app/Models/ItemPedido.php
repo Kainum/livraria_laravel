@@ -14,6 +14,8 @@ class ItemPedido extends Model
         'qtd',
         'valor_unitario',
         'valor_item',
+        'pedido_id',
+        'produto_id',
     ];
 
     public function pedido() {

@@ -13,10 +13,11 @@ class PedidoController extends Controller
     
     public function fazerPedido() {
         $user_id = Auth::guard('web')->user()->id; //pega o id do user
-        $endereco = 'Rua Estrada sem número, 000 - cidade, TR, Brazil';
-        $data_pedido = date('Y-m-d'); //mudar isso aqui depois
         $lista_items = Cart::content();
 
+        //mudar isso aqui depois
+        $data_pedido = date('Y-m-d'); 
+        $endereco = 'Rua Estrada sem número, 000 - cidade, TR, Brazil';
         $valor_frete = 10.00;
 
         $new_pedido = Pedido::create([

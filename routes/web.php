@@ -10,6 +10,7 @@ use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\ColecoesController;
 use App\Http\Controllers\CorreiosController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishListController;
 use Illuminate\Routing\RouteGroup;
@@ -29,6 +30,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+// ROTAS PUBLICAS
+Route::any('/search', [SearchController::class, 'getLivros'])->name('search');
+
+Route::group(['prefix' => 'browse', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::get('/',     [SearchController::class, 'getGeneros'])->name('browse');
+    Route::get('/{id}', [SearchController::class, 'getColecoes'])->name('browse.colecoes');;
+});
+
+Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
+
+Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::get('/',         function () { return redirect()->route('search'); });
+    Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
+});
+
+Route::get('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
+// FIM ROTAS PUBLICAS
+
+// ROTAS CLIENTE
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -40,26 +61,21 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/rem/{id}', [WishListController::class, 'removeWishList'])->name('wishlist.remove');
     });
 
+    Route::group(['prefix' => 'carrinho', ], function () {
+        Route::get('/',             [CartController::class, 'cartPage'])->name('cart.page');
+        Route::post('/',            [CartController::class, 'store'])->name('cart.store');
+        Route::get('/{rowId}/add',    [CartController::class, 'cartAdd'])->name('cart.add');
+        Route::get('/{rowId}/sub',    [CartController::class, 'cartSub'])->name('cart.sub');
+        Route::get('/{rowId}/exclude', [CartController::class, 'cartExclude'])->name('cart.exclude');
+
+        Route::post('/concluir',    [CartController::class, 'fazerPedido'])->name('cart.concluir');
+        Route::get('/compras',      [CartController::class, 'compras'])->name('cart.compras');
+    });
+    
 });
+// FIM ROTAS CLIENTE
 
-
-Route::group(['prefix' => 'browse', 'where'=>['id'=>'[0-9]+']], function () {
-    Route::get('/',     [SearchController::class, 'getGeneros'])->name('browse');
-    Route::get('/{id}', [SearchController::class, 'getColecoes'])->name('browse.colecoes');;
-});
-
-
-
-Route::any('/search', [SearchController::class, 'getLivros'])->name('search');
-
-Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
-
-Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
-    Route::get('/',         function () { return redirect()->route('search'); });
-    Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
-});
-
-
+// ROTAS ADMIN
 Route::group(['prefix' => 'admin'], function () {
     Route::get('login',     [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login',    [AdminAuthController::class, 'login'])->name('admin.login');
@@ -105,20 +121,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/{id}/update',  [ColecoesController::class,  'update'])->name('admin.colecoes.update');
     });
 });
+// FIM ROTAS ADMIN
 
 Route::get('/layout', function () {
     return view('layout_admin');
 });
-
-Route::group(['prefix' => 'cart', ], function () {
-    Route::get('/',             [CartController::class, 'cartPage'])->name('cart.page');
-    Route::post('/',            [CartController::class, 'store'])->name('cart.store');
-    Route::get('/{rowId}/add',    [CartController::class, 'cartAdd'])->name('cart.add');
-    Route::get('/{rowId}/sub',    [CartController::class, 'cartSub'])->name('cart.sub');
-    Route::get('/{rowId}/exclude', [CartController::class, 'cartExclude'])->name('cart.exclude');
-});
-
-Route::get('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
-
 
 require __DIR__.'/auth.php';

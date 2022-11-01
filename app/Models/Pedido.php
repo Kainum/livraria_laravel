@@ -16,6 +16,7 @@ class Pedido extends Model
         'valorTotal',
         'valorFrete',
         'status',
+        'comprador_id',
     ];
 
     public function comprador() {
