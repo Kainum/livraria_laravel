@@ -46,7 +46,7 @@ Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
     Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
 });
 
-Route::get('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
+Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
 // FIM ROTAS PUBLICAS
 
 // ROTAS CLIENTE

@@ -67,13 +67,14 @@
                     <h4>Calcular Frete</h4>
                 </div>
                 <div>
-                    {{ Form::open(['route'=>'correios.frete', 'class'=>'form-inline']) }}
-                        {{ Form::text('cepDestino', null, ['class'=>'form-control', 'required', 'maxlength'=>"9", 'placeholder'=>"_____-___"]) }}
-                        {{ Form::submit('Calcular', ['class'=>'btn btn-primary'])}}
+                    <form class='form-inline', id='myForm'>
+                        <meta name="csrf-token" content="{{ csrf_token() }}" />
+                        {{ Form::text('cepDestino', null, ['id'=>'cepDestino', 'required', 'class'=>'form-control', 'maxlength'=>"9", 'placeholder'=>"_____-___"]) }}
+                        {{ Form::submit('Calcular', ['class'=>'btn btn-primary']) }}
                         <a target="_blank" href="https://buscacepinter.correios.com.br/app/endereco/index.php">Não sei meu CEP</a>
-                    {{ Form::close() }}
+                    </form>
                     <div id="tabela-fretes">
-                        <table class="table table-striped">
+                        {{-- <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Transportadora</th>
@@ -90,10 +91,107 @@
                                     <td>R$43,52</td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#myForm').submit(function(e){
+                // let cepDestino = "";
+                // let codServico = "";
+
+                e.preventDefault();
+
+                let valorSedex  = "---";
+                let valorPac    = "---";
+
+                let prazoSedex  = "---";
+                let prazoPac    = "---";
+
+                // $("#tabela-fretes").html("" + valorPac+" - "+valorSedex);
+
+                let pac     = '04510';
+                let sedex   = '04014';
+
+                let cepDestino = $("#cepDestino").val();
+
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajax({
+                    url:    "/frete",
+                    type:   "POST",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        codServico: pac,
+                        cepDestino: cepDestino
+                    },
+                    dataType: 'JSON',
+                    success: function(data){
+                        valorPac = data.Valor;
+                        prazoPac = data.PrazoEntrega;
+                        //$("#tabela-fretes").html("" + valorPac+" - "+valorSedex);
+                    },
+                    error: function() {
+                        alert("Deu erro");
+                    }
+                });
+
+                $.ajax({
+                    url:    "/frete",
+                    type:   "POST",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        codServico: sedex,
+                        cepDestino: cepDestino
+                    },
+                    dataType: 'JSON',
+                    success: function(data){
+                        valorSedex = data.Valor;
+                        prazoSedex = data.PrazoEntrega;
+
+                        let partePac =      '<tr><td>Correio pac - '+prazoPac+' dias</td><td>R$'+valorPac+'</td></tr>'
+                        let parteSedex =    '<tr><td>Correio pac - '+prazoSedex+' dias</td><td>R$'+valorSedex+'</td></tr>'
+                        let elementos =     '<table class="table table-striped"><thead><tr><th>Transportadora</th><th>Custo</th></tr></thead><tbody>'+partePac+parteSedex+'</tbody></table>'
+                        
+                        $("#tabela-fretes").html(elementos);
+                    },
+                    error: function() {
+                        alert("Deu erro");
+                    }
+                });
+
+                // $.ajax({
+                //     url:    "/frete", //?codServico="+codServico+"&cepDestino="+cepDestino,
+                //     type:   "POST",
+                //     data:   o,
+                //     success: function(data){
+                //         valorSedex = JSON.parse(data).Valor;
+                //     },
+                //     error: function() {
+                //         alert(error);
+                //     }
+                // });
+
+                // $.ajax({
+                //     url:    "/frete", //?codServico="+codServico+"&cepDestino="+cepDestino,
+                //     type:   "POST",
+                //     data:   $(this).serialize(),
+                //     success: function(data){
+                //         valorSedex = JSON.parse(data).Valor;
+                //     },
+                //     error: function() {
+                //         alert("Form submission failed!");
+                //     }
+                // });
+
+                // $("#tabela-fretes").html("" + valorPac+" - "+valorSedex);
+            });
+        });
+    </script>
 @stop

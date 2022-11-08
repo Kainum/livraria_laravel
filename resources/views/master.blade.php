@@ -654,7 +654,10 @@
 <!-- Volt JS -->
 <script src="{{ url('volt/assets/js/volt.js') }}"></script>
 
-    
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+@yield('js')
 </body>
 
 </html>
