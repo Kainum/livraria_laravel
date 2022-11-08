@@ -9,10 +9,12 @@ use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\ColecoesController;
 use App\Http\Controllers\CorreiosController;
+use App\Http\Controllers\EnderecosController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishListController;
+use App\Http\Requests\EnderecoRequest;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -70,6 +72,19 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::post('/concluir',    [CartController::class, 'fazerPedido'])->name('cart.concluir');
         Route::get('/compras',      [CartController::class, 'compras'])->name('cart.compras');
+    });
+
+    Route::group(['prefix' => 'profile', 'where'=>['id'=>'[0-9]+']], function () {
+
+
+        Route::group(['prefix' => 'enderecos', 'where'=>['id'=>'[0-9]+']], function () {
+            Route::any('/',         [EnderecosController::class, 'index'])->name('enderecos');
+            Route::get('/create',   [EnderecosController::class, 'create'])->name('enderecos.create');
+            Route::post('/store',   [EnderecosController::class, 'store'])->name('enderecos.store');
+            Route::get('/{id}/destroy', [EnderecosController::class,  'destroy'])->name('enderecos.destroy');
+            Route::get('/{id}/edit',    [EnderecosController::class,  'edit'])->name('enderecos.edit');
+            Route::put('/{id}/update',  [EnderecosController::class,  'update'])->name('enderecos.update');
+        });
     });
     
 });

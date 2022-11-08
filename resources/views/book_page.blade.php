@@ -166,30 +166,6 @@
                     }
                 });
 
-                // $.ajax({
-                //     url:    "/frete", //?codServico="+codServico+"&cepDestino="+cepDestino,
-                //     type:   "POST",
-                //     data:   o,
-                //     success: function(data){
-                //         valorSedex = JSON.parse(data).Valor;
-                //     },
-                //     error: function() {
-                //         alert(error);
-                //     }
-                // });
-
-                // $.ajax({
-                //     url:    "/frete", //?codServico="+codServico+"&cepDestino="+cepDestino,
-                //     type:   "POST",
-                //     data:   $(this).serialize(),
-                //     success: function(data){
-                //         valorSedex = JSON.parse(data).Valor;
-                //     },
-                //     error: function() {
-                //         alert("Form submission failed!");
-                //     }
-                // });
-
                 // $("#tabela-fretes").html("" + valorPac+" - "+valorSedex);
             });
         });
