@@ -1,4 +1,7 @@
-@extends('master', ['model_title' => 'Loja'])
+@extends('master', [
+    'model_title'   => 'Loja',
+    'page_title'    => $item->titulo,
+])
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 mb-4">

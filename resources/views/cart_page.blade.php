@@ -1,4 +1,7 @@
-@extends('master', ['model_title' => 'Loja'])
+@extends('master', [
+    'model_title'   => 'Loja',
+    'page_title'    => 'Meu Carrinho',
+])
 @section('content')
     @if (session('message'))
         <div>{{ session('message') }}</div>
