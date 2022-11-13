@@ -8,7 +8,21 @@
     @endif
     <p>{{ ($endereco->endereco.", ".$endereco->numero." - ".$endereco->bairro) }}</p>
     <p>{{ ($endereco->cidade.", ".$endereco->uf." - ".$endereco->cep) }}</p>
-    <p>{{ print_r(session("frete_options")) }}</p>
+    <div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+                {{ "PAC - ".(session('frete_options')['pac']->PrazoEntrega)."dias - R$".(session('frete_options')['pac']->Valor) }}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+                {{ "SEDEX - ".(session('frete_options')['sedex']->PrazoEntrega)."dias - R$".(session('frete_options')['sedex']->Valor) }}
+            </label>
+        </div>
+    </div>
+    
     <div class="table-responsive">
         <table class="table table-bordered table-nowrap align-middle mb-0">
             <thead class="thead-light">

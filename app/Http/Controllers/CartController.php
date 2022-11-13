@@ -118,10 +118,10 @@ class CartController extends Controller
         $request['cepDestino'] = str_replace("-", "", $endereco->cep);
 
         $request['codServico'] = Correios::SERVICO_PAC;
-        $frete_pac = app('App\Http\Controllers\CorreiosController')->calcular($request);
+        $frete_pac = json_decode(app('App\Http\Controllers\CorreiosController')->calcular($request));
 
         $request['codServico'] = Correios::SERVICO_SEDEX;
-        $frete_sedex = app('App\Http\Controllers\CorreiosController')->calcular($request);
+        $frete_sedex = json_decode(app('App\Http\Controllers\CorreiosController')->calcular($request));
 
         $frete_options = ["pac"=>$frete_pac, "sedex"=>$frete_sedex];
 
