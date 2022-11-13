@@ -70,7 +70,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{rowId}/sub',    [CartController::class, 'cartSub'])->name('cart.sub');
         Route::get('/{rowId}/exclude', [CartController::class, 'cartExclude'])->name('cart.exclude');
 
-        Route::post('/concluir',    [CartController::class, 'fazerPedido'])->name('cart.concluir');
+        Route::post('/endereco',    [CartController::class, 'selecionarEndereco'])->name('cart.endereco');
+        Route::post('/concluir',    [CartController::class, 'continuarPedido'])->name('cart.continuar');
         Route::get('/compras',      [CartController::class, 'compras'])->name('cart.compras');
     });
 
