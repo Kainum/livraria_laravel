@@ -1,4 +1,7 @@
-@extends('master', ['model_title' => 'Loja'])
+@extends('master', [
+    'model_title'   => 'Loja',
+    'page_title'    => $item->titulo,
+])
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 mb-4">
@@ -62,38 +65,75 @@
                     </div>
                 {{ Form::close() }}
             </div>
-            <div class="container col-12">
+            <br>
+            <div class="col-12">
                 <div data-role="collapsible" role="tab" data-collapsible="true" aria-selected="true" aria-expanded="true" class="allow active">
                     <h4>Calcular Frete</h4>
                 </div>
                 <div>
-                    {{ Form::open(['route'=>'correios.frete', 'class'=>'form-inline']) }}
-                        {{ Form::text('cepDestino', null, ['class'=>'form-control', 'required', 'maxlength'=>"9", 'placeholder'=>"_____-___"]) }}
-                        {{ Form::submit('Calcular', ['class'=>'btn btn-primary'])}}
+                    <form class='form-inline', id='myForm'>
+                        <meta name="csrf-token" content="{{ csrf_token() }}" />
+                        {{ Form::text('cepDestino', null, ['id'=>'cepDestino', 'required', 'class'=>'form-control', 'maxlength'=>"9", 'placeholder'=>"_____-___"]) }}
+                        {{ Form::submit('Calcular', ['class'=>'btn btn-primary']) }}
                         <a target="_blank" href="https://buscacepinter.correios.com.br/app/endereco/index.php">Não sei meu CEP</a>
-                    {{ Form::close() }}
+                    </form>
                     <div id="tabela-fretes">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Transportadora</th>
-                                    <th>Custo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Correio pac - 10 dias</td>
-                                    <td>R$0,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Correio sedex - 7 dias</td>
-                                    <td>R$43,52</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {{-- AQUI VAI APARECER O RESULTADO DOS VALORES DO FRETE --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#myForm').submit(async function(e){
+
+                // previne a ação padrão do formulário
+                e.preventDefault();
+
+                // adiciona o carregando no lugar da tabela para saber que está processando
+                $("#tabela-fretes").html("Carregando...");
+
+                // parametros
+                let pac     = '04510';
+                let sedex   = '04014';
+
+                let cepDestino = $("#cepDestino").val();
+
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                // ----------
+
+                // chama as funções que retornam os valores com os dias
+                let chamada_pac = await getValorFrete(pac, cepDestino, CSRF_TOKEN);
+                let chamada_sedex = await getValorFrete(sedex, cepDestino, CSRF_TOKEN);
+
+                // seta os elementos na tabela para aparecer os valores
+                let partePac =      '<tr><td>Correio pac - '+chamada_pac.PrazoEntrega+' dias</td><td>R$'+chamada_pac.Valor+'</td></tr>'
+                let parteSedex =    '<tr><td>Correio pac - '+chamada_sedex.PrazoEntrega+' dias</td><td>R$'+chamada_sedex.Valor+'</td></tr>'
+                let elementos =     '<table class="table table-striped"><thead><tr><th>Transportadora</th><th>Custo</th></tr></thead><tbody>'+partePac+parteSedex+'</tbody></table>'
+                
+                $("#tabela-fretes").html(elementos);
+                // ----------
+            });
+        });
+
+        function getValorFrete(codServico, cepDestino, csrf_token) {
+            let result;
+
+            result = $.ajax({
+                url:    "/frete",
+                type:   "POST",
+                data: {
+                    _token: csrf_token,
+                    codServico: codServico,
+                    cepDestino: cepDestino
+                },
+                dataType: 'JSON',
+            });
+            return result;
+        }
+    </script>
 @stop

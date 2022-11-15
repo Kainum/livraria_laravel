@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 
 class CorreiosController extends Controller
 {
-    public function calcular () {
+    public function calcular (Request $request/*$codServico*/) { /*, $cepDestino*/
+
         $obCorreios = new Correios();
 
         // dados para os calculos do frete
-        $codServico     = Correios::SERVICO_SEDEX;
+
+        $codServico     = $request["codServico"]; //Correios::SERVICO_SEDEX;
+        $cepDestino     = $request["cepDestino"]; //'98240000';
+
         $cepOrigem      = '99050073';
-        $cepDestino     = '98240000';
         $peso           = 1;
         $formato        = Correios::FORMATO_CAIXA_PACOTE;
         $comprimento    = 15;
@@ -33,9 +36,11 @@ class CorreiosController extends Controller
         }
 
         //IMPRIME OS DADOS DA CONSULTA
-        echo 'CEP ORIGEM:   '.$cepOrigem.'<br>';
-        echo 'CEP DESTINO:  '.$cepDestino.'<br>';
-        echo 'VALOR:        '.$frete->Valor.'<br>';
-        echo 'PRAZO:        '.$frete->PrazoEntrega.'<br>';
+        // echo 'CEP ORIGEM:   '.$cepOrigem.'<br>';
+        // echo 'CEP DESTINO:  '.$cepDestino.'<br>';
+        // echo 'VALOR:        '.$frete->Valor.'<br>';
+        // echo 'PRAZO:        '.$frete->PrazoEntrega.'<br>';
+
+        return json_encode($frete);
     }
 }

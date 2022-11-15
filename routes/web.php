@@ -9,10 +9,12 @@ use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\ColecoesController;
 use App\Http\Controllers\CorreiosController;
+use App\Http\Controllers\EnderecosController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishListController;
+use App\Http\Requests\EnderecoRequest;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -46,7 +48,7 @@ Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
     Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
 });
 
-Route::get('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
+Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
 // FIM ROTAS PUBLICAS
 
 // ROTAS CLIENTE
@@ -68,8 +70,22 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{rowId}/sub',    [CartController::class, 'cartSub'])->name('cart.sub');
         Route::get('/{rowId}/exclude', [CartController::class, 'cartExclude'])->name('cart.exclude');
 
-        Route::post('/concluir',    [CartController::class, 'fazerPedido'])->name('cart.concluir');
+        Route::post('/endereco',    [CartController::class, 'selecionarEndereco'])->name('cart.endereco');
+        Route::post('/concluir',    [CartController::class, 'continuarPedido'])->name('cart.continuar');
         Route::get('/compras',      [CartController::class, 'compras'])->name('cart.compras');
+    });
+
+    Route::group(['prefix' => 'profile', 'where'=>['id'=>'[0-9]+']], function () {
+
+
+        Route::group(['prefix' => 'enderecos', 'where'=>['id'=>'[0-9]+']], function () {
+            Route::any('/',         [EnderecosController::class, 'index'])->name('enderecos');
+            Route::get('/create',   [EnderecosController::class, 'create'])->name('enderecos.create');
+            Route::post('/store',   [EnderecosController::class, 'store'])->name('enderecos.store');
+            Route::get('/{id}/destroy', [EnderecosController::class,  'destroy'])->name('enderecos.destroy');
+            Route::get('/{id}/edit',    [EnderecosController::class,  'edit'])->name('enderecos.edit');
+            Route::put('/{id}/update',  [EnderecosController::class,  'update'])->name('enderecos.update');
+        });
     });
     
 });
