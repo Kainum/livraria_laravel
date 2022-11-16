@@ -13,15 +13,15 @@
         </ul>
     @endif
 
-    {!! Form::open(['route'=>["admin.editoras.update", 'id'=>$editora->id],'method'=>'put']) !!}
+    {{ Form::open(['route'=>["admin.editoras.update", 'id'=>$editora->id],'method'=>'put']) }}
         <div class="form-group">
-            {!! Form::label('nome', 'Nome: ') !!}
-            {!! Form::text('nome', $editora->nome, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('nome', 'Nome: ') }}
+            {{ Form::text('nome', $editora->nome, ['class'=>'form-control', 'required']) }}
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
-            {!! Form::reset('Limpar', ['class'=>'btn btn-default']) !!}
+            {{ Form::submit('Salvar', ['class'=>'btn btn-primary']) }}
+            {{ Form::reset('Limpar', ['class'=>'btn btn-default']) }}
         </div>
-    {!! Form::close() !!}
+    {{ Form::close() }}
 @stop

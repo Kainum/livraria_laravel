@@ -28,15 +28,22 @@ class ColecoesController extends Controller
     }
 
     public function store (ColecaoRequest $request) {
+        $new_item = $request->all();
+        
+        // guarda a imagem do upload
+        $stored_file = $request->file('file')->store('images', 'public');
+        $new_item["imagem"] = pathinfo($stored_file)['basename'];
+
+        $ni = Colecao::create($new_item);
 
 
-        $new_item = Colecao::create(['nome'=>$request->get('nome'),]);
+        // vincula os generos na coleção
         $generos = $request->generos;
 
         foreach($generos as $gen => $value) {
             GeneroColecao::create([
                                 'genero_id'=>$generos[$gen],
-                                'colecao_id'=>$new_item->id,
+                                'colecao_id'=>$ni->id,
                                 ]);
         }
 
@@ -49,12 +56,29 @@ class ColecoesController extends Controller
     }
 
     public function edit($id) {
-        $colecao = Colecao::find($id);
-        return view('colecoes.edit', compact('colecao'));
+        $item = Colecao::find($id);
+        return view('colecoes.edit', compact('item'));
     }
 
     public function update(ColecaoRequest $request, $id) {
-        Colecao::find($id)->update($request->all());
+        $ni = Colecao::find($id);
+
+        // atualiza o item
+        $ni->update($request->all());
+
+
+        // delete os generos vinculados
+        $ni->generos()->delete();
+        // vincula os generos na coleção
+        $generos = $request->generos;
+
+        foreach($generos as $gen => $value) {
+            GeneroColecao::create([
+                                'genero_id'=>$generos[$gen],
+                                'colecao_id'=>$ni->id,
+                                ]);
+        }
+
         return redirect()->route('admin.colecoes');
     }
 }

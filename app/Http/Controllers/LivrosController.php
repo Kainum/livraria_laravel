@@ -30,7 +30,7 @@ class LivrosController extends Controller
     public function store (LivroRequest $request) {
         $new_item = $request->all();
         
-        $stored_file = $request->file('file')->store('livros', 'public');
+        $stored_file = $request->file('file')->store('images', 'public');
         $new_item["imagem"] = pathinfo($stored_file)['basename'];
 
         Livro::create($new_item);
@@ -50,16 +50,16 @@ class LivrosController extends Controller
     public function update(LivroRequest $request, $id) {
         $updated_item = $request->all();
 
-        dd($request->file('file'));
-        if ($request->hasFile('file')) {
-            if (Storage::exists('livros/'.$updated_item["imagem"])) {
-                Storage::delete('livros/'.$updated_item["imagem"]);             // delete da imagem antiga no storage
-            }
-            $stored_file = $request->file('file')->store('livros', 'public');   // guarda nova imagem no storage
-            $updated_item["imagem"] = pathinfo($stored_file)['basename'];
-        }
+        // dd($request->file('file'));
+        // if ($request->hasFile('file')) {
+        //     if (Storage::exists('livros/'.$updated_item["imagem"])) {
+        //         Storage::delete('livros/'.$updated_item["imagem"]);             // delete da imagem antiga no storage
+        //     }
+        //     $stored_file = $request->file('file')->store('livros', 'public');   // guarda nova imagem no storage
+        //     $updated_item["imagem"] = pathinfo($stored_file)['basename'];
+        // }
 
         Livro::find($id)->update($updated_item);
-        //return redirect()->route('admin.livros');
+        return redirect()->route('admin.livros');
     }
 }

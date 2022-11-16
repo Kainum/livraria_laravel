@@ -13,54 +13,54 @@
         </ul>
     @endif
 
-    {!! Form::open(['route'=>'admin.livros.store', 'files'=>true]) !!}
+    {{ Form::open(['route'=>'admin.livros.store', 'files'=>true]) }}
         <div class="form-group">
-            {!! Form::label('titulo', 'Título: ') !!}
-            {!! Form::text('titulo', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('titulo', 'Título: ') }}
+            {{ Form::text('titulo', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('isbn', 'ISBN: ') !!}
-            {!! Form::text('isbn', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('isbn', 'ISBN: ') }}
+            {{ Form::text('isbn', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('autor', 'Autor: ') !!}
-            {!! Form::text('autor', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('autor', 'Autor: ') }}
+            {{ Form::text('autor', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('file', 'Arquivo de imagem: ') !!}
-            {!! Form::file('file', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('file', 'Arquivo de imagem: ') }}
+            {{ Form::file('file', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('resumo', 'Resumo: ') !!}
-            {!! Form::textarea('resumo', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('resumo', 'Resumo: ') }}
+            {{ Form::textarea('resumo', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('data_lancamento', 'Data de Lançamento: ') !!}
-            {!! Form::date('data_lancamento', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('data_lancamento', 'Data de Lançamento: ') }}
+            {{ Form::date('data_lancamento', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('preco', 'Preço: ') !!}
-            {!! Form::number('preco', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('preco', 'Preço: ') }}
+            {{ Form::number('preco', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('paginas', 'Nº de Páginas: ') !!}
-            {!! Form::number('paginas', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('paginas', 'Nº de Páginas: ') }}
+            {{ Form::number('paginas', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('qtd_estoque', 'Estoque atual: ') !!}
-            {!! Form::number('qtd_estoque', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('qtd_estoque', 'Estoque atual: ') }}
+            {{ Form::number('qtd_estoque', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('colecao_id', 'Coleção: ') !!}
-            {!! Form::select('colecao_id', \App\Models\Colecao::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('colecao_id', 'Coleção: ') }}
+            {{ Form::select('colecao_id', \App\Models\Colecao::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('editora_id', 'Editora: ') !!}
-            {!! Form::select('editora_id', \App\Models\Editora::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('editora_id', 'Editora: ') }}
+            {{ Form::select('editora_id', \App\Models\Editora::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::submit('Criar', ['class'=>'btn btn-primary']) !!}
-            {!! Form::reset('Limpar', ['class'=>'btn btn-default']) !!}
+            {{ Form::submit('Criar', ['class'=>'btn btn-primary']) }}
+            {{ Form::reset('Limpar', ['class'=>'btn btn-default']) }}
         </div>
-    {!! Form::close() !!}
+    {{ Form::close() }}
 @stop

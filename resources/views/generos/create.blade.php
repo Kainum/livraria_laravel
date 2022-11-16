@@ -13,19 +13,19 @@
         </ul>
     @endif
 
-    {!! Form::open(['route'=>'admin.generos.store']) !!}
+    {{ Form::open(['route'=>'admin.generos.store', 'files'=>true]) }}
         <div class="form-group">
-            {!! Form::label('nome', 'Nome: ') !!}
-            {!! Form::text('nome', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('nome', 'Nome: ') }}
+            {{ Form::text('nome', null, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
-            {!! Form::label('imagem', 'URL imagem: ') !!}
-            {!! Form::text('imagem', null, ['class'=>'form-control', 'required']) !!}
+            {{ Form::label('file', 'Arquivo de imagem: ') }}
+            {{ Form::file('file', null, ['class'=>'form-control', 'required']) }}
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Criar', ['class'=>'btn btn-primary']) !!}
-            {!! Form::reset('Limpar', ['class'=>'btn btn-default']) !!}
+            {{ Form::submit('Criar', ['class'=>'btn btn-primary']) }}
+            {{ Form::reset('Limpar', ['class'=>'btn btn-default']) }}
         </div>
-    {!! Form::close() !!}
+    {{ Form::close() }}
 @stop
