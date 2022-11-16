@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('data_pedido');
             $table->string('endereco', 1000);
             $table->double('valorTotal',8,2);
+            $table->string('servicoFrete', 10);
             $table->double('valorFrete',8,2);
             $table->string('status', 3);
             $table->bigInteger('comprador_id')->unsigned();

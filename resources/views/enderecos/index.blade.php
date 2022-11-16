@@ -1,4 +1,7 @@
-@extends('master', ['model_title' => 'Endereços',])
+@extends('master', [
+    'model_title'   => 'Endereços',
+    'page_title'    => 'Meus Endereços',
+])
 @section('content')
     <table class="table table-centered table-nowrap mb-0 rounded">
         <thead class="thead-light">

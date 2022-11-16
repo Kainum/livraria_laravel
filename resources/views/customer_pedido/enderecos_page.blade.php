@@ -11,7 +11,7 @@
         <p>{{ ($item->cidade.", ".$item->uf.", ".$item->cep) }}</p>
         <p>Telefone: {{ $item->telefone}}</p>
 
-        {{ Form::open(['route'=>'cart.continuar']) }}
+        {{ Form::open(['route'=>'cart.confirmar']) }}
             {{ Form::hidden('endereco', $item->id) }}
             {{ Form::submit('Escolher', ['class'=>'btn btn-primary']) }}
         {{ Form::close() }}

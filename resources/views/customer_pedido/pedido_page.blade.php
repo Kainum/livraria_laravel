@@ -9,18 +9,22 @@
     <p>{{ ($endereco->endereco.", ".$endereco->numero." - ".$endereco->bairro) }}</p>
     <p>{{ ($endereco->cidade.", ".$endereco->uf." - ".$endereco->cep) }}</p>
     <div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-                {{ "PAC - ".(session('frete_options')['pac']->PrazoEntrega)."dias - R$".(session('frete_options')['pac']->Valor) }}
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-            <label class="form-check-label" for="flexRadioDefault2">
-                {{ "SEDEX - ".(session('frete_options')['sedex']->PrazoEntrega)."dias - R$".(session('frete_options')['sedex']->Valor) }}
-            </label>
-        </div>
+        {{ Form::open(['route'=>'cart.concluir']) }}
+            @csrf
+            <div class="form-check">
+                <input class="form-check-input" value='{{ App\Models\Correios::SERVICO_PAC }}' type="radio" name="frete" id="frete1" checked>
+                <label class="form-check-label" for="frete1">
+                    {{ "PAC - ".(session('frete_options')[App\Models\Correios::SERVICO_PAC]->PrazoEntrega)." dias - R$".(session('frete_options')[App\Models\Correios::SERVICO_PAC]->Valor) }}
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" value='{{ App\Models\Correios::SERVICO_SEDEX }}' type="radio" name="frete" id="frete2">
+                <label class="form-check-label" for="frete2">
+                    {{ "SEDEX - ".(session('frete_options')[App\Models\Correios::SERVICO_SEDEX]->PrazoEntrega)." dias - R$".(session('frete_options')[App\Models\Correios::SERVICO_SEDEX]->Valor) }}
+                </label>
+            </div>
+            {{ Form::submit('Confirmar Pedido', ['class'=>'btn btn-primary']) }}
+        {{ Form::close() }}
     </div>
     
     <div class="table-responsive">

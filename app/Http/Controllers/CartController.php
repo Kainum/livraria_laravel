@@ -67,7 +67,6 @@ class CartController extends Controller
         $user_id = Auth::guard('web')->user()->id; //pega o id do user
 
         $lista_enderecos =  Endereco::where('usuario_id', '=', $user_id)->get();
-        // $item_list =      Cart::content();
 
         return view('customer_pedido.enderecos_page', ['lista_enderecos'=>$lista_enderecos]);
         
@@ -106,10 +105,10 @@ class CartController extends Controller
         // return redirect()->route('cart.page')->with('message', 'Pedido realizado.');
     }
 
-    public function continuarPedido(Request $request) {
+    public function confirmarPedido(Request $request) {
         $this->middleware('VerifyCsfrToken');
 
-        $user_id = Auth::guard('web')->user()->id; //pega o id do user
+        
         $item_list = Cart::content();
 
         // FRETE
@@ -123,10 +122,59 @@ class CartController extends Controller
         $request['codServico'] = Correios::SERVICO_SEDEX;
         $frete_sedex = json_decode(app('App\Http\Controllers\CorreiosController')->calcular($request));
 
-        $frete_options = ["pac"=>$frete_pac, "sedex"=>$frete_sedex];
+        $frete_options = [Correios::SERVICO_PAC=>$frete_pac, Correios::SERVICO_SEDEX=>$frete_sedex];
 
+        // salva objetos na sessão
+        $request->session()->put('endereco', $endereco);
         $request->session()->put('frete_options', $frete_options);
 
         return view('customer_pedido.pedido_page', ['item_list'=>$item_list, 'endereco'=>$endereco]);
+    }
+
+    public function concluirPedido(Request $request) {
+        $this->middleware('VerifyCsfrToken');
+
+        $user_id = Auth::guard('web')->user()->id; //pega o id do user
+        $end = session('endereco');
+        $endereco = $end->destinatario."\n".
+                    $end->endereco.", ".$end->numero." - ".$end->bairro."\n".
+                    $end->cep." - ".$end->cidade." - ".$end->uf."\n".
+                    $end->complemento."\n".
+                    $end->telefone;
+        
+
+        $servicoFrete = $request['frete'];
+
+        // formata a string de valor para poder guardar no banco
+        $vf =  session('frete_options')[$servicoFrete]->Valor;
+        $valor_frete = floatval(str_replace(',', '.', str_replace('.', '', $vf)));
+
+        $item_list =    Cart::content();
+
+        $data_pedido =  date('Y-m-d');
+
+        // =============================
+        $new_pedido = Pedido::create([
+            'data_pedido'=>$data_pedido,
+            'endereco'=>$endereco,
+            'valorTotal'=>Cart::total(),
+            'servicoFrete'=>$servicoFrete,
+            'valorFrete'=>$valor_frete,
+            'status'=>'ABE',
+            'comprador_id'=>$user_id,
+        ]);
+        foreach($item_list as $item) {
+            ItemPedido::create([
+                'qtd'=>$item->qty,
+                'valor_unitario'=>$item->price,
+                'valor_item'=>($item->price * $item->qty),
+                'pedido_id'=>$new_pedido->id,
+                'produto_id'=>$item->id,
+            ]);
+        }
+
+        Cart::destroy();
+        return redirect()->route('cart.page')->with('message', 'Pedido realizado.');
+
     }
 }

@@ -14,6 +14,7 @@ class Pedido extends Model
         'data_pedido',
         'endereco',
         'valorTotal',
+        'servicoFrete',
         'valorFrete',
         'status',
         'comprador_id',

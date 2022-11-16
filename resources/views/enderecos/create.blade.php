@@ -1,4 +1,7 @@
-@extends('master', ['model_title' => 'Endereços',])
+@extends('master', [
+    'model_title'   => 'Endereços',
+    'page_title'    => 'Novo Endereço',
+])
 @section('content')
     <h2>Novo Endereço</h2>
 
