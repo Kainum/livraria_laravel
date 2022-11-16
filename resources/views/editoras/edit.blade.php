@@ -3,7 +3,7 @@
     'page_title' => 'Editar Editora',
     ])
 @section('content')
-    <h2>Editando Editora {{ $editora->nome }}</h2>
+    <h2>Editando Editora {{ $item->nome }}</h2>
 
     @if ($errors->any())
         <ul class="alert alert-danger">
@@ -13,10 +13,10 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>["admin.editoras.update", 'id'=>$editora->id],'method'=>'put']) }}
+    {{ Form::open(['route'=>["admin.editoras.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
-            {{ Form::text('nome', $editora->nome, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required']) }}
         </div>
 
         <div class="form-group">

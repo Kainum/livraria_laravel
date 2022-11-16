@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class CartController extends Controller
 {
@@ -27,7 +28,7 @@ class CartController extends Controller
     }
 
     public function store (Request $request) {
-        $product = Livro::find($request->input('product_id'));
+        $product = Livro::find(Crypt::decrypt($request->input('product_id')));
         Cart::add(
             $product->id, 
             $product->titulo, 
@@ -69,40 +70,6 @@ class CartController extends Controller
         $lista_enderecos =  Endereco::where('usuario_id', '=', $user_id)->get();
 
         return view('customer_pedido.enderecos_page', ['lista_enderecos'=>$lista_enderecos]);
-        
-        // MANDAR PRA UMA PÁGINA ONDE ESCOLHA O ENDEREÇO E O VALOR DE FRETE
-        // lista de endereços pra escolher
-        // opcoes de fretes
-        // botao de confirma - aí sim concluir
-        // listagem de produtos
-
-        // ================================================================
-
-        // $endereco = 'Rua Estrada sem número, 000 - cidade, TR, Brazil';
-        // $valor_frete = 10.00;
-
-        // $data_pedido = date('Y-m-d');
-
-        // $new_pedido = Pedido::create([
-        //     'data_pedido'=>$data_pedido,
-        //     'endereco'=>$endereco,
-        //     'valorTotal'=>Cart::total(),
-        //     'valorFrete'=>$valor_frete,
-        //     'status'=>'ABE',
-        //     'comprador_id'=>$user_id,
-        // ]);
-        // foreach($lista_items as $item) {
-        //     ItemPedido::create([
-        //         'qtd'=>$item->qty,
-        //         'valor_unitario'=>$item->price,
-        //         'valor_item'=>($item->price * $item->qty),
-        //         'pedido_id'=>$new_pedido->id,
-        //         'produto_id'=>$item->id,
-        //     ]);
-        // }
-
-        // Cart::destroy();
-        // return redirect()->route('cart.page')->with('message', 'Pedido realizado.');
     }
 
     public function confirmarPedido(Request $request) {

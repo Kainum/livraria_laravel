@@ -3,7 +3,7 @@
     'page_title' => 'Editar Gênero',
     ])
 @section('content')
-    <h2>Editando Gênero {{ $genero->nome }}</h2>
+    <h2>Editando Gênero {{ $item->nome }}</h2>
 
     @if ($errors->any())
         <ul class="alert alert-danger">
@@ -13,14 +13,14 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>["admin.generos.update", 'id'=>$genero->id],'method'=>'put']) }}
+    {{ Form::open(['route'=>["admin.generos.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
-            {{ Form::text('nome', $genero->nome, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('imagem', 'Arquivo da imagem: ') }}
-            {{ Form::text('imagem', $genero->imagem, ['class'=>'form-control', 'required', 'disabled']) }}
+            {{ Form::text('imagem', $item->imagem, ['class'=>'form-control', 'required', 'disabled']) }}
         </div>
 
         <div class="form-group">

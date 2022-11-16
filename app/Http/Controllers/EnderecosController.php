@@ -6,6 +6,7 @@ use App\Http\Requests\EnderecoRequest;
 use App\Models\Endereco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class EnderecosController extends Controller
 {
@@ -32,19 +33,19 @@ class EnderecosController extends Controller
     }
 
     public function destroy($id) {
-        Endereco::find($id)->delete();
+        Endereco::find(Crypt::decrypt($id))->delete();
         return redirect()->route('enderecos');
     }
 
-    public function edit($id) {
-        $endereco = Endereco::find($id);
-        return view('enderecos.edit', compact('endereco'));
+    public function edit(Request $request) {
+        $item = Endereco::find(Crypt::decrypt($request->get('id')));
+        return view('enderecos.edit', compact('item'));
     }
 
     public function update(EnderecoRequest $request, $id) {
         $updated_item = $request->all();
 
-        Endereco::find($id)->update($updated_item);
+        Endereco::find(Crypt::decrypt($id))->update($updated_item);
         return redirect()->route('enderecos');
     }
 }

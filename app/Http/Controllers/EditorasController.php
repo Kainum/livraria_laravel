@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EditoraRequest;
 use App\Models\Editora;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class EditorasController extends Controller
 {
@@ -35,17 +36,17 @@ class EditorasController extends Controller
     }
 
     public function destroy($id) {
-        Editora::find($id)->delete();
+        Editora::find(Crypt::decrypt($id))->delete();
         return redirect()->route('admin.editoras');
     }
 
-    public function edit($id) {
-        $editora = Editora::find($id);
-        return view('editoras.edit', compact('editora'));
+    public function edit(Request $request) {
+        $item = Editora::find(Crypt::decrypt($request->get('id')));
+        return view('editoras.edit', compact('item'));
     }
 
     public function update(EditoraRequest $request, $id) {
-        Editora::find($id)->update($request->all());
+        Editora::find(Crypt::decrypt($id))->update($request->all());
         return redirect()->route('admin.editoras');
     }
 }

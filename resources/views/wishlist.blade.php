@@ -19,10 +19,10 @@
             <tr>
                 <td>{{ $item->livro->titulo }}</td>
                 <td>
-                    {{ $item->data_adicao }}
+                    {{ Carbon\Carbon::parse($item->data_adicao)->format('d/m/Y') }}
                 </td>
                 <td>
-                    <a href="{{ route('wishlist.remove', ['id'=>$item->id]) }}" class="btn btn-danger">Remover</a>
+                    <a href="{{ route('wishlist.remove', ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-danger">Remover</a>
                 </td>
             </tr>
             @endforeach

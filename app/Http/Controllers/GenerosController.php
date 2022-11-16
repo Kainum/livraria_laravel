@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GeneroRequest;
 use App\Models\Genero;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class GenerosController extends Controller
 {
@@ -38,17 +39,17 @@ class GenerosController extends Controller
     }
 
     public function destroy($id) {
-        Genero::find($id)->delete();
+        Genero::find(Crypt::decrypt($id))->delete();
         return redirect()->route('admin.generos');
     }
 
-    public function edit($id) {
-        $genero = Genero::find($id);
-        return view('generos.edit', compact('genero'));
+    public function edit(Request $request) {
+        $item = Genero::find(Crypt::decrypt($request->get('id')));
+        return view('generos.edit', compact('item'));
     }
 
     public function update(GeneroRequest $request, $id) {
-        Genero::find($id)->update($request->all());
+        Genero::find(Crypt::decrypt($id))->update($request->all());
         return redirect()->route('admin.generos');
     }
 }

@@ -36,14 +36,14 @@ Route::get('/', function () {
 // ROTAS PUBLICAS
 Route::any('/search', [SearchController::class, 'getLivros'])->name('search');
 
-Route::group(['prefix' => 'browse', 'where'=>['id'=>'[0-9]+']], function () {
+Route::group(['prefix' => 'browse'], function () {
     Route::get('/',     [SearchController::class, 'getGeneros'])->name('browse');
     Route::get('/{id}', [SearchController::class, 'getColecoes'])->name('browse.colecoes');;
 });
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
-Route::group(['prefix' => 'produto', 'where'=>['id'=>'[0-9]+']], function () {
+Route::group(['prefix' => 'produto'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
     Route::get('/',         function () { return redirect()->route('search'); });
     Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
 });
@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::group(['prefix' => 'wishlist', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::group(['prefix' => 'wishlist'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
         Route::get('/',     [WishListController::class, 'view'])->name('wishlist');
         Route::post('/add/{id}',[WishListController::class, 'addWishList'])->name('wishlist.add');
         Route::get('/rem/{id}', [WishListController::class, 'removeWishList'])->name('wishlist.remove');
@@ -76,15 +76,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/compras',      [CartController::class, 'compras'])->name('cart.compras');
     });
 
-    Route::group(['prefix' => 'profile', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::group(['prefix' => 'profile'], function () {
 
 
-        Route::group(['prefix' => 'enderecos', 'where'=>['id'=>'[0-9]+']], function () {
+        Route::group(['prefix' => 'enderecos'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
             Route::any('/',         [EnderecosController::class, 'index'])->name('enderecos');
             Route::get('/create',   [EnderecosController::class, 'create'])->name('enderecos.create');
             Route::post('/store',   [EnderecosController::class, 'store'])->name('enderecos.store');
             Route::get('/{id}/destroy', [EnderecosController::class,  'destroy'])->name('enderecos.destroy');
-            Route::get('/{id}/edit',    [EnderecosController::class,  'edit'])->name('enderecos.edit');
+            Route::get('/edit',     [EnderecosController::class,  'edit'])->name('enderecos.edit');
             Route::put('/{id}/update',  [EnderecosController::class,  'update'])->name('enderecos.update');
         });
     });
@@ -102,39 +102,39 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 
-    Route::group(['prefix' => 'generos', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::group(['prefix' => 'generos'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
         Route::any('/',         [GenerosController::class, 'index'])->name('admin.generos');
         Route::get('/create',   [GenerosController::class, 'create'])->name('admin.generos.create');
         Route::post('/store',   [GenerosController::class, 'store'])->name('admin.generos.store');
         Route::get('/{id}/destroy', [GenerosController::class,  'destroy'])->name('admin.generos.destroy');
-        Route::get('/{id}/edit',    [GenerosController::class,  'edit'])->name('admin.generos.edit');
+        Route::get('/edit',     [GenerosController::class,  'edit'])->name('admin.generos.edit');
         Route::put('/{id}/update',  [GenerosController::class,  'update'])->name('admin.generos.update');
     });
 
-    Route::group(['prefix' => 'editoras', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::group(['prefix' => 'editoras'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
         Route::any('/',         [EditorasController::class, 'index'])->name('admin.editoras');
         Route::get('/create',   [EditorasController::class, 'create'])->name('admin.editoras.create');
         Route::post('/store',   [EditorasController::class, 'store'])->name('admin.editoras.store');
         Route::get('/{id}/destroy', [EditorasController::class,  'destroy'])->name('admin.editoras.destroy');
-        Route::get('/{id}/edit',    [EditorasController::class,  'edit'])->name('admin.editoras.edit');
+        Route::get('/edit',     [EditorasController::class,  'edit'])->name('admin.editoras.edit');
         Route::put('/{id}/update',  [EditorasController::class,  'update'])->name('admin.editoras.update');
     });
 
-    Route::group(['prefix' => 'livros', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::group(['prefix' => 'livros'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
         Route::any('/',         [LivrosController::class, 'index'])->name('admin.livros');
         Route::get('/create',   [LivrosController::class, 'create'])->name('admin.livros.create');
         Route::post('/store',   [LivrosController::class, 'store'])->name('admin.livros.store');
         Route::get('/{id}/destroy', [LivrosController::class,  'destroy'])->name('admin.livros.destroy');
-        Route::get('/{id}/edit',    [LivrosController::class,  'edit'])->name('admin.livros.edit');
+        Route::get('edit',      [LivrosController::class,  'edit'])->name('admin.livros.edit');
         Route::put('/{id}/update',  [LivrosController::class,  'update'])->name('admin.livros.update');
     });
 
-    Route::group(['prefix' => 'colecoes', 'where'=>['id'=>'[0-9]+']], function () {
+    Route::group(['prefix' => 'colecoes'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
         Route::any('/',         [ColecoesController::class, 'index'])->name('admin.colecoes');
         Route::get('/create',   [ColecoesController::class, 'create'])->name('admin.colecoes.create');
         Route::post('/store',   [ColecoesController::class, 'store'])->name('admin.colecoes.store');
         Route::get('/{id}/destroy', [ColecoesController::class,  'destroy'])->name('admin.colecoes.destroy');
-        Route::get('/{id}/edit',    [ColecoesController::class,  'edit'])->name('admin.colecoes.edit');
+        Route::get('/edit',     [ColecoesController::class,  'edit'])->name('admin.colecoes.edit');
         Route::put('/{id}/update',  [ColecoesController::class,  'update'])->name('admin.colecoes.update');
     });
 });

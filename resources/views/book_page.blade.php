@@ -13,7 +13,7 @@
                         ]) }}">
             </div>
             <div class="col-12 mb-4">
-                {{ Form::open(['route'=>['wishlist.add', 'id'=>$item->id]]) }}
+                {{ Form::open(['route'=>['wishlist.add', 'id'=>\Crypt::encrypt($item->id)]]) }}
                     <div class="form-group">
                         {{ Form::submit('Add Lista de Desejos', ['class'=>'btn btn-danger']) }}
                     </div>
@@ -31,7 +31,7 @@
                         </tr>
                         <tr>
                             <td>Data de Lançamento</td>
-                            <td><b>{{ $item->data_lancamento }}</b></td>
+                            <td><b>{{ Carbon\Carbon::parse($item->data_lancamento)->format('d/m/Y') }}</b></td>
                         </tr>
                         <tr>
                             <td>Quantidade de Páginas</td>
@@ -55,7 +55,7 @@
             <div class="col-12">
                 {{ Form::open(['route'=>'cart.store']) }}
                     <div class="form-group">
-                        {{ Form::hidden('product_id', $item->id) }}
+                        {{ Form::hidden('product_id', \Crypt::encrypt($item->id)) }}
                     </div>
                     <div class="form-group">
                         {{ Form::number('quantity', '1', ['min'=>1, 'max'=>10, 'class'=>'form-control']) }}

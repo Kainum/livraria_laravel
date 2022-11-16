@@ -18,7 +18,7 @@
                     <p>{{ ($item->cidade.", ".$item->uf." - ".$item->cep) }}</p>
                 </td>
                 <td>
-                    <a href="{{ route('enderecos.edit',     ['id'=>$item->id]) }}" class="btn btn-success">Editar</a>
+                    <a href="{{ route('enderecos.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar</a>
                     <a href="{{ route('enderecos.destroy',  ['id'=>$item->id]) }}" class="btn btn-danger">Remover</a>
                 </td>
             </tr>

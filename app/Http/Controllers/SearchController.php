@@ -6,6 +6,7 @@ use App\Models\Colecao;
 use App\Models\Genero;
 use App\Models\Livro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class SearchController extends Controller
 {
@@ -34,14 +35,14 @@ class SearchController extends Controller
 
     public function getColecoes ($id) {
         $paginate_value = 12;
-        $genero = Genero::find($id);
+        $genero = Genero::find(Crypt::decrypt($id));
         $list = $genero->colecoes;
         
         return view('browse_colecoes', ['item_list'=>$list]);
     }
 
     public function view($id) {
-        $item = Livro::find($id);
+        $item = Livro::find(Crypt::decrypt($id));
         return view('book_page', compact('item'));
     }
 

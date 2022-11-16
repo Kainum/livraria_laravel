@@ -34,7 +34,7 @@
                 <td>{{ $item->editora->nome }}</td>
                 <td>{{ $item->colecao->nome }}</td>
                 <td>
-                    <a href="{{ route('admin.livros.edit',     ['id'=>$item->id]) }}" class="btn btn-success">Editar</a>
+                    <a href="{{ route('admin.livros.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar</a>
                     <a href="{{ route('admin.livros.destroy',  ['id'=>$item->id]) }}" class="btn btn-danger">Remover</a>
                 </td>
             </tr>

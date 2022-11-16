@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>["admin.colecoes.update", 'id'=>$item->id],'method'=>'put']) }}
+    {{ Form::open(['route'=>["admin.colecoes.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
             {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required']) }}

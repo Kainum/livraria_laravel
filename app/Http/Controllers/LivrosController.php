@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LivroRequest;
 use App\Models\Livro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
 class LivrosController extends Controller
@@ -38,13 +39,13 @@ class LivrosController extends Controller
     }
 
     public function destroy($id) {
-        Livro::find($id)->delete();
+        Livro::find(Crypt::decrypt($id))->delete();
         return redirect()->route('admin.livros');
     }
 
-    public function edit($id) {
-        $livro = Livro::find($id);
-        return view('livros.edit', compact('livro'));
+    public function edit(Request $request) {
+        $item = Livro::find(Crypt::decrypt($request->get('id')));
+        return view('livros.edit', compact('item'));
     }
 
     public function update(LivroRequest $request, $id) {
@@ -59,7 +60,7 @@ class LivrosController extends Controller
         //     $updated_item["imagem"] = pathinfo($stored_file)['basename'];
         // }
 
-        Livro::find($id)->update($updated_item);
+        Livro::find(Crypt::decrypt($id))->update($updated_item);
         return redirect()->route('admin.livros');
     }
 }

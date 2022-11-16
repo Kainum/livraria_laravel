@@ -13,42 +13,42 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>["enderecos.update", 'id'=>$endereco->id],'method'=>'put']) }}
+    {{ Form::open(['route'=>["enderecos.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('cep', 'CEP: ') }}
-            {{ Form::text('cep', $endereco->cep, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('cep', $item->cep, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('endereco', 'Endereço: ') }}
-            {{ Form::text('endereco', $endereco->endereco, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('endereco', $item->endereco, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('numero', 'Nº: ') }}
-            {{ Form::text('numero', $endereco->numero, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('numero', $item->numero, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('bairro', 'Bairro: ') }}
-            {{ Form::text('bairro', $endereco->bairro, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('bairro', $item->bairro, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('cidade', 'Cidade: ') }}
-            {{ Form::text('cidade', $endereco->cidade, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('cidade', $item->cidade, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('uf', 'UF: ') }}
-            {{ Form::text('uf', $endereco->uf, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('uf', $item->uf, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('complemento', 'Complemento: ') }}
-            {{ Form::text('complemento', $endereco->complemento, ['class'=>'form-control']) }}
+            {{ Form::text('complemento', $item->complemento, ['class'=>'form-control']) }}
         </div>
         <div class="form-group">
             {{ Form::label('destinatario', 'Destinatário: ') }}
-            {{ Form::text('destinatario', $endereco->destinatario, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('destinatario', $item->destinatario, ['class'=>'form-control', 'required']) }}
         </div>
         <div class="form-group">
             {{ Form::label('telefone', 'Telefone: ') }}
-            {{ Form::text('telefone', $endereco->telefone, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('telefone', $item->telefone, ['class'=>'form-control', 'required']) }}
         </div>
 
         <div class="form-group">

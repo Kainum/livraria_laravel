@@ -6,6 +6,7 @@ use App\Http\Requests\ColecaoRequest;
 use App\Models\Colecao;
 use App\Models\GeneroColecao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class ColecoesController extends Controller
 {
@@ -51,17 +52,17 @@ class ColecoesController extends Controller
     }
 
     public function destroy($id) {
-        Colecao::find($id)->delete();
+        Colecao::find(Crypt::decrypt($id))->delete();
         return redirect()->route('admin.colecoes');
     }
 
-    public function edit($id) {
-        $item = Colecao::find($id);
+    public function edit(Request $request) {
+        $item = Colecao::find(Crypt::decrypt($request->get('id')));
         return view('colecoes.edit', compact('item'));
     }
 
     public function update(ColecaoRequest $request, $id) {
-        $ni = Colecao::find($id);
+        $ni = Colecao::find(Crypt::decrypt($id));
 
         // atualiza o item
         $ni->update($request->all());

@@ -12,11 +12,11 @@
         <p>Telefone: {{ $item->telefone}}</p>
 
         {{ Form::open(['route'=>'cart.confirmar']) }}
-            {{ Form::hidden('endereco', $item->id) }}
+            {{ Form::hidden('endereco', \Crypt::encrypt($item->id)) }}
             {{ Form::submit('Escolher', ['class'=>'btn btn-primary']) }}
         {{ Form::close() }}
 
-        <a href="{{ route('enderecos.edit',     ['id'=>$item->id]) }}" class="btn btn-success">Editar esse Endereço</a>
+        <a href="{{ route('enderecos.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar esse Endereço</a>
     @endforeach
 
     <br>
