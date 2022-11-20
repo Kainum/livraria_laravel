@@ -1,6 +1,7 @@
-@extends('master_admin', [
+@extends('layouts.default', [
     'model_title' => 'Livros',
     'page_title' => 'Listar Livros',
+    'search_route' => 'admin.livros',
     ])
 @section('content')
     {{ Form::open(['name'=>'form_name', 'route'=>'admin.livros']) }}
@@ -35,7 +36,7 @@
                 <td>{{ $item->colecao->nome }}</td>
                 <td>
                     <a href="{{ route('admin.livros.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar</a>
-                    <a href="{{ route('admin.livros.destroy',  ['id'=>$item->id]) }}" class="btn btn-danger">Remover</a>
+                    <a href="{{ route('admin.livros.destroy',  ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-danger delete-confirm">Remover</a>
                 </td>
             </tr>
             @endforeach

@@ -1,4 +1,4 @@
-@extends('master_admin', [
+@extends('layouts.default', [
     'model_title' => 'Gêneros',
     'page_title' => 'Listar Gêneros',
     'search_route' => 'admin.generos',
@@ -19,7 +19,7 @@
                 <td>{{ $item->imagem }}</td>
                 <td>
                     <a href="{{ route('admin.generos.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar</a>
-                    <a href="{{ route('admin.generos.destroy',  ['id'=>$item->id]) }}" class="btn btn-danger">Remover</a>
+                    <a href="{{ route('admin.generos.destroy',  ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-danger delete-confirm">Remover</a>
                 </td>
             </tr>
             @endforeach

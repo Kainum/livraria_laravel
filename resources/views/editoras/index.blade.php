@@ -1,4 +1,4 @@
-@extends('master_admin', [
+@extends('layouts.default', [
     'model_title' => 'Editoras',
     'page_title' => 'Listar Editoras',
     'search_route' => 'admin.editoras',
@@ -17,7 +17,7 @@
                 <td>{{ $item->nome }}</td>
                 <td>
                     <a href="{{ route('admin.editoras.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar</a>
-                    <a href="{{ route('admin.editoras.destroy',  ['id'=>$item->id]) }}" class="btn btn-danger">Remover</a>
+                    <a href="{{ route('admin.editoras.destroy',  ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-danger delete-confirm">Remover</a>
                 </td>
             </tr>
             @endforeach
@@ -28,3 +28,4 @@
 
     <a href="{{ route('admin.editoras.create', []) }}" class="btn btn-info">Adicionar</a>
 @stop
+
