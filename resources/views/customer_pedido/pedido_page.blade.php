@@ -47,9 +47,9 @@
                         'height'=>760,
                         ]) }}"></td>
                     <td>{{ $item->name }}</td>
-                    <td>R${{ $item->price }}</td>
+                    <td>R${{ \App\Util::formataDinheiro($item->price) }}</td>
                     <td>{{ $item->qty }}</td>
-                    <td>R${{ ($item->price * $item->qty) }}</td>
+                    <td>R${{ \App\Util::formataDinheiro($item->price * $item->qty) }}</td>
                 </tr>
                 @endforeach
             </tbody>

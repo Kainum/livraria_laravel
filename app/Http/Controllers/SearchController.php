@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Colecao;
 use App\Models\Genero;
 use App\Models\Livro;
+use App\Models\User;
+use App\Models\WishListItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class SearchController extends Controller
@@ -42,8 +45,19 @@ class SearchController extends Controller
     }
 
     public function view($id) {
-        $item = Livro::find(Crypt::decrypt($id));
-        return view('book_page', compact('item'));
+        $item_id = Crypt::decrypt($id);
+        $wishlist = null;
+
+        if (Auth::guard('web')->check()) {
+            $user_id = Auth::guard('web')->user()->id;
+            $wishlist = WishListItem::where('user_id', '=', $user_id)
+                        ->where('livro_id', '=', $item_id)
+                        ->first();
+        }
+        
+
+        $item = Livro::find($item_id);
+        return view('book_page', compact('item'))->with('wishlist', $wishlist);
     }
 
 }

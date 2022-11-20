@@ -9,6 +9,9 @@ class Pedido extends Model
 {
     use HasFactory;
 
+    const STATUS_ABERTO     = '01';
+    const STATUS_CANCELADO  = '05';
+
     protected $table = "pedidos";
     protected $fillable = [
         'data_pedido',

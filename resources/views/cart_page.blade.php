@@ -21,7 +21,7 @@
                             </div>
                             <div class="row col-lg-10 col-md-9 col-7">
                                 <p class="col-lg-6 col-12 my-lg-auto">{{ $item->name }}</p>
-                                <p class="col-lg-6 col-12 my-lg-auto">R${{ $item->price }}</p>
+                                <p class="col-lg-6 col-12 my-lg-auto">R${{ \App\Util::formataDinheiro($item->price) }}</p>
                             </div>
                         </div>
                         <div class="row col-md-4">
@@ -42,7 +42,7 @@
             <div class="container col-xl-4">
                 <h2>Carrinho</h2>
                 <p>Qtd total de items: {{ $qtd_total }}</p>
-                <p>Total valor: R${{ Cart::total() }}</p>
+                <p>Total valor: R${{ \App\Util::formataDinheiro(Cart::total()) }}</p>
                 <p>peso: {{ Cart::weight() }}</p>
 
                 {{ Form::open(['route'=>'cart.endereco']) }}

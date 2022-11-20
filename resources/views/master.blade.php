@@ -140,6 +140,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route("meus_pedidos") }}" class="nav-link">
+            <div class="col-10">
+              <i class="col-3 fa-solid fa-box" style="color: lightgray"></i>
+              <span class="col-9 sidebar-text">Meus Pedidos</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route("cart.page") }}" class="nav-link">
             <div class="col-10">
               <i class="col-3 fa-solid fa-cart-shopping" style="color: lightgray"></i>

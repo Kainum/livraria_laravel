@@ -87,6 +87,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/edit',     [EnderecosController::class,  'edit'])->name('enderecos.edit');
             Route::put('/{id}/update',  [EnderecosController::class,  'update'])->name('enderecos.update');
         });
+
+        Route::get('/meus_pedidos', [CartController::class, 'meusPedidos'])->name('meus_pedidos');
     });
     
 });

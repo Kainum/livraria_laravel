@@ -13,11 +13,18 @@
                         ]) }}">
             </div>
             <div class="col-12 mb-4">
-                {{ Form::open(['route'=>['wishlist.add', 'id'=>\Crypt::encrypt($item->id)]]) }}
+                @if (is_null($wishlist))
+                    {{ Form::open(['route'=>['wishlist.add', 'id'=>\Crypt::encrypt($item->id)]]) }}
+                        <div class="form-group">
+                            {{ Form::submit('Add Lista de Desejos', ['class'=>'btn btn-danger']) }}
+                        </div>
+                    {{ Form::close() }}
+                @else
                     <div class="form-group">
-                        {{ Form::submit('Add Lista de Desejos', ['class'=>'btn btn-danger']) }}
+                        <a href="{{ route('wishlist.remove',  ['id'=>\Crypt::encrypt($wishlist->id)]) }}" class="btn btn-danger">Rem Lista de Desejos</a>
                     </div>
-                {{ Form::close() }}
+                @endif
+                
                 <h4>Detalhes do Produto</h4>
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <tbody>
@@ -50,19 +57,29 @@
             <div class="col-12">
                 <h2>{{ $item->titulo }}</h2>
                 <p>{{ $item->resumo }}</p>
-                <h4>R${{ $item->preco }}</h4>
+                <h4>R${{ \App\Util::formataDinheiro($item->preco) }}</h4>
             </div>
             <div class="col-12">
                 {{ Form::open(['route'=>'cart.store']) }}
                     <div class="form-group">
                         {{ Form::hidden('product_id', \Crypt::encrypt($item->id)) }}
                     </div>
-                    <div class="form-group">
-                        {{ Form::number('quantity', '1', ['min'=>1, 'max'=>10, 'class'=>'form-control']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::submit('Adicionar ao Carrinho', ['class'=>'btn btn-success']) }}
-                    </div>
+                    @if ($item->qtd_estoque > 0)
+                        @if ($item->qtd_estoque < 21)
+                            <p style="color: darkorange">Restam {{ $item->qtd_estoque }} unidades</p>
+                        @endif
+                        <div class="form-group">
+                            {{ Form::number('quantity', '1', ['min'=>1, 'max'=>min(10, $item->qtd_estoque), 'class'=>'form-control']) }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::submit('Adicionar ao Carrinho', ['class'=>'btn btn-success']) }}
+                        </div>
+                    @else
+                        <div class="form-group">
+                            <button class="btn btn-warning" disabled>Sem estoque</button>
+                        </div>
+                    @endif
+                    
                 {{ Form::close() }}
             </div>
             <br>

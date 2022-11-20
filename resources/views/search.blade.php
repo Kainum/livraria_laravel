@@ -22,10 +22,17 @@
                 </a>
                 {{ Form::open(['route'=>['produto.view', 'id'=>\Crypt::encrypt($item->id)],'method'=>'get']) }}
                     <div class="row align-items-center">
-                        <span class="col-7">R${{ $item->preco }}</span>
-                        <button class="btn btn-success col-4 float-right" type="submit">
-                            <i class="fa-solid fa-cart-shopping" style="color:white"></i>
-                        </button>
+                        <span class="col-7">R${{ \App\Util::formataDinheiro($item->preco) }}</span>
+                        @if ($item->qtd_estoque > 0)
+                            <button class="btn btn-success col-4 float-right" type="submit">
+                                <i class="fa-solid fa-cart-shopping" style="color:white"></i>
+                            </button>
+                        @else
+                            <button class="btn btn-warning col-4 float-right" type="submit">
+                                <i class="fa-solid fa-triangle-exclamation" style="color:white"></i>
+                            </button>
+                        @endif
+                        
                     </div>
                 {{ Form::close() }}
             </div>

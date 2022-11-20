@@ -17,7 +17,11 @@
         <tbody>
             @foreach ($item_list as $item)
             <tr>
-                <td>{{ $item->livro->titulo }}</td>
+                <td>
+                    <a href="{{ route('produto.view', ['id'=>\Crypt::encrypt($item->livro->id)]) }}">
+                        {{ $item->livro->titulo }}
+                    </a>
+                </td>
                 <td>
                     {{ Carbon\Carbon::parse($item->data_adicao)->format('d/m/Y') }}
                 </td>

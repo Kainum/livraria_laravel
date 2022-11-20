@@ -75,11 +75,11 @@ class CartController extends Controller
     public function confirmarPedido(Request $request) {
         $this->middleware('VerifyCsfrToken');
 
-        
+
         $item_list = Cart::content();
 
         // FRETE
-        $endereco = Endereco::find($request['endereco']);
+        $endereco = Endereco::find(Crypt::decrypt($request['endereco']));
 
         $request['cepDestino'] = str_replace("-", "", $endereco->cep);
 
@@ -103,10 +103,10 @@ class CartController extends Controller
 
         $user_id = Auth::guard('web')->user()->id; //pega o id do user
         $end = session('endereco');
-        $endereco = $end->destinatario."\n".
-                    $end->endereco.", ".$end->numero." - ".$end->bairro."\n".
-                    $end->cep." - ".$end->cidade." - ".$end->uf."\n".
-                    $end->complemento."\n".
+        $endereco = $end->destinatario."<br>".
+                    $end->endereco.", ".$end->numero." - ".$end->bairro."<br>".
+                    $end->cep." - ".$end->cidade." - ".$end->uf."<br>".
+                    $end->complemento."<br>".
                     $end->telefone;
         
 
@@ -127,7 +127,7 @@ class CartController extends Controller
             'valorTotal'=>Cart::total(),
             'servicoFrete'=>$servicoFrete,
             'valorFrete'=>$valor_frete,
-            'status'=>'ABE',
+            'status'=>Pedido::STATUS_ABERTO,
             'comprador_id'=>$user_id,
         ]);
         foreach($item_list as $item) {
@@ -138,10 +138,22 @@ class CartController extends Controller
                 'pedido_id'=>$new_pedido->id,
                 'produto_id'=>$item->id,
             ]);
+
+            // ATUALIZA O ESTOQUE DO PRODUTO
+            $livro = Livro::find($item->id);
+            $novo_estoque = $livro['qtd_estoque'] - $item->qty;
+            $livro->update(['qtd_estoque'=>$novo_estoque]);
         }
 
         Cart::destroy();
-        return redirect()->route('cart.page')->with('message', 'Pedido realizado.');
+        return redirect()->route('meus_pedidos')->with('message', 'Pedido realizado.');
 
+    }
+
+    public function meusPedidos() {
+        $user_id = Auth::guard('web')->user()->id;
+
+        $list = Pedido::where('comprador_id', '=', $user_id)->get();
+        return view('meuspedidos_page', ['item_list'=>$list]);
     }
 }
