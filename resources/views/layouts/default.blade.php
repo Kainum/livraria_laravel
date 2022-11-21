@@ -18,7 +18,23 @@
                 buttons: ["Cancelar", "Sim!"],
             }).then(function(value) {
                 if (value) {
-                    window.location.href = url;
+                    $.get(url, function(data) {
+                        if (data.status == 200) {
+                            swal({
+                                title:  'Deletado!',
+                                text:   'Exclusão confirmada',
+                                icon:   'success',
+                            }).then(function() {
+                                window.location.reload();
+                            });
+                        } else {
+                            swal({
+                                title:  'Erro!',
+                                text:   'Ocorreram erros na exclusão. Entre em contato com o suporte.',
+                                icon:   'error',
+                            });
+                        }
+                    });
                 }
             });
         });

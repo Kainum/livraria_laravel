@@ -33,8 +33,15 @@ class EnderecosController extends Controller
     }
 
     public function destroy($id) {
-        Endereco::find(Crypt::decrypt($id))->delete();
-        return redirect()->route('enderecos');
+        try {
+            Endereco::find(Crypt::decrypt($id))->delete();
+            $ret = array('status'=>200, 'msg'=>'null');
+        } catch (\Illuminate\Database\QueryException $e) {
+            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+        } catch (\PDOException $e) {
+            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+        }
+        return $ret;
     }
 
     public function edit(Request $request) {
