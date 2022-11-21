@@ -26,15 +26,21 @@
                         </div>
                         <div class="row col-md-4">
                             <div class="col-lg-8 col-md-12 col-8 row">
-                                <a class="btn btn-success col-3 my-auto" href="{{ route('cart.sub', ['rowId'=>$item->rowId]) }}">
+                                <a class="btn btn-secondary col-3 my-auto" href="{{ route('cart.sub', ['rowId'=>$item->rowId]) }}">
                                     <i class="fa-solid {{ $item->qty != 1 ? "fa-minus" : "fa-trash-can" }}" style="color:gray"></i>
                                 </a>
                                 <div class="col-6 text-center align-self-center">{{ $item->qty }}</div>
-                                <a class="btn btn-success col-3 my-auto" href="{{ route('cart.add', ['rowId'=>$item->rowId]) }}">
-                                    <i class="fa-solid fa-plus" style="color:gray"></i>
-                                </a>
+                                @if (\App\Models\Livro::find($item->id)->qtd_estoque > $item->qty)
+                                    <a class="btn btn-secondary col-3 my-auto" href="{{ route('cart.add', ['rowId'=>$item->rowId]) }}">
+                                        <i class="fa-solid fa-plus" style="color:gray"></i>
+                                    </a>
+                                @else
+                                    <button class="btn btn-secondary col-3 my-auto" disabled>
+                                        <i class="fa-solid fa-plus" style="color:gray"></i>
+                                    </button>
+                                @endif
                             </div>
-                            <a class="btn btn-success offset-lg-1 offset-md-0 offset-1 col-lg-3 col-md-12 col-3 my-auto" href="{{ route('cart.exclude', ['rowId'=>$item->rowId]) }}">excluir</a>
+                            <a class="btn btn-warning offset-lg-1 offset-md-0 offset-1 col-lg-3 col-md-12 col-3 my-auto" href="{{ route('cart.exclude', ['rowId'=>$item->rowId]) }}">excluir</a>
                         </div>
                     </div>
                 @endforeach

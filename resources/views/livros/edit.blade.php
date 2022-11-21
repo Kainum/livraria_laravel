@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('preco', 'Preço: ') }}
-            {{ Form::number('preco', $item->preco, ['class'=>'form-control', 'required', 'min'=>0, 'step'=>0.10]) }}
+            {{ Form::number('preco', $item->preco, ['class'=>'form-control', 'required', 'min'=>0, 'step'=>0.01]) }}
         </div>
         <div class="form-group">
             {{ Form::label('paginas', 'Nº de Páginas: ') }}

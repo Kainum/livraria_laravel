@@ -45,7 +45,12 @@ Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image
 
 Route::group(['prefix' => 'produto'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
     Route::get('/',         function () { return redirect()->route('search'); });
-    Route::get('/{id}',     [SearchController::class, 'view'])->name('produto.view');
+    Route::get('/{id}',     [SearchController::class, 'viewProduto'])->name('produto.view');
+});
+
+Route::group(['prefix' => 'colecao'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
+    Route::get('/',         function () { return redirect()->route('search'); });
+    Route::get('/{id}',     [SearchController::class, 'viewColecao'])->name('colecao.view');
 });
 
 Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
@@ -77,8 +82,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['prefix' => 'profile'], function () {
-
-
         Route::group(['prefix' => 'enderecos'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
             Route::any('/',         [EnderecosController::class, 'index'])->name('enderecos');
             Route::get('/create',   [EnderecosController::class, 'create'])->name('enderecos.create');

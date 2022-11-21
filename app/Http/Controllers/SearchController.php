@@ -44,7 +44,7 @@ class SearchController extends Controller
         return view('browse_colecoes', ['item_list'=>$list]);
     }
 
-    public function view($id) {
+    public function viewProduto($id) {
         $item_id = Crypt::decrypt($id);
         $wishlist = null;
 
@@ -59,5 +59,13 @@ class SearchController extends Controller
         $item = Livro::find($item_id);
         return view('book_page', compact('item'))->with('wishlist', $wishlist);
     }
+
+    public function viewColecao($id) {
+        $paginate_value = 12;
+        $item_list = Colecao::find(Crypt::decrypt($id))->livros()->paginate($paginate_value);
+        
+        return view('search', ['item_list'=>$item_list]);
+    }
+
 
 }

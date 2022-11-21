@@ -23,16 +23,19 @@ class CartController extends Controller
         foreach ($list as $key => $value) {
             $qtd_total += $value->qty;
         }
-        // dd($list);
         return view('cart_page', ['item_list'=>$list, 'qtd_total'=>$qtd_total]);
     }
 
     public function store (Request $request) {
-        $product = Livro::find(Crypt::decrypt($request->input('product_id')));
+        $this->middleware('VerifyCsfrToken');
+
+        $req = $request->all();
+        $product = Livro::find(Crypt::decrypt($req['product_id']));
+        
         Cart::add(
-            $product->id, 
-            $product->titulo, 
-            $request->input('quantity'), 
+            $product->id,
+            $product->titulo,
+            $req['quantity'],
             $product->preco,
             181,    // peso
         );
@@ -129,7 +132,7 @@ class CartController extends Controller
             'valorFrete'=>$valor_frete,
             'status'=>Pedido::STATUS_ABERTO,
             'comprador_id'=>$user_id,
-            'cpf'=> '000.000.000-00',//Auth::guard('web')->user()->cpf,
+            'cpf'=> Auth::guard('web')->user()->cpf,
         ]);
         foreach($item_list as $item) {
             ItemPedido::create([

@@ -15,12 +15,12 @@ class ColecaoSeeder extends Seeder
      */
     public function run()
     {
-        Colecao::create(['nome' => 'Dragon Ball']);
-        Colecao::create(['nome' => 'Dr. Stone']);
-        Colecao::create(['nome' => 'Spy x Family']);
-        Colecao::create(['nome' => 'Harry Potter']);
-        Colecao::create(['nome' => 'Turma da Mônica']);
-        Colecao::create(['nome' => 'Naruto']);
+        Colecao::create(['nome' => 'Dragon Ball', 'imagem' => 'no-image.webp']);
+        Colecao::create(['nome' => 'Dr. Stone', 'imagem' => 'no-image.webp']);
+        Colecao::create(['nome' => 'Spy x Family', 'imagem' => 'no-image.webp']);
+        Colecao::create(['nome' => 'Harry Potter', 'imagem' => 'no-image.webp']);
+        Colecao::create(['nome' => 'Turma da Mônica', 'imagem' => 'no-image.webp']);
+        Colecao::create(['nome' => 'Naruto', 'imagem' => 'no-image.webp']);
         
     }
 }

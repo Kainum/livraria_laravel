@@ -34,6 +34,8 @@ class GenerosController extends Controller
         if ($request->hasFile('file')) {
             $stored_file = $request->file('file')->store('images', 'public');
             $new_item["imagem"] = pathinfo($stored_file)['basename'];
+        } else {
+            $new_item["imagem"] = 'no-image.webp';
         }
 
         Genero::create($new_item);
