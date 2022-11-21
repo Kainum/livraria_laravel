@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->date('data_adicao');
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('livro_id')->unsigned()->nullable();
+            $table->bigInteger('livro_id')->unsigned();
             $table->foreign('livro_id')->references('id')->on('livros');
         });
     }

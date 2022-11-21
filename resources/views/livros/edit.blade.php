@@ -16,23 +16,23 @@
     {{ Form::open(['route'=>["admin.livros.update", 'files'=>true, 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('titulo', 'Título: ') }}
-            {{ Form::text('titulo', $item->titulo, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('titulo', $item->titulo, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}
         </div>
         <div class="form-group">
             {{ Form::label('isbn', 'ISBN: ') }}
-            {{ Form::text('isbn', $item->isbn, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('isbn', $item->isbn, ['class'=>'form-control', 'required', 'maxlength'=>20]) }}
         </div>
         <div class="form-group">
             {{ Form::label('autor', 'Autor: ') }}
-            {{ Form::text('autor', $item->autor, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('autor', $item->autor, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}
         </div>
         <div class="form-group">
             {{ Form::label('imagem', 'Arquivo da imagem: ') }}
-            {{ Form::text('imagem', $item->imagem, ['class'=>'form-control', 'required', 'disabled']) }}
+            {{ Form::text('imagem', $item->imagem, ['class'=>'form-control']) }}
         </div>
         <div class="form-group">
             {{ Form::label('resumo', 'Resumo: ') }}
-            {{ Form::textarea('resumo', $item->resumo, ['class'=>'form-control', 'required']) }}
+            {{ Form::textarea('resumo', $item->resumo, ['class'=>'form-control', 'required', 'maxlength'=>1000]) }}
         </div>
         <div class="form-group">
             {{ Form::label('data_lancamento', 'Data de Lançamento: ') }}
@@ -40,15 +40,15 @@
         </div>
         <div class="form-group">
             {{ Form::label('preco', 'Preço: ') }}
-            {{ Form::number('preco', $item->preco, ['class'=>'form-control', 'required']) }}
+            {{ Form::number('preco', $item->preco, ['class'=>'form-control', 'required', 'min'=>0, 'step'=>0.10]) }}
         </div>
         <div class="form-group">
             {{ Form::label('paginas', 'Nº de Páginas: ') }}
-            {{ Form::number('paginas', $item->paginas, ['class'=>'form-control', 'required']) }}
+            {{ Form::number('paginas', $item->paginas, ['class'=>'form-control', 'required', 'min'=>1]) }}
         </div>
         <div class="form-group">
             {{ Form::label('qtd_estoque', 'Estoque atual: ') }}
-            {{ Form::number('qtd_estoque', $item->qtd_estoque, ['class'=>'form-control', 'required']) }}
+            {{ Form::number('qtd_estoque', $item->qtd_estoque, ['class'=>'form-control', 'required', 'min'=>0]) }}
         </div>
         <div class="form-group">
             {{ Form::label('colecao_id', 'Coleção: ') }}

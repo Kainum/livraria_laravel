@@ -24,13 +24,17 @@ class LivroRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo'=>'required|max:100',
-            'resumo'=>'max:500',
-            'isbn'=>'min:14|max:14',
-            'autor'=>'max:100',
-            'data_lancamento'=>'date',
-            'editora_id'=>'required',
-            'colecao_id'=>'required',
+            'titulo'    =>'required|max:100',
+            'resumo'    =>'required|max:1000',
+            'isbn'      =>'required|min:10|max:20',
+            'autor'     =>'required|max:100',
+            'file'      =>'image',
+            'preco'     =>'required|min:0',
+            'paginas'   =>'required|min:1',
+            'data_lancamento'   =>'required|date',
+            'qtd_estoque'       =>'required|min:0',
+            'editora_id'        =>'required',
+            'colecao_id'        =>'required',
         ];
     }
 }

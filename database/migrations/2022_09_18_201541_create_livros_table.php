@@ -18,13 +18,13 @@ return new class extends Migration
             $table->timestamps();
             $table->string('titulo', 100);
             $table->string('resumo', 1000);
-            $table->string('isbn', 14);
+            $table->string('isbn', 20);
             $table->string('autor', 100);
-            $table->string('imagem');
+            $table->string('imagem')->nullable();
             $table->date('data_lancamento');
             $table->double('preco',8,2);
-            $table->integer('paginas');
-            $table->integer('qtd_estoque');
+            $table->integer('paginas')->unsigned();
+            $table->integer('qtd_estoque')->unsigned();
 
             $table->bigInteger('editora_id')->unsigned()->nullable();
             $table->foreign('editora_id')->references('id')->on('editoras');

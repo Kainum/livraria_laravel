@@ -31,8 +31,10 @@ class GenerosController extends Controller
     public function store (GeneroRequest $request) {
         $new_item = $request->all();
         
-        $stored_file = $request->file('file')->store('images', 'public');
-        $new_item["imagem"] = pathinfo($stored_file)['basename'];
+        if ($request->hasFile('file')) {
+            $stored_file = $request->file('file')->store('images', 'public');
+            $new_item["imagem"] = pathinfo($stored_file)['basename'];
+        }
 
         Genero::create($new_item);
         return redirect()->route('admin.generos');

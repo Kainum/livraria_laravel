@@ -16,7 +16,7 @@
     {{ Form::open(['route'=>["admin.editoras.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
-            {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}
         </div>
 
         <div class="form-group">

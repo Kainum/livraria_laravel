@@ -32,8 +32,10 @@ class ColecoesController extends Controller
         $new_item = $request->all();
         
         // guarda a imagem do upload
-        $stored_file = $request->file('file')->store('images', 'public');
-        $new_item["imagem"] = pathinfo($stored_file)['basename'];
+        if ($request->hasFile('file')) {
+            $stored_file = $request->file('file')->store('images', 'public');
+            $new_item["imagem"] = pathinfo($stored_file)['basename'];
+        }
 
         $ni = Colecao::create($new_item);
 

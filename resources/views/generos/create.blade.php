@@ -16,11 +16,11 @@
     {{ Form::open(['route'=>'admin.generos.store', 'files'=>true]) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
-            {{ Form::text('nome', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('nome', null, ['class'=>'form-control', 'required', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
             {{ Form::label('file', 'Arquivo de imagem: ') }}
-            {{ Form::file('file', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::file('file', null, ['class'=>'form-control']) }}
         </div>
 
         <div class="form-group">

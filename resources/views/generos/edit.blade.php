@@ -16,11 +16,11 @@
     {{ Form::open(['route'=>["admin.generos.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
-            {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
             {{ Form::label('imagem', 'Arquivo da imagem: ') }}
-            {{ Form::text('imagem', $item->imagem, ['class'=>'form-control', 'required', 'disabled']) }}
+            {{ Form::text('imagem', $item->imagem, ['class'=>'form-control']) }}
         </div>
 
         <div class="form-group">

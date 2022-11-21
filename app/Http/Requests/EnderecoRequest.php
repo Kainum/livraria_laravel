@@ -24,7 +24,15 @@ class EnderecoRequest extends FormRequest
     public function rules()
     {
         return [
-            'endereco'=>'required|min:3',
+            'cep'       =>'required|size:9',
+            'endereco'  =>'required|max:200',
+            'numero'    =>'required|max:10',
+            'bairro'    =>'required|max:50',
+            'cidade'    =>'required|max:50',
+            'uf'        =>'required|size:2',
+            'complemento'   =>'required|max:50',
+            'destinatario'  =>'required|max:50',
+            'telefone'      =>'required|min:11|max:20',
         ];
     }
 }

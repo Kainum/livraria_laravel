@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('servicoFrete', 10);
             $table->double('valorFrete',8,2);
             $table->string('status', 3);
+            $table->string('cpf', 14);
+            
             $table->bigInteger('comprador_id')->unsigned();
             $table->foreign('comprador_id')->references('id')->on('users');
         });

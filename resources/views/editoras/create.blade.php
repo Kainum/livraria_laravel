@@ -16,7 +16,7 @@
     {{ Form::open(['route'=>'admin.editoras.store']) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
-            {{ Form::text('nome', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('nome', null, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}
         </div>
 
         <div class="form-group">

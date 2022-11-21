@@ -24,7 +24,8 @@ class GeneroRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'=>'required|min:3',
+            'nome'  =>'required|max:50',
+            'file'  =>'image',
         ];
     }
 }

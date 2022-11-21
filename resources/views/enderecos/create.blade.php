@@ -16,39 +16,39 @@
     {{ Form::open(['route'=>'enderecos.store']) }}
         <div class="form-group">
             {{ Form::label('cep', 'CEP: ') }}
-            {{ Form::text('cep', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('cep', null, ['class'=>'form-control', 'required', 'maxlength'=>9]) }}
         </div>
         <div class="form-group">
             {{ Form::label('endereco', 'Endereço: ') }}
-            {{ Form::text('endereco', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('endereco', null, ['class'=>'form-control', 'required', 'maxlength'=>200]) }}
         </div>
         <div class="form-group">
             {{ Form::label('numero', 'Nº: ') }}
-            {{ Form::text('numero', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('numero', null, ['class'=>'form-control', 'required', 'maxlength'=>10]) }}
         </div>
         <div class="form-group">
             {{ Form::label('bairro', 'Bairro: ') }}
-            {{ Form::text('bairro', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('bairro', null, ['class'=>'form-control', 'required', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
             {{ Form::label('cidade', 'Cidade: ') }}
-            {{ Form::text('cidade', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('cidade', null, ['class'=>'form-control', 'required', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
             {{ Form::label('uf', 'UF: ') }}
-            {{ Form::text('uf', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('uf', null, ['class'=>'form-control', 'required', 'maxlength'=>2]) }}
         </div>
         <div class="form-group">
             {{ Form::label('complemento', 'Complemento: ') }}
-            {{ Form::text('complemento', null, ['class'=>'form-control']) }}
+            {{ Form::text('complemento', null, ['class'=>'form-control', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
             {{ Form::label('destinatario', 'Destinatário: ') }}
-            {{ Form::text('destinatario', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('destinatario', null, ['class'=>'form-control', 'required', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
             {{ Form::label('telefone', 'Telefone: ') }}
-            {{ Form::text('telefone', null, ['class'=>'form-control', 'required']) }}
+            {{ Form::text('telefone', null, ['class'=>'form-control', 'required', 'maxlength'=>20]) }}
         </div>
         
 
