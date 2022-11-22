@@ -30,7 +30,7 @@ class EnderecoRequest extends FormRequest
             'bairro'    =>'required|max:50',
             'cidade'    =>'required|max:50',
             'uf'        =>'required|uf|size:2',
-            'complemento'   =>'required|max:50',
+            'complemento'   =>'max:50',
             'destinatario'  =>'required|max:50',
             'telefone'      =>'required|min:11|max:20',
         ];

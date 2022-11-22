@@ -15,7 +15,7 @@ class EnderecosController extends Controller
         $list = Endereco::where('usuario_id', '=', $user_id)
                         ->get();
 
-        //dd($list);
+        // dd($list);
 
         return view('enderecos.index', ['item_list'=>$list]);
     }
