@@ -12,6 +12,7 @@ use App\Http\Controllers\CorreiosController;
 use App\Http\Controllers\EnderecosController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishListController;
 use App\Http\Requests\EnderecoRequest;
@@ -82,6 +83,13 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['prefix' => 'profile'], function () {
+        Route::get('/',         [ProfileController::class,  'view'])->name('profile.view');
+        Route::get('/edit',     [ProfileController::class,  'edit'])->name('profile.edit');
+        Route::put('/update',  [ProfileController::class,  'update'])->name('profile.update');
+
+        Route::get('/password/edit',    [ProfileController::class,  'editPassword'])->name('profile.password.edit');
+        Route::put('/password/update',  [ProfileController::class,  'updatePassword'])->name('profile.password.update');
+
         Route::group(['prefix' => 'enderecos'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
             Route::any('/',         [EnderecosController::class, 'index'])->name('enderecos');
             Route::get('/create',   [EnderecosController::class, 'create'])->name('enderecos.create');

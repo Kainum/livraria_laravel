@@ -131,11 +131,12 @@
             </div>
           </a>
         </li>
+        @if (Auth::guard('web')->check())
         <li class="nav-item">
-          <a href="{{ route("wishlist") }}" class="nav-link">
+          <a href="{{ route("profile.view") }}" class="nav-link">
             <div class="col-10">
-              <i class="col-3 fa-regular fa-heart" style="color: lightgray"></i>
-              <span class="col-9 sidebar-text">Lista de Desejos</span>
+              <i class="col-3 fa-solid fa-user" style="color: lightgray"></i>
+              <span class="col-9 sidebar-text">Meu Perfil</span>
             </div>
           </a>
         </li>
@@ -144,6 +145,15 @@
             <div class="col-10">
               <i class="col-3 fa-solid fa-box" style="color: lightgray"></i>
               <span class="col-9 sidebar-text">Meus Pedidos</span>
+            </div>
+          </a>
+        </li>
+        @endif
+        <li class="nav-item">
+          <a href="{{ route("wishlist") }}" class="nav-link">
+            <div class="col-10">
+              <i class="col-3 fa-solid fa-heart" style="color: lightgray"></i>
+              <span class="col-9 sidebar-text">Lista de Desejos</span>
             </div>
           </a>
         </li>
