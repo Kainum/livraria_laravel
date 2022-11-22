@@ -30,8 +30,12 @@ use Illuminate\Routing\RouteGroup;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('home'));
 });
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
 
 
 // ROTAS PUBLICAS
@@ -59,10 +63,7 @@ Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.f
 
 // ROTAS CLIENTE
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
+    
     Route::group(['prefix' => 'wishlist'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
         Route::get('/',     [WishListController::class, 'view'])->name('wishlist');
         Route::post('/add/{id}',[WishListController::class, 'addWishList'])->name('wishlist.add');

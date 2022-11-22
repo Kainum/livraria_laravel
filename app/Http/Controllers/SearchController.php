@@ -21,7 +21,7 @@ class SearchController extends Controller
         if ($filtragem == null)
             $list = Livro::orderBy('titulo')->paginate($paginate_value);
         else
-            $list = Livro::where('titulo', 'ilike', '%'.$filtragem.'%')
+            $list = Livro::where('titulo', 'like', '%'.$filtragem.'%')
                             ->orderBy('titulo')
                             ->paginate($paginate_value)
                             ->setpath('search?pesquisa='.$filtragem);
