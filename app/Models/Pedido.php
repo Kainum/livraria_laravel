@@ -20,6 +20,7 @@ class Pedido extends Model
         'servicoFrete',
         'valorFrete',
         'status',
+        'cpf',
         'comprador_id',
     ];
 

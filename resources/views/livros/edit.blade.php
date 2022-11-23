@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>["admin.livros.update", 'files'=>true, 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
+    {{ Form::open(['route'=>["admin.livros.update", 'id'=>\Crypt::encrypt($item->id)], 'files'=>true, 'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('titulo', 'Título: ') }}
             {{ Form::text('titulo', $item->titulo, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}
@@ -25,6 +25,10 @@
         <div class="form-group">
             {{ Form::label('autor', 'Autor: ') }}
             {{ Form::text('autor', $item->autor, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}
+        </div>
+        <div class="form-group">
+            {{ Form::label('file', 'Arquivo de imagem: ') }}
+            {{ Form::file('file', null, ['class'=>'form-control',]) }}
         </div>
         <div class="form-group">
             {{ Form::label('imagem', 'Arquivo da imagem: ') }}
