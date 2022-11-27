@@ -13,14 +13,18 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>["admin.colecoes.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
+    {{ Form::open(['route'=>["admin.colecoes.update", 'id'=>\Crypt::encrypt($item->id)], 'method'=>'put', 'files'=>true,]) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
             {{ Form::text('nome', $item->nome, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}
         </div>
         <div class="form-group">
+            {{ Form::label('file', 'Alterar arquivo de imagem: ') }}
+            {{ Form::file('file', null, ['class'=>'form-control',]) }}
+        </div>
+        <div class="form-group">
             {{ Form::label('imagem', 'Arquivo da imagem: ') }}
-            {{ Form::text('imagem', $item->imagem, ['class'=>'form-control']) }}
+            {{ Form::text('imagem', $item->imagem, ['class'=>'form-control', 'disabled']) }}
         </div>
         <hr/>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GeneroRequest;
 use App\Models\Genero;
+use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -32,10 +33,9 @@ class GenerosController extends Controller
         $new_item = $request->all();
         
         if ($request->hasFile('file')) {
-            $stored_file = $request->file('file')->store('images', 'public');
-            $new_item["imagem"] = pathinfo($stored_file)['basename'];
+            $new_item["imagem"] = Util::storeFile($request->file('file'));
         } else {
-            $new_item["imagem"] = 'no-image.webp';
+            $new_item["imagem"] = Util::NO_IMAGE_TEXT;
         }
 
         Genero::create($new_item);
@@ -60,7 +60,14 @@ class GenerosController extends Controller
     }
 
     public function update(GeneroRequest $request, $id) {
-        Genero::find(Crypt::decrypt($id))->update($request->all());
+        $updated_item = $request->all();
+
+        //dd($request->file('file'));
+        if ($request->hasFile('file')) {
+            $updated_item["imagem"] = Util::updateFile($request->file('file'), $updated_item["imagem"]);
+        }
+
+        Genero::find(Crypt::decrypt($id))->update($updated_item);
         return redirect()->route('admin.generos');
     }
 }

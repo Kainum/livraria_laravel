@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LivroRequest;
 use App\Models\Livro;
+use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -32,10 +33,9 @@ class LivrosController extends Controller
         $new_item = $request->all();
         
         if ($request->hasFile('file')) {
-            $stored_file = $request->file('file')->store('images', 'public');
-            $new_item["imagem"] = pathinfo($stored_file)['basename'];
+            $new_item["imagem"] = Util::storeFile($request->file('file'));
         } else {
-            $new_item["imagem"] = 'no-image.webp';
+            $new_item["imagem"] = Util::NO_IMAGE_TEXT;
         }
         
         Livro::create($new_item);
@@ -64,11 +64,7 @@ class LivrosController extends Controller
 
         //dd($request->file('file'));
         if ($request->hasFile('file')) {
-            if (Storage::exists('images/'.$updated_item["imagem"])) {
-                Storage::delete('images/'.$updated_item["imagem"]);             // delete da imagem antiga no storage
-            }
-            $stored_file = $request->file('file')->store('images', 'public');   // guarda nova imagem no storage
-            $updated_item["imagem"] = pathinfo($stored_file)['basename'];
+            $updated_item["imagem"] = Util::updateFile($request->file('file'), $updated_item["imagem"]);
         }
 
         Livro::find(Crypt::decrypt($id))->update($updated_item);

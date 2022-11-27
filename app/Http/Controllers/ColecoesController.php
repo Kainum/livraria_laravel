@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ColecaoRequest;
 use App\Models\Colecao;
 use App\Models\GeneroColecao;
+use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -33,10 +34,9 @@ class ColecoesController extends Controller
         
         // guarda a imagem do upload
         if ($request->hasFile('file')) {
-            $stored_file = $request->file('file')->store('images', 'public');
-            $new_item["imagem"] = pathinfo($stored_file)['basename'];
+            $new_item["imagem"] = Util::storeFile($request->file('file'));
         } else {
-            $new_item["imagem"] = 'no-image.webp';
+            $new_item["imagem"] = Util::NO_IMAGE_TEXT;
         }
 
         $ni = Colecao::create($new_item);
@@ -73,10 +73,19 @@ class ColecoesController extends Controller
     }
 
     public function update(ColecaoRequest $request, $id) {
+        $updated_item = $request->all();
+
+        //dd($request->file('file'));
+        if ($request->hasFile('file')) {
+            $updated_item["imagem"] = Util::updateFile($request->file('file'), $updated_item["imagem"]);
+        }
+
         $ni = Colecao::find(Crypt::decrypt($id));
 
+        //================================================
+
         // atualiza o item
-        $ni->update($request->all());
+        $ni->update($updated_item);
 
 
         // delete os generos vinculados
