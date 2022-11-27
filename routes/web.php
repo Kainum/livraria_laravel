@@ -13,6 +13,7 @@ use App\Http\Controllers\EnderecosController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RelatoriosController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishListController;
 use App\Http\Requests\EnderecoRequest;
@@ -150,6 +151,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/{id}/destroy', [ColecoesController::class,  'destroy'])->name('admin.colecoes.destroy');
         Route::get('/edit',     [ColecoesController::class,  'edit'])->name('admin.colecoes.edit');
         Route::put('/{id}/update',  [ColecoesController::class,  'update'])->name('admin.colecoes.update');
+    });
+
+    Route::group(['prefix' => 'relatorios'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
+        Route::get('/estoque',         [RelatoriosController::class, 'relatorioEstoque'])->name('relatorios.estoque.page');
+        Route::post('/estoque',        [RelatoriosController::class, 'gerarRelEstoque'])->name('relatorios.estoque.gerar');
     });
 });
 // FIM ROTAS ADMIN
