@@ -9,6 +9,7 @@
         "bumbummen99/shoppingcart": "^4.2",
         "gumlet/php-image-resize": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "igorescobar/jquery-mask-plugin": "^1.14",
         "laravel/breeze": "^1.12",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",

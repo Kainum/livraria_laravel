@@ -1,4 +1,4 @@
-@extends('master', [
+@extends('layouts.default_loja', [
     'model_title'   => 'Endereços',
     'page_title'    => 'Novo Endereço',
 ])
@@ -16,7 +16,7 @@
     {{ Form::open(['route'=>'enderecos.store']) }}
         <div class="form-group">
             {{ Form::label('cep', 'CEP: ') }}
-            {{ Form::text('cep', null, ['class'=>'form-control', 'required', 'maxlength'=>9]) }}
+            {{ Form::text('cep', null, ['class'=>'form-control cep', 'required', 'placeholder'=>'00000-000', 'maxlength'=>9]) }}
         </div>
         <div class="form-group">
             {{ Form::label('endereco', 'Endereço: ') }}
@@ -48,7 +48,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('telefone', 'Telefone: ') }}
-            {{ Form::text('telefone', null, ['class'=>'form-control', 'required', 'maxlength'=>20]) }}
+            {{ Form::text('telefone', null, ['class'=>'form-control phone_with_ddd', 'required', 'placeholder'=>'(00) 00000-0000', 'maxlength'=>20]) }}
         </div>
         
 

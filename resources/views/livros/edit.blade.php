@@ -1,6 +1,7 @@
-@extends('master_admin', [
+@extends('layouts.default', [
     'model_title' => 'Livros',
     'page_title' => 'Editar Livro',
+    'search_route' => 'admin.livros',
     ])
 @section('content')
     <h2>Editando Livro {{ $item->titulo }}</h2>
@@ -44,7 +45,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('preco', 'Preço: ') }}
-            {{ Form::number('preco', $item->preco, ['class'=>'form-control', 'required', 'min'=>0, 'step'=>0.01]) }}
+            {{ Form::number('preco', $item->preco, ['class'=>'form-control money2', 'required', 'min'=>0, 'step'=>0.01]) }}
         </div>
         <div class="form-group">
             {{ Form::label('paginas', 'Nº de Páginas: ') }}

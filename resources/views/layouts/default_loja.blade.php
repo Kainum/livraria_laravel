@@ -1,7 +1,6 @@
-@extends('master_admin', [
+@extends('master', [
     'model_title' => $model_title,
     'page_title' => $page_title,
-    'search_route' => $search_route,
     ])
 
 @section('js')
@@ -59,8 +58,8 @@
                     $.get(url, function(data) {
                         if (data.status == 200) {
                             swal({
-                                title:  'Deletado!',
-                                text:   'Exclusão confirmada',
+                                title:  'Tudo ok',
+                                text:   'Registro deletado!',
                                 icon:   'success',
                             }).then(function() {
                                 window.location.reload();
@@ -68,7 +67,7 @@
                         } else {
                             swal({
                                 title:  'Erro!',
-                                text:   'Ocorreram erros na exclusão. Entre em contato com o suporte.',
+                                text:   'Não foi possível apagar o registro. Entre em contato com o suporte.',
                                 icon:   'error',
                             });
                         }

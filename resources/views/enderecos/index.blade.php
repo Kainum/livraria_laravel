@@ -1,4 +1,4 @@
-@extends('master', [
+@extends('layouts.default_loja', [
     'model_title'   => 'Endereços',
     'page_title'    => 'Meus Endereços',
 ])
@@ -33,7 +33,7 @@
     <a href="{{ route('enderecos.create', []) }}" class="btn btn-info">Novo Endereço</a>
 @stop
 
-@section('js')
+{{-- @section('js')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
@@ -69,4 +69,4 @@
         });
     </script>
 
-@endsection
+@endsection --}}

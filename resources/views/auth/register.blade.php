@@ -30,7 +30,7 @@
             <div class="mt-4">
                 <x-label for="cpf" :value="__('CPF')" />
 
-                <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required />
+                <x-input id="cpf" class="block mt-1 w-full cpf" type="text" name="cpf" :value="old('cpf')" required />
             </div>
 
             <!-- Password -->
@@ -64,3 +64,12 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.cpf').mask('000.000.000-00', {reverse: false});
+    });
+</script>
