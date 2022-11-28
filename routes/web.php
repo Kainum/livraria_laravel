@@ -156,6 +156,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'relatorios'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
         Route::get('/estoque',         [RelatoriosController::class, 'relatorioEstoque'])->name('relatorios.estoque.page');
         Route::post('/estoque',        [RelatoriosController::class, 'gerarRelEstoque'])->name('relatorios.estoque.gerar');
+        Route::get('/vendas_periodo',  [RelatoriosController::class, 'relatorioVendasPeriodo'])->name('relatorios.vendas_periodo.page');
+        Route::post('/vendas_periodo', [RelatoriosController::class, 'gerarRelVendasPeriodo'])->name('relatorios.vendas_periodo.gerar');
     });
 });
 // FIM ROTAS ADMIN

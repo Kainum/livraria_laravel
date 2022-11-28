@@ -54,6 +54,34 @@ class PedidosSeeder extends Seeder
 
         $produtos = [
             [
+                'livro' =>Livro::find(2),
+                'qtd'   =>random_int(1, 5),
+            ],
+            [
+                'livro' =>Livro::find(9),
+                'qtd'   =>random_int(2, 5),
+            ],
+            [
+                'livro' =>Livro::find(11),
+                'qtd'   =>random_int(1, 4),
+            ],
+            [
+                'livro' =>Livro::find(12),
+                'qtd'   =>random_int(2, 3),
+            ],
+            [
+                'livro' =>Livro::find(13),
+                'qtd'   =>random_int(1, 4),
+            ],
+        ];
+
+        $dataPedido = '2022-11-11';
+        $this->criar($produtos, $cliente, $end, $dataPedido);
+
+        // ===================================================================
+
+        $produtos = [
+            [
                 'livro' =>Livro::find(9),
                 'qtd'   =>random_int(1, 4),
             ],
