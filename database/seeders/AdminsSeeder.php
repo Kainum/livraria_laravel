@@ -16,14 +16,9 @@ class AdminsSeeder extends Seeder
     public function run()
     {
         $users = [
-            // [
-            //     'name' => 'Admin Luciano',
-            //     'email' => 'admin@admin.com',
-            //     'password' => '123456',
-            // ],
             [
                 'name' => 'Admin Leviano',
-                'email' => 'admin@animal.com',
+                'email' => 'admin@admin.com',
                 'password' => bcrypt("12345678"),
             ],
         ];

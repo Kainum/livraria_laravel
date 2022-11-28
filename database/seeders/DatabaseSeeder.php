@@ -23,12 +23,20 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UsersSeeder::class,
+            EnderecoSeeder::class,
+
             AdminsSeeder::class,
+            // =======================
+
             EditoraSeeder::class,
+
             GeneroSeeder::class,
             ColecaoSeeder::class,
-            LivroSeeder::class,
             ColecaoGeneroSeeder::class,
+
+            LivroSeeder::class,
+
+            PedidosSeeder::class,
         ]);
     }
 }

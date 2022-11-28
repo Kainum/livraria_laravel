@@ -23,22 +23,28 @@ class UsersSeeder extends Seeder
                 'cpf' => '484.774.833-61',
             ],
             [
-                'name' => 'User user',
-                'email' => 'user@user.com',
+                'name' => 'Cliente 001',
+                'email' => 'cliente001@email.com',
                 'password' => bcrypt("12345678"),
                 'cpf' => '824.894.860-98',
             ],
             [
-                'name' => 'Leviano',
-                'email' => 'leviano@email.com',
+                'name' => 'Cliente 002',
+                'email' => 'cliente002@email.com',
                 'password' => bcrypt("12345678"),
                 'cpf' => '855.968.380-12',
             ],
             [
-                'name' => 'numero',
-                'email' => '123456@123.com',
+                'name' => 'Cliente 003',
+                'email' => 'cliente003@email.com',
                 'password' => bcrypt("12345678"),
                 'cpf' => '582.812.634-23',
+            ],
+            [
+                'name' => 'Cliente 004',
+                'email' => 'cliente004@email.com',
+                'password' => bcrypt("12345678"),
+                'cpf' => '455.401.709-54',
             ],
         ];
 
