@@ -15,6 +15,7 @@ class RelatoriosController extends Controller
     }
 
     public function gerarRelEstoque (Request $request) {
+        $this->middleware('VerifyCsfrToken');
         $req = $request->all();
 
         $arquivo    = "relatorio_qtd_estoque.pdf";
@@ -38,6 +39,7 @@ class RelatoriosController extends Controller
     }
 
     public function gerarRelVendasPeriodo (Request $request) {
+        $this->middleware('VerifyCsfrToken');
         $req = $request->all();
 
         $arquivo    = "relatorio_vendas_periodo.pdf";

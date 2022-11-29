@@ -45,7 +45,18 @@
                             <td>{{ Carbon\Carbon::parse($pedido->data_pedido)->format('d/m/Y') }}</td>
                             <td>R${{ \App\Util::formataDinheiro($pedido->valorTotal) }}</td>
                             <td>R${{ \App\Util::formataDinheiro($pedido->valorFrete) }}</td>
-                            <td>aa</td>
+                            <td>
+                                @switch($pedido->status)
+                                    @case(app\Models\Pedido::STATUS_ABERTO)
+                                        <a href="{{ route('pedido.cancelar',  ['id'=>\Crypt::encrypt($pedido->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Pedido</a>
+                                        @break
+                                    @case(app\Models\Pedido::STATUS_CANCELADO)
+                                        <button disabled class="btn btn-danger">Cancelar Pedido</button>
+                                        @break
+                                    @default
+                                        <td></td>
+                                @endswitch
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="6">
@@ -78,3 +89,44 @@
     </div>
     
 @stop
+
+@section('js')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title:  'Você tem certeza?',
+                text:   'O pedido será cancelado!',
+                icon:   'warning',
+                buttons: ["Cancelar", "Sim!"],
+            }).then(function(value) {
+                if (value) {
+                    $.get(url, function(data) {
+                        if (data.status == 200) {
+                            swal({
+                                title:  'Tudo ok',
+                                text:   'Pedido Cancelado!',
+                                icon:   'success',
+                            }).then(function() {
+                                window.location.reload();
+                            });
+                        } else {
+                            swal({
+                                title:  'Erro!',
+                                text:   'Não foi possível cancelar o pedido. Entre em contato com o suporte.',
+                                icon:   'error',
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        
+    </script>
+
+@endsection

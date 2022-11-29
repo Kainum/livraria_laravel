@@ -115,7 +115,7 @@
           </a>
         </li>
         <li class="nav-item ">
-          <a href="{{ url('volt/pages/dashboard/dashboard.html') }}" class="nav-link">
+          <a href="{{ route('admin.dashboard') }}" class="nav-link">
             <span class="sidebar-icon">
               <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
             </span> 
@@ -177,23 +177,23 @@
             id="submenu-relatorios" aria-expanded="false">
             <ul class="flex-column nav">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('volt/pages/examples/sign-in.html') }}">
-                  <span class="sidebar-text">Livros</span>
+                <a class="nav-link" href="{{ route('relatorios.estoque.page') }}">
+                  <span class="sidebar-text">Qtd. Estoque</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('volt/pages/examples/sign-up.html') }}">
-                  <span class="sidebar-text">Coleção</span>
+                <a class="nav-link" href="{{ route('relatorios.vendas_periodo.page') }}">
+                  <span class="sidebar-text">Vendas por Período</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('volt/pages/examples/forgot-password.html') }}">
-                  <span class="sidebar-text">Gênero</span>
+                <a class="nav-link" href="">
+                  <span class="sidebar-text">Relatório</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('volt/pages/examples/reset-password.html') }}">
-                  <span class="sidebar-text">Editora</span>
+                <a class="nav-link" href="">
+                  <span class="sidebar-text">Relatório</span>
                 </a>
               </li>
             </ul>

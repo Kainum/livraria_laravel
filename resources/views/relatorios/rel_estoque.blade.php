@@ -14,7 +14,7 @@
     @endif
 
     {{ Form::open(['route'=>'relatorios.estoque.gerar']) }}
-    @csrf
+        @csrf
         <div class="form-group">
             {{ Form::label('maxResults', 'Número Máximo de Resultados: ') }}
             <select class="form-select" required id="maxResults" name="maxResults">

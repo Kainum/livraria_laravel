@@ -8,7 +8,7 @@
     @endif
     @if ($qtd_total > 0)
         <div class="row">
-            <div class="container col-xl-8">
+            <div class="container col-xl-8 mb-4">
                 @foreach ($item_list as $item)
                     <div class="row">
                         <div class="row col-md-8">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="row col-md-4">
-                            <div class="col-lg-8 col-md-12 col-8 row">
+                            <div class="col-md-12 col-8 row mb-2">
                                 <a class="btn btn-secondary col-3 my-auto" href="{{ route('cart.sub', ['rowId'=>$item->rowId]) }}">
                                     <i class="fa-solid {{ $item->qty != 1 ? "fa-minus" : "fa-trash-can" }}" style="color:gray"></i>
                                 </a>
@@ -40,16 +40,15 @@
                                     </button>
                                 @endif
                             </div>
-                            <a class="btn btn-warning offset-lg-1 offset-md-0 offset-1 col-lg-3 col-md-12 col-3 my-auto" href="{{ route('cart.exclude', ['rowId'=>$item->rowId]) }}">excluir</a>
+                            <a class="btn btn-warning offset-md-0 offset-1 col-md-11 col-3 my-auto" href="{{ route('cart.exclude', ['rowId'=>$item->rowId]) }}">excluir</a>
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="container col-xl-4">
-                <h2>Carrinho</h2>
-                <p>Qtd total de items: {{ $qtd_total }}</p>
-                <p>Total valor: R${{ \App\Util::formataDinheiro(Cart::total()) }}</p>
-                <p>peso: {{ Cart::weight() }}</p>
+                <p class="h2">Carrinho</p>
+                <p>Qtd total de items: <b>{{ $qtd_total }}</b></p>
+                <p>Total valor: <b>R${{ \App\Util::formataDinheiro(Cart::total()) }}</b></p>
 
                 {{ Form::open(['route'=>'cart.endereco']) }}
                     @csrf

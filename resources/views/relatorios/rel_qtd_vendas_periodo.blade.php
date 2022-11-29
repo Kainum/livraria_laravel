@@ -14,7 +14,7 @@
     @endif
 
     {{ Form::open(['route'=>'relatorios.vendas_periodo.gerar']) }}
-    @csrf
+        @csrf
         <div class="form-group">
             {{ Form::label('dataInicio', 'Período Inicial: ') }}
             {{ Form::date('dataInicio', null, ['class'=>'form-control', 'required']) }}
