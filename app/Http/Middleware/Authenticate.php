@@ -15,7 +15,9 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            if ($request->route()->getPrefix() == '/admin') 
+            // checa se o prefixo do request começa com "admin".
+            // o ltrim é por causa de um bug caso a url fosse só "url/admin" o prefixo seria "/admin" e não "admin"
+            if (str_starts_with(ltrim($request->route()->getPrefix(), "/"), 'admin')) 
                 return route('admin.login');
             else
                 return route('login');

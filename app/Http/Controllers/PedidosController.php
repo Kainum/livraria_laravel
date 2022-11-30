@@ -71,7 +71,7 @@ class PedidosController extends Controller
             'valorFrete'=>$valor_frete,
             'status'=>Pedido::STATUS_ABERTO,
             'comprador_id'=>$user_id,
-            'cpf'=> '000.000.000-00',//Auth::guard('web')->user()->cpf,
+            'cpf'=> Auth::guard('web')->user()->cpf,
         ]);
         foreach($item_list as $item) {
             ItemPedido::create([

@@ -4,6 +4,19 @@
     'search_route' => 'admin.editoras',
     ])
 @section('content')
+    {{ Form::open(['name'=>'form_name', 'route'=>'admin.editoras']) }}
+        <div class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="desc_filtro" class="form-control" style="width: 80% !important;" placeholder="Pesquisa...">
+            <span class="input-group-btn">
+            <button type="submit" name="search" id="search-btn" class="btn btn-default">
+                <i class="fa fa-search"></i>
+            </button>
+            </span>
+        </div>
+        </div>
+    {{ Form::close() }}
+    <br>
     <table class="table table-centered table-nowrap mb-0 rounded">
         <thead class="thead-light">
             <tr>
