@@ -35,9 +35,7 @@ Route::get('/', function () {
     return redirect(route('home'));
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', [SearchController::class, 'homePage'])->name('home');
 
 
 // ROTAS PUBLICAS

@@ -1,5 +1,5 @@
 @extends('master', [
-    'model_title'   => 'Loja',
+    'model_title'   => 'Lista de Desejos',
     'page_title'    => 'Lista de Desejos',
 ])
 @section('content')

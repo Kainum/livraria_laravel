@@ -57,6 +57,9 @@
             <div class="col-12">
                 <h2>{{ $item->titulo }}</h2>
                 <p>{{ $item->resumo }}</p>
+                <a class="btn btn-secondary" href="{{ route('colecao.view', ['id'=>\Crypt::encrypt($item->colecao->id)]) }}">
+                    Ver Coleção
+                </a>
                 <h4>R${{ \App\Util::formataDinheiro($item->preco) }}</h4>
             </div>
             <div class="col-12">
@@ -65,11 +68,11 @@
                         {{ Form::hidden('product_id', \Crypt::encrypt($item->id)) }}
                     </div>
                     @if ($item->qtd_estoque > 0)
-                        @if ($item->qtd_estoque < 21)
+                        @if ($item->qtd_estoque <= 20)
                             <p style="color: darkorange">Restam {{ $item->qtd_estoque }} unidades</p>
                         @endif
                         <div class="form-group">
-                            {{ Form::number('quantity', '1', ['min'=>1, 'max'=>min(10, $item->qtd_estoque), 'class'=>'form-control']) }}
+                            {{ Form::number('quantity', '1', ['min'=>1, 'max'=>min(3, $item->qtd_estoque), 'class'=>'form-control']) }}
                         </div>
                         <div class="form-group">
                             {{ Form::submit('Adicionar ao Carrinho', ['class'=>'btn btn-success']) }}

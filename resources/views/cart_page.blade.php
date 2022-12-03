@@ -1,5 +1,5 @@
 @extends('master', [
-    'model_title'   => 'Loja',
+    'model_title'   => 'Carrinho',
     'page_title'    => 'Meu Carrinho',
 ])
 @section('content')
@@ -30,7 +30,7 @@
                                     <i class="fa-solid {{ $item->qty != 1 ? "fa-minus" : "fa-trash-can" }}" style="color:gray"></i>
                                 </a>
                                 <div class="col-6 text-center align-self-center">{{ $item->qty }}</div>
-                                @if (\App\Models\Livro::find($item->id)->qtd_estoque > $item->qty)
+                                @if ($item->qty < min(\App\Models\Livro::find($item->id)->qtd_estoque, \App\Util::QTD_MAX_POR_CLIENTE))
                                     <a class="btn btn-secondary col-3 my-auto" href="{{ route('cart.add', ['rowId'=>$item->rowId]) }}">
                                         <i class="fa-solid fa-plus" style="color:gray"></i>
                                     </a>
@@ -43,6 +43,7 @@
                             <a class="btn btn-warning offset-md-0 offset-1 col-md-11 col-3 my-auto" href="{{ route('cart.exclude', ['rowId'=>$item->rowId]) }}">excluir</a>
                         </div>
                     </div>
+                    <hr>
                 @endforeach
             </div>
             <div class="container col-xl-4">

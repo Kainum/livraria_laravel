@@ -1,9 +1,8 @@
 @extends('master', [
-    'model_title'   => 'Loja',
+    'model_title'   => 'Livros',
     'page_title'    => 'Livros',
 ])
 @section('content')
-    <h2>Mangás</h2>
     <div class="row col-12">
         @if (count($item_list) === 0)
             <div>Sem resultados</div>

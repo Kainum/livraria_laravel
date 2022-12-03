@@ -26,5 +26,10 @@ class ColecaoGeneroSeeder extends Seeder
 
         GeneroColecao::create(['colecao_id'=>3,'genero_id'=>1]);
         GeneroColecao::create(['colecao_id'=>3,'genero_id'=>10]);
+
+
+        // GeneroColecao::create(['colecao_id'=>2,'genero_id'=>1]);
+        // GeneroColecao::create(['colecao_id'=>4,'genero_id'=>1]);
+        // GeneroColecao::create(['colecao_id'=>5,'genero_id'=>1]);
     }
 }

@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Crypt;
 class SearchController extends Controller
 {
 
+    public function homePage() {
+        $list = Colecao::find([1,2,3,4,5,6]); // ids das coleções em destaque na página home
+        
+        return view('home', ['item_list'=>$list]);
+    }
+
     public function getLivros (Request $filtro) {
         $paginate_value = 12;
 

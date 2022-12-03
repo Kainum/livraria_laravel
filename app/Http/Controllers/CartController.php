@@ -7,6 +7,7 @@ use App\Models\Endereco;
 use App\Models\ItemPedido;
 use App\Models\Livro;
 use App\Models\Pedido;
+use App\Util;
 use Illuminate\Http\Request;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -39,13 +40,26 @@ class CartController extends Controller
             $product->preco,
             181,    // peso
         );
+
+        // controla a quantidade máxima de produtos do mesmo tipo
+        $cart_prod = Cart::search(function($cartItem) use ($product) {
+            return $cartItem->id === $product->id;
+        })->first();
+
+        $qtd_ajustada = min($cart_prod->qty, min($product->qtd_estoque, Util::QTD_MAX_POR_CLIENTE));
+        Cart::update($cart_prod->rowId, ['qty' => $qtd_ajustada]);
+
         return redirect()->route('cart.page')->with('message', 'Adicionado com sucesso.');
     }
 
 
     public function cartAdd ($rowId) {
-        $atual_qtd = Cart::get($rowId)->qty;
-        Cart::update($rowId, ['qty' => $atual_qtd+1]);
+        // não permite que a quantidade seja maior que o estabelecido
+        $product = Cart::get($rowId);                           // acha o produto
+        $estoque = Livro::find($product->id)->qtd_estoque;      // descobre a quantidade no estoque
+        $nova_qtd = min($product->qty + 1, min($estoque, Util::QTD_MAX_POR_CLIENTE));   // atualiza a quantidade no carrinho baseado no estoque e qtd max por cliente
+
+        Cart::update($rowId, ['qty' => $nova_qtd]);
         return redirect()->route('cart.page');
     }
 

@@ -11,6 +11,8 @@ class Util
     const IMAGE_DIR     = 'images';
     const NO_IMAGE_TEXT = 'no-image.webp';
 
+    const QTD_MAX_POR_CLIENTE = 3;
+
     // função para guardar as imagens das entidades
     public static function storeFile(UploadedFile $file) {
         $stored_file = $file->store(self::IMAGE_DIR, 'public');

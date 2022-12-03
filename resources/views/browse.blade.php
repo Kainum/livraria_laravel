@@ -1,9 +1,8 @@
 @extends('master', [
-    'model_title'   => 'Loja',
-    'page_title'    => 'Categorias',
+    'model_title'   => 'Gêneros',
+    'page_title'    => 'Gêneros',
 ])
 @section('content')
-    <h2>Gêneros</h2>
     <div class="row col-12">
         @foreach ($item_list as $item)
             <div class="col-6 col-sm-4 col-xl-3 mb-1 container" style="position: relative;">
