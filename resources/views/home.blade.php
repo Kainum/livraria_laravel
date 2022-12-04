@@ -2,8 +2,8 @@
     'page_title'    => 'Home',
 ])
 @section('content')
-    <div class="col-12" style="height: 250px; background-color: red">
-
+    <div class="col-12">
+        <img src="{{ asset('storage/images/banner.png') }}" alt="">
     </div>
     <div class="">
         <center><h2>DESTAQUES</h2></center>
