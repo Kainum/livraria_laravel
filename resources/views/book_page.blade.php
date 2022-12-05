@@ -1,5 +1,4 @@
 @extends('master', [
-    'model_title'   => 'Loja',
     'page_title'    => $item->titulo,
 ])
 @section('content')
@@ -43,6 +42,23 @@
                         <tr>
                             <td>Quantidade de Páginas</td>
                             <td><b>{{ $item->paginas }}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Gêneros</td>
+                            <td>
+                                <b>
+                                    @php
+                                        $i = 0;
+                                        foreach ($item->colecao->generos as $gen) {
+                                            if ($i++ > 0) {
+                                                echo(", ");
+                                            }
+                                            echo($gen->genero->nome);
+                                        }
+                                    @endphp
+                                    
+                                </b>
+                            </td>
                         </tr>
                         <tr>
                             <td>Editora</td>

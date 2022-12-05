@@ -17,8 +17,6 @@ class EditoraSeeder extends Seeder
     {
         Editora::create(['nome' => 'JBC']);
         Editora::create(['nome' => 'Panini']);
-        Editora::create(['nome' => 'New Pop']);
-        Editora::create(['nome' => 'Edit Oras']);
-        Editora::create(['nome' => 'YoEdits']);
+        Editora::create(['nome' => 'Rocco']);
     }
 }

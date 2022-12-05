@@ -17,19 +17,18 @@ class ColecaoGeneroSeeder extends Seeder
     {
         GeneroColecao::create(['colecao_id'=>1,'genero_id'=>1]);
         GeneroColecao::create(['colecao_id'=>1,'genero_id'=>2]);
-        GeneroColecao::create(['colecao_id'=>1,'genero_id'=>10]);
+        GeneroColecao::create(['colecao_id'=>1,'genero_id'=>9]);
 
         GeneroColecao::create(['colecao_id'=>2,'genero_id'=>2]);
         GeneroColecao::create(['colecao_id'=>2,'genero_id'=>4]);
-        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>10]);
-        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>17]);
+        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>9]);
+        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>11]);
 
         GeneroColecao::create(['colecao_id'=>3,'genero_id'=>1]);
-        GeneroColecao::create(['colecao_id'=>3,'genero_id'=>10]);
+        GeneroColecao::create(['colecao_id'=>3,'genero_id'=>9]);
 
-
-        // GeneroColecao::create(['colecao_id'=>2,'genero_id'=>1]);
-        // GeneroColecao::create(['colecao_id'=>4,'genero_id'=>1]);
-        // GeneroColecao::create(['colecao_id'=>5,'genero_id'=>1]);
+        GeneroColecao::create(['colecao_id'=>4,'genero_id'=>2]);
+        GeneroColecao::create(['colecao_id'=>4,'genero_id'=>3]);
+        GeneroColecao::create(['colecao_id'=>4,'genero_id'=>8]);
     }
 }

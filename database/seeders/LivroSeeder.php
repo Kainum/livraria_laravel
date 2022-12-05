@@ -20,7 +20,7 @@ class LivroSeeder extends Seeder
             'autor' => 'Akira Toriyama',
             'preco' => 24.99,
             'paginas' => 192,
-            'editora_id' => 1,
+            'editora_id' => 2,
             'colecao_id' => 1,
         ];
         $livros = [
@@ -84,7 +84,7 @@ class LivroSeeder extends Seeder
             'autor' => 'Boichi',
             'preco' => 33.49,
             'paginas' => 192,
-            'editora_id' => 1,
+            'editora_id' => 2,
             'colecao_id' => 2,
         ];
         $livros = [
@@ -140,7 +140,7 @@ class LivroSeeder extends Seeder
             'autor' => 'Tatsuya Endo',
             'preco' => 29.90,
             'paginas' => 216,
-            'editora_id' => 1,
+            'editora_id' => 2,
             'colecao_id' => 3,
         ];
         $livros = [
@@ -182,5 +182,56 @@ class LivroSeeder extends Seeder
             Livro::create($result);
         }
         // FIM SEED SPY X FAMILY
+
+        // SEED HARRY POTTER
+        $conf = [
+            'autor' => 'J. K. Rowling',
+            'preco' => 32.99,
+            'editora_id' => 3,
+            'colecao_id' => 4,
+        ];
+        $livros = [
+            [
+                'titulo' => 'Harry Potter e a Pedra Filosofal: 1',
+                'resumo' => 'Harry Potter é um garoto cujos pais, feiticeiros, foram assassinados por um poderosíssimo bruxo quando ele ainda era um bebê. Ele foi levado, então, para a casa dos tios que nada tinham a ver com o sobrenatural. Pelo contrário. Até os 10 anos, Harry foi uma espécie de gata borralheira: maltratado pelos tios, herdava roupas velhas do primo gorducho, tinha óculos remendados e era tratado como um estorvo.No dia de seu aniversário de 11 anos, entretanto, ele parece deslizar por um buraco sem fundo, como o de Alice no país das maravilhas, que o conduz a um mundo mágico. Descobre sua verdadeira história e seu destino: ser um aprendiz de feiticeiro até o dia em que terá que enfrentar a pior força do mal, o homem que assassinou seus pais.',
+                'isbn' => '978-8532523051',
+                'imagem' => "harry_potter_01.webp",
+                'data_lancamento' => "2000-04-07",
+                'qtd_estoque' => random_int(50, 115),
+                'paginas' => 264,
+            ],
+            [
+                'titulo' => 'Harry Potter e a Câmara Secreta: 2',
+                'resumo' => 'Depois de férias aborrecidas na casa dos tios trouxas, está na hora de Harry Potter voltar a estudar. Coisas acontecem, no entanto, para dificultar o regresso de Harry. Persistente e astuto, nosso herói não se deixa intimidar pelos obstáculos e, com a ajuda dos fiéis amigos Weasley, começa o ano letivo na Escola de Magia e Bruxaria de Hogwarts. As novidades não são poucas. Novos colegas, novos professores, muitas e boas descobertas e...um grande e perigosos desafio. Alguém ou alguma coisa ameaça a segurança e a tranqüilidade dos membros de Hogwarts. Como eliminar definitivamente esse mal e restaurar a paz na escola?',
+                'isbn' => '978-8532511669',
+                'imagem' => "harry_potter_02.webp",
+                'data_lancamento' => "2000-08-15",
+                'qtd_estoque' => random_int(50, 115),
+                'paginas' => 288,
+            ],
+            [
+                'titulo' => 'Harry Potter e o Prisioneiro de Azkaban: 3',
+                'resumo' => 'Mais uma vez suas férias na rua dos Alfeneiros, 4, foi triste e solitária. Tio Válter Dursley estava especialmente irritado com ele, porque seu amigo Rony Weasley tinha lhe telefonado. E ele não aceitava qualquer ligação de Harry com o mundo dos mágicos dentro de sua casa. A situação piorou ainda mais com a chegada de tia Guida, irmã de Válter. Harry já estava acostumado a ser humilhado pelos Dursley, mas quando tia Guida passou a ofender os pais de Harry, mortos pelo bruxo Voldemort, ele não agüentou e transformou-a num imenso balão. Irritado, fugiu da casa dos tios, indo se abrigar no Beco Diagonal. Lá ele reencontra Rony e Hermione, seus melhores amigos em Hogwarts e, para sua surpresa, é procurado pelo próprio Ministro da Magia. Sem que Harry saiba, o ministro está preocupado com o garoto, pois fugiu da prisão de Azkaban o perigoso bruxo Sirius Black, que teria assassinado treze pessoas com um único feitiço e traído os pais de Harry, entregando-os a Voldemort.',
+                'isbn' => '978-1781103708',
+                'imagem' => "harry_potter_03.webp",
+                'data_lancamento' => "2000-11-28",
+                'qtd_estoque' => random_int(50, 115),
+                'paginas' => 348,
+            ],
+            [
+                'titulo' => 'Harry Potter e o Cálice de Fogo: 4',
+                'resumo' => 'O ano letivo já começa agitado. Harry volta para a Escola de Magia e Bruxaria de Hogwarts para cursar a quarta série. Acontecimentos inesperados ? como, por exemplo, a presença de um novo professor de Defesa contra as Artes das Trevas e um evento extraordinário promovido na escola ? alvoroçam os ânimos dos estudantes. Para surpresa de todos não haverá a tradicional Copa Anual de Quadribol entre Casas. Será substituída pelo Torneio Tribuxo, uma competição amistosa entre as três maiores escolas européias de bruxaria ? Hogwarts, Beauxbatons e Durmstrang ? que não se realizava havia um século.',
+                'isbn' => '978-8532512529',
+                'imagem' => "harry_potter_04.webp",
+                'data_lancamento' => "2001-06-08",
+                'qtd_estoque' => random_int(50, 115),
+                'paginas' => 584,
+            ],
+        ];
+        foreach ($livros as $key => $value) {
+            $result = array_merge($value, $conf);
+            Livro::create($result);
+        }
+        // FIM SEED HARRY POTTER
     }
 }

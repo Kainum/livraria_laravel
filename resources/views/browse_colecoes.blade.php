@@ -20,7 +20,7 @@
                 </a>
             </div>
         @empty
-            <p>Sem resultados</p>
+            <p>Sem coleções para o gênero escolhido</p>
         @endforelse
     </div>
 @stop
