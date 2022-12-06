@@ -12,6 +12,7 @@ class Colecao extends Model
     protected $table = "colecoes";
     protected $fillable = [
         'nome',
+        'imagem',
     ];
 
     public function livros() {

@@ -26,9 +26,9 @@ return new class extends Migration
             $table->integer('paginas')->unsigned();
             $table->integer('qtd_estoque')->unsigned();
 
-            $table->foreignId('editora_id')->nullable()->constrained('editoras');
+            $table->foreignId('editora_id')->constrained('editoras');
 
-            $table->foreignId('colecao_id')->nullable()->constrained('colecoes');
+            $table->foreignId('colecao_id')->constrained('colecoes');
         });
     }
 
