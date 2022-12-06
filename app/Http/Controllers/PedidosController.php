@@ -17,6 +17,10 @@ class PedidosController extends Controller
     public function confirmarPedido(Request $request) {
         $this->middleware('VerifyCsfrToken');
 
+        if (Cart::count() == 0) { //se não tem nada então retorna
+            return redirect()->route('cart.page')->with('message', 'Erro ao concluir pedido.');
+        }
+
 
         $item_list = Cart::content();
 
@@ -43,6 +47,10 @@ class PedidosController extends Controller
     public function concluirPedido(Request $request) {
         $this->middleware('VerifyCsfrToken');
 
+        if (Cart::count() == 0) { //se não tem nada então retorna
+            return redirect()->route('cart.page')->with('message', 'Erro ao concluir pedido.');
+        }
+
         $user_id = Auth::guard('web')->user()->id; //pega o id do user
         $end = session('endereco');
         $endereco = $end->destinatario."<br>".
@@ -59,6 +67,7 @@ class PedidosController extends Controller
         $valor_frete = floatval(str_replace(',', '.', str_replace('.', '', $vf)));
 
         $item_list =    Cart::content();
+
 
         $data_pedido =  date('Y-m-d');
 

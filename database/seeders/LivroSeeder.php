@@ -46,7 +46,7 @@ class LivroSeeder extends Seeder
                 'isbn' => '978-6555124668',
                 'imagem' => "dragon_ball_03.webp",
                 'data_lancamento' => "2020-11-07",
-                'qtd_estoque' => random_int(90, 200),
+                'qtd_estoque' => 12,
             ],
             [
                 'titulo' => 'Dragon Ball Vol. 4',
@@ -54,7 +54,7 @@ class LivroSeeder extends Seeder
                 'isbn' => '978-6555124675',
                 'imagem' => "dragon_ball_04.webp",
                 'data_lancamento' => "2020-11-07",
-                'qtd_estoque' => random_int(90, 200),
+                'qtd_estoque' => 0,
             ],
             [
                 'titulo' => 'Dragon Ball Vol. 5',
@@ -62,7 +62,7 @@ class LivroSeeder extends Seeder
                 'isbn' => '978-6555124682',
                 'imagem' => "dragon_ball_05.webp",
                 'data_lancamento' => "2020-11-07",
-                'qtd_estoque' => random_int(90, 200),
+                'qtd_estoque' => 0,
             ],
             [
                 'titulo' => 'Dragon Ball Vol. 6',

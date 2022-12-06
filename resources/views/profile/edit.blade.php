@@ -18,10 +18,6 @@
                 {{ Form::text('name', $item->name, ['class'=>'form-control', 'required', 'maxlength'=>255]) }}
             </div>
             <div class="form-group">
-                {{ Form::label('email', 'E-mail: ') }}
-                {{ Form::text('email', $item->email, ['class'=>'form-control', 'required', 'maxlength'=>255]) }}
-            </div>
-            <div class="form-group">
                 {{ Form::label('cpf', 'CPF: ') }}
                 {{ Form::text('cpf', $item->cpf, ['class'=>'form-control', 'required', 'maxlength'=>14]) }}
             </div>

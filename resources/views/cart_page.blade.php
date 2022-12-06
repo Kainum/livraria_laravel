@@ -4,7 +4,9 @@
 ])
 @section('content')
     @if (session('message'))
-        <div>{{ session('message') }}</div>
+        <ul class="alert alert-success">
+            <div>{{ session('message') }}</div>
+        </ul>
     @endif
     @if ($qtd_total > 0)
         <div class="row">
@@ -48,8 +50,8 @@
             </div>
             <div class="container col-xl-4">
                 <p class="h2">Carrinho</p>
-                <p>Qtd total de items: <b>{{ $qtd_total }}</b></p>
-                <p>Total valor: <b>R${{ \App\Util::formataDinheiro(Cart::total()) }}</b></p>
+                <p>Itens no carrinho: <b>{{ $qtd_total }}</b></p>
+                <p>Valor Total: <b>R${{ \App\Util::formataDinheiro(Cart::total()) }}</b></p>
 
                 {{ Form::open(['route'=>'cart.endereco']) }}
                     @csrf
@@ -59,8 +61,8 @@
         </div>
     @else
         <p>Seu carrinho está vazio :(</p>
-        <a href="{{ route('search') }}">
-            <button>Continuar comprando</button>
+        <a href="{{ route('search') }}" class="btn btn-primary">
+            Continuar comprando
         </a>
     @endif
     

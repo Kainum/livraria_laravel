@@ -25,7 +25,6 @@ class ProfileRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
             'password' => 'required|current_password:web',
             'cpf' => 'required|cpf|formato_cpf',
         ];

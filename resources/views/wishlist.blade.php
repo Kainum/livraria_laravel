@@ -4,7 +4,9 @@
 ])
 @section('content')
     @if (session('message'))
-        <div>{{ session('message') }}</div>
+        <ul class="alert alert-success">
+            <div>{{ session('message') }}</div>
+        </ul>
     @endif
     <table class="table table-centered table-nowrap mb-0 rounded">
         <thead class="thead-light">

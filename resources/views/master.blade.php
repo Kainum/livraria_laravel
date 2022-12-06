@@ -238,7 +238,7 @@
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-center mt-2 py-0">
                   <div class="list-group list-group-flush">
                     <a href="{{ route('cart.page') }}" class="text-center text-primary fw-bold border-bottom border-light py-3">Carrinho</a>
-                    @foreach (\Cart::content() as $cart_item)
+                    @foreach (\Cart::content()->take(3) as $cart_item)
                       <a href="{{ route('produto.view', ['id'=>\Crypt::encrypt($cart_item->id)]) }}" class="list-group-item list-group-item-action border-bottom">
                         <div class="row align-items-center">
                             <div class="col-3">

@@ -49,7 +49,7 @@ class CartController extends Controller
         $qtd_ajustada = min($cart_prod->qty, min($product->qtd_estoque, Util::QTD_MAX_POR_CLIENTE));
         Cart::update($cart_prod->rowId, ['qty' => $qtd_ajustada]);
 
-        return redirect()->route('cart.page')->with('message', 'Adicionado com sucesso.');
+        return redirect()->route('cart.page')->with('message', 'Item adicionado ao carinho.');
     }
 
 
