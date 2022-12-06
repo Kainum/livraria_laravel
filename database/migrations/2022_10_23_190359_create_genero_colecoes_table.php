@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('genero_colecoes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('genero_id')->unsigned();
-            $table->foreign('genero_id')->references('id')->on('generos');
-            $table->bigInteger('colecao_id')->unsigned();
-            $table->foreign('colecao_id')->references('id')->on('colecoes');
             $table->timestamps();
+            $table->foreignId('genero_id')->constrained('generos');
+            $table->foreignId('colecao_id')->constrained('colecoes');
         });
     }
 

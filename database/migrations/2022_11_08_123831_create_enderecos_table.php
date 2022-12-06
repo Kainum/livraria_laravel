@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('destinatario', 50);
             $table->string('telefone', 20);
 
-            $table->bigInteger('usuario_id')->unsigned();
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
         });
     }
 

@@ -24,8 +24,7 @@ return new class extends Migration
             $table->string('status', 3);
             $table->string('cpf', 14);
             
-            $table->bigInteger('comprador_id')->unsigned();
-            $table->foreign('comprador_id')->references('id')->on('users');
+            $table->foreignId('comprador_id')->nullable()->constrained('users')->onDelete('set null');
         });
     }
 

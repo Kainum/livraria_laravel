@@ -20,10 +20,8 @@ return new class extends Migration
             $table->double('valor_unitario',8,2);
             $table->double('valor_item',8,2);
             
-            $table->bigInteger('pedido_id')->unsigned();
-            $table->foreign('pedido_id')->references('id')->on('pedidos');
-            $table->bigInteger('produto_id')->unsigned();
-            $table->foreign('produto_id')->references('id')->on('livros');
+            $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
+            $table->foreignId('produto_id')->constrained('livros');
         });
     }
 

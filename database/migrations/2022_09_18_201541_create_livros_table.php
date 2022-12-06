@@ -26,11 +26,9 @@ return new class extends Migration
             $table->integer('paginas')->unsigned();
             $table->integer('qtd_estoque')->unsigned();
 
-            $table->bigInteger('editora_id')->unsigned()->nullable();
-            $table->foreign('editora_id')->references('id')->on('editoras');
+            $table->foreignId('editora_id')->nullable()->constrained('editoras');
 
-            $table->bigInteger('colecao_id')->unsigned()->nullable();
-            $table->foreign('colecao_id')->references('id')->on('colecoes');
+            $table->foreignId('colecao_id')->nullable()->constrained('colecoes');
         });
     }
 
