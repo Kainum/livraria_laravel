@@ -15,15 +15,21 @@ class Relatorios
         if ($allZero) {
             $resultado = Livro::where('qtd_estoque', '=', 0)->orderBy('titulo')->get();
         } else {
-            if ($maxResults <= 0) {
-                $resultado = Livro::orderBy('qtd_estoque')->get();
-            } else {
-                $resultado = Livro::orderBy('qtd_estoque')->take($maxResults)->get();
-            }
+            $resultado = Livro::orderBy('qtd_estoque')->get();
         }
+
+        if ($maxResults > 0) {
+            $resultado = $resultado->take($maxResults);
+        }
+
         $fonte  = "Arial";
         $estilo = "B";
         $border = "1";
+
+        $pdf->SetFont($fonte, $estilo, 10);
+        $pdf->Cell(190, 15, "Quantidade de estoque dos Produtos", $border, 1, "C");
+
+        $pdf->Cell(145, 10, "", 0, 1, "L");
 
         $pdf->SetFont($fonte, $estilo, 10);
         $pdf->Cell(100, 13, "Produto", $border, 0, "L");
@@ -69,6 +75,8 @@ class Relatorios
 
         $pdf->SetFont($fonte, $estilo, 10);
         $pdf->Cell(190, 15, "Produtos Mais Vendidos: ".Carbon::parse($dataInicio)->format('d/m/Y')." ~ ".Carbon::parse($dataFim)->format('d/m/Y'), $border, 1, "C");
+
+        $pdf->Cell(145, 10, "", 0, 1, "L");
 
         $pdf->SetFont($fonte, $estilo, 10);
         $pdf->Cell(145, 13, "Produto", $border, 0, "L");

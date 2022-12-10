@@ -18,10 +18,9 @@
         <div class="form-group">
             {{ Form::label('maxResults', 'Número Máximo de Resultados: ') }}
             <select class="form-select" required id="maxResults" name="maxResults">
-                <option value="10" selected>10</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-                <option value="500">500</option>
+                @foreach ([10, 50, 100, 500] as $value)
+                <option value="{{ $value }}">{{ $value }}</option>
+                @endforeach
                 <option value="-1">Todos</option>
             </select>
             

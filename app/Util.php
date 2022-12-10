@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Livro;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,5 +43,12 @@ class Util
 
         //retorna o valor formatado
         return $vf;
+    }
+
+
+    public static function updateEstoqueProduto($idProduto, $qtd) {
+        $livro = Livro::find($idProduto);
+        $novo_estoque = $livro['qtd_estoque'] + $qtd;
+        $livro->update(['qtd_estoque'=>$novo_estoque]);
     }
 }

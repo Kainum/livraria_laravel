@@ -193,7 +193,7 @@
                   <span class="sidebar-text">Vendas por Período</span>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="">
                   <span class="sidebar-text">Relatório</span>
                 </a>
@@ -202,7 +202,7 @@
                 <a class="nav-link" href="">
                   <span class="sidebar-text">Relatório</span>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </div>
         </li>

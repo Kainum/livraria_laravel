@@ -7,6 +7,7 @@ use App\Models\Endereco;
 use App\Models\ItemPedido;
 use App\Models\Livro;
 use App\Models\Pedido;
+use App\Util;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,10 +92,8 @@ class PedidosController extends Controller
                 'produto_id'=>$item->id,
             ]);
 
-            // ATUALIZA O ESTOQUE DO PRODUTO
-            $livro = Livro::find($item->id);
-            $novo_estoque = $livro['qtd_estoque'] - $item->qty;
-            $livro->update(['qtd_estoque'=>$novo_estoque]);
+            // ATUALIZA O ESTOQUE DO PRODUTO - retira do estoque
+            Util::updateEstoqueProduto($item->id, -$item->qty);
         }
 
         Cart::destroy();
@@ -117,6 +116,12 @@ class PedidosController extends Controller
             $user_id = Auth::guard('web')->user()->id;
             if ($pedido->comprador_id == $user_id) {
                 $pedido->update(['status'=>Pedido::STATUS_CANCELADO]);
+
+                // ATUALIZA O ESTOQUE DOS PRODUTOS - devolve pro estoque
+                foreach($pedido->items as $item) {
+                    Util::updateEstoqueProduto($item->produto->id, $item->qtd);
+                }
+
                 $ret = array('status'=>200, 'msg'=>'null');
             } else {
                 $ret = array('status'=>401, 'msg'=>'Usuário não autorizado');

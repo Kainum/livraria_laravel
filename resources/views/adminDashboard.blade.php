@@ -54,7 +54,7 @@
                 </center>
             </div>
         </a>
-        <a class="col-md-6 col-12" href="">
+        {{-- <a class="col-md-6 col-12" href="">
             <div class="row align-items-center m-1 btn-dashboard" style="background-color: rgb(91, 195, 235);">
                 <center>
                     <i class="fa-solid fa-square-poll-horizontal text-btn-dashboard"></i>
@@ -69,7 +69,7 @@
                     <span class="text-btn-dashboard">RELATÓRIO</span>
                 </center>
             </div>
-        </a>
+        </a> --}}
     </div>
 @stop
 
