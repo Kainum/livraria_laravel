@@ -61,13 +61,13 @@ class GenerosController extends Controller
 
     public function update(GeneroRequest $request, $id) {
         $updated_item = $request->all();
+        $item = Genero::find(Crypt::decrypt($id));
 
-        //dd($request->file('file'));
         if ($request->hasFile('file')) {
-            $updated_item["imagem"] = Util::updateFile($request->file('file'), $updated_item["imagem"]);
+            $updated_item["imagem"] = Util::updateFile($request->file('file'), $item["imagem"]);
         }
 
-        Genero::find(Crypt::decrypt($id))->update($updated_item);
+        $item->update($updated_item);
         return redirect()->route('admin.generos');
     }
 }

@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ print($pedido->endereco) }}</td>
+                            <td>{{ substr(print($pedido->endereco), 0, -1) }}</td>
                             @switch($pedido->status)
                                 @case(app\Models\Pedido::STATUS_ABERTO)
                                     <td style="color: green">ABERTO</td>

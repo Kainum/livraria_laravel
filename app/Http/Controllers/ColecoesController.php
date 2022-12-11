@@ -43,14 +43,17 @@ class ColecoesController extends Controller
 
 
         // vincula os generos na coleção
-        $generos = $request->generos;
+        if (isset($request->generos)) {
+            $generos = $request->generos;
 
-        foreach($generos as $gen => $value) {
-            GeneroColecao::create([
-                                'genero_id'=>$generos[$gen],
-                                'colecao_id'=>$ni->id,
-                                ]);
+            foreach($generos as $gen => $value) {
+                GeneroColecao::create([
+                                    'genero_id'=>$generos[$gen],
+                                    'colecao_id'=>$ni->id,
+                                    ]);
+            }
         }
+        
 
         return redirect()->route('admin.colecoes');
     }
@@ -74,13 +77,11 @@ class ColecoesController extends Controller
 
     public function update(ColecaoRequest $request, $id) {
         $updated_item = $request->all();
-
-        //dd($request->file('file'));
-        if ($request->hasFile('file')) {
-            $updated_item["imagem"] = Util::updateFile($request->file('file'), $updated_item["imagem"]);
-        }
-
         $ni = Colecao::find(Crypt::decrypt($id));
+
+        if ($request->hasFile('file')) {
+            $updated_item["imagem"] = Util::updateFile($request->file('file'), $ni["imagem"]);
+        }
 
         //================================================
 
@@ -91,13 +92,15 @@ class ColecoesController extends Controller
         // delete os generos vinculados
         $ni->generos()->delete();
         // vincula os generos na coleção
-        $generos = $request->generos;
+        if (isset($request->generos)) {
+            $generos = $request->generos;
 
-        foreach($generos as $gen => $value) {
-            GeneroColecao::create([
-                                'genero_id'=>$generos[$gen],
-                                'colecao_id'=>$ni->id,
-                                ]);
+            foreach($generos as $gen => $value) {
+                GeneroColecao::create([
+                                    'genero_id'=>$generos[$gen],
+                                    'colecao_id'=>$ni->id,
+                                    ]);
+            }
         }
 
         return redirect()->route('admin.colecoes');

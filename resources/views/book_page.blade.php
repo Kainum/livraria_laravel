@@ -148,7 +148,7 @@
 
                 // seta os elementos na tabela para aparecer os valores
                 let partePac =      '<tr><td>Correio pac - '+chamada_pac.PrazoEntrega+' dias</td><td>R$'+chamada_pac.Valor+'</td></tr>'
-                let parteSedex =    '<tr><td>Correio pac - '+chamada_sedex.PrazoEntrega+' dias</td><td>R$'+chamada_sedex.Valor+'</td></tr>'
+                let parteSedex =    '<tr><td>Correio sedex - '+chamada_sedex.PrazoEntrega+' dias</td><td>R$'+chamada_sedex.Valor+'</td></tr>'
                 let elementos =     '<table class="table table-striped"><thead><tr><th>Transportadora</th><th>Custo</th></tr></thead><tbody>'+partePac+parteSedex+'</tbody></table>'
                 
                 $("#tabela-fretes").html(elementos);

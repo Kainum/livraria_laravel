@@ -27,6 +27,8 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request) {
         $updated_item = $request->all();
+        unset($updated_item["password"]);
+        
         $user_id = Auth::guard('web')->user()->id;
 
         User::find($user_id)->update($updated_item);

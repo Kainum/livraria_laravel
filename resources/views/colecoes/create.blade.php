@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>'admin.colecoes.store']) }}
+    {{ Form::open(['route'=>'admin.colecoes.store', 'files'=>true]) }}
         <div class="form-group">
             {{ Form::label('nome', 'Nome: ') }}
             {{ Form::text('nome', null, ['class'=>'form-control', 'required', 'maxlength'=>100]) }}

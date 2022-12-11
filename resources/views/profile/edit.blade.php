@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 {{ Form::label('cpf', 'CPF: ') }}
-                {{ Form::text('cpf', $item->cpf, ['class'=>'form-control', 'required', 'maxlength'=>14]) }}
+                {{ Form::text('cpf', $item->cpf, ['class'=>'form-control cpf', 'required', 'maxlength'=>14]) }}
             </div>
             <br>
             <div class="form-group">
@@ -32,4 +32,14 @@
         {{ Form::close() }}
     </div>
 
+@stop
+
+@section('js')
+    <script type="text/javascript" src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.cpf').mask('000.000.000-00', {reverse: false});
+        });
+    </script>
 @stop
