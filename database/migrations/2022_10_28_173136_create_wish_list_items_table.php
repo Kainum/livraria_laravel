@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('data_adicao');
             
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('livro_id')->constrained('livros');
+            $table->foreignId('livro_id')->constrained('books');
         });
     }
 

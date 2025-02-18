@@ -20,8 +20,8 @@ return new class extends Migration
             $table->double('valor_unitario');
             $table->double('valor_item');
             
-            $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
-            $table->foreignId('produto_id')->constrained('livros');
+            $table->foreignId('pedido_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('produto_id')->constrained('books');
         });
     }
 

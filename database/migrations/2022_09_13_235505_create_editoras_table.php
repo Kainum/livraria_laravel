@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('editoras', function (Blueprint $table) {
+        Schema::create('publishers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('nome', 100);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editoras');
+        Schema::dropIfExists('publishers');
     }
 };

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Genero extends Model
 {
     use HasFactory;
-    protected $table = "generos";
+    protected $table = "genres";
     protected $fillable = [
         'nome',
         'imagem',

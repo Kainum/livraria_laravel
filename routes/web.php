@@ -32,7 +32,7 @@ use Illuminate\Routing\RouteGroup;
 */
 
 Route::get('/', function () {
-    return redirect(route('home'));
+    return redirect()->route('home');
 });
 
 Route::get('/home', [SearchController::class, 'homePage'])->name('home');

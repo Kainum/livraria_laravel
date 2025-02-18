@@ -12,7 +12,7 @@ class Pedido extends Model
     const STATUS_ABERTO     = '01';
     const STATUS_CANCELADO  = '05';
 
-    protected $table = "pedidos";
+    protected $table = "orders";
     protected $fillable = [
         'data_pedido',
         'endereco',

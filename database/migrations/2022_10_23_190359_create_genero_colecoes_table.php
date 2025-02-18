@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('genero_colecoes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('genero_id')->constrained('generos');
-            $table->foreignId('colecao_id')->constrained('colecoes');
+            $table->foreignId('genero_id')->constrained('genres');
+            $table->foreignId('colecao_id')->constrained('collections');
         });
     }
 

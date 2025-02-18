@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('livros', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('titulo', 100);
@@ -26,9 +26,9 @@ return new class extends Migration
             $table->integer('paginas')->unsigned();
             $table->integer('qtd_estoque')->unsigned();
 
-            $table->foreignId('editora_id')->constrained('editoras');
+            $table->foreignId('editora_id')->constrained('publishers');
 
-            $table->foreignId('colecao_id')->constrained('colecoes');
+            $table->foreignId('colecao_id')->constrained('collections');
         });
     }
 
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('livros');
+        Schema::dropIfExists('books');
     }
 };

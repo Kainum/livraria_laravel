@@ -9,7 +9,7 @@ class Colecao extends Model
 {
     use HasFactory;
 
-    protected $table = "colecoes";
+    protected $table = "collections";
     protected $fillable = [
         'nome',
         'imagem',

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('colecoes', function (Blueprint $table) {
+        Schema::create('collections', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('nome', 100);
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colecoes');
+        Schema::dropIfExists('collections');
     }
 };
