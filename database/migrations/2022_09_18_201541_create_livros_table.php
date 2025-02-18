@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('autor', 100);
             $table->string('imagem')->nullable();
             $table->date('data_lancamento');
-            $table->double('preco',8,2);
+            $table->double('preco');
             $table->integer('paginas')->unsigned();
             $table->integer('qtd_estoque')->unsigned();
 

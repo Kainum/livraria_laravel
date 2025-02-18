@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('qtd')->unsigned();
-            $table->double('valor_unitario',8,2);
-            $table->double('valor_item',8,2);
+            $table->double('valor_unitario');
+            $table->double('valor_item');
             
             $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
             $table->foreignId('produto_id')->constrained('livros');

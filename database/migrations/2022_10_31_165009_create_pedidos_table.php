@@ -18,9 +18,9 @@ return new class extends Migration
             $table->timestamps();
             $table->date('data_pedido');
             $table->string('endereco', 1000);
-            $table->double('valorTotal',8,2);
+            $table->double('valorTotal');
             $table->string('servicoFrete', 10);
-            $table->double('valorFrete',8,2);
+            $table->double('valorFrete');
             $table->string('status', 3);
             $table->string('cpf', 14);
             
