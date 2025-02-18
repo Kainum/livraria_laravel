@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wish_list_items', function (Blueprint $table) {
+        Schema::create('wishlist_item', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->date('data_adicao');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wish_list_items');
+        Schema::dropIfExists('wishlist_item');
     }
 };

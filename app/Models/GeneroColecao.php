@@ -9,7 +9,7 @@ class GeneroColecao extends Model
 {
     use HasFactory;
 
-    protected $table = "genero_colecoes";
+    protected $table = "collection_genre";
     protected $fillable = ['genero_id', 'colecao_id',];
 
     public function genero() {

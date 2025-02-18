@@ -9,7 +9,7 @@ class ItemPedido extends Model
 {
     use HasFactory;
 
-    protected $table = "item_pedidos";
+    protected $table = "order_product";
     protected $fillable = [
         'qtd',
         'valor_unitario',

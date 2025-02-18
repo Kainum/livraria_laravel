@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('genero_colecoes', function (Blueprint $table) {
+        Schema::create('collection_genre', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('genero_id')->constrained('genres');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genero_colecoes');
+        Schema::dropIfExists('collection_genre');
     }
 };
