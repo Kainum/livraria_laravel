@@ -1,19 +1,19 @@
 @extends('layouts.default', [
     'model_title' => 'Dashboard',
     'page_title' => 'Dashboard Admin',
-    'search_route' => 'admin.livros.index',
+    'search_route' => 'admin.books.index',
 ])
 @section('content')
     <div class="text-white display-4">
 
         <div class="row mb-3 gap-3">
-            <a class="col text-center py-3" href="{{ route('admin.livros.index') }}"
+            <a class="col text-center py-3" href="{{ route('admin.books.index') }}"
                 style="background-color: rgb(17, 75, 95);">
                 <i class="fa-solid fa-pencil"></i>
                 <span>LIVROS</span>
             </a>
     
-            <a class="col text-center py-3" href="{{ route('admin.colecoes.index') }}"
+            <a class="col text-center py-3" href="{{ route('admin.collections.index') }}"
                 style="background-color: rgb(2, 128, 144);">
                 <i class="fa-solid fa-pencil"></i>
                 <span>COLEÇÕES</span>
@@ -21,13 +21,13 @@
         </div>
 
         <div class="row mb-3 gap-3">
-            <a class="col text-center py-3" href="{{ route('admin.generos.index') }}"
+            <a class="col text-center py-3" href="{{ route('admin.genres.index') }}"
                 style="background-color: rgb(190, 110, 70);">
                 <i class="fa-solid fa-pencil"></i>
                 <span>GÊNEROS</span>
             </a>
     
-            <a class="col text-center py-3" href="{{ route('admin.editoras.index') }}"
+            <a class="col text-center py-3" href="{{ route('admin.publishers.index') }}"
                 style="background-color: rgb(255, 200, 87);">
                 <i class="fa-solid fa-pencil"></i>
                 <span>EDITORAS</span>

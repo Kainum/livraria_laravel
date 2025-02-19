@@ -56,7 +56,7 @@ class ColecoesController extends Controller
             }
         }
 
-        return redirect()->route('admin.colecoes.index');
+        return redirect()->route('admin.collections.index');
     }
 
     public function destroy($id)
@@ -106,6 +106,6 @@ class ColecoesController extends Controller
             }
         }
 
-        return redirect()->route('admin.colecoes.index');
+        return redirect()->route('admin.collections.index');
     }
 }

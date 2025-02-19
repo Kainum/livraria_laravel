@@ -1,12 +1,12 @@
 @extends('layouts.default', [
     'model_title' => 'Coleções',
     'page_title' => 'Listar Coleções',
-    'search_route' => 'admin.colecoes.index',
+    'search_route' => 'admin.collections.index',
 ])
 @section('content')
-    <a href="{{ route('admin.colecoes.create') }}" class="btn btn-info">Adicionar</a>
+    <a href="{{ route('admin.collections.create') }}" class="btn btn-info">Adicionar</a>
 
-    <x-admin-search-bar route="admin.colecoes.index" />
+    <x-admin-search-bar route="admin.collections.index" />
 
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
@@ -25,7 +25,7 @@
                             <li>{{ $gen->genero->nome }}</li>
                         @endforeach
                     </td>
-                    <x-admin-table-actions route="admin.colecoes" :$item />
+                    <x-admin-table-actions route="admin.collections" :$item />
                 </tr>
             @endforeach
         </tbody>

@@ -1,12 +1,12 @@
 @extends('layouts.default', [
     'model_title' => 'Editoras',
     'page_title' => 'Listar Editoras',
-    'search_route' => 'admin.editoras.index',
+    'search_route' => 'admin.publishers.index',
 ])
 @section('content')
-    <a href="{{ route('admin.editoras.create') }}" class="btn btn-info">Adicionar</a>
+    <a href="{{ route('admin.publishers.create') }}" class="btn btn-info">Adicionar</a>
 
-    <x-admin-search-bar route="admin.editoras.index" />
+    <x-admin-search-bar route="admin.publishers.index" />
 
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
@@ -19,7 +19,7 @@
             @foreach ($item_list as $item)
                 <tr>
                     <td>{{ $item->nome }}</td>
-                    <x-admin-table-actions route="admin.editoras" :$item />
+                    <x-admin-table-actions route="admin.publishers" :$item />
                 </tr>
             @endforeach
         </tbody>

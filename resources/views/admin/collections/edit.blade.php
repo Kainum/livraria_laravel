@@ -5,7 +5,7 @@
 @section('content')
     <h2>Editando Coleção {{ $item->nome }}</h2>
 
-    <form action="{{ route('admin.colecoes.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
+    <form action="{{ route('admin.collections.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
         enctype="multipart/form-data">
 
         @csrf
@@ -62,7 +62,7 @@
 
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ route('admin.colecoes.index') }}" class="btn btn-default">Voltar</a>
+            <a href="{{ route('admin.collections.index') }}" class="btn btn-default">Voltar</a>
         </div>
     </form>
 @stop

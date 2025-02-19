@@ -5,7 +5,7 @@
 @section('content')
     <h2>Editando Gênero {{ $item->nome }}</h2>
 
-    <form action="{{ route('admin.generos.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
+    <form action="{{ route('admin.genres.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
         enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3">
@@ -33,7 +33,7 @@
 
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ route('admin.generos.index') }}" class="btn btn-default">Voltar</a>
+            <a href="{{ route('admin.genres.index') }}" class="btn btn-default">Voltar</a>
         </div>
     </form>
 @stop

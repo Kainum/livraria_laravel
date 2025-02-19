@@ -1,12 +1,12 @@
 @extends('layouts.default', [
     'model_title' => 'Livros',
     'page_title' => 'Editar Livro',
-    'search_route' => 'admin.livros.index',
+    'search_route' => 'admin.books.index',
 ])
 @section('content')
     <h2>Editando Livro {{ $item->titulo }}</h2>
 
-    <form action="{{ route('admin.livros.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
+    <form action="{{ route('admin.books.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
         enctype="multipart/form-data">
 
         @csrf
@@ -124,7 +124,7 @@
 
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Criar</button>
-            <a href="{{ route('admin.livros.index') }}" class="btn btn-default">Voltar</a>
+            <a href="{{ route('admin.books.index') }}" class="btn btn-default">Voltar</a>
         </div>
 
     </form>

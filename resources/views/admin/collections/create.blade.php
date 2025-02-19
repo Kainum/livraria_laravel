@@ -5,7 +5,7 @@
 @section('content')
     <h2>Nova Coleção</h2>
 
-    <form action="{{ route('admin.colecoes.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('admin.collections.store') }}" method="post" enctype="multipart/form-data">
 
         @csrf
 
@@ -39,7 +39,7 @@
 
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Criar</button>
-            <a href="{{ route('admin.colecoes.index') }}" class="btn btn-default">Voltar</a>
+            <a href="{{ route('admin.collections.index') }}" class="btn btn-default">Voltar</a>
         </div>
     </form>
 @stop

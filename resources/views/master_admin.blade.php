@@ -174,22 +174,22 @@
                         aria-expanded="false">
                         <ul class="flex-column nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.livros.index', []) }}">
+                                <a class="nav-link" href="{{ route('admin.books.index', []) }}">
                                     <span class="sidebar-text">Livros</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.colecoes.index', []) }}">
+                                <a class="nav-link" href="{{ route('admin.collections.index', []) }}">
                                     <span class="sidebar-text">Coleção</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.generos.index', []) }}">
+                                <a class="nav-link" href="{{ route('admin.genres.index', []) }}">
                                     <span class="sidebar-text">Gênero</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.editoras.index', []) }}">
+                                <a class="nav-link" href="{{ route('admin.publishers.index', []) }}">
                                     <span class="sidebar-text">Editora</span>
                                 </a>
                             </li>

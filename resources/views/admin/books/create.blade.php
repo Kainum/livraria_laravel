@@ -1,12 +1,12 @@
 @extends('layouts.default', [
     'model_title' => 'Livros',
     'page_title' => 'Criar Livro',
-    'search_route' => 'admin.livros.index',
+    'search_route' => 'admin.books.index',
     ])
 @section('content')
     <h2>Novo Livro</h2>
 
-    <form action="{{ route('admin.livros.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('admin.books.store') }}" method="post" enctype="multipart/form-data">
 
         @csrf
 
@@ -108,7 +108,7 @@
 
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Criar</button>
-            <a href="{{ route('admin.livros.index') }}" class="btn btn-default">Voltar</a>
+            <a href="{{ route('admin.books.index') }}" class="btn btn-default">Voltar</a>
         </div>
 
     </form>

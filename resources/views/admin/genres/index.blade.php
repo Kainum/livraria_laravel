@@ -1,12 +1,12 @@
 @extends('layouts.default', [
     'model_title' => 'Gêneros',
     'page_title' => 'Listar Gêneros',
-    'search_route' => 'admin.generos.index',
+    'search_route' => 'admin.genres.index',
 ])
 @section('content')
-    <a href="{{ route('admin.generos.create') }}" class="btn btn-info">Adicionar</a>
+    <a href="{{ route('admin.genres.create') }}" class="btn btn-info">Adicionar</a>
 
-    <x-admin-search-bar route="admin.generos.index" />
+    <x-admin-search-bar route="admin.genres.index" />
     
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $item->nome }}</td>
                     <td>{{ $item->imagem }}</td>
-                    <x-admin-table-actions route="admin.generos" :$item />
+                    <x-admin-table-actions route="admin.genres" :$item />
                 </tr>
             @endforeach
         </tbody>

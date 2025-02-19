@@ -5,7 +5,7 @@
 @section('content')
     <h2>Novo Gênero</h2>
 
-    <form action="{{ route('admin.generos.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('admin.genres.store') }}" method="post" enctype="multipart/form-data">
 
         @csrf
 
@@ -27,7 +27,7 @@
 
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Criar</button>
-            <a href="{{ route('admin.generos.index') }}" class="btn btn-default">Voltar</a>
+            <a href="{{ route('admin.genres.index') }}" class="btn btn-default">Voltar</a>
         </div>
     </form>
 @stop

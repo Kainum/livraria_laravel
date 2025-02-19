@@ -102,7 +102,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::redirect('/', '/admin/dashboard');
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-        Route::prefix('generos')->controller(GenerosController::class)->name('generos.')->group(function () {
+        Route::prefix('genres')->controller(GenerosController::class)->name('genres.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
@@ -111,7 +111,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/update', 'update')->name('update');
         });
 
-        Route::prefix('editoras')->controller(EditorasController::class)->name('editoras.')->group(function () {
+        Route::prefix('publishers')->controller(EditorasController::class)->name('publishers.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
@@ -120,7 +120,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/update', 'update')->name('update');
         });
 
-        Route::prefix('livros')->controller(LivrosController::class)->name('livros.')->group(function () {
+        Route::prefix('books')->controller(LivrosController::class)->name('books.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
@@ -129,7 +129,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/update', 'update')->name('update');
         });
 
-        Route::prefix('colecoes')->controller(ColecoesController::class)->name('colecoes.')->group(function () {
+        Route::prefix('collections')->controller(ColecoesController::class)->name('collections.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');

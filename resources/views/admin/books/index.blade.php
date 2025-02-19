@@ -1,12 +1,12 @@
 @extends('layouts.default', [
     'model_title' => 'Livros',
     'page_title' => 'Listar Livros',
-    'search_route' => 'admin.livros.index',
+    'search_route' => 'admin.books.index',
 ])
 @section('content')
-    <a href="{{ route('admin.livros.create') }}" class="btn btn-info">Adicionar</a>
+    <a href="{{ route('admin.books.create') }}" class="btn btn-info">Adicionar</a>
 
-    <x-admin-search-bar route="admin.livros.index" />
+    <x-admin-search-bar route="admin.books.index" />
 
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
@@ -25,7 +25,7 @@
                     <td>{{ $item->isbn }}</td>
                     <td>{{ $item->editora->nome }}</td>
                     <td>{{ $item->colecao->nome }}</td>
-                    <x-admin-table-actions route="admin.livros" :$item />
+                    <x-admin-table-actions route="admin.books" :$item />
                 </tr>
             @endforeach
         </tbody>

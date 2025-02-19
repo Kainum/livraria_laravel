@@ -5,7 +5,7 @@
 @section('content')
     <h2>Editando Editora {{ $item->nome }}</h2>
 
-    <form action="{{ route('admin.editoras.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">
+    <form action="{{ route('admin.publishers.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">
 
         @csrf
 
@@ -20,7 +20,7 @@
 
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ route('admin.editoras.index') }}" class="btn btn-default">Voltar</a>
+            <a href="{{ route('admin.publishers.index') }}" class="btn btn-default">Voltar</a>
         </div>
     </form>
 @stop

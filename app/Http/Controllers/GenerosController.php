@@ -39,7 +39,7 @@ class GenerosController extends Controller
         }
 
         Genero::create($new_item);
-        return redirect()->route('admin.generos.index');
+        return redirect()->route('admin.genres.index');
     }
 
     public function destroy($id) {
@@ -68,6 +68,6 @@ class GenerosController extends Controller
         }
 
         $item->update($updated_item);
-        return redirect()->route('admin.generos.index');
+        return redirect()->route('admin.genres.index');
     }
 }
