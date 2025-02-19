@@ -16,17 +16,17 @@ class LivrosController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $list = Livro::orderBy('titulo')->paginate($paginate_value);
+            $item_list = Livro::orderBy('titulo')->paginate($paginate_value);
         else
-            $list = Livro::where('titulo', 'like', "%$filtragem%")
+            $item_list = Livro::where('titulo', 'like', "%$filtragem%")
                             ->orderBy('titulo')
                             ->paginate($paginate_value)
                             ->setpath('livros?desc_filtro='.$filtragem);
-        return view('livros.index', ['item_list'=>$list]);
+        return view('admin.books.index', compact('item_list'));
     }
 
     public function create () {
-        return view('livros.create');
+        return view('admin.books.create');
     }
 
     public function store (LivroRequest $request) {
@@ -56,7 +56,7 @@ class LivrosController extends Controller
 
     public function edit(Request $request) {
         $item = Livro::find(Crypt::decrypt($request->get('id')));
-        return view('livros.edit', compact('item'));
+        return view('admin.books.edit', compact('item'));
     }
 
     public function update(LivroRequest $request, $id) {

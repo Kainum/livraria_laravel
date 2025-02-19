@@ -126,7 +126,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/{id}/destroy','destroy')->name('destroy');
             Route::get('/edit', 'edit')->name('edit');
-            Route::put('/{id}/update', 'update')->name('update');
+            Route::post('/{id}/update', 'update')->name('update');
         });
 
         Route::prefix('colecoes')->controller(ColecoesController::class)->name('colecoes.')->group(function () {

@@ -27,7 +27,7 @@
 
         <div class="form-group mb-3">
             <label for="imagem">Arquivo da imagem:</label>
-            <input type="text" name="imagem" id="imagem" class="form-control" required maxlength="50" disabled
+            <input type="text" name="imagem" id="imagem" class="form-control" required maxlength="250" disabled
                 value="{{ $item->imagem }}">
         </div>
 
