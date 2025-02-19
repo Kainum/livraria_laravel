@@ -32,7 +32,7 @@ class EditorasController extends Controller
         $new_item = $request->all();
         Editora::create($new_item);
 
-        return redirect()->route('admin.editoras');
+        return redirect()->route('admin.editoras.index');
     }
 
     public function destroy($id) {
@@ -54,6 +54,6 @@ class EditorasController extends Controller
 
     public function update(EditoraRequest $request, $id) {
         Editora::find(Crypt::decrypt($id))->update($request->all());
-        return redirect()->route('admin.editoras');
+        return redirect()->route('admin.editoras.index');
     }
 }

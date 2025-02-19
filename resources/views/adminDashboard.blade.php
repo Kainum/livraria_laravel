@@ -1,11 +1,11 @@
 @extends('layouts.default', [
     'model_title' => 'Dashboard',
     'page_title' => 'Dashboard Admin',
-    'search_route' => 'admin.livros',
+    'search_route' => 'admin.livros.index',
     ])
 @section('content')
     <div class="row">
-        <a class="col-md-6 col-12" href="{{ route('admin.livros') }}">
+        <a class="col-md-6 col-12" href="{{ route('admin.livros.index') }}">
             <div class="row align-items-center m-1 btn-dashboard" style="background-color: rgb(17, 75, 95);">
                 <center>
                     <i class="fa-solid fa-pencil text-btn-dashboard"></i>
@@ -13,7 +13,7 @@
                 </center>
             </div>
         </a>
-        <a class="col-md-6 col-12" href="{{ route('admin.colecoes') }}">
+        <a class="col-md-6 col-12" href="{{ route('admin.colecoes.index') }}">
             <div class="row align-items-center m-1 btn-dashboard" style="background-color: rgb(2, 128, 144);">
                 <center>
                     <i class="fa-solid fa-pencil text-btn-dashboard"></i>
@@ -21,7 +21,7 @@
                 </center>
             </div>
         </a>
-        <a class="col-md-6 col-12" href="{{ route('admin.generos') }}">
+        <a class="col-md-6 col-12" href="{{ route('admin.generos.index') }}">
             <div class="row align-items-center m-1 btn-dashboard" style="background-color: rgb(190, 110, 70);">
                 <center>
                     <i class="fa-solid fa-pencil text-btn-dashboard"></i>
@@ -29,7 +29,7 @@
                 </center>
             </div>
         </a>
-        <a class="col-md-6 col-12" href="{{ route('admin.editoras') }}">
+        <a class="col-md-6 col-12" href="{{ route('admin.editoras.index') }}">
             <div class="row align-items-center m-1 btn-dashboard" style="background-color: rgb(255, 200, 87);">
                 <center>
                     <i class="fa-solid fa-pencil text-btn-dashboard"></i>
@@ -38,7 +38,7 @@
             </div>
         </a>
         <hr/>
-        <a class="col-md-6 col-12" href="{{ route('relatorios.estoque.page') }}">
+        <a class="col-md-6 col-12" href="{{ route('admin.relatorios.estoque.page') }}">
             <div class="row align-items-center m-1 btn-dashboard" style="background-color: rgb(175, 27, 63);">
                 <center>
                     <i class="fa-solid fa-square-poll-horizontal text-btn-dashboard"></i>
@@ -46,7 +46,7 @@
                 </center>
             </div>
         </a>
-        <a class="col-md-6 col-12" href="{{ route('relatorios.vendas_periodo.page') }}">
+        <a class="col-md-6 col-12" href="{{ route('admin.relatorios.vendas_periodo.page') }}">
             <div class="row align-items-center m-1 btn-dashboard" style="background-color: rgb(71, 49, 68);">
                 <center>
                     <i class="fa-solid fa-square-poll-horizontal text-btn-dashboard"></i>

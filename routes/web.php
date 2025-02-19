@@ -11,156 +11,138 @@ use App\Http\Controllers\ColecoesController;
 use App\Http\Controllers\CorreiosController;
 use App\Http\Controllers\EnderecosController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RelatoriosController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishListController;
-use App\Http\Requests\EnderecoRequest;
-use Illuminate\Routing\RouteGroup;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return redirect()->route('home');
-});
-
-Route::get('/home', [SearchController::class, 'homePage'])->name('home');
 
 
 // ROTAS PUBLICAS
-Route::any('/search', [SearchController::class, 'getLivros'])->name('search');
+Route::controller(SearchController::class)->group(function () {
+    Route::redirect('/', '/home');
+    Route::get('/home', 'homePage')->name('home');
 
-Route::group(['prefix' => 'browse'], function () {
-    Route::get('/',     [SearchController::class, 'getGeneros'])->name('browse');
-    Route::get('/{id}', [SearchController::class, 'getColecoes'])->name('browse.colecoes');;
+    Route::any('/search', 'getLivros')->name('search');
+
+    Route::get('/browse', 'getGeneros')->name('browse');
+    Route::get('/browse/{id}', 'getColecoes')->name('browse.colecoes');;
+
+    Route::redirect('/produto', '/search');
+    Route::get('/produto/{id}', 'viewProduto')->name('produto.view');
+
+    Route::redirect('/colecao', '/search');
+    Route::get('/colecao/{id}', 'viewColecao')->name('colecao.view');
 });
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
-Route::group(['prefix' => 'produto'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-    Route::get('/',         function () { return redirect()->route('search'); });
-    Route::get('/{id}',     [SearchController::class, 'viewProduto'])->name('produto.view');
-});
-
-Route::group(['prefix' => 'colecao'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-    Route::get('/',         function () { return redirect()->route('search'); });
-    Route::get('/{id}',     [SearchController::class, 'viewColecao'])->name('colecao.view');
-});
-
 Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
 // FIM ROTAS PUBLICAS
 
+
 // ROTAS CLIENTE
-Route::group(['middleware' => ['auth']], function () {
+Route::middleware('auth')->group(function () {
+
+    Route::prefix('wishlist')->controller(WishListController::class)->name('wishlist.')->group(function () {
+        Route::get('/', 'view')->name('index');
+        Route::post('/add/{id}', 'addWishList')->name('add');
+        Route::get('/rem/{id}', 'removeWishList')->name('remove');
+    });
+
+    Route::prefix('carrinho')->name('cart.')->group(function () {
+        Route::controller(CartController::class)->group(function () {
+            Route::get('/', 'cartPage')->name('page');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{rowId}/add', 'cartAdd')->name('add');
+            Route::get('/{rowId}/sub', 'cartSub')->name('sub');
+            Route::get('/{rowId}/exclude','cartExclude')->name('exclude');
     
-    Route::group(['prefix' => 'wishlist'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-        Route::get('/',     [WishListController::class, 'view'])->name('wishlist');
-        Route::post('/add/{id}',[WishListController::class, 'addWishList'])->name('wishlist.add');
-        Route::get('/rem/{id}', [WishListController::class, 'removeWishList'])->name('wishlist.remove');
+            Route::post('/endereco', 'selecionarEndereco')->name('endereco');
+        });
+
+        Route::controller(PedidosController::class)->group(function () {
+            Route::post('/confirmar_pedido', 'confirmarPedido')->name('confirmar');
+            Route::post('/concluir', 'concluirPedido')->name('concluir');
+        });
     });
 
-    Route::group(['prefix' => 'carrinho', ], function () {
-        Route::get('/',             [CartController::class, 'cartPage'])->name('cart.page');
-        Route::post('/',            [CartController::class, 'store'])->name('cart.store');
-        Route::get('/{rowId}/add',    [CartController::class, 'cartAdd'])->name('cart.add');
-        Route::get('/{rowId}/sub',    [CartController::class, 'cartSub'])->name('cart.sub');
-        Route::get('/{rowId}/exclude', [CartController::class, 'cartExclude'])->name('cart.exclude');
+    Route::prefix('profile')->group(function () {
+        Route::controller(ProfileController::class)->name('profile.')->group(function () {
+            Route::get('/', 'view')->name('view');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::put('/update', 'update')->name('update');
+    
+            Route::get('/password/edit', 'editPassword')->name('password.edit');
+            Route::put('/password/update', 'updatePassword')->name('password.update');
+        });
 
-        Route::post('/endereco',    [CartController::class, 'selecionarEndereco'])->name('cart.endereco');
-
-        Route::post('/confirmar_pedido',    [PedidosController::class, 'confirmarPedido'])->name('cart.confirmar');
-        Route::post('/concluir',            [PedidosController::class, 'concluirPedido'])->name('cart.concluir');
-    });
-
-    Route::group(['prefix' => 'profile'], function () {
-        Route::get('/',         [ProfileController::class,  'view'])->name('profile.view');
-        Route::get('/edit',     [ProfileController::class,  'edit'])->name('profile.edit');
-        Route::put('/update',  [ProfileController::class,  'update'])->name('profile.update');
-
-        Route::get('/password/edit',    [ProfileController::class,  'editPassword'])->name('profile.password.edit');
-        Route::put('/password/update',  [ProfileController::class,  'updatePassword'])->name('profile.password.update');
-
-        Route::group(['prefix' => 'enderecos'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-            Route::any('/',         [EnderecosController::class, 'index'])->name('enderecos');
-            Route::get('/create',   [EnderecosController::class, 'create'])->name('enderecos.create');
-            Route::post('/store',   [EnderecosController::class, 'store'])->name('enderecos.store');
-            Route::get('/{id}/destroy', [EnderecosController::class,  'destroy'])->name('enderecos.destroy');
-            Route::get('/edit',     [EnderecosController::class,  'edit'])->name('enderecos.edit');
-            Route::put('/{id}/update',  [EnderecosController::class,  'update'])->name('enderecos.update');
+        Route::prefix('enderecos')->controller(EnderecosController::class)->name('enderecos.')->group(function () {
+            Route::any('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/{id}/destroy', 'destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::put('/{id}/update', 'update')->name('update');
         });
 
         Route::get('/meus_pedidos', [PedidosController::class, 'meusPedidos'])->name('meus_pedidos');
         Route::get('/meus_pedidos/{id}/cancelar', [PedidosController::class,  'cancelarPedido'])->name('pedido.cancelar');
     });
-    
 });
 // FIM ROTAS CLIENTE
 
 // ROTAS ADMIN
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('login',     [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('login',    [AdminAuthController::class, 'login'])->name('admin.login');
-    Route::get('logout',    [AdminAuthController::class, 'logout'])->name('admin.logout');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('login');
+    Route::get('logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-    Route::group(['middleware' => ['auth:admin']], function () {
-        Route::get('/', function () {
-            return redirect(route('admin.dashboard'));
+    Route::middleware('auth:admin')->group(function () {
+        Route::redirect('/', '/admin/dashboard');
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+        Route::prefix('generos')->controller(GenerosController::class)->name('generos.')->group(function () {
+            Route::any('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/{id}/destroy','destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::put('/{id}/update', 'update')->name('update');
         });
 
-        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
-        Route::group(['prefix' => 'generos'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-            Route::any('/',         [GenerosController::class, 'index'])->name('admin.generos');
-            Route::get('/create',   [GenerosController::class, 'create'])->name('admin.generos.create');
-            Route::post('/store',   [GenerosController::class, 'store'])->name('admin.generos.store');
-            Route::get('/{id}/destroy', [GenerosController::class,  'destroy'])->name('admin.generos.destroy');
-            Route::get('/edit',     [GenerosController::class,  'edit'])->name('admin.generos.edit');
-            Route::put('/{id}/update',  [GenerosController::class,  'update'])->name('admin.generos.update');
+        Route::prefix('editoras')->controller(EditorasController::class)->name('editoras.')->group(function () {
+            Route::any('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/{id}/destroy','destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::put('/{id}/update', 'update')->name('update');
         });
 
-        Route::group(['prefix' => 'editoras'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-            Route::any('/',         [EditorasController::class, 'index'])->name('admin.editoras');
-            Route::get('/create',   [EditorasController::class, 'create'])->name('admin.editoras.create');
-            Route::post('/store',   [EditorasController::class, 'store'])->name('admin.editoras.store');
-            Route::get('/{id}/destroy', [EditorasController::class,  'destroy'])->name('admin.editoras.destroy');
-            Route::get('/edit',     [EditorasController::class,  'edit'])->name('admin.editoras.edit');
-            Route::put('/{id}/update',  [EditorasController::class,  'update'])->name('admin.editoras.update');
+        Route::prefix('livros')->controller(LivrosController::class)->name('livros.')->group(function () {
+            Route::any('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/{id}/destroy','destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::put('/{id}/update', 'update')->name('update');
         });
 
-        Route::group(['prefix' => 'livros'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-            Route::any('/',         [LivrosController::class, 'index'])->name('admin.livros');
-            Route::get('/create',   [LivrosController::class, 'create'])->name('admin.livros.create');
-            Route::post('/store',   [LivrosController::class, 'store'])->name('admin.livros.store');
-            Route::get('/{id}/destroy', [LivrosController::class,  'destroy'])->name('admin.livros.destroy');
-            Route::get('edit',      [LivrosController::class,  'edit'])->name('admin.livros.edit');
-            Route::put('/{id}/update',  [LivrosController::class,  'update'])->name('admin.livros.update');
+        Route::prefix('colecoes')->controller(ColecoesController::class)->name('colecoes.')->group(function () {
+            Route::any('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/{id}/destroy','destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::put('/{id}/update', 'update')->name('update');
         });
 
-        Route::group(['prefix' => 'colecoes'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-            Route::any('/',         [ColecoesController::class, 'index'])->name('admin.colecoes');
-            Route::get('/create',   [ColecoesController::class, 'create'])->name('admin.colecoes.create');
-            Route::post('/store',   [ColecoesController::class, 'store'])->name('admin.colecoes.store');
-            Route::get('/{id}/destroy', [ColecoesController::class,  'destroy'])->name('admin.colecoes.destroy');
-            Route::get('/edit',     [ColecoesController::class,  'edit'])->name('admin.colecoes.edit');
-            Route::put('/{id}/update',  [ColecoesController::class,  'update'])->name('admin.colecoes.update');
-        });
-
-        Route::group(['prefix' => 'relatorios'/*, 'where'=>['id'=>'[0-9]+']*/], function () {
-            Route::get('/estoque',         [RelatoriosController::class, 'relatorioEstoque'])->name('relatorios.estoque.page');
-            Route::post('/estoque',        [RelatoriosController::class, 'gerarRelEstoque'])->name('relatorios.estoque.gerar');
-            Route::get('/vendas_periodo',  [RelatoriosController::class, 'relatorioVendasPeriodo'])->name('relatorios.vendas_periodo.page');
-            Route::post('/vendas_periodo', [RelatoriosController::class, 'gerarRelVendasPeriodo'])->name('relatorios.vendas_periodo.gerar');
+        Route::prefix('relatorios')->controller(RelatoriosController::class)->name('relatorios.')->group(function () {
+            Route::get('/estoque', 'relatorioEstoque')->name('estoque.page');
+            Route::post('/estoque', 'gerarRelEstoque')->name('estoque.gerar');
+            Route::get('/vendas_periodo', 'relatorioVendasPeriodo')->name('vendas_periodo.page');
+            Route::post('/vendas_periodo', 'gerarRelVendasPeriodo')->name('vendas_periodo.gerar');
         });
     });
 });
@@ -170,4 +152,4 @@ Route::get('/layout', function () {
     return view('layout_admin');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

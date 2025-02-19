@@ -22,11 +22,11 @@ class WishListController extends Controller
             'livro_id'=>Crypt::decrypt($id),
             'data_adicao'=>date('Y-m-d'),
         ]);
-        return redirect()->route('wishlist');
+        return redirect()->route('wishlist.index');
     }
 
     public function removeWishList($id) {
         WishListItem::find(Crypt::decrypt($id))->delete();
-        return redirect()->route('wishlist');
+        return redirect()->route('wishlist.index');
     }
 }

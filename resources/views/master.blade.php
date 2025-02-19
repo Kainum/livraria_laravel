@@ -180,7 +180,7 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a href="{{ route('wishlist') }}" class="nav-link">
+                    <a href="{{ route('wishlist.index') }}" class="nav-link">
                         <div class="col-10">
                             <i class="col-3 fa-solid fa-heart" style="color: lightgray"></i>
                             <span class="col-9 sidebar-text">Lista de Desejos</span>
@@ -345,7 +345,7 @@
                                         Meus pedidos
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center"
-                                        href="{{ route('wishlist') }}">
+                                        href="{{ route('wishlist.index') }}">
                                         <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
@@ -355,7 +355,7 @@
                                         Lista de desejos
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center"
-                                        href="{{ route('enderecos') }}">
+                                        href="{{ route('enderecos.index') }}">
                                         <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"

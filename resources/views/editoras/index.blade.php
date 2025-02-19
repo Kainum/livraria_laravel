@@ -1,10 +1,10 @@
 @extends('layouts.default', [
     'model_title' => 'Editoras',
     'page_title' => 'Listar Editoras',
-    'search_route' => 'admin.editoras',
+    'search_route' => 'admin.editoras.index',
     ])
 @section('content')
-    {{ Form::open(['name'=>'form_name', 'route'=>'admin.editoras']) }}
+    {{ Form::open(['name'=>'form_name', 'route'=>'admin.editoras.index']) }}
         <div class="sidebar-form">
         <div class="input-group">
             <input type="text" name="desc_filtro" class="form-control" style="width: 80% !important;" placeholder="Pesquisa...">

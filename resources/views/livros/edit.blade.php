@@ -1,7 +1,7 @@
 @extends('layouts.default', [
     'model_title' => 'Livros',
     'page_title' => 'Editar Livro',
-    'search_route' => 'admin.livros',
+    'search_route' => 'admin.livros.index',
     ])
 @section('content')
     <h2>Editando Livro {{ $item->titulo }}</h2>

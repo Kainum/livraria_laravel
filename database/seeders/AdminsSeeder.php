@@ -15,17 +15,10 @@ class AdminsSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
-            [
-                'name' => 'Admin Leviano',
-                'email' => 'admin@admin.com',
-                'password' => bcrypt("12345678"),
-            ],
-        ];
-
-        foreach ($users as $key => $value) {
-            Admin::create($value);
-        }
-
+        Admin::create([
+            'name' => 'Admin Leviano',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt("12345678"),
+        ]);
     }
 }

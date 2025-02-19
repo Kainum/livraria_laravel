@@ -29,7 +29,7 @@ class EnderecosController extends Controller
         $new_item["usuario_id"] = Auth::guard('web')->user()->id;;
 
         Endereco::create($new_item);
-        return redirect()->route('enderecos');
+        return redirect()->route('enderecos.index');
     }
 
     public function destroy($id) {
@@ -53,6 +53,6 @@ class EnderecosController extends Controller
         $updated_item = $request->all();
 
         Endereco::find(Crypt::decrypt($id))->update($updated_item);
-        return redirect()->route('enderecos');
+        return redirect()->route('enderecos.index');
     }
 }

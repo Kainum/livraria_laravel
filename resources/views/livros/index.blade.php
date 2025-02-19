@@ -1,10 +1,10 @@
 @extends('layouts.default', [
     'model_title' => 'Livros',
     'page_title' => 'Listar Livros',
-    'search_route' => 'admin.livros',
+    'search_route' => 'admin.livros.index',
     ])
 @section('content')
-    {{ Form::open(['name'=>'form_name', 'route'=>'admin.livros']) }}
+    {{ Form::open(['name'=>'form_name', 'route'=>'admin.livros.index']) }}
         <div class="sidebar-form">
         <div class="input-group">
             <input type="text" name="desc_filtro" class="form-control" style="width: 80% !important;" placeholder="Pesquisa...">

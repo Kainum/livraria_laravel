@@ -39,7 +39,7 @@ class LivrosController extends Controller
         }
         
         Livro::create($new_item);
-        return redirect()->route('admin.livros');
+        return redirect()->route('admin.livros.index');
     }
 
     public function destroy($id) {
@@ -68,6 +68,6 @@ class LivrosController extends Controller
         }
 
         $item->update($updated_item);
-        return redirect()->route('admin.livros');
+        return redirect()->route('admin.livros.index');
     }
 }

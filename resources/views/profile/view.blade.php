@@ -20,6 +20,6 @@
             <a href="{{ route('profile.password.edit') }}" class="btn btn-warning">Trocar Senha</a>
         </div>
 
-        <a href="{{ route('enderecos') }}" class="btn btn-warning">Meus Endereços</a>
+        <a href="{{ route('enderecos.index') }}" class="btn btn-warning">Meus Endereços</a>
     </div>
 @stop
