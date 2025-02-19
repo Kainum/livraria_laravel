@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Colecao;
 use App\Models\Genero;
 use App\Models\Livro;
-use App\Models\User;
 use App\Models\WishListItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,8 +68,4 @@ class ShopNavigationController extends Controller
         $item = Livro::find($item_id);
         return view('shop.book_page', compact('item', 'wishlist'));
     }
-
-    
-
-
 }

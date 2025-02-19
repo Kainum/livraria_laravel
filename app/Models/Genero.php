@@ -14,7 +14,11 @@ class Genero extends Model
         'imagem',
     ];
 
+    // public function colecoes() {
+    //     return $this->hasMany(GeneroColecao::class);
+    // }
+
     public function colecoes() {
-        return $this->hasMany(GeneroColecao::class);
+        return $this->belongsToMany(Colecao::class, 'collection_genre', 'genero_id', 'colecao_id');
     }
 }

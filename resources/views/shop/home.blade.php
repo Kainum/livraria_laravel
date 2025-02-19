@@ -1,30 +1,17 @@
 @extends('master', [
-    'page_title'    => 'Home',
+    'page_title' => 'Home',
 ])
 @section('content')
-    <div class="col-12">
-        <img src="{{ asset('storage/images/banner.png') }}" alt="">
+    <div>
+        <img src="{{ asset('storage/images/banner.png') }}" alt="Banner">
     </div>
-    <div class="">
-        <center><h2>DESTAQUES</h2></center>
-        <div class="d-flex flex-row flex-nowrap overflow-auto">
+    <div>
+        <h2 class="text-center">DESTAQUES</h2>
+        <div class="d-flex flex-row flex-nowrap overflow-auto gap-3">
             @foreach ($item_list as $item)
-                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mx-1">
-                    <a href="{{ route('colecao.view', ['id'=>\Crypt::encrypt($item->id)]) }}">
-                        <img class="img-fluid" src="{{ route('image.show', [
-                            'image_path'=>$item->imagem,
-                            'width'=>576,
-                            'height'=>760,
-                            ]) }}">
-                        <div class='col-12'>
-                            <center>
-                                <p class="h3">{{ $item->nome }}</p>
-                            </center>
-                        </div>
-                    </a>
-                </div>
+                <x-shop-collection-image :$item />
             @endforeach
         </div>
     </div>
-    
+
 @stop
