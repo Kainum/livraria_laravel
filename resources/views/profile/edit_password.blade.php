@@ -1,4 +1,4 @@
-@extends('master', [
+@extends('layouts.shop', [
     'model_title'   => 'Alterar Senha',
     'page_title'    => 'Alterar Senha',
 ])

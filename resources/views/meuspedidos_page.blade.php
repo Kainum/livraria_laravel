@@ -1,4 +1,4 @@
-@extends('master', [
+@extends('layouts.shop', [
     'model_title'   => 'Meus Pedidos',
     'page_title'    => 'Meus Pedidos',
 ])

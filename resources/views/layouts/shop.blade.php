@@ -24,20 +24,19 @@
 <body>
     @yield('style')
 
-    <x-admin-sidebar-menu />
-
-    <x-admin-navbar-top />
-
+    <x-shop-sidebar-menu />
+    
     <main class="content">
 
+        <x-shop-navbar-top />
+
         {{-- Breadcrumb --}}
-        <div class="p-4">
-            <x-nav-breadcrumb home-route="admin.dashboard" active-title="Dashboard" :middle-links="[[
-                'route' => 'admin.dashboard',
-                'text' => 'Admin',
-            ]]" />
-            <h1 class="h4">{{ $model_title }}</h1>
-        </div>
+        @if (isset($model_title))
+            <div class="p-4">
+                <x-nav-breadcrumb home-route="home" :active-title="$model_title" />
+                <h1 class="h4">{{ $model_title }}</h1>
+            </div>
+        @endif
 
         <div class="card shadow components-section mb-4">
             <div class="card-body">
@@ -53,7 +52,6 @@
             </p>
         </footer>
     </main>
-
 
     <!-- Core -->
     <script src="{{ url('volt/vendor/@popperjs/core/dist/umd/popper.min.js') }}"></script>
@@ -80,7 +78,6 @@
     <script src="{{ asset('/assets/js/admin_forms.js') }}"></script>
 
     @yield('js')
-
 </body>
 
 </html>

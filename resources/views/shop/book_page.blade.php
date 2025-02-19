@@ -1,4 +1,4 @@
-@extends('master', [
+@extends('layouts.shop', [
     'page_title' => $item->titulo,
 ])
 @section('content')
