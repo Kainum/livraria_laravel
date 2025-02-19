@@ -13,10 +13,10 @@ class GeneroColecao extends Model
     protected $fillable = ['genero_id', 'colecao_id',];
 
     public function genero() {
-        return $this->belongsTo(Genero::class);
+        return $this->belongsTo(Genre::class);
     }
 
     public function colecao() {
-        return $this->belongsTo(Colecao::class);
+        return $this->belongsTo(Collection::class);
     }
 }

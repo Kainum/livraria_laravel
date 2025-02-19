@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Editora extends Model
+class Publisher extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,6 @@ class Editora extends Model
     ];
 
     public function livros() {
-        return $this->hasMany(Livro::class);
+        return $this->hasMany(Book::class, 'editora_id');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Genero extends Model
+class Genre extends Model
 {
     use HasFactory;
     protected $table = "genres";
@@ -14,11 +14,7 @@ class Genero extends Model
         'imagem',
     ];
 
-    // public function colecoes() {
-    //     return $this->hasMany(GeneroColecao::class);
-    // }
-
     public function colecoes() {
-        return $this->belongsToMany(Colecao::class, 'collection_genre', 'genero_id', 'colecao_id');
+        return $this->belongsToMany(Collection::class, 'collection_genre', 'genero_id', 'colecao_id');
     }
 }

@@ -16,7 +16,7 @@
                         <div class="row col-md-8">
                             <div class="col-lg-2 col-md-3 col-5">
                                 <img class="img-fluid" src="{{ route('image.show', [
-                                        'image_path'=> \App\Models\Livro::find($item->id)->imagem,
+                                        'image_path'=> \App\Models\Book::find($item->id)->imagem,
                                         'width'=>576,
                                         'height'=>760,
                                         ]) }}">
@@ -32,7 +32,7 @@
                                     <i class="fa-solid {{ $item->qty != 1 ? "fa-minus" : "fa-trash-can" }}" style="color:gray"></i>
                                 </a>
                                 <div class="col-6 text-center align-self-center">{{ $item->qty }}</div>
-                                @if ($item->qty < min(\App\Models\Livro::find($item->id)->qtd_estoque, \App\Util::QTD_MAX_POR_CLIENTE))
+                                @if ($item->qty < min(\App\Models\Book::find($item->id)->qtd_estoque, \App\Util::QTD_MAX_POR_CLIENTE))
                                     <a class="btn btn-secondary col-3 my-auto" href="{{ route('cart.add', ['rowId'=>$item->rowId]) }}">
                                         <i class="fa-solid fa-plus" style="color:gray"></i>
                                     </a>

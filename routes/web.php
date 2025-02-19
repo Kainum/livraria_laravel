@@ -4,10 +4,10 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\GenerosController;
-use App\Http\Controllers\EditorasController;
-use App\Http\Controllers\LivrosController;
-use App\Http\Controllers\ColecoesController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CorreiosController;
 use App\Http\Controllers\EnderecosController;
 use App\Http\Controllers\ImageController;
@@ -102,7 +102,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::redirect('/', '/admin/dashboard');
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-        Route::prefix('genres')->controller(GenerosController::class)->name('genres.')->group(function () {
+        Route::prefix('genres')->controller(GenreController::class)->name('genres.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
@@ -111,7 +111,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/update', 'update')->name('update');
         });
 
-        Route::prefix('publishers')->controller(EditorasController::class)->name('publishers.')->group(function () {
+        Route::prefix('publishers')->controller(PublisherController::class)->name('publishers.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
@@ -120,7 +120,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/update', 'update')->name('update');
         });
 
-        Route::prefix('books')->controller(LivrosController::class)->name('books.')->group(function () {
+        Route::prefix('books')->controller(BookController::class)->name('books.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
@@ -129,7 +129,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{id}/update', 'update')->name('update');
         });
 
-        Route::prefix('collections')->controller(ColecoesController::class)->name('collections.')->group(function () {
+        Route::prefix('collections')->controller(CollectionController::class)->name('collections.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');

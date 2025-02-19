@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Correios;
 use App\Models\Endereco;
 use App\Models\ItemPedido;
-use App\Models\Livro;
+use App\Models\Book;
 use App\Models\Pedido;
 use App\Util;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class CartController extends Controller
         $this->middleware('VerifyCsfrToken');
 
         $req = $request->all();
-        $product = Livro::find(Crypt::decrypt($req['product_id']));
+        $product = Book::find(Crypt::decrypt($req['product_id']));
         
         Cart::add(
             $product->id,
@@ -56,7 +56,7 @@ class CartController extends Controller
     public function cartAdd ($rowId) {
         // não permite que a quantidade seja maior que o estabelecido
         $product = Cart::get($rowId);                           // acha o produto
-        $estoque = Livro::find($product->id)->qtd_estoque;      // descobre a quantidade no estoque
+        $estoque = Book::find($product->id)->qtd_estoque;      // descobre a quantidade no estoque
         $nova_qtd = min($product->qty + 1, min($estoque, Util::QTD_MAX_POR_CLIENTE));   // atualiza a quantidade no carrinho baseado no estoque e qtd max por cliente
 
         Cart::update($rowId, ['qty' => $nova_qtd]);

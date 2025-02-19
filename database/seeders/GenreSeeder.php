@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Genero;
+use App\Models\Genre;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,24 +15,59 @@ class GenreSeeder extends Seeder
      */
     public function run()
     {
-        Genero::create(['nome' => 'Ação',               'imagem' => 'no-image.webp']);
-        Genero::create(['nome' => 'Aventura',           'imagem' => 'gen_aventura.webp']);
-        Genero::create(['nome' => 'Fantasia',           'imagem' => 'gen_fantasia.webp']);
-        Genero::create(['nome' => 'Ficção Científica',  'imagem' => 'gen_ficcao-cientifica.webp']);
-        Genero::create(['nome' => 'Terror',             'imagem' => 'no-image.webp']);
-        Genero::create(['nome' => 'Romance',            'imagem' => 'no-image.webp']);
-        Genero::create(['nome' => 'Suspense',           'imagem' => 'no-image.webp']);
-        Genero::create(['nome' => 'Mistério',           'imagem' => 'gen_misterio.webp']);
-        Genero::create(['nome' => 'Comédia',            'imagem' => 'gen_comedia.webp']);
-        Genero::create(['nome' => 'Histórico',          'imagem' => 'gen_historico.webp']);
-        Genero::create(['nome' => 'Ciências',           'imagem' => 'gen_ciencias.webp']);
-        Genero::create(['nome' => 'Tecnologia',         'imagem' => 'gen_tecnologia.webp']);
+        $generos = [
+            [
+                'nome' => 'Ação',
+                'imagem' => 'no-image.webp'
+            ],
+            [
+                'nome' => 'Aventura',
+                'imagem' => 'gen_aventura.webp'
+            ],
+            [
+                'nome' => 'Fantasia',
+                'imagem' => 'gen_fantasia.webp'
+            ],
+            [
+                'nome' => 'Ficção Científica',
+                'imagem' => 'gen_ficcao-cientifica.webp'
+            ],
+            [
+                'nome' => 'Terror',
+                'imagem' => 'no-image.webp'
+            ],
+            [
+                'nome' => 'Romance',
+                'imagem' => 'no-image.webp'
+            ],
+            [
+                'nome' => 'Suspense',
+                'imagem' => 'no-image.webp'
+            ],
+            [
+                'nome' => 'Mistério',
+                'imagem' => 'gen_misterio.webp'
+            ],
+            [
+                'nome' => 'Comédia',
+                'imagem' => 'gen_comedia.webp'
+            ],
+            [
+                'nome' => 'Histórico',
+                'imagem' => 'gen_historico.webp'
+            ],
+            [
+                'nome' => 'Ciências',
+                'imagem' => 'gen_ciencias.webp'
+            ],
+            [
+                'nome' => 'Tecnologia',
+                'imagem' => 'gen_tecnologia.webp'
+            ]
+        ];
 
-        // Genero::create(['nome' => 'Infantil',           'imagem' => 'no-image.webp']);
-        // Genero::create(['nome' => 'Gastronomia',        'imagem' => 'no-image.webp']);
-        // Genero::create(['nome' => 'Arte',               'imagem' => 'no-image.webp']);
-        // Genero::create(['nome' => 'Biografia',          'imagem' => 'no-image.webp']);
-        // Genero::create(['nome' => 'Guia',               'imagem' => 'no-image.webp']);
-        // Genero::create(['nome' => 'Religião',           'imagem' => 'no-image.webp']);
+        foreach ($generos as $genero) {
+            Genre::create($genero);
+        }
     }
 }

@@ -13,7 +13,7 @@
             <tr>
                 <th>Título</th>
                 <th>ISBN</th>
-                <th>Editora</th>
+                <th>Publisher</th>
                 <th>Coleção</th>
                 <th class="col-2">Ações</th>
             </tr>

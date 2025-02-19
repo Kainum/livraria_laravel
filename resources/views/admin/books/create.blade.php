@@ -1,10 +1,10 @@
 @extends('layouts.admin_layout', [
     'model_title' => 'Livros',
-    'page_title' => 'Criar Livro',
+    'page_title' => 'Criar Book',
     'search_route' => 'admin.books.index',
     ])
 @section('content')
-    <h2>Novo Livro</h2>
+    <h2>Novo Book</h2>
 
     <form action="{{ route('admin.books.store') }}" method="post" enctype="multipart/form-data">
 
@@ -85,7 +85,7 @@
         <div class="form-group mb-3">
             <label for="colecao_id">Coleção:</label>
             <select name="colecao_id" id="colecao_id" class="form-select" required>
-                @foreach(\App\Models\Colecao::orderBy('nome')->get() as $colecao)
+                @foreach(\App\Models\Collection::orderBy('nome')->get() as $colecao)
                     <option value="{{ $colecao->id }}">{{ $colecao->nome }}</option>
                 @endforeach
             </select>
@@ -95,9 +95,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="editora_id">Editora:</label>
+            <label for="editora_id">Publisher:</label>
             <select name="editora_id" id="editora_id" class="form-select" required>
-                @foreach(\App\Models\Editora::orderBy('nome')->get() as $editora)
+                @foreach(\App\Models\Publisher::orderBy('nome')->get() as $editora)
                     <option value="{{ $editora->id }}">{{ $editora->nome }}</option>
                 @endforeach
             </select>

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Editora;
+use App\Models\Publisher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +18,7 @@ class PublisherSeeder extends Seeder
         $array = ['JBC', 'Panini', 'Rocco', 'Abril'];
 
         foreach ($array as $editora) {
-            Editora::create([
+            Publisher::create([
                 'nome' => $editora
             ]);
         }

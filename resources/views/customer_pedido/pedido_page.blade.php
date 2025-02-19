@@ -42,7 +42,7 @@
                 @foreach ($item_list as $item)
                 <tr>
                     <td><img class="img-fluid" src="{{ route('image.show', [
-                        'image_path'=> \App\Models\Livro::find($item->id)->imagem,
+                        'image_path'=> \App\Models\Book::find($item->id)->imagem,
                         'width'=>576,
                         'height'=>760,
                         ]) }}"></td>

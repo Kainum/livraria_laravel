@@ -1,9 +1,9 @@
 @extends('layouts.admin_layout', [
     'model_title' => 'Editoras',
-    'page_title' => 'Editar Editora',
+    'page_title' => 'Editar Publisher',
 ])
 @section('content')
-    <h2>Editando Editora {{ $item->nome }}</h2>
+    <h2>Editando Publisher {{ $item->nome }}</h2>
 
     <form action="{{ route('admin.publishers.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">
 

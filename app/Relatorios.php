@@ -3,7 +3,7 @@
 namespace App;
 
 use App\fpdf185\FPDF;
-use App\Models\Livro;
+use App\Models\Book;
 use App\Models\Pedido;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -13,9 +13,9 @@ class Relatorios
 
     public static function relQtdEstoque(FPDF $pdf, int $maxResults = 100, bool $allZero = false) {
         if ($allZero) {
-            $resultado = Livro::where('qtd_estoque', '=', 0)->orderBy('titulo')->get();
+            $resultado = Book::where('qtd_estoque', '=', 0)->orderBy('titulo')->get();
         } else {
-            $resultado = Livro::orderBy('qtd_estoque')->get();
+            $resultado = Book::orderBy('qtd_estoque')->get();
         }
 
         if ($maxResults > 0) {

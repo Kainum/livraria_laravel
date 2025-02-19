@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Livro;
+use App\Models\Book;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -75,7 +75,7 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
-            Livro::create($result);
+            Book::create($result);
         }
         // FIM SEED DRAGON BALL
 
@@ -131,7 +131,7 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
-            Livro::create($result);
+            Book::create($result);
         }
         // FIM SEED DR STONE
 
@@ -179,7 +179,7 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
-            Livro::create($result);
+            Book::create($result);
         }
         // FIM SEED SPY X FAMILY
 
@@ -230,7 +230,7 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
-            Livro::create($result);
+            Book::create($result);
         }
         // FIM SEED HARRY POTTER
     }

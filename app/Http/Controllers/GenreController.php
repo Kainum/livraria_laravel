@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GenreRequest;
-use App\Models\Genero;
+use App\Models\Genre;
 use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class GenerosController extends Controller
+class GenreController extends Controller
 {
 
     public function index (Request $request) {
@@ -16,9 +16,9 @@ class GenerosController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $item_list = Genero::orderBy('nome')->paginate($paginate_value);
+            $item_list = Genre::orderBy('nome')->paginate($paginate_value);
         else
-            $item_list = Genero::where('nome', 'like', "%$filtragem%")
+            $item_list = Genre::where('nome', 'like', "%$filtragem%")
                             ->orderBy('nome')
                             ->paginate($paginate_value)
                             ->setpath('generos?desc_filtro='.$filtragem);
@@ -38,13 +38,13 @@ class GenerosController extends Controller
             $new_item["imagem"] = Util::NO_IMAGE_TEXT;
         }
 
-        Genero::create($new_item);
+        Genre::create($new_item);
         return redirect()->route('admin.genres.index');
     }
 
     public function destroy($id) {
         try {
-            Genero::find(Crypt::decrypt($id))->delete();
+            Genre::find(Crypt::decrypt($id))->delete();
             $ret = array('status'=>200, 'msg'=>'null');
         } catch (\Illuminate\Database\QueryException $e) {
             $ret = array('status'=>500, 'msg'=>$e->getMessage());
@@ -55,13 +55,13 @@ class GenerosController extends Controller
     }
 
     public function edit(Request $request) {
-        $item = Genero::find(Crypt::decrypt($request->get('id')));
+        $item = Genre::find(Crypt::decrypt($request->get('id')));
         return view('admin.genres.edit', compact('item'));
     }
 
     public function update(GenreRequest $request, $id) {
         $updated_item = $request->all();
-        $item = Genero::find(Crypt::decrypt($id));
+        $item = Genre::find(Crypt::decrypt($id));
 
         if ($request->hasFile('file')) {
             $updated_item["imagem"] = Util::updateFile($request->file('file'), $item["imagem"]);

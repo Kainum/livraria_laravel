@@ -24,7 +24,7 @@
         <td class="fw-bold">{{ implode(', ', $generos) }}</td>
     </tr>
     <tr>
-        <td>Editora</td>
+        <td>Publisher</td>
         <td class="fw-bold">{{ $item->editora->nome }}</td>
     </tr>
 </table>

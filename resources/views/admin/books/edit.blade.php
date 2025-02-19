@@ -1,10 +1,10 @@
 @extends('layouts.admin_layout', [
     'model_title' => 'Livros',
-    'page_title' => 'Editar Livro',
+    'page_title' => 'Editar Book',
     'search_route' => 'admin.books.index',
 ])
 @section('content')
-    <h2>Editando Livro {{ $item->titulo }}</h2>
+    <h2>Editando Book {{ $item->titulo }}</h2>
 
     <form action="{{ route('admin.books.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
         enctype="multipart/form-data">
@@ -99,7 +99,7 @@
         <div class="form-group mb-3">
             <label for="colecao_id">Coleção:</label>
             <select name="colecao_id" id="colecao_id" class="form-select" required>
-                @foreach (\App\Models\Colecao::orderBy('nome')->get() as $colecao)
+                @foreach (\App\Models\Collection::orderBy('nome')->get() as $colecao)
                     <option value="{{ $colecao->id }}" {{ $colecao->id == $item->colecao_id ? 'selected' : '' }}>
                         {{ $colecao->nome }}</option>
                 @endforeach
@@ -110,9 +110,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="editora_id">Editora:</label>
+            <label for="editora_id">Publisher:</label>
             <select name="editora_id" id="editora_id" class="form-select" required>
-                @foreach (\App\Models\Editora::orderBy('nome')->get() as $editora)
+                @foreach (\App\Models\Publisher::orderBy('nome')->get() as $editora)
                     <option value="{{ $editora->id }}" {{ $editora->id == $item->editora_id ? 'selected' : '' }}>
                         {{ $editora->nome }}</option>
                 @endforeach

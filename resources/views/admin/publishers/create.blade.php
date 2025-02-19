@@ -1,9 +1,9 @@
 @extends('layouts.admin_layout', [
     'model_title' => 'Editoras',
-    'page_title' => 'Criar Editora',
+    'page_title' => 'Criar Publisher',
     ])
 @section('content')
-    <h2>Nova Editora</h2>
+    <h2>Nova Publisher</h2>
 
     <form action="{{ route('admin.publishers.store') }}" method="post" enctype="multipart/form-data">
 

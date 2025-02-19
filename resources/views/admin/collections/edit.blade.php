@@ -42,7 +42,7 @@
                 <div class="mb-3 d-flex align-items-center">
                     <div class="w-75">
                         <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
-                            @foreach (\App\Models\Genero::orderBy('nome')->pluck('nome', 'id')->toArray() as $id => $nome)
+                            @foreach (\App\Models\Genre::orderBy('nome')->pluck('nome', 'id')->toArray() as $id => $nome)
                                 <option value="{{ $id }}" {{ $gen->genero_id == $id ? 'selected' : '' }}>{{ $nome }}</option>
                             @endforeach
                         </select>
@@ -78,7 +78,7 @@
                 var newField = `<div class="mb-3 d-flex align-items-center">
                                     <div class="w-75">
                                         <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
-                                            @foreach (\App\Models\Genero::orderBy('nome')->pluck('nome', 'id')->toArray() as $id => $nome)
+                                            @foreach (\App\Models\Genre::orderBy('nome')->pluck('nome', 'id')->toArray() as $id => $nome)
                                                 <option value="{{ $id }}">{{ $nome }}</option>
                                             @endforeach
                                         </select>

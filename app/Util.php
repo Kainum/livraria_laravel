@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Models\Livro;
+use App\Models\Book;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,7 +47,7 @@ class Util
 
 
     public static function updateEstoqueProduto($idProduto, $qtd) {
-        $livro = Livro::find($idProduto);
+        $livro = Book::find($idProduto);
         $novo_estoque = $livro['qtd_estoque'] + $qtd;
         $livro->update(['qtd_estoque'=>$novo_estoque]);
     }

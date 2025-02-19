@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Correios;
 use App\Models\Endereco;
 use App\Models\ItemPedido;
-use App\Models\Livro;
+use App\Models\Book;
 use App\Models\Pedido;
 use App\Util;
 use Gloudemans\Shoppingcart\Facades\Cart;

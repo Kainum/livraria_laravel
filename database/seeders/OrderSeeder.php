@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Correios;
 use App\Models\Endereco;
 use App\Models\ItemPedido;
-use App\Models\Livro;
+use App\Models\Book;
 use App\Models\Pedido;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,19 +24,19 @@ class OrderSeeder extends Seeder
 
         $produtos = [
             [
-                'livro' =>Livro::find(1),
+                'livro' =>Book::find(1),
                 'qtd'   =>random_int(1, 4),
             ],
             [
-                'livro' =>Livro::find(3),
+                'livro' =>Book::find(3),
                 'qtd'   =>random_int(1, 4),
             ],
             [
-                'livro' =>Livro::find(7),
+                'livro' =>Book::find(7),
                 'qtd'   =>random_int(1, 4),
             ],
             [
-                'livro' =>Livro::find(10),
+                'livro' =>Book::find(10),
                 'qtd'   =>random_int(1, 4),
             ],
         ];
@@ -54,23 +54,23 @@ class OrderSeeder extends Seeder
 
         $produtos = [
             [
-                'livro' =>Livro::find(2),
+                'livro' =>Book::find(2),
                 'qtd'   =>random_int(1, 5),
             ],
             [
-                'livro' =>Livro::find(9),
+                'livro' =>Book::find(9),
                 'qtd'   =>random_int(2, 5),
             ],
             [
-                'livro' =>Livro::find(11),
+                'livro' =>Book::find(11),
                 'qtd'   =>random_int(1, 4),
             ],
             [
-                'livro' =>Livro::find(12),
+                'livro' =>Book::find(12),
                 'qtd'   =>random_int(2, 3),
             ],
             [
-                'livro' =>Livro::find(13),
+                'livro' =>Book::find(13),
                 'qtd'   =>random_int(1, 4),
             ],
         ];
@@ -82,19 +82,19 @@ class OrderSeeder extends Seeder
 
         $produtos = [
             [
-                'livro' =>Livro::find(9),
+                'livro' =>Book::find(9),
                 'qtd'   =>random_int(1, 4),
             ],
             [
-                'livro' =>Livro::find(3),
+                'livro' =>Book::find(3),
                 'qtd'   =>random_int(1, 7),
             ],
             [
-                'livro' =>Livro::find(2),
+                'livro' =>Book::find(2),
                 'qtd'   =>random_int(1, 6),
             ],
             [
-                'livro' =>Livro::find(15),
+                'livro' =>Book::find(15),
                 'qtd'   =>random_int(1, 7),
             ],
         ];
@@ -108,19 +108,19 @@ class OrderSeeder extends Seeder
 
         $produtos = [
             [
-                'livro' =>Livro::find(6),
+                'livro' =>Book::find(6),
                 'qtd'   =>random_int(1, 10),
             ],
             [
-                'livro' =>Livro::find(4),
+                'livro' =>Book::find(4),
                 'qtd'   =>random_int(2, 10),
             ],
             [
-                'livro' =>Livro::find(11),
+                'livro' =>Book::find(11),
                 'qtd'   =>random_int(3, 10),
             ],
             [
-                'livro' =>Livro::find(13),
+                'livro' =>Book::find(13),
                 'qtd'   =>random_int(1, 10),
             ],
         ];

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Livro extends Model
+class Book extends Model
 {
     use HasFactory;
 
@@ -25,10 +25,10 @@ class Livro extends Model
     ];
 
     public function editora() {
-        return $this->belongsTo(Editora::class);
+        return $this->belongsTo(Publisher::class, 'editora_id');
     }
 
     public function colecao() {
-        return $this->belongsTo(Colecao::class);
+        return $this->belongsTo(Collection::class, 'colecao_id');
     }
 }

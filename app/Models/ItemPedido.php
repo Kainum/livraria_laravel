@@ -23,6 +23,6 @@ class ItemPedido extends Model
     }
 
     public function produto() {
-        return $this->belongsTo(Livro::class);
+        return $this->belongsTo(Book::class);
     }
 }

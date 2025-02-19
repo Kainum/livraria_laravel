@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Colecao;
-use App\Models\Genero;
-use App\Models\Livro;
+use App\Models\Collection;
+use App\Models\Genre;
+use App\Models\Book;
 use App\Models\WishListItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ class ShopNavigationController extends Controller
 {
 
     public function home() {
-        $item_list = Colecao::all()->take(4);
+        $item_list = Collection::all()->take(4);
         
         return view('shop.home', compact('item_list'));
     }
@@ -24,9 +24,9 @@ class ShopNavigationController extends Controller
 
         $filtragem = $request->get('pesquisa');
         if ($filtragem == null)
-            $list = Livro::orderBy('titulo')->paginate($paginate_value);
+            $list = Book::orderBy('titulo')->paginate($paginate_value);
         else
-            $list = Livro::where('titulo', 'like', "%$filtragem%")
+            $list = Book::where('titulo', 'like', "%$filtragem%")
                             ->orderBy('titulo')
                             ->paginate($paginate_value)
                             ->setpath('search?pesquisa='.$filtragem);
@@ -35,20 +35,20 @@ class ShopNavigationController extends Controller
     }
 
     public function browse () {
-        $item_list = Genero::orderBy('nome')->get();
+        $item_list = Genre::orderBy('nome')->get();
 
         return view('shop.browse', compact('item_list'));
     }
 
     public function browse_collections ($id) {
-        $genre = Genero::with('colecoes')->find(Crypt::decrypt($id));
+        $genre = Genre::with('colecoes')->find(Crypt::decrypt($id));
         
         return view('shop.browse_collections', compact('genre'));
     }
 
     public function view_collection($id) {
         $paginate_value = 12;
-        $collection = Colecao::find(Crypt::decrypt($id));
+        $collection = Collection::find(Crypt::decrypt($id));
         $livros = $collection->livros()->paginate($paginate_value);
         
         return view('shop.search', compact('collection', 'livros'));
@@ -65,7 +65,7 @@ class ShopNavigationController extends Controller
                         ->first();
         }
         
-        $item = Livro::find($item_id);
+        $item = Book::find($item_id);
         return view('shop.book_page', compact('item', 'wishlist'));
     }
 }

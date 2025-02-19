@@ -214,7 +214,7 @@
                     </span>
                     <div class="multi-level collapse " role="list" id="submenu-generos" aria-expanded="false">
                         <ul class="flex-column nav">
-                            @foreach (App\Models\Genero::orderBy('nome')->get()->take(10) as $item)
+                            @foreach (App\Models\Genre::orderBy('nome')->get()->take(10) as $item)
                                 <li class="nav-item">
                                     <a class="nav-link"
                                         href="{{ route('browse.colecoes', ['id' => \Crypt::encrypt($item->id)]) }}">
@@ -279,7 +279,7 @@
                                                     <div class="col-3">
                                                         <img class="img-fluid"
                                                             src="{{ route('image.show', [
-                                                                'image_path' => \App\Models\Livro::find($cart_item->id)->imagem,
+                                                                'image_path' => \App\Models\Book::find($cart_item->id)->imagem,
                                                                 'width' => 576,
                                                                 'height' => 760,
                                                             ]) }}">

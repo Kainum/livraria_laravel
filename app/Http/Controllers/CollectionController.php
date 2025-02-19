@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionRequest;
-use App\Models\Colecao;
+use App\Models\Collection;
 use App\Models\GeneroColecao;
 use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class ColecoesController extends Controller
+class CollectionController extends Controller
 {
     public function index(Request $request)
     {
@@ -17,9 +17,9 @@ class ColecoesController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $item_list = Colecao::orderBy('nome')->paginate($paginate_value);
+            $item_list = Collection::orderBy('nome')->paginate($paginate_value);
         else
-            $item_list = Colecao::where('nome', 'like', "%$filtragem%")
+            $item_list = Collection::where('nome', 'like', "%$filtragem%")
                 ->orderBy('nome')
                 ->paginate($paginate_value)
                 ->setpath('colecoes?desc_filtro=' . $filtragem);
@@ -42,7 +42,7 @@ class ColecoesController extends Controller
             $new_item["imagem"] = Util::NO_IMAGE_TEXT;
         }
 
-        $new_item = Colecao::create($new_item);
+        $new_item = Collection::create($new_item);
 
         // vincula os generos na coleção
         if (isset($request->generos)) {
@@ -62,7 +62,7 @@ class ColecoesController extends Controller
     public function destroy($id)
     {
         try {
-            Colecao::find(Crypt::decrypt($id))->delete();
+            Collection::find(Crypt::decrypt($id))->delete();
             $ret = array('status' => 200, 'msg' => 'null');
         } catch (\Illuminate\Database\QueryException $e) {
             $ret = array('status' => 500, 'msg' => $e->getMessage());
@@ -74,14 +74,14 @@ class ColecoesController extends Controller
 
     public function edit(Request $request)
     {
-        $item = Colecao::find(Crypt::decrypt($request->get('id')));
+        $item = Collection::find(Crypt::decrypt($request->get('id')));
         return view('admin.collections.edit', compact('item'));
     }
 
     public function update(CollectionRequest $request, $id)
     {
         $updated_item = $request->all();
-        $item = Colecao::find(Crypt::decrypt($id));
+        $item = Collection::find(Crypt::decrypt($id));
 
         if ($request->hasFile('file')) {
             $updated_item["imagem"] = Util::updateFile($request->file('file'), $item["imagem"]);
