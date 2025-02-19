@@ -1,4 +1,4 @@
-@extends('layouts.default', [
+@extends('layouts.admin_layout', [
     'model_title' => 'Dashboard',
     'page_title' => 'Dashboard Admin',
     'search_route' => 'admin.books.index',

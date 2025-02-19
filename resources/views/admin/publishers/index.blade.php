@@ -1,4 +1,4 @@
-@extends('layouts.default', [
+@extends('layouts.admin_layout', [
     'model_title' => 'Editoras',
     'page_title' => 'Listar Editoras',
     'search_route' => 'admin.publishers.index',

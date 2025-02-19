@@ -1,4 +1,4 @@
-@extends('layouts.default', [
+@extends('layouts.admin_layout', [
     'model_title' => 'Coleções',
     'page_title' => 'Listar Coleções',
     'search_route' => 'admin.collections.index',

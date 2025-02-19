@@ -1,4 +1,4 @@
-@extends('master_admin', [
+@extends('layouts.admin_layout', [
     'model_title' => 'Coleções',
     'page_title' => 'Criar Coleção',
 ])

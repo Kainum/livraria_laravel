@@ -1,4 +1,4 @@
-@extends('layouts.default', [
+@extends('layouts.admin_layout', [
     'model_title' => 'Livros',
     'page_title' => 'Editar Livro',
     'search_route' => 'admin.books.index',

@@ -1,4 +1,4 @@
-@extends('layouts.default', [
+@extends('layouts.admin_layout', [
     'model_title' => 'Gêneros',
     'page_title' => 'Listar Gêneros',
     'search_route' => 'admin.genres.index',
