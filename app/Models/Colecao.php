@@ -20,6 +20,6 @@ class Colecao extends Model
     }
 
     public function generos() {
-        return $this->hasMany(GeneroColecao::class);
+        return $this->belongsToMany(Genero::class, 'collection_genre', 'colecao_id', 'genero_id');
     }
 }

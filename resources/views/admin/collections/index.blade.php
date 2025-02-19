@@ -21,8 +21,8 @@
                 <tr>
                     <td>{{ $item->nome }}</td>
                     <td>
-                        @foreach ($item->generos as $gen)
-                            <li>{{ $gen->genero->nome }}</li>
+                        @foreach ($item->generos as $genero)
+                            <li>{{ $genero->nome }}</li>
                         @endforeach
                     </td>
                     <x-admin-table-actions route="admin.collections" :$item />

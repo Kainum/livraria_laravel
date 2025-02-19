@@ -11,13 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
-class SearchController extends Controller
+class ShopNavigationController extends Controller
 {
 
-    public function homePage() {
-        $list = Colecao::find([1,2,3,4,5,6]); // ids das coleções em destaque na página home
+    public function home() {
+        $item_list = Colecao::all()->take(4);
         
-        return view('home', ['item_list'=>$list]);
+        return view('shop.home', compact('item_list'));
     }
 
     public function getLivros (Request $request) {
@@ -32,22 +32,27 @@ class SearchController extends Controller
                             ->paginate($paginate_value)
                             ->setpath('search?pesquisa='.$filtragem);
 
-        return view('search', ['item_list'=>$list]);
+        return view('shop.search', ['item_list'=>$list]);
     }
 
-    public function getGeneros () {
-        $paginate_value = 12;
-        $list = Genero::orderBy('nome')->paginate($paginate_value);
+    public function browse () {
+        $item_list = Genero::orderBy('nome')->get();
 
-        return view('browse', ['item_list'=>$list]);
+        return view('shop.browse', compact('item_list'));
     }
 
-    public function getColecoes ($id) {
-        $paginate_value = 12;
-        $genero = Genero::find(Crypt::decrypt($id));
-        $list = $genero->colecoes;
+    public function browse_collections ($id) {
+        $genre = Genero::with('colecoes')->find(Crypt::decrypt($id));
         
-        return view('browse_colecoes', ['item_list'=>$list]);
+        return view('shop.browse_collections', compact('genre'));
+    }
+
+    public function view_collection($id) {
+        $paginate_value = 12;
+        $collection = Colecao::find(Crypt::decrypt($id));
+        $livros = $collection->livros()->paginate($paginate_value);
+        
+        return view('shop.search', compact('collection', 'livros'));
     }
 
     public function viewProduto($id) {
@@ -61,17 +66,11 @@ class SearchController extends Controller
                         ->first();
         }
         
-
         $item = Livro::find($item_id);
-        return view('book_page', compact('item'))->with('wishlist', $wishlist);
+        return view('shop.book_page', compact('item', 'wishlist'));
     }
 
-    public function viewColecao($id) {
-        $paginate_value = 12;
-        $item_list = Colecao::find(Crypt::decrypt($id))->livros()->paginate($paginate_value);
-        
-        return view('search', ['item_list'=>$item_list]);
-    }
+    
 
 
 }

@@ -14,25 +14,25 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RelatoriosController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ShopNavigationController;
 use App\Http\Controllers\WishListController;
 
 
 // ROTAS PUBLICAS
-Route::controller(SearchController::class)->group(function () {
+Route::controller(ShopNavigationController::class)->group(function () {
     Route::redirect('/', '/home');
-    Route::get('/home', 'homePage')->name('home');
+    Route::get('/home', 'home')->name('home');
 
     Route::any('/search', 'getLivros')->name('search');
 
-    Route::get('/browse', 'getGeneros')->name('browse');
-    Route::get('/browse/{id}', 'getColecoes')->name('browse.colecoes');;
+    Route::get('/browse', 'browse')->name('browse');
+    Route::get('/browse/{id}', 'browse_collections')->name('browse.colecoes');;
 
     Route::redirect('/produto', '/search');
     Route::get('/produto/{id}', 'viewProduto')->name('produto.view');
 
     Route::redirect('/colecao', '/search');
-    Route::get('/colecao/{id}', 'viewColecao')->name('colecao.view');
+    Route::get('/colecao/{id}', 'view_collection')->name('colecao.view');
 });
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
@@ -96,7 +96,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('login', [AdminAuthController::class, 'login'])->name('login');
-    Route::get('logout', [AdminAuthController::class, 'logout'])->name('logout');
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
 
     Route::middleware('auth:admin')->group(function () {
         Route::redirect('/', '/admin/dashboard');

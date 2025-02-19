@@ -5,7 +5,7 @@
         <div class="text-dark fs-sm me-3 text-white">
             Olá, <span class="fw-bold">{{ Auth::guard('admin')->user()->name }}</span>
         </div>
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
 
             <button type="submit" class="btn btn-secondary">

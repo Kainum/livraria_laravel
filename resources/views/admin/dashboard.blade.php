@@ -1,7 +1,6 @@
 @extends('layouts.admin_layout', [
     'model_title' => 'Dashboard',
     'page_title' => 'Dashboard Admin',
-    'search_route' => 'admin.books.index',
 ])
 @section('content')
     <div class="text-white display-4">
@@ -51,4 +50,4 @@
         </div>
 
     </div>
-@stop
+@endsection

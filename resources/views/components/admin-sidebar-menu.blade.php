@@ -14,7 +14,7 @@
         {{-- MENU MOBILE --}}
         <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center p-4">
 
-            <form action="{{ route('logout') }}" method="post">
+            <form action="{{ route('admin.logout') }}" method="post">
                 <h2 class="h5 mb-3">Olá, {{ Auth::guard('admin')->user()->name }}</h2>
 
                 @csrf
