@@ -1,7 +1,6 @@
 <nav class="navbar navbar-dark navbar-theme-primary px-4 d-lg-none">
     <div class="d-flex align-items-center ms-auto">
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu">
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
@@ -19,10 +18,9 @@
                         <h2 class="h5 mb-3">Olá, {{ Auth::guard('web')->user()->name }}</h2>
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button type="submit"
-                                class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-                                <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <button type="submit" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
+                                <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                                     </path>
@@ -59,8 +57,7 @@
             @if (!Auth::guard('web')->check())
                 <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
                 <li class="nav-item">
-                    <a href="{{ route('login') }}">Entre</a> ou <a
-                        href="{{ route('register') }}">Cadastre-se</a>
+                    <a href="{{ route('login') }}">Entre</a> ou <a href="{{ route('register') }}">Cadastre-se</a>
                     </span>
                 </li>
             @endif
@@ -124,7 +121,7 @@
                         </svg>
                     </span>
                 </span>
-                <div class="multi-level collapse " role="list" id="submenu-generos" aria-expanded="false">
+                <div class="multi-level collapse" role="list" id="submenu-generos" aria-expanded="false">
                     <ul class="flex-column nav">
                         @foreach (App\Models\Genre::orderBy('nome')->get()->take(10) as $item)
                             <li class="nav-item">

@@ -24,14 +24,14 @@ class ShopNavigationController extends Controller
 
         $filtragem = $request->get('pesquisa');
         if ($filtragem == null)
-            $list = Book::orderBy('titulo')->paginate($paginate_value);
+            $livros = Book::orderBy('titulo')->paginate($paginate_value);
         else
-            $list = Book::where('titulo', 'like', "%$filtragem%")
+            $livros = Book::where('titulo', 'like', "%$filtragem%")
                             ->orderBy('titulo')
                             ->paginate($paginate_value)
                             ->setpath('search?pesquisa='.$filtragem);
 
-        return view('shop.search', ['item_list'=>$list]);
+        return view('shop.search', compact('livros'));
     }
 
     public function browse () {
@@ -51,7 +51,7 @@ class ShopNavigationController extends Controller
         $collection = Collection::find(Crypt::decrypt($id));
         $livros = $collection->livros()->paginate($paginate_value);
         
-        return view('shop.search', compact('collection', 'livros'));
+        return view('shop.collection_books', compact('collection', 'livros'));
     }
 
     public function viewProduto($id) {

@@ -4,6 +4,7 @@
 
         {{-- Search form --}}
         <form action="{{ route('search') }}" method="post" class="col-6">
+            @csrf
             <div class="input-group">
                 <input type="text" name="pesquisa" class="form-control w-75" placeholder="Pesquisa...">
                 <span class="input-group-btn">

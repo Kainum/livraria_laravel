@@ -1,6 +1,6 @@
 @extends('layouts.shop', [
-    'model_title' => "Resultados da pesquisa",
-    'page_title' => "Resultados da pesquisa",
+    'model_title' => "Coleção $collection->nome",
+    'page_title' => "Coleção $collection->nome",
 ])
 @section('content')
     <div class="row">
