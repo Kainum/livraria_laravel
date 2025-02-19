@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GeneroRequest;
+use App\Http\Requests\GenreRequest;
 use App\Models\Genero;
 use App\Util;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class GenerosController extends Controller
         return view('admin.genres.create');
     }
 
-    public function store (GeneroRequest $request) {
+    public function store (GenreRequest $request) {
         $new_item = $request->all();
         
         if ($request->hasFile('file')) {
@@ -59,7 +59,7 @@ class GenerosController extends Controller
         return view('admin.genres.edit', compact('item'));
     }
 
-    public function update(GeneroRequest $request, $id) {
+    public function update(GenreRequest $request, $id) {
         $updated_item = $request->all();
         $item = Genero::find(Crypt::decrypt($id));
 

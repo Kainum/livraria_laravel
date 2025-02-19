@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ColecaoRequest;
+use App\Http\Requests\CollectionRequest;
 use App\Models\Colecao;
 use App\Models\GeneroColecao;
 use App\Util;
@@ -31,7 +31,7 @@ class ColecoesController extends Controller
         return view('admin.collections.create');
     }
 
-    public function store(ColecaoRequest $request)
+    public function store(CollectionRequest $request)
     {
         $new_item = $request->all();
 
@@ -78,7 +78,7 @@ class ColecoesController extends Controller
         return view('admin.collections.edit', compact('item'));
     }
 
-    public function update(ColecaoRequest $request, $id)
+    public function update(CollectionRequest $request, $id)
     {
         $updated_item = $request->all();
         $item = Colecao::find(Crypt::decrypt($id));

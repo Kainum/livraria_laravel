@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LivroRequest;
+use App\Http\Requests\BookRequest;
 use App\Models\Livro;
 use App\Util;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class LivrosController extends Controller
         return view('admin.books.create');
     }
 
-    public function store (LivroRequest $request) {
+    public function store (BookRequest $request) {
         $new_item = $request->all();
         
         if ($request->hasFile('file')) {
@@ -59,7 +59,7 @@ class LivrosController extends Controller
         return view('admin.books.edit', compact('item'));
     }
 
-    public function update(LivroRequest $request, $id) {
+    public function update(BookRequest $request, $id) {
         $updated_item = $request->all();
         $item = Livro::find(Crypt::decrypt($id));
 

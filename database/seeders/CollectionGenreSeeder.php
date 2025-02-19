@@ -6,7 +6,7 @@ use App\Models\GeneroColecao;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ColecaoGeneroSeeder extends Seeder
+class CollectionGenreSeeder extends Seeder
 {
     /**
      * Run the database seeds.

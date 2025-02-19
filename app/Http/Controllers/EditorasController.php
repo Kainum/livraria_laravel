@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EditoraRequest;
+use App\Http\Requests\PublisherRequest;
 use App\Models\Editora;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -28,7 +28,7 @@ class EditorasController extends Controller
         return view('admin.publishers.create');
     }
 
-    public function store (EditoraRequest $request) {
+    public function store (PublisherRequest $request) {
         $new_item = $request->all();
         Editora::create($new_item);
 
@@ -52,7 +52,7 @@ class EditorasController extends Controller
         return view('admin.publishers.edit', compact('item'));
     }
 
-    public function update(EditoraRequest $request, $id) {
+    public function update(PublisherRequest $request, $id) {
         Editora::find(Crypt::decrypt($id))->update($request->all());
         return redirect()->route('admin.publishers.index');
     }

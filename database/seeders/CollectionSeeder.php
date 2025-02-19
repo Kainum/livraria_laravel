@@ -6,7 +6,7 @@ use App\Models\Colecao;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ColecaoSeeder extends Seeder
+class CollectionSeeder extends Seeder
 {
     /**
      * Run the database seeds.

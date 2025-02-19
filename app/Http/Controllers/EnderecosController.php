@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EnderecoRequest;
+use App\Http\Requests\AddressRequest;
 use App\Models\Endereco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class EnderecosController extends Controller
         return view('enderecos.create');
     }
 
-    public function store (EnderecoRequest $request) {
+    public function store (AddressRequest $request) {
         $new_item = $request->all();
         $new_item["usuario_id"] = Auth::guard('web')->user()->id;;
 
@@ -49,7 +49,7 @@ class EnderecosController extends Controller
         return view('enderecos.edit', compact('item'));
     }
 
-    public function update(EnderecoRequest $request, $id) {
+    public function update(AddressRequest $request, $id) {
         $updated_item = $request->all();
 
         Endereco::find(Crypt::decrypt($id))->update($updated_item);

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GeneroRequest extends FormRequest
+class CollectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class GeneroRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'  =>'required|max:50',
+            'nome'  =>'required|max:100',
             'file'  =>'image',
         ];
     }
