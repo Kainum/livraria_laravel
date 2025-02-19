@@ -117,7 +117,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/{id}/destroy','destroy')->name('destroy');
             Route::get('/edit', 'edit')->name('edit');
-            Route::put('/{id}/update', 'update')->name('update');
+            Route::post('/{id}/update', 'update')->name('update');
         });
 
         Route::prefix('livros')->controller(LivrosController::class)->name('livros.')->group(function () {
@@ -135,7 +135,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/{id}/destroy','destroy')->name('destroy');
             Route::get('/edit', 'edit')->name('edit');
-            Route::put('/{id}/update', 'update')->name('update');
+            Route::post('/{id}/update', 'update')->name('update');
         });
 
         Route::prefix('relatorios')->controller(RelatoriosController::class)->name('relatorios.')->group(function () {
