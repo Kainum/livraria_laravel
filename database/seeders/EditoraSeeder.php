@@ -15,8 +15,15 @@ class EditoraSeeder extends Seeder
      */
     public function run()
     {
-        Editora::create(['nome' => 'JBC']);
-        Editora::create(['nome' => 'Panini']);
-        Editora::create(['nome' => 'Rocco']);
+        $array = [
+            ['nome' => 'JBC'],
+            ['nome' => 'Panini'],
+            ['nome' => 'Rocco'],
+            ['nome' => 'Abril'],
+        ];
+
+        foreach ($array as $editora) {
+            Editora::create($editora);
+        }
     }
 }

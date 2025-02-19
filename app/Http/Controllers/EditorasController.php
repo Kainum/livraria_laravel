@@ -15,17 +15,17 @@ class EditorasController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $list = Editora::orderBy('nome')->paginate($paginate_value);
+            $item_list = Editora::orderBy('nome')->paginate($paginate_value);
         else
-            $list = Editora::where('nome', 'like', "%$filtragem%")
+            $item_list = Editora::where('nome', 'like', "%$filtragem%")
                             ->orderBy('nome')
                             ->paginate($paginate_value)
                             ->setpath('editoras?desc_filtro='.$filtragem);
-        return view('editoras.index', ['item_list'=>$list]);
+        return view('admin.publishers.index', compact('item_list'));
     }
 
     public function create () {
-        return view('editoras.create');
+        return view('admin.publishers.create');
     }
 
     public function store (EditoraRequest $request) {
@@ -49,7 +49,7 @@ class EditorasController extends Controller
 
     public function edit(Request $request) {
         $item = Editora::find(Crypt::decrypt($request->get('id')));
-        return view('editoras.edit', compact('item'));
+        return view('admin.publishers.edit', compact('item'));
     }
 
     public function update(EditoraRequest $request, $id) {
