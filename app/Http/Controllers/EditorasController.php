@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Crypt;
 class EditorasController extends Controller
 {
 
-    public function index (Request $filtro) {
+    public function index (Request $request) {
         $paginate_value = 10;
 
-        $filtragem = $filtro->get('desc_filtro');
+        $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
             $list = Editora::orderBy('nome')->paginate($paginate_value);
         else
-            $list = Editora::where('nome', 'like', '%'.$filtragem.'%')
+            $list = Editora::where('nome', 'like', "%$filtragem%")
                             ->orderBy('nome')
                             ->paginate($paginate_value)
                             ->setpath('editoras?desc_filtro='.$filtragem);

@@ -11,22 +11,22 @@ use Illuminate\Support\Facades\Crypt;
 class GenerosController extends Controller
 {
 
-    public function index (Request $filtro) {
+    public function index (Request $request) {
         $paginate_value = 10;
 
-        $filtragem = $filtro->get('desc_filtro');
+        $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $list = Genero::orderBy('nome')->paginate($paginate_value);
+            $item_list = Genero::orderBy('nome')->paginate($paginate_value);
         else
-            $list = Genero::where('nome', 'like', '%'.$filtragem.'%')
+            $item_list = Genero::where('nome', 'like', "%$filtragem%")
                             ->orderBy('nome')
                             ->paginate($paginate_value)
                             ->setpath('generos?desc_filtro='.$filtragem);
-        return view('generos.index', ['item_list'=>$list]);
+        return view('admin.genres.index', compact('item_list'));
     }
 
     public function create () {
-        return view('generos.create');
+        return view('admin.genres.create');
     }
 
     public function store (GeneroRequest $request) {
@@ -56,7 +56,7 @@ class GenerosController extends Controller
 
     public function edit(Request $request) {
         $item = Genero::find(Crypt::decrypt($request->get('id')));
-        return view('generos.edit', compact('item'));
+        return view('admin.genres.edit', compact('item'));
     }
 
     public function update(GeneroRequest $request, $id) {

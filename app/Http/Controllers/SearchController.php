@@ -20,14 +20,14 @@ class SearchController extends Controller
         return view('home', ['item_list'=>$list]);
     }
 
-    public function getLivros (Request $filtro) {
+    public function getLivros (Request $request) {
         $paginate_value = 12;
 
-        $filtragem = $filtro->get('pesquisa');
+        $filtragem = $request->get('pesquisa');
         if ($filtragem == null)
             $list = Livro::orderBy('titulo')->paginate($paginate_value);
         else
-            $list = Livro::where('titulo', 'like', '%'.$filtragem.'%')
+            $list = Livro::where('titulo', 'like', "%$filtragem%")
                             ->orderBy('titulo')
                             ->paginate($paginate_value)
                             ->setpath('search?pesquisa='.$filtragem);

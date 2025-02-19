@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Storage;
 
 class LivrosController extends Controller
 {
-    public function index (Request $filtro) {
+    public function index (Request $request) {
         $paginate_value = 10;
 
-        $filtragem = $filtro->get('desc_filtro');
+        $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
             $list = Livro::orderBy('titulo')->paginate($paginate_value);
         else
-            $list = Livro::where('titulo', 'like', '%'.$filtragem.'%')
+            $list = Livro::where('titulo', 'like', "%$filtragem%")
                             ->orderBy('titulo')
                             ->paginate($paginate_value)
                             ->setpath('livros?desc_filtro='.$filtragem);
