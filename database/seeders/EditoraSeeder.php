@@ -15,15 +15,12 @@ class EditoraSeeder extends Seeder
      */
     public function run()
     {
-        $array = [
-            ['nome' => 'JBC'],
-            ['nome' => 'Panini'],
-            ['nome' => 'Rocco'],
-            ['nome' => 'Abril'],
-        ];
+        $array = ['JBC', 'Panini', 'Rocco', 'Abril'];
 
         foreach ($array as $editora) {
-            Editora::create($editora);
+            Editora::create([
+                'nome' => $editora
+            ]);
         }
     }
 }

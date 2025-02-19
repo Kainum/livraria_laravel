@@ -15,20 +15,17 @@ class ColecaoGeneroSeeder extends Seeder
      */
     public function run()
     {
-        GeneroColecao::create(['colecao_id'=>1,'genero_id'=>1]);
-        GeneroColecao::create(['colecao_id'=>1,'genero_id'=>2]);
-        GeneroColecao::create(['colecao_id'=>1,'genero_id'=>9]);
-
-        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>2]);
-        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>4]);
-        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>9]);
-        GeneroColecao::create(['colecao_id'=>2,'genero_id'=>11]);
-
-        GeneroColecao::create(['colecao_id'=>3,'genero_id'=>1]);
-        GeneroColecao::create(['colecao_id'=>3,'genero_id'=>9]);
-
-        GeneroColecao::create(['colecao_id'=>4,'genero_id'=>2]);
-        GeneroColecao::create(['colecao_id'=>4,'genero_id'=>3]);
-        GeneroColecao::create(['colecao_id'=>4,'genero_id'=>8]);
+        foreach ([1, 2, 9] as $genero_id) {
+            GeneroColecao::create(['colecao_id' => 1, 'genero_id' => $genero_id]);
+        }
+        foreach ([2, 4, 9, 11] as $genero_id) {
+            GeneroColecao::create(['colecao_id' => 2, 'genero_id' => $genero_id]);
+        }
+        foreach ([1, 9] as $genero_id) {
+            GeneroColecao::create(['colecao_id' => 3, 'genero_id' => $genero_id]);
+        }
+        foreach ([2, 3, 8] as $genero_id) {
+            GeneroColecao::create(['colecao_id' => 4, 'genero_id' => $genero_id]);
+        }
     }
 }
