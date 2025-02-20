@@ -5,132 +5,143 @@ namespace App\Http\Controllers;
 use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
 use App\Models\Endereco;
-use App\Models\ItemPedido;
-use App\Models\Book;
 use App\Models\Pedido;
+use App\Services\Cart;
 use App\Util;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class PedidosController extends Controller
 {
-    public function confirmarPedido(Request $request) {
-        $this->middleware('VerifyCsfrToken');
+    public function confirmarPedido(Request $request)
+    {
 
-        if (Cart::count() == 0) { //se não tem nada então retorna
+        $cart = Cart::content();
+
+        if ($cart == null || $cart->items->count() == 0) { //se não tem nada então retorna
             return redirect()->route('cart.page')->with('message', 'Erro ao concluir pedido.');
         }
 
-
-        $item_list = Cart::content();
+        $item_list = $cart->items;
 
         // FRETE
-        $endereco = Endereco::find(Crypt::decrypt($request['endereco']));
+        $endereco = Endereco::find(Crypt::decrypt($request->endereco));
 
-        $request['cepDestino'] = str_replace("-", "", $endereco->cep);
+        // $request['cepDestino'] = str_replace("-", "", $endereco->cep);
 
-        $request['codServico'] = Correios::SERVICO_PAC;
-        $frete_pac = json_decode(app('App\Http\Controllers\CorreiosController')->calcular($request));
+        // $request['codServico'] = Correios::SERVICO_PAC;
+        // $frete_pac = json_decode(app('App\Http\Controllers\CorreiosController')->calcular($request));
 
-        $request['codServico'] = Correios::SERVICO_SEDEX;
-        $frete_sedex = json_decode(app('App\Http\Controllers\CorreiosController')->calcular($request));
+        // $request['codServico'] = Correios::SERVICO_SEDEX;
+        // $frete_sedex = json_decode(app('App\Http\Controllers\CorreiosController')->calcular($request));
 
-        $frete_options = [Correios::SERVICO_PAC=>$frete_pac, Correios::SERVICO_SEDEX=>$frete_sedex];
+        // $frete_options = [Correios::SERVICO_PAC=>$frete_pac, Correios::SERVICO_SEDEX=>$frete_sedex];
 
         // salva objetos na sessão
         $request->session()->put('endereco', $endereco);
-        $request->session()->put('frete_options', $frete_options);
+        // $request->session()->put('frete_options', $frete_options);
 
-        return view('customer_pedido.pedido_page', ['item_list'=>$item_list, 'endereco'=>$endereco]);
+        return view('customer_pedido.pedido_page', compact('item_list', 'endereco'));
     }
 
-    public function concluirPedido(Request $request) {
-        $this->middleware('VerifyCsfrToken');
+    public function concluirPedido(Request $request)
+    {
 
-        if (Cart::count() == 0) { //se não tem nada então retorna
+        $cart = Cart::content();
+
+        if ($cart == null || $cart->items->count() == 0) { //se não tem nada então retorna
             return redirect()->route('cart.page')->with('message', 'Erro ao concluir pedido.');
         }
 
-        $user_id = Auth::guard('web')->user()->id; //pega o id do user
         $end = session('endereco');
-        $endereco = $end->destinatario."<br>".
-                    $end->endereco.", ".$end->numero." - ".$end->bairro."<br>".
-                    $end->cep." - ".$end->cidade." - ".$end->uf."<br>".
-                    $end->complemento."<br>".
-                    $end->telefone;
-        
+        $endereco = $end->destinatario . "<br>" .
+            $end->endereco . ", " . $end->numero . " - " . $end->bairro . "<br>" .
+            $end->cep . " - " . $end->cidade . " - " . $end->uf . "<br>" .
+            $end->complemento . "<br>" .
+            $end->telefone;
 
-        $servicoFrete = $request['frete'];
 
+        // CORRIGIR DEPOIS
+        $servicoFrete = $request->frete;
         // formata a string de valor para poder guardar no banco
-        $vf =  session('frete_options')[$servicoFrete]->Valor;
-        $valor_frete = floatval(str_replace(',', '.', str_replace('.', '', $vf)));
+        // $vf =  session('frete_options')[$servicoFrete]->Valor;
+        // $valor_frete = floatval(str_replace(',', '.', str_replace('.', '', $vf)));
+        $valor_frete = 10.00;
 
-        $item_list =    Cart::content();
-
-
-        $data_pedido =  date('Y-m-d');
 
         // =============================
-        $new_pedido = Pedido::create([
-            'data_pedido'=>$data_pedido,
-            'endereco'=>$endereco,
-            'valorTotal'=>Cart::total(),
-            'servicoFrete'=>$servicoFrete,
-            'valorFrete'=>$valor_frete,
-            'status'=>OrderStatusEnum::PAID,
-            'comprador_id'=>$user_id,
-            'cpf'=> Auth::guard('web')->user()->cpf,
-        ]);
-        foreach($item_list as $item) {
-            ItemPedido::create([
-                'qtd'=>$item->qty,
-                'valor_unitario'=>$item->price,
-                'valor_item'=>($item->price * $item->qty),
-                'pedido_id'=>$new_pedido->id,
-                'produto_id'=>$item->id,
-            ]);
 
+        $cart->update([
+            'data_pedido' => date('Y-m-d'),
+            'endereco' => $endereco,
+            'status' => OrderStatusEnum::PAID,
+            'cpf' => Auth::guard('web')->user()->cpf,
+            'valorTotal' => 100.00, // CORRIGIR DEPOIS
+            'servicoFrete' => $servicoFrete,
+            'valorFrete' => $valor_frete,
+        ]);
+
+        foreach ($cart->items as $item) {
             // ATUALIZA O ESTOQUE DO PRODUTO - retira do estoque
-            Util::updateEstoqueProduto($item->id, -$item->qty);
+            Util::updateEstoqueProduto($item->produto_id, -$item->qtd);
         }
 
-        Cart::destroy();
+        // $new_pedido = Pedido::create([
+        //     // 'data_pedido'=>date('Y-m-d'),
+        //     // 'endereco'=>$endereco,
+        //     // 'valorTotal'=>Cart::total(),
+        //     // 'servicoFrete'=>$servicoFrete,
+        //     // 'valorFrete' => $valor_frete,
+        //     // 'status'=>OrderStatusEnum::PAID,
+        //     // 'comprador_id'=>$user_id,
+        //     // 'cpf'=> Auth::guard('web')->user()->cpf,
+        // ]);
+        // foreach ($item_list as $item) {
+        //     ItemPedido::create([
+        //         'qtd' => $item->qty,
+        //         'valor_unitario' => $item->price,
+        //         'valor_item' => ($item->price * $item->qty),
+        //         'pedido_id' => $new_pedido->id,
+        //         'produto_id' => $item->id,
+        //     ]);
+
+        //     // ATUALIZA O ESTOQUE DO PRODUTO - retira do estoque
+        //     Util::updateEstoqueProduto($item->id, -$item->qty);
+        // }
+
         return redirect()->route('meus_pedidos')->with('message', 'Pedido realizado.');
-
     }
 
-    public function meusPedidos() {
-        $user_id = Auth::guard('web')->user()->id;
-
-        $list = Pedido::where('comprador_id', '=', $user_id)
-            ->orderBy('data_pedido', 'DESC')
-            ->get();
-        return view('meuspedidos_page', ['item_list'=>$list]);
+    public function meusPedidos()
+    {
+        $item_list = Auth::guard('web')->user()->pedidos()->orderBy('data_pedido', 'DESC')->get();
+        return view('meuspedidos_page', compact('item_list'));
     }
 
-    public function cancelarPedido($id) {
+    public function cancelarPedido($id)
+    {
         try {
             $pedido = Pedido::find(Crypt::decrypt($id));
             $user_id = Auth::guard('web')->user()->id;
             if ($pedido->comprador_id == $user_id) {
-                $pedido->update(['status'=>OrderStatusEnum::CANCELED]);
+                $pedido->update([
+                    'status' => OrderStatusEnum::CANCELED
+                ]);
 
                 // ATUALIZA O ESTOQUE DOS PRODUTOS - devolve pro estoque
-                foreach($pedido->items as $item) {
+                foreach ($pedido->items as $item) {
                     Util::updateEstoqueProduto($item->produto->id, $item->qtd);
                 }
 
-                $ret = array('status'=>200, 'msg'=>'null');
+                $ret = array('status' => 200, 'msg' => 'null');
             } else {
-                $ret = array('status'=>401, 'msg'=>'Usuário não autorizado');
+                $ret = array('status' => 401, 'msg' => 'Usuário não autorizado');
             }
         } catch (\Illuminate\Database\QueryException $e) {
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
         } catch (\PDOException $e) {
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
         }
         return $ret;
     }

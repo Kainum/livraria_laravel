@@ -12,7 +12,6 @@ use App\Services\Cart;
 use App\Util;
 use Illuminate\Http\Request;
 
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
@@ -30,7 +29,6 @@ class CartController extends Controller
     }
 
     public function store (Request $request) {
-        $this->middleware('VerifyCsfrToken');
 
         $product = Book::find(Crypt::decrypt($request->product_id));
 
@@ -109,17 +107,14 @@ class CartController extends Controller
 
 
     public function selecionarEndereco() {
-        $this->middleware('VerifyCsfrToken');
 
-        if (Cart::count() == 0) { //se não tem nada então retorna
+        if (Cart::content()?->items->count() == 0) { //se não tem nada então retorna
             return redirect()->route('cart.page')->with('message', 'Erro ao concluir pedido.');
         }
 
-        $user_id = Auth::guard('web')->user()->id; //pega o id do user
+        $lista_enderecos = Auth::guard('web')->user()->enderecos; //pega os enderecos do user
 
-        $lista_enderecos =  Endereco::where('usuario_id', '=', $user_id)->get();
-
-        return view('customer_pedido.enderecos_page', ['lista_enderecos'=>$lista_enderecos]);
+        return view('customer_pedido.enderecos_page', compact('lista_enderecos'));
     }
 
     

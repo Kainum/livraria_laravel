@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('servicoFrete', 10)->nullable();
             $table->double('valorFrete')->nullable();
             $table->integer('status'); // ENUM
-            // $table->string('status', 3);
             $table->string('cpf', 14)->nullable();
             $table->timestamps();
             $table->softDeletes();
