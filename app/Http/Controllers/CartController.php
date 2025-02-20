@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
 use App\Models\Endereco;
 use App\Models\ItemPedido;
 use App\Models\Book;
 use App\Models\Pedido;
+use App\Services\Cart;
 use App\Util;
 use Illuminate\Http\Request;
 
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -19,58 +20,90 @@ class CartController extends Controller
 {
 
     public function cartPage() {
-        $list = Cart::content();
+        $cart = Cart::content();
+
         $qtd_total = 0;
-        foreach ($list as $key => $value) {
-            $qtd_total += $value->qty;
+        foreach ($cart?->items as $item) {
+            $qtd_total += $item->qtd;
         }
-        return view('cart_page', ['item_list'=>$list, 'qtd_total'=>$qtd_total]);
+        return view('cart_page', compact('cart', 'qtd_total'));
     }
 
     public function store (Request $request) {
         $this->middleware('VerifyCsfrToken');
 
-        $req = $request->all();
-        $product = Book::find(Crypt::decrypt($req['product_id']));
-        
-        Cart::add(
-            $product->id,
-            $product->titulo,
-            $req['quantity'],
-            $product->preco,
-            181,    // peso
-        );
+        $product = Book::find(Crypt::decrypt($request->product_id));
+
+        // acha o carrinho existente ou cria um novo
+        $order = Pedido::firstOrCreate([
+            'comprador_id' => Auth::guard('web')->user()->id,
+            'status' => OrderStatusEnum::CART,
+        ]);
+
+        // verifica se o item já existe no carrinho
+        // se existe, atualiza a quantidade
+        // se não existe, cria um novo
+        $item = $order->items()->where('produto_id', $product->id)->first();
+        if ($item) {
+            $item->update([
+                'qtd' => $request->quantity + $item->qtd,
+                'valor_item' => $product->preco * ($request->quantity + $item->qtd),
+            ]);
+        } else {
+            $order->items()->create([
+                'produto_id' => $product->id,
+                'qtd' => $request->quantity,
+                'valor_unitario' => $product->preco,
+                'valor_item' => $product->preco * $request->quantity,
+            ]);
+        }
 
         // controla a quantidade máxima de produtos do mesmo tipo
-        $cart_prod = Cart::search(function($cartItem) use ($product) {
-            return $cartItem->id === $product->id;
-        })->first();
+        // CONSERTAR ISSO MAIS TARDE
 
-        $qtd_ajustada = min($cart_prod->qty, min($product->qtd_estoque, Util::QTD_MAX_POR_CLIENTE));
-        Cart::update($cart_prod->rowId, ['qty' => $qtd_ajustada]);
+        // $cart_prod = Cart::search(function($cartItem) use ($product) {
+        //     return $cartItem->id === $product->id;
+        // })->first();
+
+        // $qtd_ajustada = min($cart_prod->qty, min($product->qtd_estoque, Util::QTD_MAX_POR_CLIENTE));
+        // Cart::update($cart_prod->rowId, ['qty' => $qtd_ajustada]);
 
         return redirect()->route('cart.page')->with('message', 'Item adicionado ao carrinho.');
     }
 
 
-    public function cartAdd ($rowId) {
+    public function cartAdd ($id) {
         // não permite que a quantidade seja maior que o estabelecido
-        $product = Cart::get($rowId);                           // acha o produto
-        $estoque = Book::find($product->id)->qtd_estoque;      // descobre a quantidade no estoque
-        $nova_qtd = min($product->qty + 1, min($estoque, Util::QTD_MAX_POR_CLIENTE));   // atualiza a quantidade no carrinho baseado no estoque e qtd max por cliente
+        $item = ItemPedido::find($id);
+        $qtd_estoque = $item->produto->qtd_estoque;
 
-        Cart::update($rowId, ['qty' => $nova_qtd]);
+        $item->update([
+            'qtd' => min($item->qtd + 1, min($qtd_estoque, Util::QTD_MAX_POR_CLIENTE)),
+        ]);
+
         return redirect()->route('cart.page');
     }
 
-    public function cartSub ($rowId) {
-        $atual_qtd = Cart::get($rowId)->qty;
-        Cart::update($rowId, ['qty' => $atual_qtd-1]);
+    public function cartSub ($id) {
+        $item = ItemPedido::find($id);
+
+        $new_qtd = $item->qtd - 1;
+
+        if ($new_qtd == 0) {
+            $item->delete();
+        } else {
+            $item->update([
+                'qtd' => $new_qtd,
+            ]);
+        }
+
         return redirect()->route('cart.page');
     }
 
-    public function cartExclude ($rowId) {
-        Cart::remove($rowId);
+    public function cartExclude ($id) {
+        $item = ItemPedido::find($id);
+        $item->delete();
+
         return redirect()->route('cart.page');
     }
 

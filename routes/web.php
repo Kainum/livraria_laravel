@@ -54,9 +54,9 @@ Route::middleware('auth')->group(function () {
         Route::controller(CartController::class)->group(function () {
             Route::get('/', 'cartPage')->name('page');
             Route::post('/', 'store')->name('store');
-            Route::get('/{rowId}/add', 'cartAdd')->name('add');
-            Route::get('/{rowId}/sub', 'cartSub')->name('sub');
-            Route::get('/{rowId}/exclude','cartExclude')->name('exclude');
+            Route::get('/add/{id}', 'cartAdd')->name('add');
+            Route::get('/sub/{id}', 'cartSub')->name('sub');
+            Route::get('/exclude/{id}','cartExclude')->name('exclude');
     
             Route::post('/endereco', 'selecionarEndereco')->name('endereco');
         });
