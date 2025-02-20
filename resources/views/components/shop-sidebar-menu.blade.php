@@ -1,3 +1,4 @@
+{{-- MOBILE --}}
 <nav class="navbar navbar-dark navbar-theme-primary px-4 d-lg-none">
     <div class="d-flex align-items-center ms-auto">
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
@@ -8,122 +9,98 @@
 
 {{-- SIDEBAR MENU --}}
 <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
-    <div class="sidebar-inner px-4 pt-3">
+    <div class="sidebar-inner">
         {{-- MENU MOBILE --}}
         <div
-            class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+            class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center p-4">
             @if (Auth::guard('web')->check())
-                <div class="d-flex align-items-center">
-                    <div class="d-block">
-                        <h2 class="h5 mb-3">Olá, {{ Auth::guard('web')->user()->name }}</h2>
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-                                <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                                    </path>
-                                </svg>
-                                Log Out
-                            </button>
-                        </form>
-                    </div>
+                <form action="{{ route('admin.logout') }}" method="post">
+                    <h2 class="h5 mb-3">Olá, {{ Auth::guard('admin')->user()->name }}</h2>
+
+                    @csrf
+
+                    <button type="submit" class="btn btn-secondary btn-sm">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i>
+                        Log Out
+                    </button>
+                </form>
+            @else
+                <div>
+                    fazer login
                 </div>
             @endif
-            <div class="collapse-close d-md-none">
-                <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
-                    aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
-                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
+            <div class="collapse-close d-md-none h2">
+                <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                    <i class="fa-regular fa-circle-xmark"></i>
                 </a>
             </div>
         </div>
+
         <!-- SIDEBAR MENU -->
-        <ul class="nav flex-column pt-3 pt-md-0">
+        <ul class="nav flex-column text-white p-4">
             <li class="nav-item">
                 <a href="{{ route('home') }}" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">
                         <img src="{{ url('volt/assets/img/brand/light.svg') }}" height="20" width="20"
                             alt="Volt Logo">
                     </span>
-                    <span class="mt-1 ms-1 sidebar-text">Livrarias Leia +</span>
+                    <span class="col">Livrarias Leia +</span>
                 </a>
             </li>
+
             @if (!Auth::guard('web')->check())
-                <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+                <hr>
                 <li class="nav-item">
                     <a href="{{ route('login') }}">Entre</a> ou <a href="{{ route('register') }}">Cadastre-se</a>
-                    </span>
                 </li>
             @endif
-            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
-            <li class="nav-item">
-                <a href="{{ route('home') }}" class="nav-link">
-                    <div class="col-10">
-                        <i class="col-3 fa-solid fa-house" style="color: lightgray"></i>
-                        <span class="col-9 sidebar-text">Home</span>
-                    </div>
+
+            <hr>
+            <li class="nav-item ">
+                <a href="{{ route('home') }}" class="nav-link d-flex align-items-center">
+                    <i class="fa-solid fa-house col-2"></i>
+                    <span class="col">Home</span>
                 </a>
             </li>
             @if (Auth::guard('web')->check())
-                <li class="nav-item">
-                    <a href="{{ route('profile.view') }}" class="nav-link">
-                        <div class="col-10">
-                            <i class="col-3 fa-solid fa-user" style="color: lightgray"></i>
-                            <span class="col-9 sidebar-text">Meu Perfil</span>
-                        </div>
+                <li class="nav-item ">
+                    <a href="{{ route('profile.view') }}" class="nav-link d-flex align-items-center">
+                        <i class="fa-solid fa-user col-2"></i>
+                        <span class="col">Meu Perfil</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('meus_pedidos') }}" class="nav-link">
-                        <div class="col-10">
-                            <i class="col-3 fa-solid fa-box" style="color: lightgray"></i>
-                            <span class="col-9 sidebar-text">Meus Pedidos</span>
-                        </div>
+                <li class="nav-item ">
+                    <a href="{{ route('meus_pedidos') }}" class="nav-link d-flex align-items-center">
+                        <i class="fa-solid fa-box col-2"></i>
+                        <span class="col">Meus Pedidos</span>
                     </a>
                 </li>
             @endif
-            <li class="nav-item">
-                <a href="{{ route('wishlist.index') }}" class="nav-link">
-                    <div class="col-10">
-                        <i class="col-3 fa-solid fa-heart" style="color: lightgray"></i>
-                        <span class="col-9 sidebar-text">Lista de Desejos</span>
-                    </div>
+
+            <li class="nav-item ">
+                <a href="{{ route('wishlist.index') }}" class="nav-link d-flex align-items-center">
+                    <i class="fa-solid fa-heart col-2"></i>
+                    <span class="col">Lista de Desejos</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('cart.page') }}" class="nav-link">
-                    <div class="col-10">
-                        <i class="col-3 fa-solid fa-cart-shopping" style="color: lightgray"></i>
-                        <span class="col-9 sidebar-text">Carrinho</span>
-                    </div>
+            <li class="nav-item ">
+                <a href="{{ route('cart.page') }}" class="nav-link d-flex align-items-center">
+                    <i class="fa-solid fa-cart-shopping col-2"></i>
+                    <span class="col">Carrinho</span>
                 </a>
             </li>
-            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+
+            <hr>
             <li class="nav-item">
-                <span class="nav-link collapsed d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" data-bs-target="#submenu-generos">
-                    <a href="{{ route('browse') }}" class="col-10">
-                        <i class="col-3 fa-solid fa-book-open" style="color: lightgray"></i>
-                        <span class="col-9 sidebar-text">Gêneros</span>
-                    </a>
-                    <span class="link-arrow">
-                        <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
+                <span class="nav-link collapsed d-flex align-items-center" data-bs-toggle="collapse"
+                    data-bs-target="#submenu-generos">
+                    <i class="fa-solid fa-folder-open col-2"></i>
+                    <span class="col">Gêneros</span>
+                    <i class="link-arrow text-center fa-solid fa-chevron-right col-2"></i>
                 </span>
                 <div class="multi-level collapse" role="list" id="submenu-generos" aria-expanded="false">
                     <ul class="flex-column nav">
-                        @foreach (App\Models\Genre::orderBy('nome')->get()->take(10) as $item)
+                        @foreach (App\Models\Genre::orderBy('nome')->take(5)->get() as $item)
                             <li class="nav-item">
                                 <a class="nav-link"
                                     href="{{ route('browse.colecoes', ['id' => \Crypt::encrypt($item->id)]) }}">

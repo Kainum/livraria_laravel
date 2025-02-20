@@ -1,8 +1,7 @@
 {{-- MOBILE --}}
 <nav class="navbar navbar-dark navbar-theme-primary px-4 d-lg-none">
     <div class="d-flex align-items-center ms-auto">
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu">
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
@@ -50,10 +49,11 @@
             <hr>
 
             <li class="nav-item">
-                <span class="nav-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-manutencoes">
+                <span class="nav-link collapsed d-flex align-items-center" data-bs-toggle="collapse"
+                    data-bs-target="#submenu-manutencoes">
                     <i class="fa-solid fa-folder-open col-2"></i>
                     <span class="col">Manutenções</span>
-                    <i class="link-arrow fa-solid fa-chevron-right col-2"></i>
+                    <i class="link-arrow text-center fa-solid fa-chevron-right col-2"></i>
                 </span>
                 <div class="multi-level collapse" role="list" id="submenu-manutencoes" aria-expanded="false">
                     <ul class="flex-column nav">
@@ -82,10 +82,11 @@
             </li>
 
             <li class="nav-item">
-                <span class="nav-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-relatorios">
+                <span class="nav-link collapsed d-flex align-items-center" data-bs-toggle="collapse"
+                    data-bs-target="#submenu-relatorios">
                     <i class="fa-solid fa-square-poll-horizontal col-2"></i>
                     <span class="col">Relatórios</span>
-                    <i class="link-arrow fa-solid fa-chevron-right col-2"></i>
+                    <i class="link-arrow text-center fa-solid fa-chevron-right col-2"></i>
                 </span>
 
                 <div class="multi-level collapse" role="list" id="submenu-relatorios" aria-expanded="false">
