@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\ProfileRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -29,9 +26,10 @@ class ProfileController extends Controller
         $updated_item = $request->all();
         unset($updated_item["password"]);
         
-        $user_id = Auth::guard('web')->user()->id;
+        // $user_id = Auth::guard('web')->user()->id;
 
-        User::find($user_id)->update($updated_item);
+        // User::find($user_id)->update($updated_item);
+        Auth::guard('web')->user()->update($updated_item);
         return redirect()->route('profile.view');
     }
 
@@ -40,11 +38,13 @@ class ProfileController extends Controller
     }
 
     public function updatePassword(PasswordRequest $request) {
-        $new_password = Hash::make($request->all()['new_password']);
-        // dd($new_password);
-        $user_id = Auth::guard('web')->user()->id;
+        $new_password = bcrypt($request->new_password);
+        // $user_id = Auth::guard('web')->user()->id;
 
-        User::find($user_id)->update(['password'=>$new_password]);
+        // User::find($user_id)->update(['password'=>$new_password]);
+        Auth::guard('web')->user()->update([
+            'password'=>$new_password
+        ]);
         return redirect()->route('profile.view');
     }
 }

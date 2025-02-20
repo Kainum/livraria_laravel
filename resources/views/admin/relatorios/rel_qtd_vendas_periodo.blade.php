@@ -1,7 +1,7 @@
 @extends('layouts.admin_layout', [
     'model_title' => 'Relatórios',
     'page_title' => 'Relatório Quantidade de Vendas por Período',
-    ])
+])
 @section('content')
     <h2>Relatório Quantidade de Vendas por Período</h2>
 
@@ -13,20 +13,20 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>'relatorios.vendas_periodo.gerar']) }}
+    <form action="{{ route('admin.relatorios.vendas_periodo.gerar') }}" method="post" class="w-50">
         @csrf
         <div class="form-group">
-            {{ Form::label('dataInicio', 'Período Inicial: ') }}
-            {{ Form::date('dataInicio', null, ['class'=>'form-control', 'required']) }}
+            <label for="dataInicio">Período Inicial:</label>
+            <input type="date" name="dataInicio" id="dataInicio" class="form-control" required>
         </div>
         <br>
         <div class="form-group">
-            {{ Form::label('dataFim', 'Período Final: ') }}
-            {{ Form::date('dataFim', date('Y-m-d'), ['class'=>'form-control', 'required']) }}
+            <label for="dataFim">Período Final:</label>
+            <input type="date" name="dataFim" id="dataFim" class="form-control" required value="{{ date('Y-m-d') }}">
         </div>
 
         <div class="form-group">
-            {{ Form::submit('Gerar', ['class'=>'btn btn-primary']) }}
+            <button type="submit" class="btn btn-primary">Gerar</button>
         </div>
-    {{ Form::close() }}
+    </form>
 @stop

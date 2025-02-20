@@ -1,6 +1,6 @@
 <!-- NAV TOP -->
 <nav class="navbar d-none d-lg-block">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
 
         {{-- Search form --}}
         <form action="{{ route('search') }}" method="post" class="col-6">
