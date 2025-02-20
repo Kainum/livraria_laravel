@@ -12,10 +12,10 @@
         @foreach ($item_list as $pedido)
             <div class="table-responsive mb-3">
                 @switch($pedido->status)
-                    @case(app\Models\Pedido::STATUS_ABERTO)
+                    @case(app\Enums\OrderStatusEnum::PAID)
                         <table class="table table-success table-bordered align-middle">
                         @break
-                    @case(app\Models\Pedido::STATUS_CANCELADO)
+                    @case(app\Enums\OrderStatusEnum::CANCELED)
                         <table class="table table-danger table-bordered align-middle">
                         @break
                     @default
@@ -35,10 +35,10 @@
                         <tr>
                             <td>{{ substr(print($pedido->endereco), 0, -1) }}</td>
                             @switch($pedido->status)
-                                @case(app\Models\Pedido::STATUS_ABERTO)
+                                @case(app\Enums\OrderStatusEnum::PAID)
                                     <td style="color: green">ABERTO</td>
                                     @break
-                                @case(app\Models\Pedido::STATUS_CANCELADO)
+                                @case(app\Enums\OrderStatusEnum::CANCELED)
                                     <td style="color: firebrick">CANCELADO</td>
                                     @break
                                 @default
@@ -49,10 +49,10 @@
                             <td>R${{ \App\Util::formataDinheiro($pedido->valorFrete) }}</td>
                             <td>
                                 @switch($pedido->status)
-                                    @case(app\Models\Pedido::STATUS_ABERTO)
+                                    @case(app\Enums\OrderStatusEnum::PAID)
                                         <a href="{{ route('pedido.cancelar',  ['id'=>\Crypt::encrypt($pedido->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Pedido</a>
                                         @break
-                                    @case(app\Models\Pedido::STATUS_CANCELADO)
+                                    @case(app\Enums\OrderStatusEnum::CANCELED)
                                         <button disabled class="btn btn-danger">Cancelar Pedido</button>
                                         @break
                                     @default

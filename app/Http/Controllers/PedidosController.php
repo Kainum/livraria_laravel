@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
 use App\Models\Endereco;
 use App\Models\ItemPedido;
@@ -79,7 +80,7 @@ class PedidosController extends Controller
             'valorTotal'=>Cart::total(),
             'servicoFrete'=>$servicoFrete,
             'valorFrete'=>$valor_frete,
-            'status'=>Pedido::STATUS_ABERTO,
+            'status'=>OrderStatusEnum::PAID,
             'comprador_id'=>$user_id,
             'cpf'=> Auth::guard('web')->user()->cpf,
         ]);
@@ -115,7 +116,7 @@ class PedidosController extends Controller
             $pedido = Pedido::find(Crypt::decrypt($id));
             $user_id = Auth::guard('web')->user()->id;
             if ($pedido->comprador_id == $user_id) {
-                $pedido->update(['status'=>Pedido::STATUS_CANCELADO]);
+                $pedido->update(['status'=>OrderStatusEnum::CANCELED]);
 
                 // ATUALIZA O ESTOQUE DOS PRODUTOS - devolve pro estoque
                 foreach($pedido->items as $item) {

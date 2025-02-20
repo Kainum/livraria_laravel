@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
 use App\Models\Endereco;
 use App\Models\ItemPedido;
@@ -154,7 +155,7 @@ class OrderSeeder extends Seeder
             'valorTotal'    =>$valorTotal,
             'servicoFrete'  =>Correios::SERVICO_PAC,
             'valorFrete'    =>10.00,
-            'status'        =>Pedido::STATUS_ABERTO,
+            'status'        =>OrderStatusEnum::PAID,
             'cpf'           =>$cliente->cpf,
             'comprador_id'  =>$cliente->id,
         ]);

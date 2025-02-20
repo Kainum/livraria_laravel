@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
     use HasFactory;
-
-    const STATUS_ABERTO     = '01';
-    const STATUS_CANCELADO  = '05';
 
     protected $table = "orders";
     protected $fillable = [
@@ -22,6 +20,10 @@ class Pedido extends Model
         'status',
         'cpf',
         'comprador_id',
+    ];
+
+    protected $casts = [
+        'status' => OrderStatusEnum::class,
     ];
 
     public function comprador() {
