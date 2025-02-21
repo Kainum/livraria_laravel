@@ -11,7 +11,7 @@
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
             <tr>
-                <th>Nome</th>
+                <th class="col-2">Nome</th>
                 <th>Gêneros</th>
                 <th class="col-2">Ações</th>
             </tr>
@@ -19,12 +19,11 @@
         <tbody>
             @foreach ($item_list as $item)
                 <tr>
+                    @php
+                        $genres = array_column($item->generos->toArray(), 'name');
+                    @endphp
                     <td>{{ $item->name }}</td>
-                    <td>
-                        @foreach ($item->generos as $genre)
-                            <li>{{ $genre->name }}</li>
-                        @endforeach
-                    </td>
+                    <td>{{ implode(', ', $genres) }}</td>
                     <x-admin-table-actions route="admin.collections" :$item />
                 </tr>
             @endforeach

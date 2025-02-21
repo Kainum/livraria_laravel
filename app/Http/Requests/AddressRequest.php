@@ -32,7 +32,7 @@ class AddressRequest extends FormRequest
             'uf'        =>'required|uf|size:2',
             'complemento'   =>'max:50',
             'destinatario'  =>'required|max:50',
-            'telefone'      =>'required|min:11|max:20',
+            'phone_number'      =>'required|min:11|max:20',
         ];
     }
 }

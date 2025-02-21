@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('cep', 9);
             $table->string('endereco', 200);
             $table->string('numero', 10);
@@ -24,7 +23,8 @@ return new class extends Migration
             $table->string('uf', 2);
             $table->string('complemento', 50)->nullable();
             $table->string('destinatario', 50);
-            $table->string('telefone', 20);
+            $table->string('phone_number', 20);
+            $table->timestamps();
 
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
         });

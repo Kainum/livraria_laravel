@@ -15,16 +15,17 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('titulo', 100);
-            $table->string('resumo', 1000);
+            $table->string('product_name', 100);
+            $table->string('synopsis', 1000);
             $table->string('isbn', 20);
-            $table->string('autor', 100);
+            $table->string('author', 100);
             $table->string('image')->nullable();
-            $table->date('data_lancamento');
-            $table->double('preco');
-            $table->integer('paginas')->unsigned();
-            $table->integer('qtd_estoque')->unsigned();
+            $table->date('release_date');
+            $table->double('price');
+            $table->integer('page_number')->unsigned();
+            $table->integer('qty_in_stock')->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreignId('publisher_id')->constrained('publishers');
 

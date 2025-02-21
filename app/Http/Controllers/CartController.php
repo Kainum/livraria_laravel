@@ -22,7 +22,7 @@ class CartController extends Controller
         $cart = Cart::content();
 
         $qtd_total = $cart?->items->sum(function ($q) {
-            return $q->pivot->qtd;
+            return $q->pivot->quantity;
         }) ?? 0;
         
         return view('cart_page', compact('cart', 'qtd_total'));
@@ -44,16 +44,16 @@ class CartController extends Controller
         $item = $order->items()->where('book_id', $product->id)->first();
         if ($item) {
             $item->pivot->update([
-                'qtd' => $request->quantity + $item->pivot->qtd,
-                'item_value' => $product->preco * ($request->quantity + $item->pivot->qtd),
+                'quantity' => $request->quantity + $item->pivot->quantity,
+                'item_value' => $product->price * ($request->quantity + $item->pivot->quantity),
             ]);
         } else {
             OrderProduct::create([
                 'order_id' => $order->id,
                 'book_id' => $product->id,
-                'qtd' => $request->quantity,
-                'unit_value' => $product->preco,
-                'item_value' => $product->preco * $request->quantity,
+                'quantity' => $request->quantity,
+                'unit_value' => $product->price,
+                'item_value' => $product->price * $request->quantity,
             ]);
         }
 
@@ -64,7 +64,7 @@ class CartController extends Controller
         //     return $cartItem->id === $product->id;
         // })->first();
 
-        // $qtd_ajustada = min($cart_prod->qty, min($product->qtd_estoque, Util::QTD_MAX_POR_CLIENTE));
+        // $qtd_ajustada = min($cart_prod->qty, min($product->qty_in_stock, Util::QTD_MAX_POR_CLIENTE));
         // Cart::update($cart_prod->rowId, ['qty' => $qtd_ajustada]);
 
         return redirect()->route('cart.page')->with('message', 'Item adicionado ao carrinho.');
@@ -74,10 +74,10 @@ class CartController extends Controller
     public function cartAdd ($id) {
         // não permite que a quantidade seja maior que o estabelecido
         $item = OrderProduct::find($id);
-        $qtd_estoque = $item->book->qtd_estoque;
+        $qty_in_stock = $item->book->qty_in_stock;
 
         $item->update([
-            'qtd' => min($item->qtd + 1, min($qtd_estoque, Util::QTD_MAX_POR_CLIENTE)),
+            'quantity' => min($item->quantity + 1, min($qty_in_stock, Util::QTD_MAX_POR_CLIENTE)),
         ]);
 
         return redirect()->route('cart.page');
@@ -86,13 +86,13 @@ class CartController extends Controller
     public function cartSub ($id) {
         $item = OrderProduct::find($id);
 
-        $new_qtd = $item->qtd - 1;
+        $new_qtd = $item->quantity - 1;
 
         if ($new_qtd == 0) {
             $item->delete();
         } else {
             $item->update([
-                'qtd' => $new_qtd,
+                'quantity' => $new_qtd,
             ]);
         }
 

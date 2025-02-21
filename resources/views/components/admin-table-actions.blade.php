@@ -1,4 +1,4 @@
-<td class="text-center">
+<td class="text-center py-0">
     @php
         $id = \Crypt::encrypt($item->id);
     @endphp

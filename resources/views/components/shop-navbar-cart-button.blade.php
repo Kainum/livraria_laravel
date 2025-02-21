@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-9">
                             <p class="font-small mt-1 mb-0 text-truncate bg-danger" style="max-width: 200px;">
-                                {{ $cart_item->titulo }}
+                                {{ $cart_item->product_name }}
                                 {{-- @if (strlen($cart_item->name) > 28)
                                     {{ substr($cart_item->name, 0, 25) . '...' }}
                                 @else

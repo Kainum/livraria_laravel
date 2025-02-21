@@ -25,7 +25,7 @@ class AddressSeeder extends Seeder
                 'uf'            =>'RS',
                 'complemento'   =>'Casa',
                 'destinatario'  =>'Luciano Elly dos Santos',
-                'telefone'      =>'(55) 99207-5062',
+                'phone_number'      =>'(55) 99207-5062',
                 'usuario_id'    =>'1',
             ],
             [
@@ -37,7 +37,7 @@ class AddressSeeder extends Seeder
                 'uf'            =>'RS',
                 'complemento'   =>'Campus 1',
                 'destinatario'  =>'Universidade de Passo Fundo',
-                'telefone'      =>'(54) 3316-8100',
+                'phone_number'      =>'(54) 3316-8100',
                 'usuario_id'    =>'1',
             ],
             [
@@ -49,7 +49,7 @@ class AddressSeeder extends Seeder
                 'uf'            =>'RS',
                 'complemento'   =>'Casa',
                 'destinatario'  =>'Luciano Elly dos Santos',
-                'telefone'      =>'(55) 99207-5062',
+                'phone_number'      =>'(55) 99207-5062',
                 'usuario_id'    =>'2',
             ],
             

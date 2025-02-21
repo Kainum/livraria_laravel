@@ -1,8 +1,8 @@
 @php
     $route = route('produto.view', ['id' => \Crypt::encrypt($item->id)]);
 
-    $color = $item->qtd_estoque > 0 ? 'success' : 'warning';
-    $icon = $item->qtd_estoque > 0 ? 'cart-shopping' : 'triangle-exclamation';
+    $color = $item->qty_in_stock > 0 ? 'success' : 'warning';
+    $icon = $item->qty_in_stock > 0 ? 'cart-shopping' : 'triangle-exclamation';
 @endphp
 
 <div class="col-6 col-sm-4 col-xl-3 mb-4 px-2">
@@ -13,12 +13,12 @@
     </a>
 
     <a href="{{ $route }}">
-        {{ $item->titulo }}
+        {{ $item->product_name }}
     </a>
 
     <a href="{{ $route }}">
         <div class="d-flex align-items-center justify-content-between">
-            <span>{{ \App\Services\Operations::money($item->preco) }}</span>
+            <span>{{ \App\Services\Operations::money($item->price) }}</span>
             <button class="btn btn-{{ $color }} col-4" type="submit">
                 <i class="fa-solid fa-{{ $icon }} text-white"></i>
             </button>

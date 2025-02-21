@@ -16,9 +16,9 @@
             <tbody>
                 @foreach ($result as $item)
                     <tr>
-                        <td>{{ $item->titulo }}</td>
+                        <td>{{ $item->product_name }}</td>
                         <td>{{ $item->isbn }}</td>
-                        <td>{{ $item->qtd_estoque }}</td>
+                        <td>{{ $item->qty_in_stock }}</td>
                     </tr>
                 @endforeach
             </tbody>

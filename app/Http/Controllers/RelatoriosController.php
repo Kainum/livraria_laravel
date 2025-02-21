@@ -21,9 +21,9 @@ class RelatoriosController extends Controller
         $allZero    = isset($request->allZero);
 
         if ($allZero) {
-            $result = Book::where('qtd_estoque', 0)->orderBy('titulo')->get();
+            $result = Book::where('qty_in_stock', 0)->orderBy('product_name')->get();
         } else {
-            $result = Book::orderBy('qtd_estoque')->get();
+            $result = Book::orderBy('qty_in_stock')->get();
         }
 
         if ($maxResults > 0) {
@@ -47,8 +47,8 @@ class RelatoriosController extends Controller
         $dataFim    = $request->dataFim;
 
 
-        $items = OrderProduct::select('book_id', 'qtd')->whereHas('pedido', function ($q) use ($dataInicio, $dataFim) {
-            $q->whereBetween('data_pedido', [$dataInicio, $dataFim])->whereNot('status', OrderStatusEnum::CART);
+        $items = OrderProduct::select('book_id', 'quantity')->whereHas('pedido', function ($q) use ($dataInicio, $dataFim) {
+            $q->whereBetween('order_date', [$dataInicio, $dataFim])->whereNot('status', OrderStatusEnum::CART);
         })->orderBy('book_id')->get();
 
         $result = [];
@@ -56,7 +56,7 @@ class RelatoriosController extends Controller
             if (!isset($result[$item->book_id])) {
                 $result[$item->book_id] = 0;
             }
-            $result[$item->book_id] = $result[$item->book_id] + $item->qtd;
+            $result[$item->book_id] = $result[$item->book_id] + $item->quantity;
         }
 
         return view('admin.relatorios.results.mais_vendidos', compact('result', 'dataInicio', 'dataFim'));

@@ -23,7 +23,7 @@
                     <tr>
                         <td>
                             <a href="{{ route('produto.view', ['id' => \Crypt::encrypt($item->livro->id)]) }}">
-                                {{ $item->livro->titulo }}
+                                {{ $item->livro->product_name }}
                             </a>
                         </td>
                         <td>

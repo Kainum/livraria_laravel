@@ -32,7 +32,7 @@ class Util
 
     public static function updateEstoqueProduto($idProduto, $qtd) {
         $livro = Book::find($idProduto);
-        $novo_estoque = $livro['qtd_estoque'] + $qtd;
-        $livro->update(['qtd_estoque'=>$novo_estoque]);
+        $novo_estoque = $livro['qty_in_stock'] + $qtd;
+        $livro->update(['qty_in_stock'=>$novo_estoque]);
     }
 }

@@ -16,10 +16,10 @@ class BookController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $item_list = Book::orderBy('titulo')->paginate($paginate_value);
+            $item_list = Book::orderBy('product_name')->paginate($paginate_value);
         else
-            $item_list = Book::where('titulo', 'like', "%$filtragem%")
-                            ->orderBy('titulo')
+            $item_list = Book::where('product_name', 'like', "%$filtragem%")
+                            ->orderBy('product_name')
                             ->paginate($paginate_value)
                             ->setpath('livros?desc_filtro='.$filtragem);
         return view('admin.books.index', compact('item_list'));

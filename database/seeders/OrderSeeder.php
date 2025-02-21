@@ -26,19 +26,19 @@ class OrderSeeder extends Seeder
         $produtos = [
             [
                 'livro' =>Book::find(1),
-                'qtd'   =>random_int(1, 4),
+                'quantity'   =>random_int(1, 4),
             ],
             [
                 'livro' =>Book::find(3),
-                'qtd'   =>random_int(1, 4),
+                'quantity'   =>random_int(1, 4),
             ],
             [
                 'livro' =>Book::find(7),
-                'qtd'   =>random_int(1, 4),
+                'quantity'   =>random_int(1, 4),
             ],
             [
                 'livro' =>Book::find(10),
-                'qtd'   =>random_int(1, 4),
+                'quantity'   =>random_int(1, 4),
             ],
         ];
 
@@ -56,23 +56,23 @@ class OrderSeeder extends Seeder
         $produtos = [
             [
                 'livro' =>Book::find(2),
-                'qtd'   =>random_int(1, 5),
+                'quantity'   =>random_int(1, 5),
             ],
             [
                 'livro' =>Book::find(9),
-                'qtd'   =>random_int(2, 5),
+                'quantity'   =>random_int(2, 5),
             ],
             [
                 'livro' =>Book::find(11),
-                'qtd'   =>random_int(1, 4),
+                'quantity'   =>random_int(1, 4),
             ],
             [
                 'livro' =>Book::find(12),
-                'qtd'   =>random_int(2, 3),
+                'quantity'   =>random_int(2, 3),
             ],
             [
                 'livro' =>Book::find(13),
-                'qtd'   =>random_int(1, 4),
+                'quantity'   =>random_int(1, 4),
             ],
         ];
 
@@ -84,19 +84,19 @@ class OrderSeeder extends Seeder
         $produtos = [
             [
                 'livro' =>Book::find(9),
-                'qtd'   =>random_int(1, 4),
+                'quantity'   =>random_int(1, 4),
             ],
             [
                 'livro' =>Book::find(3),
-                'qtd'   =>random_int(1, 7),
+                'quantity'   =>random_int(1, 7),
             ],
             [
                 'livro' =>Book::find(2),
-                'qtd'   =>random_int(1, 6),
+                'quantity'   =>random_int(1, 6),
             ],
             [
                 'livro' =>Book::find(15),
-                'qtd'   =>random_int(1, 7),
+                'quantity'   =>random_int(1, 7),
             ],
         ];
 
@@ -110,19 +110,19 @@ class OrderSeeder extends Seeder
         $produtos = [
             [
                 'livro' =>Book::find(6),
-                'qtd'   =>random_int(1, 10),
+                'quantity'   =>random_int(1, 10),
             ],
             [
                 'livro' =>Book::find(4),
-                'qtd'   =>random_int(2, 10),
+                'quantity'   =>random_int(2, 10),
             ],
             [
                 'livro' =>Book::find(11),
-                'qtd'   =>random_int(3, 10),
+                'quantity'   =>random_int(3, 10),
             ],
             [
                 'livro' =>Book::find(13),
-                'qtd'   =>random_int(1, 10),
+                'quantity'   =>random_int(1, 10),
             ],
         ];
 
@@ -139,20 +139,20 @@ class OrderSeeder extends Seeder
     }
 
     private function criar($produtos, $cliente, $end, $dataPedido) {
-        $valorTotal = 0;
+        $total_value = 0;
         foreach($produtos as $p) {
-            $valorTotal += $p["qtd"] * $p["livro"]->preco;
+            $total_value += $p["quantity"] * $p["livro"]->price;
         }
 
         $endereco = $end->destinatario."<br>".
                     $end->endereco.", ".$end->numero." - ".$end->bairro."<br>".
                     $end->cep." - ".$end->cidade." - ".$end->uf."<br>".
                     $end->complemento."<br>".
-                    $end->telefone;
+                    $end->phone_number;
         $pedido = Order::create([
-            'data_pedido'   =>$dataPedido,
+            'order_date'   =>$dataPedido,
             'endereco'      =>$endereco,
-            'valorTotal'    =>$valorTotal,
+            'total_value'    =>$total_value,
             'servicoFrete'  =>Correios::SERVICO_PAC,
             'valorFrete'    =>10.00,
             'status'        =>OrderStatusEnum::PAID,
@@ -162,9 +162,9 @@ class OrderSeeder extends Seeder
 
         foreach($produtos as $p) {
             OrderProduct::create([
-                'qtd'               =>$p["qtd"],
-                'unit_value'    =>$p["livro"]->preco,
-                'item_value'        =>$p["livro"]->preco * $p["qtd"],
+                'quantity'               =>$p["quantity"],
+                'unit_value'    =>$p["livro"]->price,
+                'item_value'        =>$p["livro"]->price * $p["quantity"],
                 'book_id'        =>$p["livro"]->id,
                 'order_id'         =>$pedido->id,
             ]);

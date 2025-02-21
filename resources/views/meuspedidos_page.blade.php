@@ -44,8 +44,8 @@
                                 @default
                                     <td></td>
                             @endswitch
-                            <td>{{ Carbon\Carbon::parse($pedido->data_pedido)->format('d/m/Y') }}</td>
-                            <td>{{ \App\Services\Operations::money($pedido->valorTotal) }}</td>
+                            <td>{{ Carbon\Carbon::parse($pedido->order_date)->format('d/m/Y') }}</td>
+                            <td>{{ \App\Services\Operations::money($pedido->total_value) }}</td>
                             <td>{{ \App\Services\Operations::money($pedido->valorFrete) }}</td>
                             <td>
                                 @switch($pedido->status)
@@ -74,8 +74,8 @@
                                     <tbody>
                                         @foreach ($pedido->items as $item)
                                             <tr>
-                                                <td>{{ $item->titulo }}</td>
-                                                <td>{{ $item->pivot->qtd }}</td>
+                                                <td>{{ $item->product_name }}</td>
+                                                <td>{{ $item->pivot->quantity }}</td>
                                                 <td>{{ \App\Services\Operations::money($item->pivot->unit_value) }}</td>
                                                 <td>{{ \App\Services\Operations::money($item->pivot->item_value) }}</td>
                                             </tr>

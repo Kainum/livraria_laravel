@@ -4,7 +4,7 @@
     'search_route' => 'admin.books.index',
 ])
 @section('content')
-    <h2>Editando Book {{ $item->titulo }}</h2>
+    <h2>Editando Book {{ $item->product_name }}</h2>
 
     <form action="{{ route('admin.books.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
         enctype="multipart/form-data">
@@ -12,10 +12,10 @@
         @csrf
 
         <div class="form-group mb-3">
-            <label for="titulo">Título:</label>
-            <input type="text" name="titulo" id="titulo" class="form-control" required maxlength="100"
-                value="{{ old('titulo', $item->titulo) }}">
-            @error('titulo')
+            <label for="product_name">Título:</label>
+            <input type="text" name="product_name" id="product_name" class="form-control" required maxlength="100"
+                value="{{ old('product_name', $item->product_name) }}">
+            @error('product_name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -30,10 +30,10 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="autor">Autor:</label>
-            <input type="text" name="autor" id="autor" class="form-control" required maxlength="100"
-                value="{{ old('autor', $item->autor) }}">
-            @error('autor')
+            <label for="author">Autor:</label>
+            <input type="text" name="author" id="author" class="form-control" required maxlength="100"
+                value="{{ old('author', $item->author) }}">
+            @error('author')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -53,45 +53,45 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="resumo">Resumo:</label>
-            <textarea name="resumo" id="resumo" class="form-control" required maxlength="1000">{{ old('resumo', $item->resumo) }}</textarea>
-            @error('resumo')
+            <label for="synopsis">Resumo:</label>
+            <textarea name="synopsis" id="synopsis" class="form-control" required maxlength="1000">{{ old('synopsis', $item->synopsis) }}</textarea>
+            @error('synopsis')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="data_lancamento">Data de Lançamento:</label>
-            <input type="date" name="data_lancamento" id="data_lancamento" class="form-control" required
-                value="{{ old('data_lancamento', $item->data_lancamento) }}">
-            @error('data_lancamento')
+            <label for="release_date">Data de Lançamento:</label>
+            <input type="date" name="release_date" id="release_date" class="form-control" required
+                value="{{ old('release_date', $item->release_date) }}">
+            @error('release_date')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="preco">Preço:</label>
-            <input type="number" name="preco" id="preco" class="form-control money2" required min="0"
-                step="0.01" value="{{ old('preco', $item->preco) }}">
-            @error('preco')
+            <label for="price">Preço:</label>
+            <input type="number" name="price" id="price" class="form-control money2" required min="0"
+                step="0.01" value="{{ old('price', $item->price) }}">
+            @error('price')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="paginas">Nº de Páginas:</label>
-            <input type="number" name="paginas" id="paginas" class="form-control" required min="1"
-                value="{{ old('paginas', $item->paginas) }}">
-            @error('paginas')
+            <label for="page_number">Nº de Páginas:</label>
+            <input type="number" name="page_number" id="page_number" class="form-control" required min="1"
+                value="{{ old('page_number', $item->page_number) }}">
+            @error('page_number')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="qtd_estoque">Estoque Atual:</label>
-            <input type="number" name="qtd_estoque" id="qtd_estoque" class="form-control" required min="0"
-                value="{{ old('qtd_estoque', $item->qtd_estoque) }}">
-            @error('qtd_estoque')
+            <label for="qty_in_stock">Estoque Atual:</label>
+            <input type="number" name="qty_in_stock" id="qty_in_stock" class="form-control" required min="0"
+                value="{{ old('qty_in_stock', $item->qty_in_stock) }}">
+            @error('qty_in_stock')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

@@ -58,9 +58,9 @@
                         <img class="img-fluid" width="576px" height="760px"
                         src="https://br.web.img3.acsta.net/medias/nmedia/18/93/64/37/20269376.jpg">
                     </td>
-                    <td>{{ $item->titulo }}</td>
+                    <td>{{ $item->product_name }}</td>
                     <td>{{ \App\Services\Operations::money($item->pivot->unit_value) }}</td>
-                    <td>{{ $item->pivot->qtd }}</td>
+                    <td>{{ $item->pivot->quantity }}</td>
                     <td>{{ \App\Services\Operations::money($item->pivot->item_value) }}</td>
                 </tr>
                 @endforeach

@@ -12,9 +12,9 @@ class Order extends Model
 
     protected $table = "orders";
     protected $fillable = [
-        'data_pedido',
+        'order_date',
         'endereco',
-        'valorTotal',
+        'total_value',
         'servicoFrete',
         'valorFrete',
         'status',
@@ -35,7 +35,7 @@ class Order extends Model
     {
         return $this->belongsToMany(Book::class, 'order_product')->using(OrderProduct::class)->withPivot([
             'id',
-            'qtd',
+            'quantity',
             'unit_value',
             'item_value',
         ]);

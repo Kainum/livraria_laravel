@@ -21,7 +21,7 @@
         <tbody>
             @foreach ($item_list as $item)
                 <tr>
-                    <td>{{ $item->titulo }}</td>
+                    <td>{{ $item->product_name }}</td>
                     <td>{{ $item->isbn }}</td>
                     <td>{{ $item->editora->name }}</td>
                     <td>{{ $item->colecao->name }}</td>

@@ -6,15 +6,15 @@
     </tr>
     <tr>
         <td>Autor</td>
-        <td class="fw-bold">{{ $item->autor }}</td>
+        <td class="fw-bold">{{ $item->author }}</td>
     </tr>
     <tr>
         <td>Data de Lançamento</td>
-        <td class="fw-bold">{{ Carbon\Carbon::parse($item->data_lancamento)->format('d/m/Y') }}</td>
+        <td class="fw-bold">{{ Carbon\Carbon::parse($item->release_date)->format('d/m/Y') }}</td>
     </tr>
     <tr>
         <td>Quantidade de Páginas</td>
-        <td class="fw-bold">{{ $item->paginas }}</td>
+        <td class="fw-bold">{{ $item->page_number }}</td>
     </tr>
     <tr>
         @php

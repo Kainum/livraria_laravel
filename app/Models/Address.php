@@ -19,7 +19,7 @@ class Address extends Model
         'uf',
         'complemento',
         'destinatario',
-        'telefone',
+        'phone_number',
         'usuario_id',
     ];
 

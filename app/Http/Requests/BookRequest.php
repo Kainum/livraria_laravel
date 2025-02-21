@@ -24,15 +24,15 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo'    =>'required|max:100',
-            'resumo'    =>'required|max:1000',
+            'product_name'    =>'required|max:100',
+            'synopsis'    =>'required|max:1000',
             'isbn'      =>'required|min:10|max:20',
-            'autor'     =>'required|max:100',
+            'author'     =>'required|max:100',
             'file'      =>'image',
-            'preco'     =>'required|min:0',
-            'paginas'   =>'required|min:1',
-            'data_lancamento'   =>'required|date',
-            'qtd_estoque'       =>'required|min:0',
+            'price'     =>'required|min:0',
+            'page_number'   =>'required|min:1',
+            'release_date'   =>'required|date',
+            'qty_in_stock'       =>'required|min:0',
             'publisher_id'        =>'required',
             'collection_id'        =>'required',
         ];

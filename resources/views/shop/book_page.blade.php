@@ -1,5 +1,5 @@
 @extends('layouts.shop', [
-    'page_title' => $item->titulo,
+    'page_title' => $item->product_name,
 ])
 @section('content')
     <div class="row">
@@ -26,13 +26,13 @@
         <div class="col-12 col-md-6 d-flex flex-column gap-3">
             {{-- INFO --}}
             <div>
-                <h2>{{ $item->titulo }}</h2>
-                <p>{{ $item->resumo }}</p>
+                <h2>{{ $item->product_name }}</h2>
+                <p>{{ $item->synopsis }}</p>
                 <a class="btn btn-secondary"
                     href="{{ route('colecao.view', ['id' => \Crypt::encrypt($item->colecao->id)]) }}">
                     Ver Coleção
                 </a>
-                <h4>{{ \App\Services\Operations::money($item->preco) }}</h4>
+                <h4>{{ \App\Services\Operations::money($item->price) }}</h4>
             </div>
 
             {{-- CARRINHO --}}
@@ -43,13 +43,13 @@
                     <input type="hidden" name="product_id" value="{{ \Crypt::encrypt($item->id) }}">
                 </div>
 
-                @if ($item->qtd_estoque > 0)
-                    @if ($item->qtd_estoque <= 20)
-                        <p class="text-danger">Restam {{ $item->qtd_estoque }} unidades</p>
+                @if ($item->qty_in_stock > 0)
+                    @if ($item->qty_in_stock <= 20)
+                        <p class="text-danger">Restam {{ $item->qty_in_stock }} unidades</p>
                     @endif
                     <div class="form-group">
                         <input type="number" name="quantity" id="quantity" min="1"
-                            max="{{ min(3, $item->qtd_estoque) }}" class="form-control" value="1">
+                            max="{{ min(3, $item->qty_in_stock) }}" class="form-control" value="1">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Adicionar ao Carrinho</button>

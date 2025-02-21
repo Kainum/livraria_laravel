@@ -59,7 +59,7 @@ class OrderController extends Controller
             $end->endereco . ", " . $end->numero . " - " . $end->bairro . "<br>" .
             $end->cep . " - " . $end->cidade . " - " . $end->uf . "<br>" .
             $end->complemento . "<br>" .
-            $end->telefone;
+            $end->phone_number;
 
 
         // CORRIGIR DEPOIS
@@ -73,18 +73,18 @@ class OrderController extends Controller
         // =============================
 
         $cart->update([
-            'data_pedido' => date('Y-m-d'),
+            'order_date' => date('Y-m-d'),
             'endereco' => $endereco,
             'status' => OrderStatusEnum::PAID,
             'cpf' => Auth::guard('web')->user()->cpf,
-            'valorTotal' => 100.00, // CORRIGIR DEPOIS
+            'total_value' => 100.00, // CORRIGIR DEPOIS
             'servicoFrete' => $servicoFrete,
             'valorFrete' => $valor_frete,
         ]);
 
         foreach ($cart->items as $item) {
             // ATUALIZA O ESTOQUE DO PRODUTO - retira do estoque
-            Util::updateEstoqueProduto($item->book_id, -$item->qtd);
+            Util::updateEstoqueProduto($item->book_id, -$item->quantity);
         }
 
         return redirect()->route('meus_pedidos')->with('message', 'Order realizado.');
@@ -92,7 +92,7 @@ class OrderController extends Controller
 
     public function meusPedidos()
     {
-        $item_list = Auth::guard('web')->user()->pedidos()->orderBy('data_pedido', 'DESC')->get();
+        $item_list = Auth::guard('web')->user()->pedidos()->orderBy('order_date', 'DESC')->get();
         return view('meuspedidos_page', compact('item_list'));
     }
 
@@ -108,7 +108,7 @@ class OrderController extends Controller
 
                 // ATUALIZA O ESTOQUE DOS PRODUTOS - devolve pro estoque
                 foreach ($pedido->items as $item) {
-                    Util::updateEstoqueProduto($item->id, $item->pivot->qtd);
+                    Util::updateEstoqueProduto($item->id, $item->pivot->quantity);
                 }
 
                 $ret = array('status' => 200, 'msg' => 'null');

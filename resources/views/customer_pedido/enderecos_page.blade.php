@@ -12,7 +12,7 @@
                     <span>{{ "$item->endereco, $item->numero" }}</span><br>
                     <span>{{ $item->bairro }}</span><br>
                     <span>{{ "$item->cidade, $item->uf, $item->cep" }}</span><br>
-                    <span>Telefone: {{ $item->telefone }}</span>
+                    <span>Telefone: {{ $item->phone_number }}</span>
                 </p>
 
                 <form action="{{ route('cart.confirmar') }}" method="post">

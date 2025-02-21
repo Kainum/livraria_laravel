@@ -24,10 +24,10 @@ class ShopNavigationController extends Controller
 
         $filtragem = $request->get('pesquisa');
         if ($filtragem == null)
-            $livros = Book::orderBy('titulo')->paginate($paginate_value);
+            $livros = Book::orderBy('product_name')->paginate($paginate_value);
         else
-            $livros = Book::where('titulo', 'like', "%$filtragem%")
-                            ->orderBy('titulo')
+            $livros = Book::where('product_name', 'like', "%$filtragem%")
+                            ->orderBy('product_name')
                             ->paginate($paginate_value)
                             ->setpath('search?pesquisa='.$filtragem);
 

@@ -9,7 +9,7 @@
                 ]) }}">
         </div>
         <div class="row col-lg-10 col-md-9 col-7">
-            <p>{{ $item->titulo }}</p>
+            <p>{{ $item->product_name }}</p>
             <p>{{ \App\Services\Operations::money($item->pivot->item_value) }}</p>
         </div>
     </div>
@@ -17,12 +17,12 @@
         <div class="col-md-12 col-7 row m-0 p-0 text-black align-items-center">
 
             <a class="btn btn-secondary col-3 text-center px-0 m-0" href="{{ route('cart.sub', ['id' => $item->pivot->id]) }}">
-                <i class="fa-solid fa-{{ $item->pivot->qtd > 1 ? 'minus' : 'trash-can' }}"></i>
+                <i class="fa-solid fa-{{ $item->pivot->quantity > 1 ? 'minus' : 'trash-can' }}"></i>
             </a>
 
-            <div class="col text-center m-0">{{ $item->pivot->qtd }}</div>
+            <div class="col text-center m-0">{{ $item->pivot->quantity }}</div>
 
-            @if ($item->pivot->qtd < min($item->qtd_estoque, \App\Util::QTD_MAX_POR_CLIENTE))
+            @if ($item->pivot->quantity < min($item->qty_in_stock, \App\Util::QTD_MAX_POR_CLIENTE))
                 <a class="btn btn-secondary col-3 text-center px-0 m-0" href="{{ route('cart.add', ['id' => $item->pivot->id]) }}">
                     <i class="fa-solid fa-plus"></i>
                 </a>

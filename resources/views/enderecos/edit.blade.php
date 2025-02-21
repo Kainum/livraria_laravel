@@ -47,8 +47,8 @@
             {{ Form::text('destinatario', $item->destinatario, ['class'=>'form-control', 'required', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
-            {{ Form::label('telefone', 'Telefone: ') }}
-            {{ Form::text('telefone', $item->telefone, ['class'=>'form-control phone_with_ddd', 'required', 'maxlength'=>20]) }}
+            {{ Form::label('phone_number', 'Telefone: ') }}
+            {{ Form::text('phone_number', $item->phone_number, ['class'=>'form-control phone_with_ddd', 'required', 'maxlength'=>20]) }}
         </div>
 
         <div class="form-group">

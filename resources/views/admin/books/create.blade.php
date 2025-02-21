@@ -11,9 +11,9 @@
         @csrf
 
         <div class="form-group mb-3">
-            <label for="titulo">Título:</label>
-            <input type="text" name="titulo" id="titulo" class="form-control" required maxlength="100">
-            @error('titulo')
+            <label for="product_name">Título:</label>
+            <input type="text" name="product_name" id="product_name" class="form-control" required maxlength="100">
+            @error('product_name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -27,9 +27,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="autor">Autor:</label>
-            <input type="text" name="autor" id="autor" class="form-control" required maxlength="100">
-            @error('autor')
+            <label for="author">Autor:</label>
+            <input type="text" name="author" id="author" class="form-control" required maxlength="100">
+            @error('author')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -43,41 +43,41 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="resumo">Resumo:</label>
-            <textarea name="resumo" id="resumo" class="form-control" required maxlength="1000"></textarea>
-            @error('resumo')
+            <label for="synopsis">Resumo:</label>
+            <textarea name="synopsis" id="synopsis" class="form-control" required maxlength="1000"></textarea>
+            @error('synopsis')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="data_lancamento">Data de Lançamento:</label>
-            <input type="date" name="data_lancamento" id="data_lancamento" class="form-control" required>
-            @error('data_lancamento')
+            <label for="release_date">Data de Lançamento:</label>
+            <input type="date" name="release_date" id="release_date" class="form-control" required>
+            @error('release_date')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="preco">Preço:</label>
-            <input type="number" name="preco" id="preco" class="form-control money2" required min="0" step="0.01">
-            @error('preco')
+            <label for="price">Preço:</label>
+            <input type="number" name="price" id="price" class="form-control money2" required min="0" step="0.01">
+            @error('price')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="paginas">Nº de Páginas:</label>
-            <input type="number" name="paginas" id="paginas" class="form-control" required min="1">
-            @error('paginas')
+            <label for="page_number">Nº de Páginas:</label>
+            <input type="number" name="page_number" id="page_number" class="form-control" required min="1">
+            @error('page_number')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         
         <div class="form-group mb-3">
-            <label for="qtd_estoque">Estoque Atual:</label>
-            <input type="number" name="qtd_estoque" id="qtd_estoque" class="form-control" required min="0">
-            @error('qtd_estoque')
+            <label for="qty_in_stock">Estoque Atual:</label>
+            <input type="number" name="qty_in_stock" id="qty_in_stock" class="form-control" required min="0">
+            @error('qty_in_stock')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

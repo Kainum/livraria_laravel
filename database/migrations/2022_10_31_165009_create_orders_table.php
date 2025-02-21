@@ -16,9 +16,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->date('data_pedido')->nullable();
+            $table->date('order_date')->nullable();
             $table->string('endereco', 1000)->nullable();
-            $table->double('valorTotal')->nullable();
+            $table->double('total_value')->nullable();
             $table->string('servicoFrete', 10)->nullable();
             $table->double('valorFrete')->nullable();
             $table->integer('status'); // ENUM

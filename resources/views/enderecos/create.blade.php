@@ -47,8 +47,8 @@
             {{ Form::text('destinatario', null, ['class'=>'form-control', 'required', 'maxlength'=>50]) }}
         </div>
         <div class="form-group">
-            {{ Form::label('telefone', 'Telefone: ') }}
-            {{ Form::text('telefone', null, ['class'=>'form-control phone_with_ddd', 'required', 'placeholder'=>'(00) 00000-0000', 'maxlength'=>20]) }}
+            {{ Form::label('phone_number', 'Telefone: ') }}
+            {{ Form::text('phone_number', null, ['class'=>'form-control phone_with_ddd', 'required', 'placeholder'=>'(00) 00000-0000', 'maxlength'=>20]) }}
         </div>
         
 
