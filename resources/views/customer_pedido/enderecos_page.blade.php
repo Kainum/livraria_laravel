@@ -22,12 +22,12 @@
                     <button type="submit" class="btn btn-primary">Escolher</button>
                 </form>
 
-                <a href="{{ route('enderecos.edit', ['id' => \Crypt::encrypt($item->id)]) }}"
+                <a href="{{ route('profile.addresses.edit', ['id' => \Crypt::encrypt($item->id)]) }}"
                     class="btn btn-success">Editar esse Endereço</a>
 
             </div>
         @endforeach
     </div>
 
-    <a href="{{ route('enderecos.create') }}" class="btn btn-info mt-3">Novo Endereço</a>
+    <a href="{{ route('profile.addresses.create') }}" class="btn btn-info mt-3">Novo Endereço</a>
 @stop

@@ -87,7 +87,7 @@ class OrderController extends Controller
             Util::updateEstoqueProduto($item->book_id, -$item->quantity);
         }
 
-        return redirect()->route('meus_pedidos')->with('message', 'Order realizado.');
+        return redirect()->route('profile.orders.index')->with('message', 'Order realizado.');
     }
 
     public function meusPedidos()

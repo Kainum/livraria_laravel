@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
-    public function index (Request $request) {
+    public function index(Request $request)
+    {
         $paginate_value = 10;
 
         $filtragem = $request->get('desc_filtro');
@@ -19,47 +20,39 @@ class BookController extends Controller
             $item_list = Book::orderBy('product_name')->paginate($paginate_value);
         else
             $item_list = Book::where('product_name', 'like', "%$filtragem%")
-                            ->orderBy('product_name')
-                            ->paginate($paginate_value)
-                            ->setpath('livros?desc_filtro='.$filtragem);
+                ->orderBy('product_name')
+                ->paginate($paginate_value)
+                ->setpath('livros?desc_filtro=' . $filtragem);
         return view('admin.books.index', compact('item_list'));
     }
 
-    public function create () {
+    public function create()
+    {
         return view('admin.books.create');
     }
 
-    public function store (BookRequest $request) {
+    public function store(BookRequest $request)
+    {
         $new_item = $request->all();
-        
+
         if ($request->hasFile('file')) {
             $new_item["image"] = Util::storeFile($request->file('file'));
         } else {
             $new_item["image"] = Util::NO_IMAGE_TEXT;
         }
-        
+
         Book::create($new_item);
         return redirect()->route('admin.books.index');
     }
 
-    public function destroy($id) {
-        try {
-            Book::find(Crypt::decrypt($id))->delete();
-            $ret = array('status'=>200, 'msg'=>'null');
-        } catch (\Illuminate\Database\QueryException $e) {
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        } catch (\PDOException $e) {
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        }
-        return $ret;
-    }
-
-    public function edit(Request $request) {
-        $item = Book::find(Crypt::decrypt($request->get('id')));
+    public function edit($id)
+    {
+        $item = Book::find(Crypt::decrypt($id));
         return view('admin.books.edit', compact('item'));
     }
 
-    public function update(BookRequest $request, $id) {
+    public function update(BookRequest $request, $id)
+    {
         $updated_item = $request->all();
         $item = Book::find(Crypt::decrypt($id));
 
@@ -69,5 +62,18 @@ class BookController extends Controller
 
         $item->update($updated_item);
         return redirect()->route('admin.books.index');
+    }
+
+    public function destroy($id)
+    {
+        try {
+            Book::find(Crypt::decrypt($id))->delete();
+            $ret = array('status' => 200, 'msg' => 'null');
+        } catch (\Illuminate\Database\QueryException $e) {
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
+        } catch (\PDOException $e) {
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
+        }
+        return $ret;
     }
 }

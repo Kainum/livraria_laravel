@@ -33,13 +33,13 @@
                         <a class="dropdown-item d-flex" href="{{ route('profile.view') }}">
                             <i class="fa-regular fa-circle-user fs-5 me-2"></i>Meu perfil
                         </a>
-                        <a class="dropdown-item d-flex" href="{{ route('meus_pedidos') }}">
+                        <a class="dropdown-item d-flex" href="{{ route('profile.orders.index') }}">
                             <i class="fa-regular fa-circle-user fs-5 me-2"></i>Meus pedidos
                         </a>
-                        <a class="dropdown-item d-flex" href="{{ route('wishlist.index') }}">
+                        <a class="dropdown-item d-flex" href="{{ route('profile.wishlist.index') }}">
                             <i class="fa-regular fa-circle-user fs-5 me-2"></i>Lista de desejos
                         </a>
-                        <a class="dropdown-item d-flex" href="{{ route('enderecos.index') }}">
+                        <a class="dropdown-item d-flex" href="{{ route('profile.addresses.index') }}">
                             <i class="fa-regular fa-circle-user fs-5 me-2"></i>Meus endereços
                         </a>
                     </div>

@@ -9,13 +9,13 @@
                 src="https://m.media-amazon.com/images/I/71ySKqK3SRL._AC_UF894,1000_QL80_.jpg">
 
             @if (is_null($wishlist))
-                <form action="{{ route('wishlist.add', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">
+                <form action="{{ route('profile.wishlist.add', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-danger">Adicionar à Lista de Desejos</button>
                 </form>
             @else
                 <div class="form-group">
-                    <a href="{{ route('wishlist.remove', ['id' => \Crypt::encrypt($wishlist->id)]) }}"
+                    <a href="{{ route('profile.wishlist.remove', ['id' => \Crypt::encrypt($wishlist->id)]) }}"
                         class="btn btn-danger">Rem Lista de Desejos</a>
                 </div>
             @endif

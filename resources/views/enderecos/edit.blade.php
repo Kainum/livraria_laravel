@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>["enderecos.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
+    {{ Form::open(['route'=>["profile.addresses.update", 'id'=>\Crypt::encrypt($item->id)],'method'=>'put']) }}
         <div class="form-group">
             {{ Form::label('cep', 'CEP: ') }}
             {{ Form::text('cep', $item->cep, ['class'=>'form-control cep', 'required', 'placeholder'=>'00000-000', 'maxlength'=>9]) }}

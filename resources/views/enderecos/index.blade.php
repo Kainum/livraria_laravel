@@ -19,8 +19,8 @@
                         <p>{{ ($item->cidade.", ".$item->uf." - ".$item->cep) }}</p>
                     </td>
                     <td>
-                        <a href="{{ route('enderecos.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar</a>
-                        <a href="{{ route('enderecos.destroy',  ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-danger delete-confirm">Remover</a>
+                        <a href="{{ route('profile.addresses.edit',     ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-success">Editar</a>
+                        <a href="{{ route('profile.addresses.destroy',  ['id'=>\Crypt::encrypt($item->id)]) }}" class="btn btn-danger delete-confirm">Remover</a>
                     </td>
                 </tr>
                 @endforeach
@@ -30,7 +30,7 @@
         <p>Você não possui endereços cadastrados</p>
     @endif
 
-    <a href="{{ route('enderecos.create', []) }}" class="btn btn-info">Novo Endereço</a>
+    <a href="{{ route('profile.addresses.create', []) }}" class="btn btn-info">Novo Endereço</a>
 @stop
 
 {{-- @section('js')

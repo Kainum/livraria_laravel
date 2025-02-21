@@ -44,20 +44,14 @@ Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.f
 // ROTAS CLIENTE
 Route::middleware('auth')->group(function () {
 
-    Route::prefix('wishlist')->controller(WishListController::class)->name('wishlist.')->group(function () {
-        Route::get('/', 'view')->name('index');
-        Route::post('/add/{id}', 'addWishList')->name('add');
-        Route::get('/rem/{id}', 'removeWishList')->name('remove');
-    });
-
     Route::prefix('carrinho')->name('cart.')->group(function () {
         Route::controller(CartController::class)->group(function () {
             Route::get('/', 'cartPage')->name('page');
             Route::post('/', 'store')->name('store');
             Route::get('/add/{id}', 'cartAdd')->name('add');
             Route::get('/sub/{id}', 'cartSub')->name('sub');
-            Route::get('/exclude/{id}','cartExclude')->name('exclude');
-    
+            Route::get('/exclude/{id}', 'cartExclude')->name('exclude');
+
             Route::post('/endereco', 'selecionarEndereco')->name('endereco');
         });
 
@@ -67,27 +61,37 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::prefix('profile')->group(function () {
-        Route::controller(ProfileController::class)->name('profile.')->group(function () {
+    Route::prefix('my-profile')->name('profile.')->group(function () {
+
+        Route::controller(ProfileController::class)->group(function () {
             Route::get('/', 'view')->name('view');
             Route::get('/edit', 'edit')->name('edit');
             Route::put('/update', 'update')->name('update');
-    
+
             Route::get('/password/edit', 'editPassword')->name('password.edit');
             Route::put('/password/update', 'updatePassword')->name('password.update');
         });
 
-        Route::prefix('enderecos')->controller(AddressController::class)->name('enderecos.')->group(function () {
+        Route::prefix('wishlist')->controller(WishListController::class)->name('wishlist.')->group(function () {
+            Route::get('/', 'view')->name('index');
+            Route::post('/add/{id}', 'addWishList')->name('add');
+            Route::get('/rem/{id}', 'removeWishList')->name('remove');
+        });
+
+        Route::prefix('my-addresses')->controller(AddressController::class)->name('addresses.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::get('/{id}/destroy', 'destroy')->name('destroy');
             Route::get('/edit', 'edit')->name('edit');
-            Route::put('/{id}/update', 'update')->name('update');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::get('/destroy/{id}', 'destroy')->name('destroy');
+        });
+        
+        Route::prefix('my-orders')->controller(OrderController::class)->name('orders.')->group(function () {
+            Route::get('/', 'meusPedidos')->name('index');
+            Route::get('/cancelar/{id}', 'cancelarPedido')->name('cancel');
         });
 
-        Route::get('/meus_pedidos', [OrderController::class, 'meusPedidos'])->name('meus_pedidos');
-        Route::get('/meus_pedidos/{id}/cancelar', [OrderController::class,  'cancelarPedido'])->name('pedido.cancelar');
     });
 });
 // FIM ROTAS CLIENTE
@@ -106,36 +110,36 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::get('/{id}/destroy','destroy')->name('destroy');
-            Route::get('/edit', 'edit')->name('edit');
-            Route::post('/{id}/update', 'update')->name('update');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/destroy/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('publishers')->controller(PublisherController::class)->name('publishers.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::get('/{id}/destroy','destroy')->name('destroy');
-            Route::get('/edit', 'edit')->name('edit');
-            Route::post('/{id}/update', 'update')->name('update');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/destroy/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('books')->controller(BookController::class)->name('books.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::get('/{id}/destroy','destroy')->name('destroy');
-            Route::get('/edit', 'edit')->name('edit');
-            Route::post('/{id}/update', 'update')->name('update');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/destroy/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('collections')->controller(CollectionController::class)->name('collections.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::get('/{id}/destroy','destroy')->name('destroy');
-            Route::get('/edit', 'edit')->name('edit');
-            Route::post('/{id}/update', 'update')->name('update');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
+            Route::get('/destroy/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('relatorios')->controller(RelatoriosController::class)->name('relatorios.')->group(function () {

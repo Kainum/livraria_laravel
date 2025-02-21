@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    {{ Form::open(['route'=>'enderecos.store']) }}
+    {{ Form::open(['route'=>'profile.addresses.store']) }}
         <div class="form-group">
             {{ Form::label('cep', 'CEP: ') }}
             {{ Form::text('cep', null, ['class'=>'form-control cep', 'required', 'placeholder'=>'00000-000', 'maxlength'=>9]) }}

@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="{{ route('meus_pedidos') }}" class="nav-link d-flex align-items-center">
+                    <a href="{{ route('profile.orders.index') }}" class="nav-link d-flex align-items-center">
                         <i class="fa-solid fa-box col-2"></i>
                         <span class="col">Meus Pedidos</span>
                     </a>
@@ -78,7 +78,7 @@
             @endif
 
             <li class="nav-item ">
-                <a href="{{ route('wishlist.index') }}" class="nav-link d-flex align-items-center">
+                <a href="{{ route('profile.wishlist.index') }}" class="nav-link d-flex align-items-center">
                     <i class="fa-solid fa-heart col-2"></i>
                     <span class="col">Lista de Desejos</span>
                 </a>

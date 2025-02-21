@@ -29,7 +29,7 @@ class AddressController extends Controller
         $new_item["usuario_id"] = Auth::guard('web')->user()->id;;
 
         Address::create($new_item);
-        return redirect()->route('enderecos.index');
+        return redirect()->route('profile.addresses.index');
     }
 
     public function destroy($id) {
@@ -53,6 +53,6 @@ class AddressController extends Controller
         $updated_item = $request->all();
 
         Address::find(Crypt::decrypt($id))->update($updated_item);
-        return redirect()->route('enderecos.index');
+        return redirect()->route('profile.addresses.index');
     }
 }

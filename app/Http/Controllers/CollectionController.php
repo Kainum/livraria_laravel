@@ -59,22 +59,9 @@ class CollectionController extends Controller
         return redirect()->route('admin.collections.index');
     }
 
-    public function destroy($id)
+    public function edit($id)
     {
-        try {
-            Collection::find(Crypt::decrypt($id))->delete();
-            $ret = array('status' => 200, 'msg' => 'null');
-        } catch (\Illuminate\Database\QueryException $e) {
-            $ret = array('status' => 500, 'msg' => $e->getMessage());
-        } catch (\PDOException $e) {
-            $ret = array('status' => 500, 'msg' => $e->getMessage());
-        }
-        return $ret;
-    }
-
-    public function edit(Request $request)
-    {
-        $item = Collection::find(Crypt::decrypt($request->get('id')));
+        $item = Collection::find(Crypt::decrypt($id));
         return view('admin.collections.edit', compact('item'));
     }
 
@@ -94,7 +81,7 @@ class CollectionController extends Controller
 
         // delete os generos vinculados
         CollectionGenre::where('collection_id', $item->id)->delete();
-        
+
         // vincula os generos na coleção
         if (isset($request->generos)) {
             $generos = $request->generos;
@@ -108,5 +95,18 @@ class CollectionController extends Controller
         }
 
         return redirect()->route('admin.collections.index');
+    }
+
+    public function destroy($id)
+    {
+        try {
+            Collection::find(Crypt::decrypt($id))->delete();
+            $ret = array('status' => 200, 'msg' => 'null');
+        } catch (\Illuminate\Database\QueryException $e) {
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
+        } catch (\PDOException $e) {
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
+        }
+        return $ret;
     }
 }
