@@ -10,11 +10,11 @@ class Genre extends Model
     use HasFactory;
     protected $table = "genres";
     protected $fillable = [
-        'nome',
-        'imagem',
+        'name',
+        'image',
     ];
 
     public function colecoes() {
-        return $this->belongsToMany(Collection::class, 'collection_genre', 'genero_id', 'colecao_id');
+        return $this->belongsToMany(Collection::class, 'collection_genre', 'genre_id', 'collection_id');
     }
 }

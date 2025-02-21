@@ -20,15 +20,15 @@ return new class extends Migration
             $table->string('resumo', 1000);
             $table->string('isbn', 20);
             $table->string('autor', 100);
-            $table->string('imagem')->nullable();
+            $table->string('image')->nullable();
             $table->date('data_lancamento');
             $table->double('preco');
             $table->integer('paginas')->unsigned();
             $table->integer('qtd_estoque')->unsigned();
 
-            $table->foreignId('editora_id')->constrained('publishers');
+            $table->foreignId('publisher_id')->constrained('publishers');
 
-            $table->foreignId('colecao_id')->constrained('collections');
+            $table->foreignId('collection_id')->constrained('collections');
         });
     }
 

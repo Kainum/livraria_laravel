@@ -15,12 +15,12 @@ class CollectionSeeder extends Seeder
      */
     public function run()
     {
-        Collection::create(['nome' => 'Dragon Ball',       'imagem' => 'col-dragon-ball.webp']);
-        Collection::create(['nome' => 'Dr. Stone',         'imagem' => 'col-dr-stone.webp']);
-        Collection::create(['nome' => 'Spy x Family',      'imagem' => 'col-spy-family.webp']);
-        Collection::create(['nome' => 'Harry Potter',      'imagem' => 'col_harry_potter.jpg']);
-        // Collection::create(['nome' => 'Turma da Mônica',   'imagem' => 'no-image.webp']);
-        // Collection::create(['nome' => 'Naruto',            'imagem' => 'no-image.webp']);
+        Collection::create(['name' => 'Dragon Ball',       'image' => 'col-dragon-ball.webp']);
+        Collection::create(['name' => 'Dr. Stone',         'image' => 'col-dr-stone.webp']);
+        Collection::create(['name' => 'Spy x Family',      'image' => 'col-spy-family.webp']);
+        Collection::create(['name' => 'Harry Potter',      'image' => 'col_harry_potter.jpg']);
+        // Collection::create(['name' => 'Turma da Mônica',   'image' => 'no-image.webp']);
+        // Collection::create(['name' => 'Naruto',            'image' => 'no-image.webp']);
         
     }
 }

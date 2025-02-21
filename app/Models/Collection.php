@@ -11,15 +11,15 @@ class Collection extends Model
 
     protected $table = "collections";
     protected $fillable = [
-        'nome',
-        'imagem',
+        'name',
+        'image',
     ];
 
     public function livros() {
-        return $this->hasMany(Book::class, 'colecao_id');
+        return $this->hasMany(Book::class, 'collection_id');
     }
 
     public function generos() {
-        return $this->belongsToMany(Genre::class, 'collection_genre', 'colecao_id', 'genero_id');
+        return $this->belongsToMany(Genre::class, 'collection_genre', 'collection_id', 'genre_id')->using(CollectionGenre::class);
     }
 }

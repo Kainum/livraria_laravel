@@ -35,9 +35,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="imagem">Arquivo de Imagem:</label>
-            <input type="file" name="imagem" id="imagem" class="form-control">
-            @error('imagem')
+            <label for="image">Arquivo de Imagem:</label>
+            <input type="file" name="image" id="image" class="form-control">
+            @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -83,25 +83,25 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="colecao_id">Coleção:</label>
-            <select name="colecao_id" id="colecao_id" class="form-select" required>
-                @foreach(\App\Models\Collection::orderBy('nome')->get() as $colecao)
-                    <option value="{{ $colecao->id }}">{{ $colecao->nome }}</option>
+            <label for="collection_id">Coleção:</label>
+            <select name="collection_id" id="collection_id" class="form-select" required>
+                @foreach(\App\Models\Collection::orderBy('name')->get() as $colecao)
+                    <option value="{{ $colecao->id }}">{{ $colecao->name }}</option>
                 @endforeach
             </select>
-            @error('colecao_id')
+            @error('collection_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="editora_id">Publisher:</label>
-            <select name="editora_id" id="editora_id" class="form-select" required>
-                @foreach(\App\Models\Publisher::orderBy('nome')->get() as $editora)
-                    <option value="{{ $editora->id }}">{{ $editora->nome }}</option>
+            <label for="publisher_id">Publisher:</label>
+            <select name="publisher_id" id="publisher_id" class="form-select" required>
+                @foreach(\App\Models\Publisher::orderBy('name')->get() as $editora)
+                    <option value="{{ $editora->id }}">{{ $editora->name }}</option>
                 @endforeach
             </select>
-            @error('editora_id')
+            @error('publisher_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

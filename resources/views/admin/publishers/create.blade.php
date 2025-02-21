@@ -10,9 +10,9 @@
         @csrf
 
         <div class="form-group mb-3">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" class="form-control" required maxlength="100">
-            @error('nome')
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name" class="form-control" required maxlength="100">
+            @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

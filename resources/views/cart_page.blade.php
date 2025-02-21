@@ -21,8 +21,12 @@
             <div class="col-xl-4 m-0">
                 <p class="h2">Carrinho</p>
                 <p>Itens no carrinho: <b>{{ $qtd_total }}</b></p>
-                {{-- <p>Valor Total: <b>R${{ \App\Util::formataDinheiro(Cart::total()) }}</b></p> --}}
-                <p>Valor Total: <b>R$ {{ \App\Util::formataDinheiro(100.0) }}</b></p>
+                @php
+                    $valor_total = $cart->items->sum(function ($q) {
+                        return $q->pivot->item_value;
+                    });
+                @endphp
+                <p>Valor Total: <b>R$ {{ \App\Util::formataDinheiro($valor_total) }}</b></p>
 
                 <form action="{{ route('cart.endereco') }}" method="post">
                     @csrf

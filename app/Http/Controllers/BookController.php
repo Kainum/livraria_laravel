@@ -33,9 +33,9 @@ class BookController extends Controller
         $new_item = $request->all();
         
         if ($request->hasFile('file')) {
-            $new_item["imagem"] = Util::storeFile($request->file('file'));
+            $new_item["image"] = Util::storeFile($request->file('file'));
         } else {
-            $new_item["imagem"] = Util::NO_IMAGE_TEXT;
+            $new_item["image"] = Util::NO_IMAGE_TEXT;
         }
         
         Book::create($new_item);
@@ -64,7 +64,7 @@ class BookController extends Controller
         $item = Book::find(Crypt::decrypt($id));
 
         if ($request->hasFile('file')) {
-            $updated_item["imagem"] = Util::updateFile($request->file('file'), $item["imagem"]);
+            $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
         }
 
         $item->update($updated_item);

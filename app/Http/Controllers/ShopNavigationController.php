@@ -35,7 +35,7 @@ class ShopNavigationController extends Controller
     }
 
     public function browse () {
-        $item_list = Genre::orderBy('nome')->get();
+        $item_list = Genre::orderBy('name')->get();
 
         return view('shop.browse', compact('item_list'));
     }
@@ -61,7 +61,7 @@ class ShopNavigationController extends Controller
         if (Auth::guard('web')->check()) {
             $user_id = Auth::guard('web')->user()->id;
             $wishlist = WishListItem::where('user_id', '=', $user_id)
-                        ->where('livro_id', '=', $item_id)
+                        ->where('book_id', '=', $item_id)
                         ->first();
         }
         

@@ -19,7 +19,7 @@ class PublisherSeeder extends Seeder
 
         foreach ($array as $editora) {
             Publisher::create([
-                'nome' => $editora
+                'name' => $editora
             ]);
         }
     }

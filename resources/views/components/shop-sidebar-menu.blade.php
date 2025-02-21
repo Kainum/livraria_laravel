@@ -100,11 +100,11 @@
                 </span>
                 <div class="multi-level collapse" role="list" id="submenu-generos" aria-expanded="false">
                     <ul class="flex-column nav">
-                        @foreach (App\Models\Genre::orderBy('nome')->take(5)->get() as $item)
+                        @foreach (App\Models\Genre::orderBy('name')->take(5)->get() as $item)
                             <li class="nav-item">
                                 <a class="nav-link"
                                     href="{{ route('browse.colecoes', ['id' => \Crypt::encrypt($item->id)]) }}">
-                                    <span class="sidebar-text">{{ $item->nome }}</span>
+                                    <span class="sidebar-text">{{ $item->name }}</span>
                                 </a>
                             </li>
                         @endforeach

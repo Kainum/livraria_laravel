@@ -16,9 +16,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($result as $produto_id => $qtd)
+                @foreach ($result as $book_id => $qtd)
                     <tr>
-                        <td>{{ App\Models\Book::find($produto_id)->titulo }}</td>
+                        <td>{{ App\Models\Book::find($book_id)->titulo }}</td>
                         <td>{{ $qtd }}</td>
                     </tr>
                 @endforeach

@@ -10,17 +10,17 @@
         @csrf
 
         <div class="form-group mb-3">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" class="form-control" required maxlength="100">
-            @error('nome')
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name" class="form-control" required maxlength="100">
+            @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group mb-3">
-            <label for="imagem">Arquivo de Imagem:</label>
-            <input type="file" name="imagem" id="imagem" class="form-control">
-            @error('imagem')
+            <label for="image">Arquivo de Imagem:</label>
+            <input type="file" name="image" id="image" class="form-control">
+            @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -55,8 +55,8 @@
                 var newField = `<div class="mb-3 d-flex align-items-center">
                                     <div class="w-75">
                                         <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
-                                            @foreach (\App\Models\Genre::orderBy('nome')->pluck('nome', 'id')->toArray() as $id => $nome)
-                                                <option value="{{ $id }}">{{ $nome }}</option>
+                                            @foreach (\App\Models\Genre::orderBy('name')->pluck('name', 'id')->toArray() as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

@@ -19,8 +19,8 @@
         <tbody>
             @foreach ($item_list as $item)
                 <tr>
-                    <td>{{ $item->nome }}</td>
-                    <td>{{ $item->imagem }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->image }}</td>
                     <x-admin-table-actions route="admin.genres" :$item />
                 </tr>
             @endforeach

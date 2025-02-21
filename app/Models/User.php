@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function pedidos() {
-        return $this->hasMany(Order::class, 'comprador_id');
+        return $this->hasMany(Order::class, 'client_id');
     }
 
     public function enderecos() {

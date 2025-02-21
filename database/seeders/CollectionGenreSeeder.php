@@ -15,17 +15,17 @@ class CollectionGenreSeeder extends Seeder
      */
     public function run()
     {
-        foreach ([1, 2, 9] as $genero_id) {
-            CollectionGenre::create(['colecao_id' => 1, 'genero_id' => $genero_id]);
+        foreach ([1, 2, 9] as $genre_id) {
+            CollectionGenre::create(['collection_id' => 1, 'genre_id' => $genre_id]);
         }
-        foreach ([2, 4, 9, 11] as $genero_id) {
-            CollectionGenre::create(['colecao_id' => 2, 'genero_id' => $genero_id]);
+        foreach ([2, 4, 9, 11] as $genre_id) {
+            CollectionGenre::create(['collection_id' => 2, 'genre_id' => $genre_id]);
         }
-        foreach ([1, 9] as $genero_id) {
-            CollectionGenre::create(['colecao_id' => 3, 'genero_id' => $genero_id]);
+        foreach ([1, 9] as $genre_id) {
+            CollectionGenre::create(['collection_id' => 3, 'genre_id' => $genre_id]);
         }
-        foreach ([2, 3, 8] as $genero_id) {
-            CollectionGenre::create(['colecao_id' => 4, 'genero_id' => $genero_id]);
+        foreach ([2, 3, 8] as $genre_id) {
+            CollectionGenre::create(['collection_id' => 4, 'genre_id' => $genre_id]);
         }
     }
 }

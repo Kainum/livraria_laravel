@@ -21,10 +21,10 @@ class CartController extends Controller
     public function cartPage() {
         $cart = Cart::content();
 
-        $qtd_total = 0;
-        foreach ($cart?->items as $item) {
-            $qtd_total += $item->qtd;
-        }
+        $qtd_total = $cart?->items->sum(function ($q) {
+            return $q->pivot->qtd;
+        }) ?? 0;
+        
         return view('cart_page', compact('cart', 'qtd_total'));
     }
 
@@ -34,25 +34,26 @@ class CartController extends Controller
 
         // acha o carrinho existente ou cria um novo
         $order = Order::firstOrCreate([
-            'comprador_id' => Auth::guard('web')->user()->id,
+            'client_id' => Auth::guard('web')->user()->id,
             'status' => OrderStatusEnum::CART,
         ]);
 
         // verifica se o item já existe no carrinho
         // se existe, atualiza a quantidade
         // se não existe, cria um novo
-        $item = $order->items()->where('produto_id', $product->id)->first();
+        $item = $order->items()->where('book_id', $product->id)->first();
         if ($item) {
-            $item->update([
-                'qtd' => $request->quantity + $item->qtd,
-                'valor_item' => $product->preco * ($request->quantity + $item->qtd),
+            $item->pivot->update([
+                'qtd' => $request->quantity + $item->pivot->qtd,
+                'item_value' => $product->preco * ($request->quantity + $item->pivot->qtd),
             ]);
         } else {
-            $order->items()->create([
-                'produto_id' => $product->id,
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'book_id' => $product->id,
                 'qtd' => $request->quantity,
-                'valor_unitario' => $product->preco,
-                'valor_item' => $product->preco * $request->quantity,
+                'unit_value' => $product->preco,
+                'item_value' => $product->preco * $request->quantity,
             ]);
         }
 
@@ -73,7 +74,7 @@ class CartController extends Controller
     public function cartAdd ($id) {
         // não permite que a quantidade seja maior que o estabelecido
         $item = OrderProduct::find($id);
-        $qtd_estoque = $item->produto->qtd_estoque;
+        $qtd_estoque = $item->book->qtd_estoque;
 
         $item->update([
             'qtd' => min($item->qtd + 1, min($qtd_estoque, Util::QTD_MAX_POR_CLIENTE)),

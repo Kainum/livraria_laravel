@@ -17,10 +17,10 @@ class CollectionController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $item_list = Collection::orderBy('nome')->paginate($paginate_value);
+            $item_list = Collection::orderBy('name')->paginate($paginate_value);
         else
-            $item_list = Collection::where('nome', 'like', "%$filtragem%")
-                ->orderBy('nome')
+            $item_list = Collection::where('name', 'like', "%$filtragem%")
+                ->orderBy('name')
                 ->paginate($paginate_value)
                 ->setpath('colecoes?desc_filtro=' . $filtragem);
         return view('admin.collections.index', compact('item_list'));
@@ -35,11 +35,11 @@ class CollectionController extends Controller
     {
         $new_item = $request->all();
 
-        // guarda a imagem do upload
+        // guarda a image do upload
         if ($request->hasFile('file')) {
-            $new_item["imagem"] = Util::storeFile($request->file('file'));
+            $new_item["image"] = Util::storeFile($request->file('file'));
         } else {
-            $new_item["imagem"] = Util::NO_IMAGE_TEXT;
+            $new_item["image"] = Util::NO_IMAGE_TEXT;
         }
 
         $new_item = Collection::create($new_item);
@@ -50,8 +50,8 @@ class CollectionController extends Controller
 
             foreach ($generos as $value) {
                 CollectionGenre::create([
-                    'genero_id' => $value,
-                    'colecao_id' => $new_item->id,
+                    'genre_id' => $value,
+                    'collection_id' => $new_item->id,
                 ]);
             }
         }
@@ -84,7 +84,7 @@ class CollectionController extends Controller
         $item = Collection::find(Crypt::decrypt($id));
 
         if ($request->hasFile('file')) {
-            $updated_item["imagem"] = Util::updateFile($request->file('file'), $item["imagem"]);
+            $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
         }
 
         //================================================
@@ -93,15 +93,16 @@ class CollectionController extends Controller
         $item->update($updated_item);
 
         // delete os generos vinculados
-        $item->generos()->delete();
+        CollectionGenre::where('collection_id', $item->id)->delete();
+        
         // vincula os generos na coleção
         if (isset($request->generos)) {
             $generos = $request->generos;
 
             foreach ($generos as $value) {
                 CollectionGenre::create([
-                    'genero_id' => $value,
-                    'colecao_id' => $item->id,
+                    'genre_id' => $value,
+                    'collection_id' => $item->id,
                 ]);
             }
         }

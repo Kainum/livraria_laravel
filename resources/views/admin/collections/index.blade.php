@@ -19,10 +19,10 @@
         <tbody>
             @foreach ($item_list as $item)
                 <tr>
-                    <td>{{ $item->nome }}</td>
+                    <td>{{ $item->name }}</td>
                     <td>
-                        @foreach ($item->generos as $genero)
-                            <li>{{ $genero->nome }}</li>
+                        @foreach ($item->generos as $genre)
+                            <li>{{ $genre->name }}</li>
                         @endforeach
                     </td>
                     <x-admin-table-actions route="admin.collections" :$item />

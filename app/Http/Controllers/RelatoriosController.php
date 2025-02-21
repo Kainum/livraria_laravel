@@ -47,16 +47,16 @@ class RelatoriosController extends Controller
         $dataFim    = $request->dataFim;
 
 
-        $items = OrderProduct::select('produto_id', 'qtd')->whereHas('pedido', function ($q) use ($dataInicio, $dataFim) {
+        $items = OrderProduct::select('book_id', 'qtd')->whereHas('pedido', function ($q) use ($dataInicio, $dataFim) {
             $q->whereBetween('data_pedido', [$dataInicio, $dataFim])->whereNot('status', OrderStatusEnum::CART);
-        })->orderBy('produto_id')->get();
+        })->orderBy('book_id')->get();
 
         $result = [];
         foreach ($items as $item) {
-            if (!isset($result[$item->produto_id])) {
-                $result[$item->produto_id] = 0;
+            if (!isset($result[$item->book_id])) {
+                $result[$item->book_id] = 0;
             }
-            $result[$item->produto_id] = $result[$item->produto_id] + $item->qtd;
+            $result[$item->book_id] = $result[$item->book_id] + $item->qtd;
         }
 
         return view('admin.relatorios.results.mais_vendidos', compact('result', 'dataInicio', 'dataFim'));

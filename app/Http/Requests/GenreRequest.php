@@ -24,7 +24,7 @@ class GenreRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'  =>'required|max:50',
+            'name'  =>'required|max:50',
             'file'  =>'image',
         ];
     }

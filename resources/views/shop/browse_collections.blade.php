@@ -1,6 +1,6 @@
 @extends('layouts.shop', [
-    'model_title' => "Coleções de $genre->nome",
-    'page_title' => "Coleções de $genre->nome",
+    'model_title' => "Coleções de $genre->name",
+    'page_title' => "Coleções de $genre->name",
 ])
 @section('content')
     <div class="row justify-content-around">

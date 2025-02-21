@@ -84,31 +84,8 @@ class OrderController extends Controller
 
         foreach ($cart->items as $item) {
             // ATUALIZA O ESTOQUE DO PRODUTO - retira do estoque
-            Util::updateEstoqueProduto($item->produto_id, -$item->qtd);
+            Util::updateEstoqueProduto($item->book_id, -$item->qtd);
         }
-
-        // $new_pedido = Order::create([
-        //     // 'data_pedido'=>date('Y-m-d'),
-        //     // 'endereco'=>$endereco,
-        //     // 'valorTotal'=>Cart::total(),
-        //     // 'servicoFrete'=>$servicoFrete,
-        //     // 'valorFrete' => $valor_frete,
-        //     // 'status'=>OrderStatusEnum::PAID,
-        //     // 'comprador_id'=>$user_id,
-        //     // 'cpf'=> Auth::guard('web')->user()->cpf,
-        // ]);
-        // foreach ($item_list as $item) {
-        //     OrderProduct::create([
-        //         'qtd' => $item->qty,
-        //         'valor_unitario' => $item->price,
-        //         'valor_item' => ($item->price * $item->qty),
-        //         'pedido_id' => $new_pedido->id,
-        //         'produto_id' => $item->id,
-        //     ]);
-
-        //     // ATUALIZA O ESTOQUE DO PRODUTO - retira do estoque
-        //     Util::updateEstoqueProduto($item->id, -$item->qty);
-        // }
 
         return redirect()->route('meus_pedidos')->with('message', 'Order realizado.');
     }
@@ -124,14 +101,14 @@ class OrderController extends Controller
         try {
             $pedido = Order::find(Crypt::decrypt($id));
             $user_id = Auth::guard('web')->user()->id;
-            if ($pedido->comprador_id == $user_id) {
+            if ($pedido->client_id == $user_id) {
                 $pedido->update([
                     'status' => OrderStatusEnum::CANCELED
                 ]);
 
                 // ATUALIZA O ESTOQUE DOS PRODUTOS - devolve pro estoque
                 foreach ($pedido->items as $item) {
-                    Util::updateEstoqueProduto($item->produto->id, $item->qtd);
+                    Util::updateEstoqueProduto($item->id, $item->pivot->qtd);
                 }
 
                 $ret = array('status' => 200, 'msg' => 'null');

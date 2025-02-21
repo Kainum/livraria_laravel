@@ -3,7 +3,7 @@
     'page_title' => 'Editar Coleção',
 ])
 @section('content')
-    <h2>Editando Coleção {{ $item->nome }}</h2>
+    <h2>Editando Coleção {{ $item->name }}</h2>
 
     <form action="{{ route('admin.collections.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
         enctype="multipart/form-data">
@@ -11,10 +11,10 @@
         @csrf
 
         <div class="form-group mb-3">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" class="form-control" required maxlength="100"
-                value="{{ old('nome', $item->nome) }}">
-            @error('nome')
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name" class="form-control" required maxlength="100"
+                value="{{ old('name', $item->name) }}">
+            @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -28,9 +28,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="imagem">Arquivo da imagem:</label>
-            <input type="text" name="imagem" id="imagem" class="form-control" required maxlength="255" disabled
-                value="{{ $item->imagem }}">
+            <label for="image">Arquivo da image:</label>
+            <input type="text" name="image" id="image" class="form-control" required maxlength="255" disabled
+                value="{{ $item->image }}">
         </div>
 
         <hr class="mb-3">
@@ -38,12 +38,12 @@
         <h4>Gêneros</h4>
 
         <div class="input_fields_wrap mb-3">
-            @foreach ($item->generos as $gen)
+            @foreach ($item->generos as $genre)
                 <div class="mb-3 d-flex align-items-center">
                     <div class="w-75">
                         <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
-                            @foreach (\App\Models\Genre::orderBy('nome')->pluck('nome', 'id')->toArray() as $id => $nome)
-                                <option value="{{ $id }}" {{ $gen->genero_id == $id ? 'selected' : '' }}>{{ $nome }}</option>
+                            @foreach (\App\Models\Genre::orderBy('name')->pluck('name', 'id')->toArray() as $id => $name)
+                                <option value="{{ $id }}" {{ $genre->id == $id ? 'selected' : '' }}>{{ $name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -78,8 +78,8 @@
                 var newField = `<div class="mb-3 d-flex align-items-center">
                                     <div class="w-75">
                                         <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
-                                            @foreach (\App\Models\Genre::orderBy('nome')->pluck('nome', 'id')->toArray() as $id => $nome)
-                                                <option value="{{ $id }}">{{ $nome }}</option>
+                                            @foreach (\App\Models\Genre::orderBy('name')->pluck('name', 'id')->toArray() as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

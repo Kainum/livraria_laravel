@@ -19,8 +19,8 @@ class WishListController extends Controller
         $user_id = Auth::guard('web')->user()->id;
         WishListItem::create([
             'user_id'=>$user_id,
-            'livro_id'=>Crypt::decrypt($id),
-            'data_adicao'=>date('Y-m-d'),
+            'book_id'=>Crypt::decrypt($id),
+            'added_date'=>date('Y-m-d'),
         ]);
         return redirect()->route('wishlist.index');
     }

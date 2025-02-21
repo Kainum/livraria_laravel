@@ -24,7 +24,7 @@ class CollectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'  =>'required|max:100',
+            'name'  =>'required|max:100',
             'file'  =>'image',
         ];
     }

@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('qtd')->unsigned();
-            $table->double('valor_unitario');
-            $table->double('valor_item');
+            $table->double('unit_value');
+            $table->double('item_value');
             
-            $table->foreignId('pedido_id')->constrained('orders')->onDelete('cascade');
-            $table->foreignId('produto_id')->constrained('books');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('book_id')->constrained('books');
         });
     }
 

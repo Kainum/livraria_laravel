@@ -18,7 +18,7 @@
         <tbody>
             @foreach ($item_list as $item)
                 <tr>
-                    <td>{{ $item->nome }}</td>
+                    <td>{{ $item->name }}</td>
                     <x-admin-table-actions route="admin.publishers" :$item />
                 </tr>
             @endforeach

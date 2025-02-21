@@ -157,16 +157,16 @@ class OrderSeeder extends Seeder
             'valorFrete'    =>10.00,
             'status'        =>OrderStatusEnum::PAID,
             'cpf'           =>$cliente->cpf,
-            'comprador_id'  =>$cliente->id,
+            'client_id'  =>$cliente->id,
         ]);
 
         foreach($produtos as $p) {
             OrderProduct::create([
                 'qtd'               =>$p["qtd"],
-                'valor_unitario'    =>$p["livro"]->preco,
-                'valor_item'        =>$p["livro"]->preco * $p["qtd"],
-                'produto_id'        =>$p["livro"]->id,
-                'pedido_id'         =>$pedido->id,
+                'unit_value'    =>$p["livro"]->preco,
+                'item_value'        =>$p["livro"]->preco * $p["qtd"],
+                'book_id'        =>$p["livro"]->id,
+                'order_id'         =>$pedido->id,
             ]);
         }
     }

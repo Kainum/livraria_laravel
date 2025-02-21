@@ -16,10 +16,10 @@ class GenreController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $item_list = Genre::orderBy('nome')->paginate($paginate_value);
+            $item_list = Genre::orderBy('name')->paginate($paginate_value);
         else
-            $item_list = Genre::where('nome', 'like', "%$filtragem%")
-                            ->orderBy('nome')
+            $item_list = Genre::where('name', 'like', "%$filtragem%")
+                            ->orderBy('name')
                             ->paginate($paginate_value)
                             ->setpath('generos?desc_filtro='.$filtragem);
         return view('admin.genres.index', compact('item_list'));
@@ -33,9 +33,9 @@ class GenreController extends Controller
         $new_item = $request->all();
         
         if ($request->hasFile('file')) {
-            $new_item["imagem"] = Util::storeFile($request->file('file'));
+            $new_item["image"] = Util::storeFile($request->file('file'));
         } else {
-            $new_item["imagem"] = Util::NO_IMAGE_TEXT;
+            $new_item["image"] = Util::NO_IMAGE_TEXT;
         }
 
         Genre::create($new_item);
@@ -64,7 +64,7 @@ class GenreController extends Controller
         $item = Genre::find(Crypt::decrypt($id));
 
         if ($request->hasFile('file')) {
-            $updated_item["imagem"] = Util::updateFile($request->file('file'), $item["imagem"]);
+            $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
         }
 
         $item->update($updated_item);

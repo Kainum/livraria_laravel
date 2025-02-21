@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('publishers', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 100);
+            $table->string('name', 100);
             $table->timestamps();
             $table->softDeletes();
         });

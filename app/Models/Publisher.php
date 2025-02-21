@@ -11,10 +11,10 @@ class Publisher extends Model
 
     protected $table = "publishers";
     protected $fillable = [
-        'nome',
+        'name',
     ];
 
     public function livros() {
-        return $this->hasMany(Book::class, 'editora_id');
+        return $this->hasMany(Book::class, 'publisher_id');
     }
 }

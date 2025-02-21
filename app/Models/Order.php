@@ -19,18 +19,25 @@ class Order extends Model
         'valorFrete',
         'status',
         'cpf',
-        'comprador_id',
+        'client_id',
     ];
 
     protected $casts = [
         'status' => OrderStatusEnum::class,
     ];
 
-    public function comprador() {
+    public function client()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function items() {
-        return $this->hasMany(OrderProduct::class);
+    public function items()
+    {
+        return $this->belongsToMany(Book::class, 'order_product')->using(OrderProduct::class)->withPivot([
+            'id',
+            'qtd',
+            'unit_value',
+            'item_value',
+        ]);
     }
 }

@@ -33,8 +33,8 @@ class BookRequest extends FormRequest
             'paginas'   =>'required|min:1',
             'data_lancamento'   =>'required|date',
             'qtd_estoque'       =>'required|min:0',
-            'editora_id'        =>'required',
-            'colecao_id'        =>'required',
+            'publisher_id'        =>'required',
+            'collection_id'        =>'required',
         ];
     }
 }

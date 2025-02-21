@@ -17,57 +17,57 @@ class GenreSeeder extends Seeder
     {
         $generos = [
             [
-                'nome' => 'Ação',
-                'imagem' => 'no-image.webp'
+                'name' => 'Ação',
+                'image' => 'no-image.webp'
             ],
             [
-                'nome' => 'Aventura',
-                'imagem' => 'gen_aventura.webp'
+                'name' => 'Aventura',
+                'image' => 'gen_aventura.webp'
             ],
             [
-                'nome' => 'Fantasia',
-                'imagem' => 'gen_fantasia.webp'
+                'name' => 'Fantasia',
+                'image' => 'gen_fantasia.webp'
             ],
             [
-                'nome' => 'Ficção Científica',
-                'imagem' => 'gen_ficcao-cientifica.webp'
+                'name' => 'Ficção Científica',
+                'image' => 'gen_ficcao-cientifica.webp'
             ],
             [
-                'nome' => 'Terror',
-                'imagem' => 'no-image.webp'
+                'name' => 'Terror',
+                'image' => 'no-image.webp'
             ],
             [
-                'nome' => 'Romance',
-                'imagem' => 'no-image.webp'
+                'name' => 'Romance',
+                'image' => 'no-image.webp'
             ],
             [
-                'nome' => 'Suspense',
-                'imagem' => 'no-image.webp'
+                'name' => 'Suspense',
+                'image' => 'no-image.webp'
             ],
             [
-                'nome' => 'Mistério',
-                'imagem' => 'gen_misterio.webp'
+                'name' => 'Mistério',
+                'image' => 'gen_misterio.webp'
             ],
             [
-                'nome' => 'Comédia',
-                'imagem' => 'gen_comedia.webp'
+                'name' => 'Comédia',
+                'image' => 'gen_comedia.webp'
             ],
             [
-                'nome' => 'Histórico',
-                'imagem' => 'gen_historico.webp'
+                'name' => 'Histórico',
+                'image' => 'gen_historico.webp'
             ],
             [
-                'nome' => 'Ciências',
-                'imagem' => 'gen_ciencias.webp'
+                'name' => 'Ciências',
+                'image' => 'gen_ciencias.webp'
             ],
             [
-                'nome' => 'Tecnologia',
-                'imagem' => 'gen_tecnologia.webp'
+                'name' => 'Tecnologia',
+                'image' => 'gen_tecnologia.webp'
             ]
         ];
 
-        foreach ($generos as $genero) {
-            Genre::create($genero);
+        foreach ($generos as $genre) {
+            Genre::create($genre);
         }
     }
 }

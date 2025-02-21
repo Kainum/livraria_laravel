@@ -27,7 +27,7 @@
                             </a>
                         </td>
                         <td>
-                            {{ Carbon\Carbon::parse($item->data_adicao)->format('d/m/Y') }}
+                            {{ Carbon\Carbon::parse($item->added_date)->format('d/m/Y') }}
                         </td>
                         <td>
                             <a href="{{ route('wishlist.remove', ['id' => \Crypt::encrypt($item->id)]) }}"

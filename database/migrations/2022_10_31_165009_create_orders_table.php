@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             
-            $table->foreignId('comprador_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('client_id')->nullable()->constrained('users')->onDelete('set null');
         });
     }
 

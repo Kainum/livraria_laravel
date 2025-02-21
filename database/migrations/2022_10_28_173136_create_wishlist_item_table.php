@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('wishlist_item', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('data_adicao');
+            $table->date('added_date');
             
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('livro_id')->constrained('books');
+            $table->foreignId('book_id')->constrained('books');
         });
     }
 

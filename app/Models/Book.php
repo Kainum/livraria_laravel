@@ -15,20 +15,20 @@ class Book extends Model
         'resumo',
         'isbn',
         'autor',
-        'imagem',
+        'image',
         'data_lancamento',
         'preco',
         'paginas',
         'qtd_estoque',
-        'editora_id',
-        'colecao_id',
+        'publisher_id',
+        'collection_id',
     ];
 
     public function editora() {
-        return $this->belongsTo(Publisher::class, 'editora_id');
+        return $this->belongsTo(Publisher::class, 'publisher_id');
     }
 
     public function colecao() {
-        return $this->belongsTo(Collection::class, 'colecao_id');
+        return $this->belongsTo(Collection::class, 'collection_id');
     }
 }

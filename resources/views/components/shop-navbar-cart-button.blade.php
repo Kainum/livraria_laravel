@@ -13,24 +13,24 @@
                 $cart_items = App\Services\Cart::content()?->items->take(3) ?? [];
             @endphp
             @foreach ($cart_items as $cart_item)
-                <a href="{{ route('produto.view', ['id' => \Crypt::encrypt($cart_item->produto->id)]) }}"
+                <a href="{{ route('produto.view', ['id' => \Crypt::encrypt($cart_item->id)]) }}"
                     class="list-group-item list-group-item-action border-bottom">
                     <div class="d-flex align-items-center">
                         <div class="col-3">
                             <img class="img-fluid"
                                 src="{{ route('image.show', [
-                                    'image_path' => $cart_item->produto->imagem,
+                                    'image_path' => $cart_item->image,
                                     'width' => 576,
                                     'height' => 760,
                                 ]) }}">
                         </div>
                         <div class="col-9">
                             <p class="font-small mt-1 mb-0 text-truncate bg-danger" style="max-width: 200px;">
-                                {{ $cart_item->produto->titulo }}
-                                {{-- @if (strlen($cart_item->produto->nome) > 28)
-                                    {{ substr($cart_item->produto->nome, 0, 25) . '...' }}
+                                {{ $cart_item->titulo }}
+                                {{-- @if (strlen($cart_item->name) > 28)
+                                    {{ substr($cart_item->name, 0, 25) . '...' }}
                                 @else
-                                    {{ $cart_item->produto->nome }}
+                                    {{ $cart_item->name }}
                                 @endif --}}
                             </p>
                         </div>

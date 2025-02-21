@@ -74,10 +74,10 @@
                                     <tbody>
                                         @foreach ($pedido->items as $item)
                                             <tr>
-                                                <td>{{ $item->produto->titulo }}</td>
-                                                <td>{{ $item->qtd }}</td>
-                                                <td>R${{ \App\Util::formataDinheiro($item->valor_unitario) }}</td>
-                                                <td>R${{ \App\Util::formataDinheiro($item->valor_item) }}</td>
+                                                <td>{{ $item->titulo }}</td>
+                                                <td>{{ $item->pivot->qtd }}</td>
+                                                <td>R${{ \App\Util::formataDinheiro($item->pivot->unit_value) }}</td>
+                                                <td>R${{ \App\Util::formataDinheiro($item->pivot->item_value) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

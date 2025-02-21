@@ -6,7 +6,7 @@
             src="https://www.smashbros.com/assets_v2/img/top/hero05_en.jpg">
             
         <div class="py-3 text-center">
-            <span class="fs-3">{{ $item->nome }}</span>
+            <span class="fs-3">{{ $item->name }}</span>
         </div>
 
     </a>

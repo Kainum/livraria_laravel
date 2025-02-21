@@ -10,7 +10,7 @@ class WishListItem extends Model
     use HasFactory;
 
     protected $table = "wishlist_item";
-    protected $fillable = ['user_id', 'livro_id', 'data_adicao'];
+    protected $fillable = ['user_id', 'book_id', 'added_date'];
 
     public function user() {
         return $this->belongsTo(User::class);

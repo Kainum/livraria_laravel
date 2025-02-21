@@ -18,13 +18,13 @@
     </tr>
     <tr>
         @php
-            $generos = array_column($item->colecao->generos->toArray(), 'nome');
+            $generos = array_column($item->colecao->generos->toArray(), 'name');
         @endphp
         <td>Gêneros</td>
         <td class="fw-bold">{{ implode(', ', $generos) }}</td>
     </tr>
     <tr>
         <td>Publisher</td>
-        <td class="fw-bold">{{ $item->editora->nome }}</td>
+        <td class="fw-bold">{{ $item->editora->name }}</td>
     </tr>
 </table>

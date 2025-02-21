@@ -3,16 +3,16 @@
     'page_title' => 'Editar Gênero',
 ])
 @section('content')
-    <h2>Editando Gênero {{ $item->nome }}</h2>
+    <h2>Editando Gênero {{ $item->name }}</h2>
 
     <form action="{{ route('admin.genres.update', ['id' => \Crypt::encrypt($item->id)]) }}" method="post"
         enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" class="form-control" required maxlength="50"
-                value="{{ old('nome', $item->nome) }}">
-            @error('nome')
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name" class="form-control" required maxlength="50"
+                value="{{ old('name', $item->name) }}">
+            @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -26,9 +26,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="imagem">Arquivo da imagem:</label>
-            <input type="text" name="imagem" id="imagem" class="form-control" required maxlength="250" disabled
-                value="{{ $item->imagem }}">
+            <label for="image">Arquivo da image:</label>
+            <input type="text" name="image" id="image" class="form-control" required maxlength="250" disabled
+                value="{{ $item->image }}">
         </div>
 
         <div class="form-group mb-3">

@@ -15,10 +15,10 @@ class PublisherController extends Controller
 
         $filtragem = $request->get('desc_filtro');
         if ($filtragem == null)
-            $item_list = Publisher::orderBy('nome')->paginate($paginate_value);
+            $item_list = Publisher::orderBy('name')->paginate($paginate_value);
         else
-            $item_list = Publisher::where('nome', 'like', "%$filtragem%")
-                            ->orderBy('nome')
+            $item_list = Publisher::where('name', 'like', "%$filtragem%")
+                            ->orderBy('name')
                             ->paginate($paginate_value)
                             ->setpath('editoras?desc_filtro='.$filtragem);
         return view('admin.publishers.index', compact('item_list'));
