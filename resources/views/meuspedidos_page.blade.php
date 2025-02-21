@@ -45,8 +45,8 @@
                                     <td></td>
                             @endswitch
                             <td>{{ Carbon\Carbon::parse($pedido->data_pedido)->format('d/m/Y') }}</td>
-                            <td>R${{ \App\Util::formataDinheiro($pedido->valorTotal) }}</td>
-                            <td>R${{ \App\Util::formataDinheiro($pedido->valorFrete) }}</td>
+                            <td>{{ \App\Services\Operations::money($pedido->valorTotal) }}</td>
+                            <td>{{ \App\Services\Operations::money($pedido->valorFrete) }}</td>
                             <td>
                                 @switch($pedido->status)
                                     @case(app\Enums\OrderStatusEnum::PAID)
@@ -76,8 +76,8 @@
                                             <tr>
                                                 <td>{{ $item->titulo }}</td>
                                                 <td>{{ $item->pivot->qtd }}</td>
-                                                <td>R${{ \App\Util::formataDinheiro($item->pivot->unit_value) }}</td>
-                                                <td>R${{ \App\Util::formataDinheiro($item->pivot->item_value) }}</td>
+                                                <td>{{ \App\Services\Operations::money($item->pivot->unit_value) }}</td>
+                                                <td>{{ \App\Services\Operations::money($item->pivot->item_value) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

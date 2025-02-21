@@ -32,7 +32,7 @@
                     href="{{ route('colecao.view', ['id' => \Crypt::encrypt($item->colecao->id)]) }}">
                     Ver Coleção
                 </a>
-                <h4>R$ {{ \App\Util::formataDinheiro($item->preco) }}</h4>
+                <h4>{{ \App\Services\Operations::money($item->preco) }}</h4>
             </div>
 
             {{-- CARRINHO --}}

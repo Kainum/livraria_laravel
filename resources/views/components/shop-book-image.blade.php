@@ -18,7 +18,7 @@
 
     <a href="{{ $route }}">
         <div class="d-flex align-items-center justify-content-between">
-            <span>R${{ \App\Util::formataDinheiro($item->preco) }}</span>
+            <span>{{ \App\Services\Operations::money($item->preco) }}</span>
             <button class="btn btn-{{ $color }} col-4" type="submit">
                 <i class="fa-solid fa-{{ $icon }} text-white"></i>
             </button>

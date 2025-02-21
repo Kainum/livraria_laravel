@@ -26,7 +26,7 @@
                         return $q->pivot->item_value;
                     });
                 @endphp
-                <p>Valor Total: <b>R$ {{ \App\Util::formataDinheiro($valor_total) }}</b></p>
+                <p>Valor Total: <b>{{ \App\Services\Operations::money($valor_total) }}</b></p>
 
                 <form action="{{ route('cart.endereco') }}" method="post">
                     @csrf

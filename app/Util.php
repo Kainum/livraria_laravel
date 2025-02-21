@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class Util
 {
-
     const IMAGE_DIR     = 'images';
     const NO_IMAGE_TEXT = 'no-image.webp';
 
@@ -29,10 +28,6 @@ class Util
             self::deleteFile($current_file);    // delete da imagem antiga no storage
         } 
         return self::storeFile($file);          // guarda nova imagem no storage
-    }
-
-    public static function formataDinheiro($valor) {
-        return number_format($valor, 2, ',', '.');
     }
 
     public static function updateEstoqueProduto($idProduto, $qtd) {

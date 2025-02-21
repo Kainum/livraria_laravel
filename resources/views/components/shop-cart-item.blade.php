@@ -10,7 +10,7 @@
         </div>
         <div class="row col-lg-10 col-md-9 col-7">
             <p>{{ $item->titulo }}</p>
-            <p>R$ {{ \App\Util::formataDinheiro($item->pivot->item_value) }}</p>
+            <p>{{ \App\Services\Operations::money($item->pivot->item_value) }}</p>
         </div>
     </div>
     <div class="col-md-3 row m-0 gap-2">
