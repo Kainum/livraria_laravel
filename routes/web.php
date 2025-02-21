@@ -9,9 +9,9 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CorreiosController;
-use App\Http\Controllers\EnderecosController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RelatoriosController;
 use App\Http\Controllers\ShopNavigationController;
@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/endereco', 'selecionarEndereco')->name('endereco');
         });
 
-        Route::controller(PedidosController::class)->group(function () {
+        Route::controller(OrderController::class)->group(function () {
             Route::post('/confirmar_pedido', 'confirmarPedido')->name('confirmar');
             Route::post('/concluir', 'concluirPedido')->name('concluir');
         });
@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/password/update', 'updatePassword')->name('password.update');
         });
 
-        Route::prefix('enderecos')->controller(EnderecosController::class)->name('enderecos.')->group(function () {
+        Route::prefix('enderecos')->controller(AddressController::class)->name('enderecos.')->group(function () {
             Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
@@ -86,8 +86,8 @@ Route::middleware('auth')->group(function () {
             Route::put('/{id}/update', 'update')->name('update');
         });
 
-        Route::get('/meus_pedidos', [PedidosController::class, 'meusPedidos'])->name('meus_pedidos');
-        Route::get('/meus_pedidos/{id}/cancelar', [PedidosController::class,  'cancelarPedido'])->name('pedido.cancelar');
+        Route::get('/meus_pedidos', [OrderController::class, 'meusPedidos'])->name('meus_pedidos');
+        Route::get('/meus_pedidos/{id}/cancelar', [OrderController::class,  'cancelarPedido'])->name('pedido.cancelar');
     });
 });
 // FIM ROTAS CLIENTE
@@ -147,9 +147,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 // FIM ROTAS ADMIN
-
-Route::get('/layout', function () {
-    return view('layout_admin');
-});
 
 require __DIR__ . '/auth.php';

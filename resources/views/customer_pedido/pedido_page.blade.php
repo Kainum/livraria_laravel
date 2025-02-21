@@ -1,6 +1,6 @@
 @extends('layouts.shop', [
     'model_title'   => 'Loja',
-    'page_title'    => 'Pedido',
+    'page_title'    => 'Order',
 ])
 @section('content')
 
@@ -29,8 +29,8 @@
                     {{-- {{ "SEDEX - ".(session('frete_options')[App\Models\Correios::SERVICO_SEDEX]->PrazoEntrega)." dias - R$".(session('frete_options')[App\Models\Correios::SERVICO_SEDEX]->Valor) }} --}}
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
-            {{-- {{ Form::submit('Confirmar Pedido', ['class'=>'btn btn-primary']) }} --}}
+            <button type="submit" class="btn btn-primary">Confirmar Order</button>
+            {{-- {{ Form::submit('Confirmar Order', ['class'=>'btn btn-primary']) }} --}}
         </form>
         
     </div>

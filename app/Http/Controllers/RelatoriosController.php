@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Book;
-use App\Models\ItemPedido;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 
 class RelatoriosController extends Controller
@@ -47,7 +47,7 @@ class RelatoriosController extends Controller
         $dataFim    = $request->dataFim;
 
 
-        $items = ItemPedido::select('produto_id', 'qtd')->whereHas('pedido', function ($q) use ($dataInicio, $dataFim) {
+        $items = OrderProduct::select('produto_id', 'qtd')->whereHas('pedido', function ($q) use ($dataInicio, $dataFim) {
             $q->whereBetween('data_pedido', [$dataInicio, $dataFim])->whereNot('status', OrderStatusEnum::CART);
         })->orderBy('produto_id')->get();
 

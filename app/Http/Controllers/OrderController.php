@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
-use App\Models\Endereco;
-use App\Models\Pedido;
+use App\Models\Address;
+use App\Models\Order;
 use App\Services\Cart;
 use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
-class PedidosController extends Controller
+class OrderController extends Controller
 {
     public function confirmarPedido(Request $request)
     {
@@ -26,7 +26,7 @@ class PedidosController extends Controller
         $item_list = $cart->items;
 
         // FRETE
-        $endereco = Endereco::find(Crypt::decrypt($request->endereco));
+        $endereco = Address::find(Crypt::decrypt($request->endereco));
 
         // $request['cepDestino'] = str_replace("-", "", $endereco->cep);
 
@@ -87,7 +87,7 @@ class PedidosController extends Controller
             Util::updateEstoqueProduto($item->produto_id, -$item->qtd);
         }
 
-        // $new_pedido = Pedido::create([
+        // $new_pedido = Order::create([
         //     // 'data_pedido'=>date('Y-m-d'),
         //     // 'endereco'=>$endereco,
         //     // 'valorTotal'=>Cart::total(),
@@ -98,7 +98,7 @@ class PedidosController extends Controller
         //     // 'cpf'=> Auth::guard('web')->user()->cpf,
         // ]);
         // foreach ($item_list as $item) {
-        //     ItemPedido::create([
+        //     OrderProduct::create([
         //         'qtd' => $item->qty,
         //         'valor_unitario' => $item->price,
         //         'valor_item' => ($item->price * $item->qty),
@@ -110,7 +110,7 @@ class PedidosController extends Controller
         //     Util::updateEstoqueProduto($item->id, -$item->qty);
         // }
 
-        return redirect()->route('meus_pedidos')->with('message', 'Pedido realizado.');
+        return redirect()->route('meus_pedidos')->with('message', 'Order realizado.');
     }
 
     public function meusPedidos()
@@ -122,7 +122,7 @@ class PedidosController extends Controller
     public function cancelarPedido($id)
     {
         try {
-            $pedido = Pedido::find(Crypt::decrypt($id));
+            $pedido = Order::find(Crypt::decrypt($id));
             $user_id = Auth::guard('web')->user()->id;
             if ($pedido->comprador_id == $user_id) {
                 $pedido->update([

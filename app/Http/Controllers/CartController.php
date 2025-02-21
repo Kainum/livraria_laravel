@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
-use App\Models\Endereco;
-use App\Models\ItemPedido;
+use App\Models\Address;
+use App\Models\OrderProduct;
 use App\Models\Book;
-use App\Models\Pedido;
+use App\Models\Order;
 use App\Services\Cart;
 use App\Util;
 use Illuminate\Http\Request;
@@ -33,7 +33,7 @@ class CartController extends Controller
         $product = Book::find(Crypt::decrypt($request->product_id));
 
         // acha o carrinho existente ou cria um novo
-        $order = Pedido::firstOrCreate([
+        $order = Order::firstOrCreate([
             'comprador_id' => Auth::guard('web')->user()->id,
             'status' => OrderStatusEnum::CART,
         ]);
@@ -72,7 +72,7 @@ class CartController extends Controller
 
     public function cartAdd ($id) {
         // não permite que a quantidade seja maior que o estabelecido
-        $item = ItemPedido::find($id);
+        $item = OrderProduct::find($id);
         $qtd_estoque = $item->produto->qtd_estoque;
 
         $item->update([
@@ -83,7 +83,7 @@ class CartController extends Controller
     }
 
     public function cartSub ($id) {
-        $item = ItemPedido::find($id);
+        $item = OrderProduct::find($id);
 
         $new_qtd = $item->qtd - 1;
 
@@ -99,7 +99,7 @@ class CartController extends Controller
     }
 
     public function cartExclude ($id) {
-        $item = ItemPedido::find($id);
+        $item = OrderProduct::find($id);
         $item->delete();
 
         return redirect()->route('cart.page');

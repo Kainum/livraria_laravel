@@ -47,10 +47,10 @@ class User extends Authenticatable
     }
 
     public function pedidos() {
-        return $this->hasMany(Pedido::class, 'comprador_id');
+        return $this->hasMany(Order::class, 'comprador_id');
     }
 
     public function enderecos() {
-        return $this->hasMany(Endereco::class, 'usuario_id');
+        return $this->hasMany(Address::class, 'usuario_id');
     }
 }

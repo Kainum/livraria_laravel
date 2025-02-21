@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
-use App\Models\Endereco;
-use App\Models\ItemPedido;
+use App\Models\Address;
+use App\Models\OrderProduct;
 use App\Models\Book;
-use App\Models\Pedido;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -43,7 +43,7 @@ class OrderSeeder extends Seeder
         ];
 
         $cliente = User::find(1);
-        $list_end = Endereco::where('usuario_id', '=', $cliente->id)
+        $list_end = Address::where('usuario_id', '=', $cliente->id)
                         ->get();
         
         $end = $list_end[0];
@@ -127,7 +127,7 @@ class OrderSeeder extends Seeder
         ];
 
         $cliente = User::find(2);
-        $list_end = Endereco::where('usuario_id', '=', $cliente->id)
+        $list_end = Address::where('usuario_id', '=', $cliente->id)
                         ->get();
         
         $end = $list_end[0];
@@ -149,7 +149,7 @@ class OrderSeeder extends Seeder
                     $end->cep." - ".$end->cidade." - ".$end->uf."<br>".
                     $end->complemento."<br>".
                     $end->telefone;
-        $pedido = Pedido::create([
+        $pedido = Order::create([
             'data_pedido'   =>$dataPedido,
             'endereco'      =>$endereco,
             'valorTotal'    =>$valorTotal,
@@ -161,7 +161,7 @@ class OrderSeeder extends Seeder
         ]);
 
         foreach($produtos as $p) {
-            ItemPedido::create([
+            OrderProduct::create([
                 'qtd'               =>$p["qtd"],
                 'valor_unitario'    =>$p["livro"]->preco,
                 'valor_item'        =>$p["livro"]->preco * $p["qtd"],

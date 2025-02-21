@@ -25,7 +25,7 @@
                         <tr>
                             <th class="rounded-start">Endereço</th>
                             <th class="">Status</th>
-                            <th class="">Data do Pedido</th>
+                            <th class="">Data do Order</th>
                             <th class="">Valor Total</th>
                             <th class="">Frete</th>
                             <th class="rounded-end"></th>
@@ -50,10 +50,10 @@
                             <td>
                                 @switch($pedido->status)
                                     @case(app\Enums\OrderStatusEnum::PAID)
-                                        <a href="{{ route('pedido.cancelar',  ['id'=>\Crypt::encrypt($pedido->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Pedido</a>
+                                        <a href="{{ route('pedido.cancelar',  ['id'=>\Crypt::encrypt($pedido->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Order</a>
                                         @break
                                     @case(app\Enums\OrderStatusEnum::CANCELED)
-                                        <button disabled class="btn btn-danger">Cancelar Pedido</button>
+                                        <button disabled class="btn btn-danger">Cancelar Order</button>
                                         @break
                                     @default
                                         <td></td>
@@ -111,7 +111,7 @@
                         if (data.status == 200) {
                             swal({
                                 title:  'Tudo ok',
-                                text:   'Pedido Cancelado!',
+                                text:   'Order Cancelado!',
                                 icon:   'success',
                             }).then(function() {
                                 window.location.reload();

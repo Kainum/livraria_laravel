@@ -1,6 +1,6 @@
 @extends('layouts.shop', [
     'model_title' => 'Loja',
-    'page_title' => 'Pedido',
+    'page_title' => 'Order',
 ])
 @section('content')
 

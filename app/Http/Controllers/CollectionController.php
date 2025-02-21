@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionRequest;
 use App\Models\Collection;
-use App\Models\GeneroColecao;
+use App\Models\CollectionGenre;
 use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -49,7 +49,7 @@ class CollectionController extends Controller
             $generos = $request->generos;
 
             foreach ($generos as $value) {
-                GeneroColecao::create([
+                CollectionGenre::create([
                     'genero_id' => $value,
                     'colecao_id' => $new_item->id,
                 ]);
@@ -99,7 +99,7 @@ class CollectionController extends Controller
             $generos = $request->generos;
 
             foreach ($generos as $value) {
-                GeneroColecao::create([
+                CollectionGenre::create([
                     'genero_id' => $value,
                     'colecao_id' => $item->id,
                 ]);

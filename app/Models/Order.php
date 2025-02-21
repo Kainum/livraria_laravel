@@ -6,7 +6,7 @@ use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pedido extends Model
+class Order extends Model
 {
     use HasFactory;
 
@@ -31,6 +31,6 @@ class Pedido extends Model
     }
 
     public function items() {
-        return $this->hasMany(ItemPedido::class);
+        return $this->hasMany(OrderProduct::class);
     }
 }
