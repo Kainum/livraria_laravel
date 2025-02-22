@@ -6,7 +6,7 @@
 @section('content')
     <a href="{{ route('admin.collections.create') }}" class="btn btn-info">Adicionar</a>
 
-    <x-admin-search-bar route="admin.collections.index" />
+    <x-admin.search-bar route="admin.collections.index" />
 
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
@@ -24,7 +24,7 @@
                     @endphp
                     <td>{{ $item->name }}</td>
                     <td>{{ implode(', ', $genres) }}</td>
-                    <x-admin-table-actions route="admin.collections" :$item />
+                    <x-admin.table-actions route="admin.collections" :$item />
                 </tr>
             @endforeach
         </tbody>

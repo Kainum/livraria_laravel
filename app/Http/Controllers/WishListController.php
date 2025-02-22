@@ -12,10 +12,10 @@ class WishListController extends Controller
 {
     public function view() {
         $list = Auth::guard('web')->user()->wishListItems;
-        return view('wishlist', ['item_list'=>$list]);
+        return view('profile.wishlist_page', ['item_list'=>$list]);
     }
 
-    public function addWishList($id) {
+    public function wishlist_add($id) {
         $user_id = Auth::guard('web')->user()->id;
         WishListItem::create([
             'user_id'=>$user_id,
@@ -25,7 +25,7 @@ class WishListController extends Controller
         return redirect()->route('profile.wishlist.index');
     }
 
-    public function removeWishList($id) {
+    public function wishlist_remove($id) {
         WishListItem::find(Crypt::decrypt($id))->delete();
         return redirect()->route('profile.wishlist.index');
     }

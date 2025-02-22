@@ -24,11 +24,11 @@
 <body>
     @yield('style')
 
-    <x-shop-sidebar-menu />
+    <x-shop.sidebar-menu />
     
     <main class="content">
 
-        <x-shop-navbar-top />
+        <x-shop.navbar-top />
 
         {{-- Breadcrumb --}}
         @if (isset($model_title))

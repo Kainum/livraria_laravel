@@ -19,7 +19,7 @@
         @if (Auth::guard('web')->check())
             <div class="d-flex align-items-center">
                 {{-- carrinho --}}
-                <x-shop-navbar-cart-button />
+                <x-shop.navbar-cart-button />
 
                 {{-- Perfil --}}
                 <div class="nav-item dropdown ms-lg-3">

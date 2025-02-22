@@ -24,9 +24,9 @@
 <body>
     @yield('style')
 
-    <x-admin-sidebar-menu />
+    <x-admin.sidebar-menu />
 
-    <x-admin-navbar-top />
+    <x-admin.navbar-top />
 
     <main class="content">
 

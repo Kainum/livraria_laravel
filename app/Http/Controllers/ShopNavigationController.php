@@ -19,7 +19,7 @@ class ShopNavigationController extends Controller
         return view('shop.home', compact('item_list'));
     }
 
-    public function getLivros (Request $request) {
+    public function search (Request $request) {
         $paginate_value = 12;
 
         $filtragem = $request->get('pesquisa');

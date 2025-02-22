@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         @forelse ($livros as $item)
-            <x-shop-book-image :$item />
+            <x-shop.book-image :$item />
         @empty
             <div>Sem resultados</div>
         @endforelse

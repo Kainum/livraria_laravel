@@ -9,7 +9,7 @@
         <h2 class="text-center">DESTAQUES</h2>
         <div class="d-flex flex-row flex-nowrap overflow-auto gap-3">
             @foreach ($item_list as $item)
-                <x-shop-collection-image :$item />
+                <x-shop.collection-image :$item />
             @endforeach
         </div>
     </div>

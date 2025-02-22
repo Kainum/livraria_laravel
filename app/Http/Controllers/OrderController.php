@@ -42,7 +42,7 @@ class OrderController extends Controller
         $request->session()->put('endereco', $endereco);
         // $request->session()->put('frete_options', $frete_options);
 
-        return view('customer_pedido.pedido_page', compact('item_list', 'endereco'));
+        return view('cart.confirm_order', compact('item_list', 'endereco'));
     }
 
     public function concluirPedido(Request $request)
@@ -93,7 +93,7 @@ class OrderController extends Controller
     public function meusPedidos()
     {
         $item_list = Auth::guard('web')->user()->pedidos()->orderBy('order_date', 'DESC')->get();
-        return view('meuspedidos_page', compact('item_list'));
+        return view('profile.my_orders_page', compact('item_list'));
     }
 
     public function cancelarPedido($id)

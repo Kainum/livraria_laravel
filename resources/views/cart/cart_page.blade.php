@@ -13,7 +13,7 @@
             {{-- ITENS --}}
             <div class="col-xl-8 mb-4 p-0 d-flex flex-column gap-2">
                 @foreach ($cart->items as $item)
-                    <x-shop-cart-item :$item />
+                    <x-shop.cart-item :$item />
                 @endforeach
             </div>
 

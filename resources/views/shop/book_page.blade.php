@@ -20,7 +20,7 @@
                 </div>
             @endif
 
-            <x-shop-book-details :$item />
+            <x-shop.book-details :$item />
         </div>
 
         <div class="col-12 col-md-6 d-flex flex-column gap-3">

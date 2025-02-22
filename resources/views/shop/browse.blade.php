@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         @foreach ($item_list as $item)
-            <x-shop-genre-image :$item />
+            <x-shop.genre-image :$item />
         @endforeach
     </div>
 @stop

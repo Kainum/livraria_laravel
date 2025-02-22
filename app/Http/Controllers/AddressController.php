@@ -17,11 +17,11 @@ class AddressController extends Controller
 
         // dd($list);
 
-        return view('enderecos.index', ['item_list'=>$list]);
+        return view('profile.addresses.index', ['item_list'=>$list]);
     }
 
     public function create () {
-        return view('enderecos.create');
+        return view('profile.addresses.create');
     }
 
     public function store (AddressRequest $request) {
@@ -46,7 +46,7 @@ class AddressController extends Controller
 
     public function edit(Request $request) {
         $item = Address::find(Crypt::decrypt($request->get('id')));
-        return view('enderecos.edit', compact('item'));
+        return view('profile.addresses.edit', compact('item'));
     }
 
     public function update(AddressRequest $request, $id) {

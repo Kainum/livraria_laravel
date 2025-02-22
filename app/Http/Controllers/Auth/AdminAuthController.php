@@ -40,7 +40,7 @@ class AdminAuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])) {
-            $user = auth()->user();
+            // $user = auth()->user();
 
             return redirect()->intended(url('/admin/dashboard'));
         } else {

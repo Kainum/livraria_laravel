@@ -25,7 +25,7 @@ class CartController extends Controller
             return $q->pivot->quantity;
         }) ?? 0;
         
-        return view('cart_page', compact('cart', 'qtd_total'));
+        return view('cart.cart_page', compact('cart', 'qtd_total'));
     }
 
     public function store (Request $request) {
@@ -71,7 +71,7 @@ class CartController extends Controller
     }
 
 
-    public function cartAdd ($id) {
+    public function cart_add ($id) {
         // não permite que a quantidade seja maior que o estabelecido
         $item = OrderProduct::find($id);
         $qty_in_stock = $item->book->qty_in_stock;
@@ -83,7 +83,7 @@ class CartController extends Controller
         return redirect()->route('cart.page');
     }
 
-    public function cartSub ($id) {
+    public function cart_sub ($id) {
         $item = OrderProduct::find($id);
 
         $new_qtd = $item->quantity - 1;
@@ -99,13 +99,12 @@ class CartController extends Controller
         return redirect()->route('cart.page');
     }
 
-    public function cartExclude ($id) {
+    public function cart_exclude ($id) {
         $item = OrderProduct::find($id);
         $item->delete();
 
         return redirect()->route('cart.page');
     }
-
 
     public function selecionarEndereco() {
 
@@ -115,7 +114,7 @@ class CartController extends Controller
 
         $lista_enderecos = Auth::guard('web')->user()->enderecos; //pega os enderecos do user
 
-        return view('customer_pedido.enderecos_page', compact('lista_enderecos'));
+        return view('cart.select_address', compact('lista_enderecos'));
     }
 
     

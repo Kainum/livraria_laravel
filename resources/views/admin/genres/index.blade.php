@@ -6,7 +6,7 @@
 @section('content')
     <a href="{{ route('admin.genres.create') }}" class="btn btn-info">Adicionar</a>
 
-    <x-admin-search-bar route="admin.genres.index" />
+    <x-admin.search-bar route="admin.genres.index" />
     
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->image }}</td>
-                    <x-admin-table-actions route="admin.genres" :$item />
+                    <x-admin.table-actions route="admin.genres" :$item />
                 </tr>
             @endforeach
         </tbody>

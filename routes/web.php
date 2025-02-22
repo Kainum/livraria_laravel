@@ -23,7 +23,7 @@ Route::controller(ShopNavigationController::class)->group(function () {
     Route::redirect('/', '/home');
     Route::get('/home', 'home')->name('home');
 
-    Route::any('/search', 'getLivros')->name('search');
+    Route::any('/search', 'search')->name('search');
 
     Route::get('/browse', 'browse')->name('browse');
     Route::get('/browse/{id}', 'browse_collections')->name('browse.colecoes');;
@@ -38,7 +38,6 @@ Route::controller(ShopNavigationController::class)->group(function () {
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
 Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
-// FIM ROTAS PUBLICAS
 
 
 // ROTAS CLIENTE
@@ -48,9 +47,9 @@ Route::middleware('auth')->group(function () {
         Route::controller(CartController::class)->group(function () {
             Route::get('/', 'cartPage')->name('page');
             Route::post('/', 'store')->name('store');
-            Route::get('/add/{id}', 'cartAdd')->name('add');
-            Route::get('/sub/{id}', 'cartSub')->name('sub');
-            Route::get('/exclude/{id}', 'cartExclude')->name('exclude');
+            Route::get('/add/{id}', 'cart_add')->name('add');
+            Route::get('/sub/{id}', 'cart_sub')->name('sub');
+            Route::get('/exclude/{id}', 'cart_exclude')->name('exclude');
 
             Route::post('/endereco', 'selecionarEndereco')->name('endereco');
         });
@@ -74,8 +73,8 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('wishlist')->controller(WishListController::class)->name('wishlist.')->group(function () {
             Route::get('/', 'view')->name('index');
-            Route::post('/add/{id}', 'addWishList')->name('add');
-            Route::get('/rem/{id}', 'removeWishList')->name('remove');
+            Route::post('/add/{id}', 'wishlist_add')->name('add');
+            Route::get('/rem/{id}', 'wishlist_remove')->name('remove');
         });
 
         Route::prefix('my-addresses')->controller(AddressController::class)->name('addresses.')->group(function () {
@@ -97,57 +96,56 @@ Route::middleware('auth')->group(function () {
 // FIM ROTAS CLIENTE
 
 // ROTAS ADMIN
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [AdminAuthController::class, 'login'])->name('login');
-    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-    Route::middleware('auth:admin')->group(function () {
-        Route::redirect('/', '/admin/dashboard');
-        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function () {
 
-        Route::prefix('genres')->controller(GenreController::class)->name('genres.')->group(function () {
-            Route::any('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::post('/update/{id}', 'update')->name('update');
-            Route::get('/destroy/{id}', 'destroy')->name('destroy');
-        });
+    Route::redirect('/', '/admin/dashboard');
+    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-        Route::prefix('publishers')->controller(PublisherController::class)->name('publishers.')->group(function () {
-            Route::any('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::post('/update/{id}', 'update')->name('update');
-            Route::get('/destroy/{id}', 'destroy')->name('destroy');
-        });
+    Route::prefix('genres')->controller(GenreController::class)->name('genres.')->group(function () {
+        Route::any('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
 
-        Route::prefix('books')->controller(BookController::class)->name('books.')->group(function () {
-            Route::any('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::post('/update/{id}', 'update')->name('update');
-            Route::get('/destroy/{id}', 'destroy')->name('destroy');
-        });
+    Route::prefix('publishers')->controller(PublisherController::class)->name('publishers.')->group(function () {
+        Route::any('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
 
-        Route::prefix('collections')->controller(CollectionController::class)->name('collections.')->group(function () {
-            Route::any('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::post('/update/{id}', 'update')->name('update');
-            Route::get('/destroy/{id}', 'destroy')->name('destroy');
-        });
+    Route::prefix('books')->controller(BookController::class)->name('books.')->group(function () {
+        Route::any('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
 
-        Route::prefix('relatorios')->controller(RelatoriosController::class)->name('relatorios.')->group(function () {
-            Route::get('/estoque', 'relatorioEstoque')->name('estoque.page');
-            Route::post('/estoque', 'gerarRelEstoque')->name('estoque.gerar');
-            Route::get('/vendas_periodo', 'relatorioVendasPeriodo')->name('vendas_periodo.page');
-            Route::post('/vendas_periodo', 'gerarRelVendasPeriodo')->name('vendas_periodo.gerar');
-        });
+    Route::prefix('collections')->controller(CollectionController::class)->name('collections.')->group(function () {
+        Route::any('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('relatorios')->controller(RelatoriosController::class)->name('relatorios.')->group(function () {
+        Route::get('/estoque', 'relatorioEstoque')->name('estoque.page');
+        Route::post('/estoque', 'gerarRelEstoque')->name('estoque.gerar');
+        Route::get('/vendas_periodo', 'relatorioVendasPeriodo')->name('vendas_periodo.page');
+        Route::post('/vendas_periodo', 'gerarRelVendasPeriodo')->name('vendas_periodo.gerar');
     });
 });
 // FIM ROTAS ADMIN

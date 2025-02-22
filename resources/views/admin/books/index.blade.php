@@ -6,7 +6,7 @@
 @section('content')
     <a href="{{ route('admin.books.create') }}" class="btn btn-info">Adicionar</a>
 
-    <x-admin-search-bar route="admin.books.index" />
+    <x-admin.search-bar route="admin.books.index" />
 
     <table class="table table-bordered table-nowrap mb-3">
         <thead class="thead-light">
@@ -25,7 +25,7 @@
                     <td>{{ $item->isbn }}</td>
                     <td>{{ $item->editora->name }}</td>
                     <td>{{ $item->colecao->name }}</td>
-                    <x-admin-table-actions route="admin.books" :$item />
+                    <x-admin.table-actions route="admin.books" :$item />
                 </tr>
             @endforeach
         </tbody>
