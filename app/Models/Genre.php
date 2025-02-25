@@ -12,9 +12,10 @@ class Genre extends Model
     protected $fillable = [
         'name',
         'image',
+        'slug',
     ];
 
-    public function colecoes() {
+    public function collections() {
         return $this->belongsToMany(Collection::class, 'collection_genre', 'genre_id', 'collection_id');
     }
 }

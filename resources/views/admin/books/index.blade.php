@@ -23,8 +23,8 @@
                 <tr>
                     <td>{{ $item->product_name }}</td>
                     <td>{{ $item->isbn }}</td>
-                    <td>{{ $item->editora->name }}</td>
-                    <td>{{ $item->colecao->name }}</td>
+                    <td>{{ $item->publisher->name }}</td>
+                    <td>{{ $item->collection->name }}</td>
                     <x-admin.table-actions route="admin.books" :$item />
                 </tr>
             @endforeach

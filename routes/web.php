@@ -26,13 +26,13 @@ Route::controller(ShopNavigationController::class)->group(function () {
     Route::any('/search', 'search')->name('search');
 
     Route::get('/browse', 'browse')->name('browse');
-    Route::get('/browse/{id}', 'browse_collections')->name('browse.colecoes');;
+    Route::get('/browse/{slug}', 'browse_collections')->name('browse.collections');;
 
-    Route::redirect('/produto', '/search');
-    Route::get('/produto/{id}', 'viewProduto')->name('produto.view');
+    Route::redirect('/book', '/search');
+    Route::get('/book/{id}', 'view_book')->name('product.view');
 
-    Route::redirect('/colecao', '/search');
-    Route::get('/colecao/{id}', 'view_collection')->name('colecao.view');
+    Route::redirect('/collection', '/search');
+    Route::get('/collection/{id}', 'view_collection')->name('collection.view');
 });
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');

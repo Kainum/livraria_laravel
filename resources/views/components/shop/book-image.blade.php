@@ -1,5 +1,5 @@
 @php
-    $route = route('produto.view', ['id' => \Crypt::encrypt($item->id)]);
+    $route = route('product.view', ['id' => \Crypt::encrypt($item->id)]);
 
     $color = $item->qty_in_stock > 0 ? 'success' : 'warning';
     $icon = $item->qty_in_stock > 0 ? 'cart-shopping' : 'triangle-exclamation';

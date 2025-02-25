@@ -99,9 +99,9 @@
         <div class="form-group mb-3">
             <label for="collection_id">Coleção:</label>
             <select name="collection_id" id="collection_id" class="form-select" required>
-                @foreach (\App\Models\Collection::orderBy('name')->get() as $colecao)
-                    <option value="{{ $colecao->id }}" {{ $colecao->id == $item->collection_id ? 'selected' : '' }}>
-                        {{ $colecao->name }}</option>
+                @foreach (\App\Models\Collection::orderBy('name')->get() as $collection)
+                    <option value="{{ $collection->id }}" {{ $collection->id == $item->collection_id ? 'selected' : '' }}>
+                        {{ $collection->name }}</option>
                 @endforeach
             </select>
             @error('collection_id')
@@ -112,9 +112,9 @@
         <div class="form-group mb-3">
             <label for="publisher_id">Publisher:</label>
             <select name="publisher_id" id="publisher_id" class="form-select" required>
-                @foreach (\App\Models\Publisher::orderBy('name')->get() as $editora)
-                    <option value="{{ $editora->id }}" {{ $editora->id == $item->publisher_id ? 'selected' : '' }}>
-                        {{ $editora->name }}</option>
+                @foreach (\App\Models\Publisher::orderBy('name')->get() as $publisher)
+                    <option value="{{ $publisher->id }}" {{ $publisher->id == $item->publisher_id ? 'selected' : '' }}>
+                        {{ $publisher->name }}</option>
                 @endforeach
             </select>
             @error('publisher_id')

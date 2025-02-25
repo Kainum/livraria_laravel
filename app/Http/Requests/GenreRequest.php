@@ -26,6 +26,7 @@ class GenreRequest extends FormRequest
         return [
             'name'  =>'required|max:50',
             'file'  =>'image',
+            'slug'  =>'required|min:3|max:100|unique:genres,slug',
         ];
     }
 }

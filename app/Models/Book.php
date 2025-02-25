@@ -24,11 +24,11 @@ class Book extends Model
         'collection_id',
     ];
 
-    public function editora() {
+    public function publisher() {
         return $this->belongsTo(Publisher::class, 'publisher_id');
     }
 
-    public function colecao() {
+    public function collection() {
         return $this->belongsTo(Collection::class, 'collection_id');
     }
 }

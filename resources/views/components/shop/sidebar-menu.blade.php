@@ -103,7 +103,7 @@
                         @foreach (App\Models\Genre::orderBy('name')->take(5)->get() as $item)
                             <li class="nav-item">
                                 <a class="nav-link"
-                                    href="{{ route('browse.colecoes', ['id' => \Crypt::encrypt($item->id)]) }}">
+                                    href="{{ route('browse.collections', ['slug' => $item->slug]) }}">
                                     <span class="sidebar-text">{{ $item->name }}</span>
                                 </a>
                             </li>

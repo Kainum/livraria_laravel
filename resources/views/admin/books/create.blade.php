@@ -85,8 +85,8 @@
         <div class="form-group mb-3">
             <label for="collection_id">Coleção:</label>
             <select name="collection_id" id="collection_id" class="form-select" required>
-                @foreach(\App\Models\Collection::orderBy('name')->get() as $colecao)
-                    <option value="{{ $colecao->id }}">{{ $colecao->name }}</option>
+                @foreach(\App\Models\Collection::orderBy('name')->get() as $collection)
+                    <option value="{{ $collection->id }}">{{ $collection->name }}</option>
                 @endforeach
             </select>
             @error('collection_id')
@@ -97,8 +97,8 @@
         <div class="form-group mb-3">
             <label for="publisher_id">Publisher:</label>
             <select name="publisher_id" id="publisher_id" class="form-select" required>
-                @foreach(\App\Models\Publisher::orderBy('name')->get() as $editora)
-                    <option value="{{ $editora->id }}">{{ $editora->name }}</option>
+                @foreach(\App\Models\Publisher::orderBy('name')->get() as $publisher)
+                    <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
                 @endforeach
             </select>
             @error('publisher_id')

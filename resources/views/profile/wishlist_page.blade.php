@@ -22,7 +22,7 @@
                 @foreach ($item_list as $item)
                     <tr>
                         <td>
-                            <a href="{{ route('produto.view', ['id' => \Crypt::encrypt($item->livro->id)]) }}">
+                            <a href="{{ route('product.view', ['id' => \Crypt::encrypt($item->livro->id)]) }}">
                                 {{ $item->livro->product_name }}
                             </a>
                         </td>

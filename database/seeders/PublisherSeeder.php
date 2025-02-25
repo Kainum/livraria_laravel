@@ -17,9 +17,9 @@ class PublisherSeeder extends Seeder
     {
         $array = ['JBC', 'Panini', 'Rocco', 'Abril'];
 
-        foreach ($array as $editora) {
+        foreach ($array as $publisher) {
             Publisher::create([
-                'name' => $editora
+                'name' => $publisher
             ]);
         }
     }

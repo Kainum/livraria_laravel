@@ -17,7 +17,7 @@ class CollectionGenre extends Pivot
         return $this->belongsTo(Genre::class);
     }
 
-    public function colecao() {
+    public function collection() {
         return $this->belongsTo(Collection::class);
     }
 }

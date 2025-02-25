@@ -4,7 +4,7 @@
 ])
 @section('content')
     <div class="row justify-content-around">
-        @forelse ($genre->colecoes as $item)
+        @forelse ($genre->collections as $item)
             <x-shop.collection-image :$item />
         @empty
             <div class="text-center p-5">

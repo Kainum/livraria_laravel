@@ -40,8 +40,9 @@ class ShopNavigationController extends Controller
         return view('shop.browse', compact('item_list'));
     }
 
-    public function browse_collections ($id) {
-        $genre = Genre::with('colecoes')->find(Crypt::decrypt($id));
+    public function browse_collections ($slug) {
+        // $genre = Genre::with('collections')->find(Crypt::decrypt($id));
+        $genre = Genre::with('collections')->where('slug', $slug)->firstOrFail();
         
         return view('shop.browse_collections', compact('genre'));
     }
@@ -54,7 +55,7 @@ class ShopNavigationController extends Controller
         return view('shop.collection_books', compact('collection', 'livros'));
     }
 
-    public function viewProduto($id) {
+    public function view_book($id) {
         $item_id = Crypt::decrypt($id);
         $wishlist = null;
 
