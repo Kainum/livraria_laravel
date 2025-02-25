@@ -29,7 +29,7 @@
                 <h2>{{ $item->product_name }}</h2>
                 <p>{{ $item->synopsis }}</p>
                 <a class="btn btn-secondary"
-                    href="{{ route('collection.view', ['id' => \Crypt::encrypt($item->collection->id)]) }}">
+                    href="{{ route('collection.view', ['slug' => $item->collection->slug]) }}">
                     Ver Coleção
                 </a>
                 <h4>{{ \App\Services\Operations::money($item->price) }}</h4>

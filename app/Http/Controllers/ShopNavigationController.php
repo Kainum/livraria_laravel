@@ -41,15 +41,14 @@ class ShopNavigationController extends Controller
     }
 
     public function browse_collections ($slug) {
-        // $genre = Genre::with('collections')->find(Crypt::decrypt($id));
         $genre = Genre::with('collections')->where('slug', $slug)->firstOrFail();
         
         return view('shop.browse_collections', compact('genre'));
     }
 
-    public function view_collection($id) {
+    public function view_collection($slug) {
         $paginate_value = 12;
-        $collection = Collection::find(Crypt::decrypt($id));
+        $collection = Collection::where('slug', $slug)->firstOrFail();
         $livros = $collection->livros()->paginate($paginate_value);
         
         return view('shop.collection_books', compact('collection', 'livros'));

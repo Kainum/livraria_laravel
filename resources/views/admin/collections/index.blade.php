@@ -13,6 +13,7 @@
             <tr>
                 <th class="col-2">Nome</th>
                 <th>Gêneros</th>
+                <th>Slug</th>
                 <th class="col-2">Ações</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                     @endphp
                     <td>{{ $item->name }}</td>
                     <td>{{ implode(', ', $genres) }}</td>
+                    <td>{{ $item->slug }}</td>
                     <x-admin.table-actions route="admin.collections" :$item />
                 </tr>
             @endforeach

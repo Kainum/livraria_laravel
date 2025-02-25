@@ -26,6 +26,7 @@ class CollectionRequest extends FormRequest
         return [
             'name'  =>'required|max:100',
             'file'  =>'image',
+            'slug'  =>'required|min:3|max:100|unique:collections,slug',
         ];
     }
 }

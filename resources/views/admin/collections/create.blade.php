@@ -25,6 +25,14 @@
             @enderror
         </div>
 
+        <div class="form-group mb-3">
+            <label for="slug">Slug:</label>
+            <input type="text" name="slug" id="slug" class="form-control" required maxlength="100">
+            @error('slug')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
         <hr class="mb-3">
 
         <h4>Gêneros</h4>

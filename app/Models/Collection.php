@@ -13,6 +13,7 @@ class Collection extends Model
     protected $fillable = [
         'name',
         'image',
+        'slug',
     ];
 
     public function livros() {

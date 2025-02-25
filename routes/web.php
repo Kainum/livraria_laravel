@@ -28,11 +28,11 @@ Route::controller(ShopNavigationController::class)->group(function () {
     Route::get('/browse', 'browse')->name('browse');
     Route::get('/browse/{slug}', 'browse_collections')->name('browse.collections');;
 
+    Route::redirect('/collection', '/search');
+    Route::get('/collection/{slug}', 'view_collection')->name('collection.view');
+    
     Route::redirect('/book', '/search');
     Route::get('/book/{id}', 'view_book')->name('product.view');
-
-    Route::redirect('/collection', '/search');
-    Route::get('/collection/{id}', 'view_collection')->name('collection.view');
 });
 
 Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
