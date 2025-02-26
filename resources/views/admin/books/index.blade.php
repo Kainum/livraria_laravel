@@ -15,6 +15,7 @@
                 <th>ISBN</th>
                 <th>Publisher</th>
                 <th>Coleção</th>
+                <th>Slug</th>
                 <th class="col-2">Ações</th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                     <td>{{ $item->isbn }}</td>
                     <td>{{ $item->publisher->name }}</td>
                     <td>{{ $item->collection->name }}</td>
+                    <td>{{ $item->slug }}</td>
                     <x-admin.table-actions route="admin.books" :$item />
                 </tr>
             @endforeach

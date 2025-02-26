@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('isbn', 20);
             $table->string('author', 100);
             $table->string('image')->nullable();
+            $table->string('slug', 200)->unique();
             $table->date('release_date');
             $table->double('price');
             $table->integer('page_number')->unsigned();

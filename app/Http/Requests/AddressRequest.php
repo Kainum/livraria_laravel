@@ -24,15 +24,15 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'cep'       =>'required|formato_cep|size:9',
-            'endereco'  =>'required|max:200',
-            'numero'    =>'required|max:10',
-            'bairro'    =>'required|max:50',
-            'cidade'    =>'required|max:50',
-            'uf'        =>'required|uf|size:2',
-            'complemento'   =>'max:50',
-            'destinatario'  =>'required|max:50',
-            'phone_number'      =>'required|min:11|max:20',
+            'cep' => 'required|formato_cep|size:9',
+            'endereco' => 'required|max:200',
+            'numero' => 'required|max:10',
+            'bairro' => 'required|max:50',
+            'cidade' => 'required|max:50',
+            'uf' => 'required|uf|size:2',
+            'complemento' => 'max:50',
+            'destinatario' => 'required|max:50',
+            'phone_number' => 'required|min:11|max:20',
         ];
     }
 }

@@ -24,17 +24,18 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name'    =>'required|max:100',
-            'synopsis'    =>'required|max:1000',
-            'isbn'      =>'required|min:10|max:20',
-            'author'     =>'required|max:100',
-            'file'      =>'image',
-            'price'     =>'required|min:0',
-            'page_number'   =>'required|min:1',
-            'release_date'   =>'required|date',
-            'qty_in_stock'       =>'required|min:0',
-            'publisher_id'        =>'required',
-            'collection_id'        =>'required',
+            'product_name' => 'required|max:100',
+            'synopsis' => 'required|max:1000',
+            'isbn' => 'required|min:10|max:20',
+            'author' => 'required|max:100',
+            'file' => 'image',
+            'slug' => 'required|min:3|max:100|unique:books,slug',
+            'price' => 'required|min:0',
+            'page_number' => 'required|min:1',
+            'release_date' => 'required|date',
+            'qty_in_stock' => 'required|min:0',
+            'publisher_id' => 'required',
+            'collection_id' => 'required',
         ];
     }
 }

@@ -24,9 +24,9 @@ class GenreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  =>'required|max:50',
-            'file'  =>'image',
-            'slug'  =>'required|min:3|max:100|unique:genres,slug',
+            'name' => 'required|max:50',
+            'file' => 'image',
+            'slug' => 'required|min:3|max:100|unique:genres,slug',
         ];
     }
 }

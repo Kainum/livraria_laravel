@@ -13,7 +13,7 @@
                 $cart_items = App\Services\Cart::content()?->items->take(3) ?? [];
             @endphp
             @foreach ($cart_items as $cart_item)
-                <a href="{{ route('product.view', ['id' => \Crypt::encrypt($cart_item->id)]) }}"
+                <a href="{{ route('product.view', ['slug' => $cart_item->slug]) }}"
                     class="list-group-item list-group-item-action border-bottom">
                     <div class="d-flex align-items-center">
                         <div class="col-3">

@@ -75,6 +75,7 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
+            $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
         }
         // FIM SEED DRAGON BALL
@@ -131,6 +132,7 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
+            $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
         }
         // FIM SEED DR STONE
@@ -179,6 +181,7 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
+            $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
         }
         // FIM SEED SPY X FAMILY
@@ -230,8 +233,15 @@ class BookSeeder extends Seeder
         ];
         foreach ($livros as $key => $value) {
             $result = array_merge($value, $conf);
+            $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
         }
         // FIM SEED HARRY POTTER
+    }
+
+    static function clean_string($string) {
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+        
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
     }
 }

@@ -40,13 +40,13 @@ class ShopNavigationController extends Controller
         return view('shop.browse', compact('item_list'));
     }
 
-    public function browse_collections ($slug) {
+    public function view_collections_from_genre ($slug) {
         $genre = Genre::with('collections')->where('slug', $slug)->firstOrFail();
         
         return view('shop.browse_collections', compact('genre'));
     }
 
-    public function view_collection($slug) {
+    public function view_books_from_collection($slug) {
         $paginate_value = 12;
         $collection = Collection::where('slug', $slug)->firstOrFail();
         $livros = $collection->livros()->paginate($paginate_value);
@@ -54,18 +54,10 @@ class ShopNavigationController extends Controller
         return view('shop.collection_books', compact('collection', 'livros'));
     }
 
-    public function view_book($id) {
-        $item_id = Crypt::decrypt($id);
-        $wishlist = null;
+    public function view_book($slug) {
+        $item = Book::where('slug', $slug)->firstOrFail();
+        $wishlist = Auth::guard('web')->user()?->wishListItems->where('book_id', $item->id)->first();
 
-        if (Auth::guard('web')->check()) {
-            $user_id = Auth::guard('web')->user()->id;
-            $wishlist = WishListItem::where('user_id', '=', $user_id)
-                        ->where('book_id', '=', $item_id)
-                        ->first();
-        }
-        
-        $item = Book::find($item_id);
         return view('shop.book_page', compact('item', 'wishlist'));
     }
 }

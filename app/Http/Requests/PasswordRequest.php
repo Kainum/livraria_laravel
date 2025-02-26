@@ -24,9 +24,9 @@ class PasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'current_password'  => 'required|current_password:web',
-            'new_password'      => 'required|min:8',
-            'confirm_password'  => 'required|same:new_password',
+            'current_password' => 'required|current_password:web',
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|same:new_password',
         ];
     }
 }

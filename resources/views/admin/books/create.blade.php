@@ -107,6 +107,14 @@
         </div>
 
         <div class="form-group mb-3">
+            <label for="slug">Slug:</label>
+            <input type="text" name="slug" id="slug" class="form-control" required maxlength="200">
+            @error('slug')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Criar</button>
             <a href="{{ route('admin.books.index') }}" class="btn btn-default">Voltar</a>
         </div>

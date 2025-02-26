@@ -1,5 +1,5 @@
 <div class="col-6 col-sm-4 col-xl-3 mb-4">
-    <a href="{{ route('browse.collections', ['slug' => $item->slug]) }}">
+    <a href="{{ route('genre.view', ['slug' => $item->slug]) }}">
         {{-- <img class="img-fluid" src="{{ route('image.show', [
             'image_path'=>$item->image,
             'width'=>576,

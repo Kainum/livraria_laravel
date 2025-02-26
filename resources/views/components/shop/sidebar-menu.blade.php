@@ -103,7 +103,7 @@
                         @foreach (App\Models\Genre::orderBy('name')->take(5)->get() as $item)
                             <li class="nav-item">
                                 <a class="nav-link"
-                                    href="{{ route('browse.collections', ['slug' => $item->slug]) }}">
+                                    href="{{ route('genre.view', ['slug' => $item->slug]) }}">
                                     <span class="sidebar-text">{{ $item->name }}</span>
                                 </a>
                             </li>

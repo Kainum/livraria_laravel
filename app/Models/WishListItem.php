@@ -16,7 +16,7 @@ class WishListItem extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function livro() {
+    public function book() {
         return $this->belongsTo(Book::class);
     }
 }
