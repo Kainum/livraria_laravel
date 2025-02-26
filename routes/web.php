@@ -26,7 +26,7 @@ Route::controller(ShopNavigationController::class)->group(function () {
     Route::any('/search', 'search')->name('search');
 
     Route::get('/browse', 'browse')->name('browse');
-    Route::get('/browse/{slug}', 'view_collections_from_genre')->name('genre.view');;
+    Route::get('/browse/{slug}', 'view_collections_from_genre')->name('genre.view');
 
     Route::redirect('/collection', '/search');
     Route::get('/collection/{slug}', 'view_books_from_collection')->name('collection.view');
@@ -65,10 +65,10 @@ Route::middleware('auth')->group(function () {
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/', 'view')->name('view');
             Route::get('/edit', 'edit')->name('edit');
-            Route::put('/update', 'update')->name('update');
+            Route::post('/update', 'update')->name('update');
 
             Route::get('/password/edit', 'editPassword')->name('password.edit');
-            Route::put('/password/update', 'updatePassword')->name('password.update');
+            Route::post('/password/update', 'updatePassword')->name('password.update');
         });
 
         Route::prefix('wishlist')->controller(WishListController::class)->name('wishlist.')->group(function () {

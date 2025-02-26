@@ -13,7 +13,7 @@ class ProfileController extends Controller
 
     public function view() {
         $user = Auth::guard('web')->user();
-        return view('profile.view', compact('user'));
+        return view('profile.my-profile', compact('user'));
     }
 
 

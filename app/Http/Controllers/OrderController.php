@@ -92,7 +92,7 @@ class OrderController extends Controller
 
     public function meusPedidos()
     {
-        $item_list = Auth::guard('web')->user()->pedidos()->orderBy('order_date', 'DESC')->get();
+        $item_list = Auth::guard('web')->user()->orders()->orderBy('order_date', 'DESC')->get();
         return view('profile.my_orders_page', compact('item_list'));
     }
 

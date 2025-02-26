@@ -46,7 +46,7 @@ class User extends Authenticatable
         return $this->hasMany(WishListItem::class);
     }
 
-    public function pedidos() {
+    public function orders() {
         return $this->hasMany(Order::class, 'client_id');
     }
 
