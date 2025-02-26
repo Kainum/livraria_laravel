@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'client_id');
     }
 
-    public function enderecos() {
+    public function addresses() {
         return $this->hasMany(Address::class, 'usuario_id');
     }
 }

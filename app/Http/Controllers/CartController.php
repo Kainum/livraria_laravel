@@ -112,7 +112,7 @@ class CartController extends Controller
             return redirect()->route('cart.page')->with('message', 'Erro ao concluir pedido.');
         }
 
-        $lista_enderecos = Auth::guard('web')->user()->enderecos; //pega os enderecos do user
+        $lista_enderecos = Auth::guard('web')->user()->addresses; //pega os enderecos do user
 
         return view('cart.select_address', compact('lista_enderecos'));
     }

@@ -39,9 +39,6 @@
                         <a class="dropdown-item d-flex" href="{{ route('profile.wishlist.index') }}">
                             <i class="fa-regular fa-circle-user fs-5 me-2"></i>Lista de desejos
                         </a>
-                        <a class="dropdown-item d-flex" href="{{ route('profile.addresses.index') }}">
-                            <i class="fa-regular fa-circle-user fs-5 me-2"></i>Meus endereços
-                        </a>
                     </div>
                 </div>
 

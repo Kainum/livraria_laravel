@@ -78,7 +78,6 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('my-addresses')->controller(AddressController::class)->name('addresses.')->group(function () {
-            Route::any('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
             Route::get('/edit', 'edit')->name('edit');
