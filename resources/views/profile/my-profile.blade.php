@@ -39,6 +39,8 @@
                         <tr>
                             <td class="py-1">
                                 <p class="m-0">
+                                    {{ "$item->destinatario - $item->phone_number" }}
+                                    <br>
                                     {{ "$item->endereco, $item->numero - $item->bairro" }}
                                     <br>
                                     {{ "$item->cidade, $item->uf - $item->cep" }}

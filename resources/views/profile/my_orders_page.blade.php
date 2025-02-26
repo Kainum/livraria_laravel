@@ -11,52 +11,56 @@
     <div class="row">
         @foreach ($item_list as $pedido)
             <div class="table-responsive mb-3">
-                @switch($pedido->status)
-                    @case(app\Enums\OrderStatusEnum::PAID)
-                        <table class="table table-success table-bordered align-middle">
-                        @break
-                    @case(app\Enums\OrderStatusEnum::CANCELED)
-                        <table class="table table-danger table-bordered align-middle">
-                        @break
-                    @default
-                        <table class="table table-bordered align-middle">
-                @endswitch
+                @php
+                    switch ($pedido->status) {
+                        case app\Enums\OrderStatusEnum::PAID:
+                            $color = 'success';
+                            break;
+                        case app\Enums\OrderStatusEnum::CANCELED:
+                            $color = 'danger';
+                            break;
+                        default:
+                            $color = 'info';
+                            break;
+                    }
+                @endphp
+                <table class="table table-bordered align-middle table-{{ $color }}">
                     <thead>
                         <tr>
-                            <th class="rounded-start">Endereço</th>
-                            <th class="">Status</th>
-                            <th class="">Data do Order</th>
-                            <th class="">Valor Total</th>
-                            <th class="">Frete</th>
-                            <th class="rounded-end"></th>
+                            <th class="col">Endereço</th>
+                            <th class="col-1 text-center">Status</th>
+                            <th class="col-1">Data do Pedido</th>
+                            <th class="col-2 text-end">Valor Total</th>
+                            <th class="col-1 text-end">Frete</th>
+                            <th class="col-2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ substr(print($pedido->endereco), 0, -1) }}</td>
+                            <td>{!! $pedido->endereco !!}</td>
                             @switch($pedido->status)
                                 @case(app\Enums\OrderStatusEnum::PAID)
-                                    <td style="color: green">ABERTO</td>
+                                    <td class="text-center" style="color: green">ABERTO</td>
                                     @break
                                 @case(app\Enums\OrderStatusEnum::CANCELED)
-                                    <td style="color: firebrick">CANCELADO</td>
+                                    <td class="text-center" style="color: firebrick">CANCELADO</td>
                                     @break
                                 @default
                                     <td></td>
                             @endswitch
                             <td>{{ Carbon\Carbon::parse($pedido->order_date)->format('d/m/Y') }}</td>
-                            <td>{{ \App\Services\Operations::money($pedido->total_value) }}</td>
-                            <td>{{ \App\Services\Operations::money($pedido->valorFrete) }}</td>
-                            <td>
+                            <td class="text-end">{{ \App\Services\Operations::money($pedido->total_value) }}</td>
+                            <td class="text-end">{{ \App\Services\Operations::money($pedido->valorFrete) }}</td>
+                            <td class="text-center">
                                 @switch($pedido->status)
                                     @case(app\Enums\OrderStatusEnum::PAID)
-                                        <a href="{{ route('profile.orders.cancel',  ['id'=>\Crypt::encrypt($pedido->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Order</a>
+                                        <a href="{{ route('profile.orders.cancel', ['id'=>\Crypt::encrypt($pedido->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Order</a>
                                         @break
                                     @case(app\Enums\OrderStatusEnum::CANCELED)
-                                        <button disabled class="btn btn-danger">Cancelar Order</button>
+                                        {{-- sem nada --}}
                                         @break
                                     @default
-                                        <td></td>
+                                        {{-- sem nada --}}
                                 @endswitch
                             </td>
                         </tr>
@@ -65,10 +69,10 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Produto</th>
-                                            <th>Qtd</th>
-                                            <th>Preço Unit.</th>
-                                            <th>Valor Item</th>
+                                            <th class="col">Produto</th>
+                                            <th class="col-1">Qtd</th>
+                                            <th class="col-1 text-end">Preço Unit.</th>
+                                            <th class="col-1 text-end">Valor Item</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -76,8 +80,8 @@
                                             <tr>
                                                 <td>{{ $item->product_name }}</td>
                                                 <td>{{ $item->pivot->quantity }}</td>
-                                                <td>{{ \App\Services\Operations::money($item->pivot->unit_value) }}</td>
-                                                <td>{{ \App\Services\Operations::money($item->pivot->item_value) }}</td>
+                                                <td class="text-end">{{ \App\Services\Operations::money($item->pivot->unit_value) }}</td>
+                                                <td class="text-end">{{ \App\Services\Operations::money($item->pivot->item_value) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -10,12 +10,12 @@
     @endif
 
     @if ($item_list->count() > 0)
-        <table class="table table-centered table-nowrap mb-0 rounded">
+        <table class="table table-bordered table-nowrap mb-0">
             <thead class="thead-light">
                 <tr>
-                    <th class="border-0 rounded-start">Produto</th>
-                    <th class="border-0">Data de Adição</th>
-                    <th class="border-0 rounded-end"></th>
+                    <th class="col">Produto</th>
+                    <th class="col-2 text-center">Data de Adição</th>
+                    <th class="col-2"></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,12 +26,10 @@
                                 {{ $item->book->product_name }}
                             </a>
                         </td>
-                        <td>
-                            {{ Carbon\Carbon::parse($item->added_date)->format('d/m/Y') }}
-                        </td>
-                        <td>
+                        <td class="text-center">{{ Carbon\Carbon::parse($item->added_date)->format('d/m/Y') }}</td>
+                        <td class="p-0 text-center">
                             <a href="{{ route('profile.wishlist.remove', ['id' => \Crypt::encrypt($item->id)]) }}"
-                                class="btn btn-danger">Remover</a>
+                                class="btn btn-danger btn-sm">Remover</a>
                         </td>
                     </tr>
                 @endforeach
