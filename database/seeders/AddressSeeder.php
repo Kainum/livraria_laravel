@@ -18,7 +18,7 @@ class AddressSeeder extends Seeder
         $enderecos = [
             [
                 'cep'           =>'98240-000',
-                'endereco'      =>'Rua 1º de Maio',
+                'logradouro'      =>'Rua 1º de Maio',
                 'numero'        =>'150',
                 'bairro'        =>'Fátima',
                 'cidade'        =>'Santa Bárbara do Sul',
@@ -30,7 +30,7 @@ class AddressSeeder extends Seeder
             ],
             [
                 'cep'           =>'99052-900',
-                'endereco'      =>'BR 285 Km 292.7',
+                'logradouro'      =>'BR 285 Km 292.7',
                 'numero'        =>'1',
                 'bairro'        =>'São José',
                 'cidade'        =>'Passo Fundo',
@@ -42,7 +42,7 @@ class AddressSeeder extends Seeder
             ],
             [
                 'cep'           =>'98240-000',
-                'endereco'      =>'Rua Abegay Vieira',
+                'logradouro'      =>'Rua Abegay Vieira',
                 'numero'        =>'658',
                 'bairro'        =>'Morada do Sol',
                 'cidade'        =>'Santa Bárbara do Sul',

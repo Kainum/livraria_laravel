@@ -16,11 +16,11 @@ class Collection extends Model
         'slug',
     ];
 
-    public function livros() {
+    public function books() {
         return $this->hasMany(Book::class, 'collection_id');
     }
 
-    public function generos() {
+    public function genres() {
         return $this->belongsToMany(Genre::class, 'collection_genre', 'collection_id', 'genre_id')->using(CollectionGenre::class);
     }
 }

@@ -35,11 +35,11 @@ class CollectionController extends Controller
     public function store(CollectionRequest $request)
     {
         $genres = [];
-        foreach ($request->generos as $genre) {
+        foreach ($request->genres ?? [] as $genre) {
             $genres[] = Operations::decryptId($genre);
         }
         $request->merge([
-            'generos' => $genres,
+            'genres' => $genres,
         ]);
 
         $new_item = $request->all();
@@ -54,15 +54,11 @@ class CollectionController extends Controller
         $new_item = Collection::create($new_item);
 
         // vincula os generos na coleção
-        if (isset($request->generos)) {
-            $generos = $request->generos;
-
-            foreach ($generos as $value) {
-                CollectionGenre::create([
-                    'genre_id' => $value,
-                    'collection_id' => $new_item->id,
-                ]);
-            }
+        foreach ($request->genres ?? [] as $genre_id) {
+            CollectionGenre::create([
+                'genre_id' => $genre_id,
+                'collection_id' => $new_item->id,
+            ]);
         }
 
         return redirect()->route('admin.collections.index');
@@ -77,11 +73,11 @@ class CollectionController extends Controller
     public function update(CollectionRequest $request, $id)
     {
         $genres = [];
-        foreach ($request->generos as $genre) {
+        foreach ($request->genres ?? [] as $genre) {
             $genres[] = Operations::decryptId($genre);
         }
         $request->merge([
-            'generos' => $genres,
+            'genres' => $genres,
         ]);
 
         $updated_item = $request->all();
@@ -100,15 +96,11 @@ class CollectionController extends Controller
         CollectionGenre::where('collection_id', $item->id)->delete();
 
         // vincula os generos na coleção
-        if (isset($request->generos)) {
-            $generos = $request->generos;
-
-            foreach ($generos as $value) {
-                CollectionGenre::create([
-                    'genre_id' => $value,
-                    'collection_id' => $item->id,
-                ]);
-            }
+        foreach ($request->genres ?? [] as $genre_id) {
+            CollectionGenre::create([
+                'genre_id' => $genre_id,
+                'collection_id' => $item->id,
+            ]);
         }
 
         return redirect()->route('admin.collections.index');

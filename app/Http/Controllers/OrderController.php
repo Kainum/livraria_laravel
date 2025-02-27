@@ -26,7 +26,7 @@ class OrderController extends Controller
         $item_list = $cart->items;
 
         // FRETE
-        $endereco = Address::find(Crypt::decrypt($request->endereco));
+        $endereco = Address::find(Crypt::decrypt($request->logradouro));
 
         // $request['cepDestino'] = str_replace("-", "", $endereco->cep);
 
@@ -56,7 +56,7 @@ class OrderController extends Controller
 
         $end = session('endereco');
         $endereco = $end->destinatario . "<br>" .
-            $end->endereco . ", " . $end->numero . " - " . $end->bairro . "<br>" .
+            $end->logradouro . ", " . $end->numero . " - " . $end->bairro . "<br>" .
             $end->cep . " - " . $end->cidade . " - " . $end->uf . "<br>" .
             $end->complemento . "<br>" .
             $end->phone_number;

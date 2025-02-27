@@ -23,7 +23,7 @@ class BookSeeder extends Seeder
             'publisher_id' => 2,
             'collection_id' => 1,
         ];
-        $livros = [
+        $books = [
             [
                 'product_name' => 'Dragon Ball Vol. 1',
                 'synopsis' => "Son Goku é um pequeno órfão de coração puro, mas com uma tremenda força. Depois de viver tanto tempo isolado da civilização, ele recebe a inesperada visita de uma garota! Bulma lhe propõe uma parceria para buscar as sete Esferas do Dragão, que, quando reunidas, são capazes de realizar qualquer desejo! Perigos e adversários não faltarão no caminho dessa dupla inusitada, e os mais variados personagens marcarão presença nesta aventura cheia de humor!",
@@ -73,7 +73,7 @@ class BookSeeder extends Seeder
                 'qty_in_stock' => random_int(90, 200),
             ],
         ];
-        foreach ($livros as $key => $value) {
+        foreach ($books as $key => $value) {
             $result = array_merge($value, $conf);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
@@ -88,7 +88,7 @@ class BookSeeder extends Seeder
             'publisher_id' => 2,
             'collection_id' => 2,
         ];
-        $livros = [
+        $books = [
             [
                 'product_name' => 'Dr. Stone Vol. 1',
                 'synopsis' => "Em um instante, todos os humanos do mundo viraram pedra. Este acontecimento misterioso envolveu o estudante Taiju e, depois de milhares de anos, ele e o seu amigo Senku despertam e decidem reconstruir a civilização do zero! E assim começa uma grande e única aventura de sobrevivência num mundo de ficção científica!",
@@ -130,7 +130,7 @@ class BookSeeder extends Seeder
                 'qty_in_stock' => random_int(90, 200),
             ],
         ];
-        foreach ($livros as $key => $value) {
+        foreach ($books as $key => $value) {
             $result = array_merge($value, $conf);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
@@ -145,7 +145,7 @@ class BookSeeder extends Seeder
             'publisher_id' => 2,
             'collection_id' => 3,
         ];
-        $livros = [
+        $books = [
             [
                 'product_name' => 'Spy X Family Vol. 1',
                 'synopsis' => 'O habilidoso espião "Twilight" é instruído a construir uma "família" para se infiltrar em uma tradicional instituição de ensino. Mas a "filha" que ele encontra é uma paranormal que lê mentes! E a "esposa" é uma assassina?! Ocultando um do outro suas identidades, essa família temporária terá de enfrentar os perigos dos exames de admissão e do mundo em uma espirituosa comédia doméstica!!',
@@ -179,7 +179,7 @@ class BookSeeder extends Seeder
                 'qty_in_stock' => random_int(90, 200),
             ],
         ];
-        foreach ($livros as $key => $value) {
+        foreach ($books as $key => $value) {
             $result = array_merge($value, $conf);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
@@ -193,7 +193,7 @@ class BookSeeder extends Seeder
             'publisher_id' => 3,
             'collection_id' => 4,
         ];
-        $livros = [
+        $books = [
             [
                 'product_name' => 'Harry Potter e a Pedra Filosofal: 1',
                 'synopsis' => 'Harry Potter é um garoto cujos pais, feiticeiros, foram assassinados por um poderosíssimo bruxo quando ele ainda era um bebê. Ele foi levado, então, para a casa dos tios que nada tinham a ver com o sobrenatural. Pelo contrário. Até os 10 anos, Harry foi uma espécie de gata borralheira: maltratado pelos tios, herdava roupas velhas do primo gorducho, tinha óculos remendados e era tratado como um estorvo.No dia de seu aniversário de 11 anos, entretanto, ele parece deslizar por um buraco sem fundo, como o de Alice no país das maravilhas, que o conduz a um mundo mágico. Descobre sua verdadeira história e seu destino: ser um aprendiz de feiticeiro até o dia em que terá que enfrentar a pior força do mal, o homem que assassinou seus pais.',
@@ -231,7 +231,7 @@ class BookSeeder extends Seeder
                 'page_number' => 584,
             ],
         ];
-        foreach ($livros as $key => $value) {
+        foreach ($books as $key => $value) {
             $result = array_merge($value, $conf);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);

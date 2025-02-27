@@ -47,10 +47,10 @@
         <h4>Gêneros</h4>
 
         <div class="input_fields_wrap mb-3">
-            @foreach ($item->generos as $genre)
+            @foreach ($item->genres as $genre)
                 <div class="mb-3 d-flex align-items-center">
                     <div class="w-75">
-                        <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
+                        <select name="genres[]" class="form-select" required placeholder="Selecione um gênero">
                             @foreach (\App\Models\Genre::orderBy('name')->pluck('name', 'id')->toArray() as $id => $name)
                                 <option value="{{ $id }}" {{ $genre->id == $id ? 'selected' : '' }}>{{ $name }}</option>
                             @endforeach
@@ -86,7 +86,7 @@
                 x++;
                 var newField = `<div class="mb-3 d-flex align-items-center">
                                     <div class="w-75">
-                                        <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
+                                        <select name="genres[]" class="form-select" required placeholder="Selecione um gênero">
                                             @foreach (\App\Models\Genre::orderBy('name')->pluck('name', 'id')->toArray() as $id => $name)
                                                 <option value="{{ \Crypt::encrypt($id) }}">{{ $name }}</option>
                                             @endforeach

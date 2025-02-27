@@ -62,7 +62,7 @@
                 x++;
                 var newField = `<div class="mb-3 d-flex align-items-center">
                                     <div class="w-75">
-                                        <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
+                                        <select name="genres[]" class="form-select" required placeholder="Selecione um gênero">
                                             @foreach (\App\Models\Genre::orderBy('name')->pluck('name', 'id')->toArray() as $id => $name)
                                                 <option value="{{ \Crypt::encrypt($id) }}">{{ $name }}</option>
                                             @endforeach

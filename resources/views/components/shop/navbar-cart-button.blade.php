@@ -15,23 +15,13 @@
             @foreach ($cart_items as $cart_item)
                 <a href="{{ route('product.view', ['slug' => $cart_item->slug]) }}"
                     class="list-group-item list-group-item-action border-bottom">
-                    <div class="d-flex align-items-center">
-                        <div class="col-3">
-                            <img class="img-fluid"
-                                src="{{ route('image.show', [
-                                    'image_path' => $cart_item->image,
-                                    'width' => 576,
-                                    'height' => 760,
-                                ]) }}">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="col-2">
+                            <img class="img-fluid" width="576px" height="760px" src="{{ asset('/assets/images/fill/fill_book.jpg') }}">
                         </div>
                         <div class="col-9">
-                            <p class="font-small mt-1 mb-0 text-truncate bg-danger" style="max-width: 200px;">
+                            <p class="font-small mt-1 mb-0 text-truncate" style="max-width: 200px;">
                                 {{ $cart_item->product_name }}
-                                {{-- @if (strlen($cart_item->name) > 28)
-                                    {{ substr($cart_item->name, 0, 25) . '...' }}
-                                @else
-                                    {{ $cart_item->name }}
-                                @endif --}}
                             </p>
                         </div>
                     </div>

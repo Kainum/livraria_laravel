@@ -8,7 +8,7 @@
         <div>{{ session('message') }}</div>
     @endif
 
-    <p>{{ "$endereco->endereco, $endereco->numero - $endereco->bairro" }}</p>
+    <p>{{ "$endereco->logradouro, $endereco->numero - $endereco->bairro" }}</p>
     <p>{{ "$endereco->cidade, $endereco->uf - $endereco->cep" }}</p>
     <div>
 

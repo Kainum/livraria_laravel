@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{!! $pedido->endereco !!}</td>
+                            <td>{!! $pedido->logradouro !!}</td>
                             @switch($pedido->status)
                                 @case(app\Enums\OrderStatusEnum::PAID)
                                     <td class="text-center" style="color: green">ABERTO</td>

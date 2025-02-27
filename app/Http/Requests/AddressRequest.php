@@ -25,7 +25,7 @@ class AddressRequest extends FormRequest
     {
         return [
             'cep' => 'required|formato_cep|size:9',
-            'endereco' => 'required|max:200',
+            'logradouro' => 'required|max:200',
             'numero' => 'required|max:10',
             'bairro' => 'required|max:50',
             'cidade' => 'required|max:50',

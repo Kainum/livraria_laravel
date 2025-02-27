@@ -9,7 +9,7 @@
             <div class="col-md-4 col-12 border border-2 p-3">
                 <p>
                     <span class="fw-black">{{ $item->destinatario }}</span><br>
-                    <span>{{ "$item->endereco, $item->numero" }}</span><br>
+                    <span>{{ "$item->logradouro, $item->numero" }}</span><br>
                     <span>{{ $item->bairro }}</span><br>
                     <span>{{ "$item->cidade, $item->uf, $item->cep" }}</span><br>
                     <span>Telefone: {{ $item->phone_number }}</span>

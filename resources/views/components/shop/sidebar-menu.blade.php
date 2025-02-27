@@ -93,12 +93,12 @@
             <hr>
             <li class="nav-item">
                 <span class="nav-link collapsed d-flex align-items-center" data-bs-toggle="collapse"
-                    data-bs-target="#submenu-generos">
+                    data-bs-target="#submenu-genres">
                     <i class="fa-solid fa-folder-open col-2"></i>
                     <span class="col">Gêneros</span>
                     <i class="link-arrow text-center fa-solid fa-chevron-right col-2"></i>
                 </span>
-                <div class="multi-level collapse" role="list" id="submenu-generos" aria-expanded="false">
+                <div class="multi-level collapse" role="list" id="submenu-genres" aria-expanded="false">
                     <ul class="flex-column nav">
                         @foreach (App\Models\Genre::orderBy('name')->take(5)->get() as $item)
                             <li class="nav-item">

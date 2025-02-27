@@ -9,7 +9,7 @@
 
     <a href="{{ $route }}">
         <img class="img-fluid" width="576px" height="760px"
-            src="https://br.web.img3.acsta.net/medias/nmedia/18/93/64/37/20269376.jpg">
+            src="{{ asset('/assets/images/fill/fill_book.jpg') }}">
     </a>
 
     <a href="{{ $route }}">

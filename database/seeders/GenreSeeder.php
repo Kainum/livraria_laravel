@@ -15,7 +15,7 @@ class GenreSeeder extends Seeder
      */
     public function run()
     {
-        $generos = [
+        $genres = [
             [
                 'name' => 'Ação',
                 'image' => 'no-image.webp',
@@ -78,7 +78,7 @@ class GenreSeeder extends Seeder
             ]
         ];
 
-        foreach ($generos as $genre) {
+        foreach ($genres as $genre) {
             Genre::create($genre);
         }
     }

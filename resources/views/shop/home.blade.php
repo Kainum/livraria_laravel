@@ -3,7 +3,7 @@
 ])
 @section('content')
     <div>
-        <img src="{{ asset('storage/images/banner.png') }}" alt="Banner">
+        <img src="{{ asset('assets/images/banner.png') }}" alt="Banner">
     </div>
     <div>
         <h2 class="text-center">DESTAQUES</h2>

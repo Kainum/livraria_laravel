@@ -6,7 +6,7 @@
         <div class="col-12 col-md-6 d-flex flex-column gap-2">
             {{-- IMAGEM --}}
             <img class="img-fluid" width="400px" height="640px"
-                src="https://m.media-amazon.com/images/I/71ySKqK3SRL._AC_UF894,1000_QL80_.jpg">
+                src="{{ asset('/assets/images/fill/fill_book_big.jpg') }}">
 
             @if (is_null($wishlist))
                 <form action="{{ route('profile.wishlist.add', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">

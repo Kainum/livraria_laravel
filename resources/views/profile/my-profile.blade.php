@@ -41,7 +41,7 @@
                                 <p class="m-0">
                                     {{ "$item->destinatario - $item->phone_number" }}
                                     <br>
-                                    {{ "$item->endereco, $item->numero - $item->bairro" }}
+                                    {{ "$item->logradouro, $item->numero - $item->bairro" }}
                                     <br>
                                     {{ "$item->cidade, $item->uf - $item->cep" }}
                                 </p>

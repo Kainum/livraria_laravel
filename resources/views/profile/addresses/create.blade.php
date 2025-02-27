@@ -10,10 +10,10 @@
 
         <div class="row">
             <div class="form-group col mb-3">
-                <label for="endereco">Endereço:</label>
-                <input type="text" name="endereco" id="endereco" class="form-control" required maxlength="200"
-                    value="{{ old('endereco') }}">
-                @error('endereco')
+                <label for="logradouro">Logradouro:</label>
+                <input type="text" name="logradouro" id="logradouro" class="form-control" required maxlength="200"
+                    value="{{ old('logradouro') }}">
+                @error('logradouro')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

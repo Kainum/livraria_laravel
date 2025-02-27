@@ -21,7 +21,7 @@
             @foreach ($item_list as $item)
                 <tr>
                     @php
-                        $genres = array_column($item->generos->toArray(), 'name');
+                        $genres = array_column($item->genres->toArray(), 'name');
                     @endphp
                     <td>{{ $item->name }}</td>
                     <td>{{ implode(', ', $genres) }}</td>

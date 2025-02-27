@@ -18,10 +18,10 @@
     </tr>
     <tr>
         @php
-            $generos = array_column($item->collection->generos->toArray(), 'name');
+            $genres = array_column($item->collection->genres->toArray(), 'name');
         @endphp
         <td>Gêneros</td>
-        <td class="fw-bold">{{ implode(', ', $generos) }}</td>
+        <td class="fw-bold">{{ implode(', ', $genres) }}</td>
     </tr>
     <tr>
         <td>Publisher</td>
