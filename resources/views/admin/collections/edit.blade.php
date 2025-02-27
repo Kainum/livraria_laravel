@@ -88,7 +88,7 @@
                                     <div class="w-75">
                                         <select name="generos[]" class="form-select" required placeholder="Selecione um gênero">
                                             @foreach (\App\Models\Genre::orderBy('name')->pluck('name', 'id')->toArray() as $id => $name)
-                                                <option value="{{ $id }}">{{ $name }}</option>
+                                                <option value="{{ \Crypt::encrypt($id) }}">{{ $name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

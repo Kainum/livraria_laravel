@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CollectionRequest;
 use App\Models\Collection;
 use App\Models\CollectionGenre;
+use App\Services\Operations;
 use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -33,6 +34,14 @@ class CollectionController extends Controller
 
     public function store(CollectionRequest $request)
     {
+        $genres = [];
+        foreach ($request->generos as $genre) {
+            $genres[] = Operations::decryptId($genre);
+        }
+        $request->merge([
+            'generos' => $genres,
+        ]);
+
         $new_item = $request->all();
 
         // guarda a image do upload
@@ -61,14 +70,22 @@ class CollectionController extends Controller
 
     public function edit($id)
     {
-        $item = Collection::find(Crypt::decrypt($id));
+        $item = Collection::find(Operations::decryptId($id));
         return view('admin.collections.edit', compact('item'));
     }
 
     public function update(CollectionRequest $request, $id)
     {
+        $genres = [];
+        foreach ($request->generos as $genre) {
+            $genres[] = Operations::decryptId($genre);
+        }
+        $request->merge([
+            'generos' => $genres,
+        ]);
+
         $updated_item = $request->all();
-        $item = Collection::find(Crypt::decrypt($id));
+        $item = Collection::find(Operations::decryptId($id));
 
         if ($request->hasFile('file')) {
             $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
@@ -100,7 +117,7 @@ class CollectionController extends Controller
     public function destroy($id)
     {
         try {
-            Collection::find(Crypt::decrypt($id))->delete();
+            Collection::find(Operations::decryptId($id))->delete();
             $ret = array('status' => 200, 'msg' => 'null');
         } catch (\Illuminate\Database\QueryException $e) {
             $ret = array('status' => 500, 'msg' => $e->getMessage());

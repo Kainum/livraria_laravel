@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
+use App\Services\Operations;
 use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -33,6 +34,10 @@ class BookController extends Controller
 
     public function store(BookRequest $request)
     {
+        $request->merge([
+            'collection_id' => Operations::decryptId($request->collection_id),
+            'publisher_id' => Operations::decryptId($request->publisher_id),
+        ]);
         $new_item = $request->all();
 
         if ($request->hasFile('file')) {
@@ -47,14 +52,18 @@ class BookController extends Controller
 
     public function edit($id)
     {
-        $item = Book::find(Crypt::decrypt($id));
+        $item = Book::find(Operations::decryptId($id));
         return view('admin.books.edit', compact('item'));
     }
 
     public function update(BookRequest $request, $id)
     {
+        $request->merge([
+            'collection_id' => Operations::decryptId($request->collection_id),
+            'publisher_id' => Operations::decryptId($request->publisher_id),
+        ]);
         $updated_item = $request->all();
-        $item = Book::find(Crypt::decrypt($id));
+        $item = Book::find(Operations::decryptId($id));
 
         if ($request->hasFile('file')) {
             $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
@@ -67,7 +76,7 @@ class BookController extends Controller
     public function destroy($id)
     {
         try {
-            Book::find(Crypt::decrypt($id))->delete();
+            Book::find(Operations::decryptId($id))->delete();
             $ret = array('status' => 200, 'msg' => 'null');
         } catch (\Illuminate\Database\QueryException $e) {
             $ret = array('status' => 500, 'msg' => $e->getMessage());

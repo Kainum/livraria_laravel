@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PublisherRequest;
 use App\Models\Publisher;
+use App\Services\Operations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -40,20 +41,20 @@ class PublisherController extends Controller
 
     public function edit($id)
     {
-        $item = Publisher::find(Crypt::decrypt($id));
+        $item = Publisher::find(Operations::decryptId($id));
         return view('admin.publishers.edit', compact('item'));
     }
 
     public function update(PublisherRequest $request, $id)
     {
-        Publisher::find(Crypt::decrypt($id))->update($request->all());
+        Publisher::find(Operations::decryptId($id))->update($request->all());
         return redirect()->route('admin.publishers.index');
     }
 
     public function destroy($id)
     {
         try {
-            Publisher::find(Crypt::decrypt($id))->delete();
+            Publisher::find(Operations::decryptId($id))->delete();
             $ret = array('status' => 200, 'msg' => 'null');
         } catch (\Illuminate\Database\QueryException $e) {
             $ret = array('status' => 500, 'msg' => $e->getMessage());

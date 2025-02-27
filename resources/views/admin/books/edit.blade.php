@@ -100,7 +100,7 @@
             <label for="collection_id">Coleção:</label>
             <select name="collection_id" id="collection_id" class="form-select" required>
                 @foreach (\App\Models\Collection::orderBy('name')->get() as $collection)
-                    <option value="{{ $collection->id }}" {{ $collection->id == $item->collection_id ? 'selected' : '' }}>
+                    <option value="{{ \Crypt::encrypt($collection->id) }}" {{ $collection->id == $item->collection_id ? 'selected' : '' }}>
                         {{ $collection->name }}</option>
                 @endforeach
             </select>
@@ -113,7 +113,7 @@
             <label for="publisher_id">Publisher:</label>
             <select name="publisher_id" id="publisher_id" class="form-select" required>
                 @foreach (\App\Models\Publisher::orderBy('name')->get() as $publisher)
-                    <option value="{{ $publisher->id }}" {{ $publisher->id == $item->publisher_id ? 'selected' : '' }}>
+                    <option value="{{ \Crypt::encrypt($publisher->id) }}" {{ $publisher->id == $item->publisher_id ? 'selected' : '' }}>
                         {{ $publisher->name }}</option>
                 @endforeach
             </select>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GenreRequest;
 use App\Models\Genre;
+use App\Services\Operations;
 use App\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -47,14 +48,14 @@ class GenreController extends Controller
 
     public function edit($id)
     {
-        $item = Genre::find(Crypt::decrypt($id));
+        $item = Genre::find(Operations::decryptId($id));
         return view('admin.genres.edit', compact('item'));
     }
 
     public function update(GenreRequest $request, $id)
     {
         $updated_item = $request->all();
-        $item = Genre::find(Crypt::decrypt($id));
+        $item = Genre::find(Operations::decryptId($id));
 
         if ($request->hasFile('file')) {
             $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
@@ -67,7 +68,7 @@ class GenreController extends Controller
     public function destroy($id)
     {
         try {
-            Genre::find(Crypt::decrypt($id))->delete();
+            Genre::find(Operations::decryptId($id))->delete();
             $ret = array('status' => 200, 'msg' => 'null');
         } catch (\Illuminate\Database\QueryException $e) {
             $ret = array('status' => 500, 'msg' => $e->getMessage());
