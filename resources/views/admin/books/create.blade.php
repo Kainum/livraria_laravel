@@ -35,9 +35,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="image">Arquivo de Imagem:</label>
-            <input type="file" name="image" id="image" class="form-control">
-            @error('image')
+            <label for="file">Arquivo de Imagem:</label>
+            <input type="file" name="file" id="file" class="form-control">
+            @error('file')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

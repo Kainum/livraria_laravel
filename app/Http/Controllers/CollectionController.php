@@ -6,9 +6,7 @@ use App\Http\Requests\CollectionRequest;
 use App\Models\Collection;
 use App\Models\CollectionGenre;
 use App\Services\Operations;
-use App\Util;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 
 class CollectionController extends Controller
 {
@@ -46,9 +44,7 @@ class CollectionController extends Controller
 
         // guarda a image do upload
         if ($request->hasFile('file')) {
-            $new_item["image"] = Util::storeFile($request->file('file'));
-        } else {
-            $new_item["image"] = Util::NO_IMAGE_TEXT;
+            $new_item["image"] = Operations::storeFile($request->file('file'), 'collections');
         }
 
         $new_item = Collection::create($new_item);
@@ -84,7 +80,7 @@ class CollectionController extends Controller
         $item = Collection::find(Operations::decryptId($id));
 
         if ($request->hasFile('file')) {
-            $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
+            $updated_item["image"] = Operations::updateFile($request->file('file'), 'collections', $item["image"]);
         }
 
         //================================================

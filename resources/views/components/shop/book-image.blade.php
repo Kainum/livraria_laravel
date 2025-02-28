@@ -8,8 +8,8 @@
 <div class="col-6 col-sm-4 col-xl-3 mb-4 px-2">
 
     <a href="{{ $route }}">
-        <img class="img-fluid" width="576px" height="760px"
-            src="{{ asset('/assets/images/fill/fill_book.jpg') }}">
+        <img class="object-fit-cover" style="width:576px;height:680px;"
+            src="{{ $item->image ? \App\Services\Operations::getFile($item->image) : asset('/assets/images/fill/fill_book.jpg') }}">
     </a>
 
     <a href="{{ $route }}">

@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use App\Services\Operations;
-use App\Util;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -40,10 +37,9 @@ class BookController extends Controller
         ]);
         $new_item = $request->all();
 
+        // guarda a image do upload
         if ($request->hasFile('file')) {
-            $new_item["image"] = Util::storeFile($request->file('file'));
-        } else {
-            $new_item["image"] = Util::NO_IMAGE_TEXT;
+            $new_item["image"] = Operations::storeFile($request->file('file'), 'books');
         }
 
         Book::create($new_item);
@@ -66,7 +62,7 @@ class BookController extends Controller
         $item = Book::find(Operations::decryptId($id));
 
         if ($request->hasFile('file')) {
-            $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
+            $updated_item["image"] = Operations::updateFile($request->file('file'), 'books', $item["image"]);
         }
 
         $item->update($updated_item);

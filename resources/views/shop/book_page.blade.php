@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-12 col-md-6 d-flex flex-column gap-2">
             {{-- IMAGEM --}}
-            <img class="img-fluid" width="400px" height="640px"
-                src="{{ asset('/assets/images/fill/fill_book_big.jpg') }}">
+            <img class="object-fit-cover" style="width:480px;height:640px;"
+                src="{{ $item->image ? \App\Services\Operations::getFile($item->image) : asset('/assets/images/fill/fill_book_big.jpg') }}">
 
             @if (is_null($wishlist))
                 <form action="{{ route('profile.wishlist.add', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">

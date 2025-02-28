@@ -17,7 +17,8 @@
                     class="list-group-item list-group-item-action border-bottom">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="col-2">
-                            <img class="img-fluid" width="576px" height="760px" src="{{ asset('/assets/images/fill/fill_book.jpg') }}">
+                            <img class="object-fit-cover" style="width:576px;height:680px;"
+                                src="{{ $cart_item->image ? \App\Services\Operations::getFile($cart_item->image) : asset('/assets/images/fill/fill_book.jpg') }}">
                         </div>
                         <div class="col-9">
                             <p class="font-small mt-1 mb-0 text-truncate" style="max-width: 200px;">

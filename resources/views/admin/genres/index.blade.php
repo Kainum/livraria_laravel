@@ -21,7 +21,7 @@
             @foreach ($item_list as $item)
                 <tr>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->image }}</td>
+                    <td>{{ $item->image ?? '-- none --' }}</td>
                     <td>{{ $item->slug }}</td>
                     <x-admin.table-actions route="admin.genres" :$item />
                 </tr>

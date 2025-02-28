@@ -51,12 +51,7 @@
                 @foreach ($item_list as $item)
                     <tr>
                         <td>
-                            {{-- <img class="img-fluid" src="{{ route('image.show', [
-                        'image_path'=> \App\Models\Book::find($item->id)->image,
-                        'width'=>576,
-                        'height'=>760,
-                        ]) }}"> --}}
-                            <img class="img-fluid" width="576px" height="760px"
+                            <img class="object-fit-cover" style="width:576px;height:680px;"
                                 src="https://br.web.img3.acsta.net/medias/nmedia/18/93/64/37/20269376.jpg">
                         </td>
                         <td>{{ $item->product_name }}</td>

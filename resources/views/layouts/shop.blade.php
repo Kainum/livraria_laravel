@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $page_title }}</title>
 
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
     <!-- Sweet Alert -->
     <link type="text/css" href="{{ url('volt/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
     

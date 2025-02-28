@@ -1,7 +1,8 @@
 <div class="row m-0 border border-2">
     <div class="col-md-9 d-flex">
         <div class="col-lg-2 col-md-3 col-5">
-            <img class="img-fluid" width="576px" height="760px" src="{{ asset('/assets/images/fill/fill_book.jpg') }}">
+            <img class="object-fit-cover" style="width:576px;height:680px;"
+                src="{{ $item->image ? \App\Services\Operations::getFile($item->image) : asset('/assets/images/fill/fill_book.jpg') }}">
         </div>
         <div class="row col-lg-10 col-md-9 col-7">
             <p>{{ $item->product_name }}</p>

@@ -18,22 +18,22 @@ class CollectionSeeder extends Seeder
         $array = [
             [
                 'name' => 'Dragon Ball',
-                'image' => 'col-dragon-ball.webp',
+                'image' => 'collections/col-dragon-ball.webp',
                 'slug' => 'dragon-ball-3265',
             ],
             [
                 'name' => 'Dr. Stone',
-                'image' => 'col-dr-stone.webp',
+                'image' => 'collections/col-dr-stone.webp',
                 'slug' => 'dr-stone-5367',
             ],
             [
                 'name' => 'Spy x Family',
-                'image' => 'col-spy-family.webp',
+                'image' => 'collections/col-spy-family.webp',
                 'slug' => 'spy-x-family-1234',
             ],
             [
                 'name' => 'Harry Potter',
-                'image' => 'col-harry-potter.jpg',
+                'image' => 'collections/col-harry-potter.jpg',
                 'slug' => 'harry-potter-9954',
             ],
         ];

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GenreRequest;
 use App\Models\Genre;
 use App\Services\Operations;
-use App\Util;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 
 class GenreController extends Controller
 {
@@ -36,10 +34,9 @@ class GenreController extends Controller
     {
         $new_item = $request->all();
 
+        // guarda a imagem do upload
         if ($request->hasFile('file')) {
-            $new_item["image"] = Util::storeFile($request->file('file'));
-        } else {
-            $new_item["image"] = Util::NO_IMAGE_TEXT;
+            $new_item["image"] = Operations::storeFile($request->file('file'), 'genres');
         }
 
         Genre::create($new_item);
@@ -58,7 +55,7 @@ class GenreController extends Controller
         $item = Genre::find(Operations::decryptId($id));
 
         if ($request->hasFile('file')) {
-            $updated_item["image"] = Util::updateFile($request->file('file'), $item["image"]);
+            $updated_item["image"] = Operations::updateFile($request->file('file'), 'genres', $item["image"]);
         }
 
         $item->update($updated_item);
