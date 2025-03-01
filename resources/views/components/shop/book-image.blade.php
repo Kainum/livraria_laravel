@@ -9,7 +9,7 @@
 
     <a href="{{ $route }}">
         <img class="object-fit-cover" style="width:576px;height:680px;"
-            src="{{ $item->image ? \App\Services\Operations::getFile($item->image) : asset('/assets/images/fill/fill_book.jpg') }}">
+            src="{{ $item->image ? Storage::url($item->image) : asset('/assets/images/fill/fill_book.jpg') }}">
     </a>
 
     <a href="{{ $route }}">

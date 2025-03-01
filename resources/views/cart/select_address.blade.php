@@ -18,7 +18,7 @@
                 <form action="{{ route('cart.confirmar') }}" method="post">
                     @csrf
 
-                    <input type="hidden" name="endereco" value="{{ \Crypt::encrypt($item->id) }}">
+                    <input type="hidden" name="endereco_id" value="{{ \Crypt::encrypt($item->id) }}">
                     <button type="submit" class="btn btn-primary">Escolher</button>
                 </form>
 

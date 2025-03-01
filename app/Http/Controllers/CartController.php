@@ -9,11 +9,10 @@ use App\Models\OrderProduct;
 use App\Models\Book;
 use App\Models\Order;
 use App\Services\Cart;
+use App\Services\Operations;
 use App\Util;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 
 class CartController extends Controller
 {
@@ -30,7 +29,8 @@ class CartController extends Controller
 
     public function store (Request $request) {
 
-        $product = Book::find(Crypt::decrypt($request->product_id));
+        $product_id = Operations::decryptId($request->product_id);
+        $product = Book::find($product_id);
 
         // acha o carrinho existente ou cria um novo
         $order = Order::firstOrCreate([

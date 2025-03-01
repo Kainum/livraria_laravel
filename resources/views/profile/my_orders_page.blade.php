@@ -9,10 +9,10 @@
         </ul>
     @endif
     <div class="row">
-        @foreach ($item_list as $pedido)
+        @foreach ($item_list as $order)
             <div class="table-responsive mb-3">
                 @php
-                    switch ($pedido->status) {
+                    switch ($order->status) {
                         case app\Enums\OrderStatusEnum::PAID:
                             $color = 'success';
                             break;
@@ -37,8 +37,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{!! $pedido->logradouro !!}</td>
-                            @switch($pedido->status)
+                            <td>{!! $order->endereco !!}</td>
+                            @switch($order->status)
                                 @case(app\Enums\OrderStatusEnum::PAID)
                                     <td class="text-center" style="color: green">ABERTO</td>
                                     @break
@@ -48,13 +48,13 @@
                                 @default
                                     <td></td>
                             @endswitch
-                            <td>{{ Carbon\Carbon::parse($pedido->order_date)->format('d/m/Y') }}</td>
-                            <td class="text-end">{{ \App\Services\Operations::money($pedido->total_value) }}</td>
-                            <td class="text-end">{{ \App\Services\Operations::money($pedido->valorFrete) }}</td>
+                            <td>{{ Carbon\Carbon::parse($order->order_date)->format('d/m/Y') }}</td>
+                            <td class="text-end">{{ \App\Services\Operations::money($order->total_value) }}</td>
+                            <td class="text-end">{{ \App\Services\Operations::money($order->valorFrete) }}</td>
                             <td class="text-center">
-                                @switch($pedido->status)
+                                @switch($order->status)
                                     @case(app\Enums\OrderStatusEnum::PAID)
-                                        <a href="{{ route('profile.orders.cancel', ['id'=>\Crypt::encrypt($pedido->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Order</a>
+                                        <a href="{{ route('profile.orders.cancel', ['id'=>\Crypt::encrypt($order->id)]) }}" class="btn btn-danger delete-confirm">Cancelar Order</a>
                                         @break
                                     @case(app\Enums\OrderStatusEnum::CANCELED)
                                         {{-- sem nada --}}
@@ -76,7 +76,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pedido->items as $item)
+                                        @foreach ($order->items as $item)
                                             <tr>
                                                 <td>{{ $item->product_name }}</td>
                                                 <td>{{ $item->pivot->quantity }}</td>

@@ -18,8 +18,9 @@
             </div>
 
             {{-- INFO --}}
-            <div class="col-xl-4 m-0">
+            <div class="col-xl-4 m-0 ps-4">
                 <p class="h2">Carrinho</p>
+                <hr>
                 <p>Itens no carrinho: <b>{{ $qtd_total }}</b></p>
                 @php
                     $valor_total = $cart->items->sum(function ($q) {
@@ -37,9 +38,7 @@
     @else
         <div class="text-center p-3">
             <p>Seu carrinho está vazio.</p>
-            <a href="{{ route('search') }}" class="btn btn-primary">
-                Continuar comprando
-            </a>
+            <a href="{{ route('search') }}" class="btn btn-primary">Continuar comprando</a>
         </div>
     @endif
 

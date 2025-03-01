@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2.0",
-        "gumlet/php-image-resize": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "igorescobar/jquery-mask-plugin": "^1.14",
         "laravel/breeze": "^2.0",

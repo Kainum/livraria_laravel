@@ -10,7 +10,6 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CorreiosController;
 use App\Http\Controllers\AddressController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RelatoriosController;
@@ -34,8 +33,6 @@ Route::controller(ShopNavigationController::class)->group(function () {
     Route::redirect('/book', '/search');
     Route::get('/book/{slug}', 'view_book')->name('product.view');
 });
-
-Route::get('/image/{image_path}', [ImageController::class, 'show'])->name('image.show');
 
 Route::post('/frete', [CorreiosController::class, 'calcular'])->name('correios.frete');
 
@@ -80,7 +77,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('my-addresses')->controller(AddressController::class)->name('addresses.')->group(function () {
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::get('/edit', 'edit')->name('edit');
+            Route::get('/edit/{id}', 'edit')->name('edit');
             Route::post('/update/{id}', 'update')->name('update');
             Route::get('/destroy/{id}', 'destroy')->name('destroy');
         });

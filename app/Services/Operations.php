@@ -22,10 +22,6 @@ class Operations {
         return $value;
     }
 
-    public static function getFile($file) {
-        return Storage::url($file);
-    }
-
     public static function storeFile(UploadedFile $file, string $directory) {
         $path = $directory . '/' . $file->hashName();
         Storage::disk('public')->put($path, $file->get());

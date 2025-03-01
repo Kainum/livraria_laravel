@@ -150,7 +150,7 @@ class OrderSeeder extends Seeder
             $end->cep . " - " . $end->cidade . " - " . $end->uf . "<br>" .
             $end->complemento . "<br>" .
             $end->phone_number;
-        $pedido = Order::create([
+        $order = Order::create([
             'order_date'   => $dataPedido,
             'endereco'      => $endereco,
             'total_value'    => $total_value,
@@ -167,7 +167,7 @@ class OrderSeeder extends Seeder
                 'unit_value'    => $p["livro"]->price,
                 'item_value'        => $p["livro"]->price * $p["quantity"],
                 'book_id'        => $p["livro"]->id,
-                'order_id'         => $pedido->id,
+                'order_id'         => $order->id,
             ]);
         }
     }

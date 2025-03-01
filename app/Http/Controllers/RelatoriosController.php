@@ -47,7 +47,7 @@ class RelatoriosController extends Controller
         $dataFim    = $request->dataFim;
 
 
-        $items = OrderProduct::select('book_id', 'quantity')->whereHas('pedido', function ($q) use ($dataInicio, $dataFim) {
+        $items = OrderProduct::select('book_id', 'quantity')->whereHas('order', function ($q) use ($dataInicio, $dataFim) {
             $q->whereBetween('order_date', [$dataInicio, $dataFim])->whereNot('status', OrderStatusEnum::CART);
         })->orderBy('book_id')->get();
 

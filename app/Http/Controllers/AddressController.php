@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddressRequest;
 use App\Models\Address;
+use App\Services\Operations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 
 class AddressController extends Controller
 {
@@ -27,22 +27,23 @@ class AddressController extends Controller
 
     public function edit(Request $request)
     {
-        $item = Address::find(Crypt::decrypt($request->get('id')));
+        $id = Operations::decryptId($request->id);
+        $item = Address::find($id);
         return view('profile.addresses.edit', compact('item'));
     }
 
     public function update(AddressRequest $request, $id)
     {
-        $updated_item = $request->all();
+        $id = Operations::decryptId($id);
 
-        Address::find(Crypt::decrypt($id))->update($updated_item);
+        Address::find($id)->update($request->all());
         return redirect()->route('profile.view');
     }
 
     public function destroy($id)
     {
         try {
-            Address::find(Crypt::decrypt($id))->delete();
+            Address::find(Operations::decryptId($id))->delete();
             $ret = array('status' => 200, 'msg' => 'null');
         } catch (\Illuminate\Database\QueryException $e) {
             $ret = array('status' => 500, 'msg' => $e->getMessage());

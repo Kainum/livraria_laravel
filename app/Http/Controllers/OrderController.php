@@ -7,10 +7,9 @@ use App\Models\Correios;
 use App\Models\Address;
 use App\Models\Order;
 use App\Services\Cart;
-use App\Util;
+use App\Services\Operations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 
 class OrderController extends Controller
 {
@@ -26,7 +25,8 @@ class OrderController extends Controller
         $item_list = $cart->items;
 
         // FRETE
-        $endereco = Address::find(Crypt::decrypt($request->logradouro));
+        $endereco_id = Operations::decryptId($request->endereco_id);
+        $endereco = Address::find($endereco_id);
 
         // $request['cepDestino'] = str_replace("-", "", $endereco->cep);
 
@@ -84,7 +84,7 @@ class OrderController extends Controller
 
         foreach ($cart->items as $item) {
             // ATUALIZA O ESTOQUE DO PRODUTO - retira do estoque
-            Util::updateEstoqueProduto($item->book_id, -$item->quantity);
+            $item->update(['qty_in_stock' => $item->qty_in_stock - $item->pivot->quantity]);
         }
 
         return redirect()->route('profile.orders.index')->with('message', 'Order realizado.');
@@ -99,16 +99,18 @@ class OrderController extends Controller
     public function cancelarPedido($id)
     {
         try {
-            $pedido = Order::find(Crypt::decrypt($id));
+            $order_id = Operations::decryptId($id);
+            $order = Order::find($order_id);
+            
             $user_id = Auth::guard('web')->user()->id;
-            if ($pedido->client_id == $user_id) {
-                $pedido->update([
+            if ($order->client_id == $user_id) {
+                $order->update([
                     'status' => OrderStatusEnum::CANCELED
                 ]);
 
                 // ATUALIZA O ESTOQUE DOS PRODUTOS - devolve pro estoque
-                foreach ($pedido->items as $item) {
-                    Util::updateEstoqueProduto($item->id, $item->pivot->quantity);
+                foreach ($order->items as $item) {
+                    $item->update(['qty_in_stock' => $item->qty_in_stock + $item->pivot->quantity]);
                 }
 
                 $ret = array('status' => 200, 'msg' => 'null');

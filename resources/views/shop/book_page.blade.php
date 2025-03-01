@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-12 col-md-6 d-flex flex-column gap-2">
             {{-- IMAGEM --}}
-            <img class="object-fit-cover" style="width:480px;height:640px;"
-                src="{{ $item->image ? \App\Services\Operations::getFile($item->image) : asset('/assets/images/fill/fill_book_big.jpg') }}">
+            <img class="object-fit-cover" style="width:480px;"
+                src="{{ $item->image ? Storage::url($item->image) : asset('/assets/images/fill/fill_book_big.jpg') }}">
 
             @if (is_null($wishlist))
                 <form action="{{ route('profile.wishlist.add', ['id' => \Crypt::encrypt($item->id)]) }}" method="post">
@@ -32,11 +32,12 @@
                     href="{{ route('collection.view', ['slug' => $item->collection->slug]) }}">
                     Ver Coleção
                 </a>
+                <hr>
                 <h4>{{ \App\Services\Operations::money($item->price) }}</h4>
             </div>
 
             {{-- CARRINHO --}}
-            <form action="{{ route('cart.store') }}" method="post">
+            <form action="{{ route('cart.store') }}" method="post" class="w-50">
                 @csrf
 
                 <div class="form-group">
@@ -47,12 +48,15 @@
                     @if ($item->qty_in_stock <= 20)
                         <p class="text-danger">Restam {{ $item->qty_in_stock }} unidades</p>
                     @endif
-                    <div class="form-group">
-                        <input type="number" name="quantity" id="quantity" min="1"
-                            max="{{ min(3, $item->qty_in_stock) }}" class="form-control" value="1">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Adicionar ao Carrinho</button>
+                    <div class="d-flex justify-content-between align-items-end gap-3">
+                        <div class="form-group flex-grow-1">
+                            <label for="quantity">Quantidade</label>
+                            <input type="number" name="quantity" id="quantity" min="1"
+                                max="{{ min(3, $item->qty_in_stock) }}" class="form-control" value="1">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success m-0">Adicionar ao Carrinho</button>
+                        </div>
                     </div>
                 @else
                     <div class="form-group">
@@ -74,7 +78,7 @@
                                 placeholder="_____-___">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Calcular</button>
+                        <button type="submit" class="btn btn-primary me-3">Calcular</button>
                         <a target="_blank" href="https://buscacepinter.correios.com.br/app/endereco/index.php">Não sei meu
                             CEP</a>
                     </form>
