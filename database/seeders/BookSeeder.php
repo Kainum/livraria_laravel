@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Book;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BookSeeder extends Seeder
@@ -73,7 +72,7 @@ class BookSeeder extends Seeder
                 'qty_in_stock' => random_int(90, 200),
             ],
         ];
-        foreach ($books as $key => $value) {
+        foreach ($books as $value) {
             $result = array_merge($value, $conf);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
@@ -95,7 +94,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8542614541',
                 'image' => "books/dr_stone_01.webp",
                 'release_date' => "2018-10-04",
-                'qty_in_stock' => random_int(90, 200),
             ],
             [
                 'product_name' => 'Dr. Stone Vol. 2',
@@ -103,7 +101,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8542615395',
                 'image' => "books/dr_stone_02.webp",
                 'release_date' => "2018-12-03",
-                'qty_in_stock' => random_int(90, 200),
             ],
             [
                 'product_name' => 'Dr. Stone Vol. 3',
@@ -111,7 +108,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8542615401',
                 'image' => "books/dr_stone_03.webp",
                 'release_date' => "2019-01-14",
-                'qty_in_stock' => random_int(90, 200),
             ],
             [
                 'product_name' => 'Dr. Stone Vol. 4',
@@ -119,7 +115,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8542618433',
                 'image' => "books/dr_stone_04.webp",
                 'release_date' => "2019-03-20",
-                'qty_in_stock' => random_int(90, 200),
             ],
             [
                 'product_name' => 'Dr. Stone Vol. 5',
@@ -127,11 +122,10 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8542619768',
                 'image' => "books/dr_stone_05.webp",
                 'release_date' => "2019-05-20",
-                'qty_in_stock' => random_int(90, 200),
             ],
         ];
-        foreach ($books as $key => $value) {
-            $result = array_merge($value, $conf);
+        foreach ($books as $value) {
+            $result = array_merge($value, $conf, ['qty_in_stock' => random_int(90, 200)]);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
         }
@@ -152,7 +146,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-6555123036',
                 'image' => "books/spy_family_01.webp",
                 'release_date' => "2020-09-15",
-                'qty_in_stock' => random_int(90, 200),
             ],
             [
                 'product_name' => 'Spy X Family Vol. 2',
@@ -160,7 +153,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-6555123104',
                 'image' => "books/spy_family_02.webp",
                 'release_date' => "2020-11-15",
-                'qty_in_stock' => random_int(90, 200),
             ],
             [
                 'product_name' => 'Spy X Family Vol. 3',
@@ -168,7 +160,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-6555129021',
                 'image' => "books/spy_family_03.webp",
                 'release_date' => "2021-01-11",
-                'qty_in_stock' => random_int(90, 200),
             ],
             [
                 'product_name' => 'Spy X Family Vol. 4',
@@ -176,11 +167,10 @@ class BookSeeder extends Seeder
                 'isbn' => '978-6555127249',
                 'image' => "books/spy_family_04.webp",
                 'release_date' => "2021-03-01",
-                'qty_in_stock' => random_int(90, 200),
             ],
         ];
-        foreach ($books as $key => $value) {
-            $result = array_merge($value, $conf);
+        foreach ($books as $value) {
+            $result = array_merge($value, $conf, ['qty_in_stock' => random_int(90, 200)]);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
         }
@@ -200,7 +190,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8532523051',
                 'image' => "books/harry_potter_01.webp",
                 'release_date' => "2000-04-07",
-                'qty_in_stock' => random_int(50, 115),
                 'page_number' => 264,
             ],
             [
@@ -209,7 +198,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8532511669',
                 'image' => "books/harry_potter_02.webp",
                 'release_date' => "2000-08-15",
-                'qty_in_stock' => random_int(50, 115),
                 'page_number' => 288,
             ],
             [
@@ -218,7 +206,6 @@ class BookSeeder extends Seeder
                 'isbn' => '978-1781103708',
                 'image' => "books/harry_potter_03.webp",
                 'release_date' => "2000-11-28",
-                'qty_in_stock' => random_int(50, 115),
                 'page_number' => 348,
             ],
             [
@@ -227,12 +214,11 @@ class BookSeeder extends Seeder
                 'isbn' => '978-8532512529',
                 'image' => "books/harry_potter_04.webp",
                 'release_date' => "2001-06-08",
-                'qty_in_stock' => random_int(50, 115),
                 'page_number' => 584,
             ],
         ];
-        foreach ($books as $key => $value) {
-            $result = array_merge($value, $conf);
+        foreach ($books as $value) {
+            $result = array_merge($value, $conf, ['qty_in_stock' => random_int(50, 115)]);
             $result['slug'] = strtolower($this->clean_string($result['product_name'])) . '-' . random_int(1000, 9999);
             Book::create($result);
         }

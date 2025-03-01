@@ -4,12 +4,10 @@ namespace Database\Seeders;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Correios;
-use App\Models\Address;
 use App\Models\OrderProduct;
 use App\Models\Book;
 use App\Models\Order;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
@@ -23,114 +21,51 @@ class OrderSeeder extends Seeder
     {
         // ===================================================================
 
-        $books = [
-            [
-                'livro' => Book::find(1),
-                'quantity'   => random_int(1, 4),
-            ],
-            [
-                'livro' => Book::find(3),
-                'quantity'   => random_int(1, 4),
-            ],
-            [
-                'livro' => Book::find(7),
-                'quantity'   => random_int(1, 4),
-            ],
-            [
-                'livro' => Book::find(10),
-                'quantity'   => random_int(1, 4),
-            ],
-        ];
+        $books = Book::select('id', 'price')->inRandomOrder()->limit(4)->get()->map(function ($book) {
+            $book->quantity = random_int(1, 4);
+            return $book;
+        });
 
         $cliente = User::find(1);
-        $list_end = Address::where('usuario_id', '=', $cliente->id)
-            ->get();
 
-        $end = $list_end[0];
-
+        $end = $cliente->addresses[0];
         $dataPedido = '2022-11-25';
+
         $this->criar($books, $cliente, $end, $dataPedido);
 
         // ===================================================================
 
-        $books = [
-            [
-                'livro' => Book::find(2),
-                'quantity'   => random_int(1, 5),
-            ],
-            [
-                'livro' => Book::find(9),
-                'quantity'   => random_int(2, 5),
-            ],
-            [
-                'livro' => Book::find(11),
-                'quantity'   => random_int(1, 4),
-            ],
-            [
-                'livro' => Book::find(12),
-                'quantity'   => random_int(2, 3),
-            ],
-            [
-                'livro' => Book::find(13),
-                'quantity'   => random_int(1, 4),
-            ],
-        ];
+        $books = Book::select('id', 'price')->inRandomOrder()->limit(4)->get()->map(function ($book) {
+            $book->quantity = random_int(1, 5);
+            return $book;
+        });
 
         $dataPedido = '2022-11-11';
+
         $this->criar($books, $cliente, $end, $dataPedido);
 
         // ===================================================================
 
-        $books = [
-            [
-                'livro' => Book::find(9),
-                'quantity'   => random_int(1, 4),
-            ],
-            [
-                'livro' => Book::find(3),
-                'quantity'   => random_int(1, 7),
-            ],
-            [
-                'livro' => Book::find(2),
-                'quantity'   => random_int(1, 6),
-            ],
-            [
-                'livro' => Book::find(15),
-                'quantity'   => random_int(1, 7),
-            ],
-        ];
+        $books = Book::select('id', 'price')->inRandomOrder()->limit(4)->get()->map(function ($book) {
+            $book->quantity = random_int(1, 7);
+            return $book;
+        });
 
-        $end = $list_end[1];
-
+        $end = $cliente->addresses[1];
         $dataPedido = '2022-10-20';
+
         $this->criar($books, $cliente, $end, $dataPedido);
 
         // ===================================================================
 
-        $books = [
-            [
-                'livro' => Book::find(6),
-                'quantity'   => random_int(1, 10),
-            ],
-            [
-                'livro' => Book::find(4),
-                'quantity'   => random_int(2, 10),
-            ],
-            [
-                'livro' => Book::find(11),
-                'quantity'   => random_int(3, 10),
-            ],
-            [
-                'livro' => Book::find(13),
-                'quantity'   => random_int(1, 10),
-            ],
-        ];
+        $books = Book::select('id', 'price')->inRandomOrder()->limit(4)->get()->map(function ($book) {
+            $book->quantity = random_int(1, 5);
+            return $book;
+        });
 
         $cliente = User::find(2);
-        $list_end = Address::where('usuario_id', '=', $cliente->id)
-            ->get();
 
-        $end = $list_end[0];
+        $end = $cliente->addresses[0];
 
         $dataPedido = '2022-08-15';
         $this->criar($books, $cliente, $end, $dataPedido);
@@ -140,34 +75,35 @@ class OrderSeeder extends Seeder
 
     private function criar($books, $cliente, $end, $dataPedido)
     {
-        $total_value = 0;
-        foreach ($books as $p) {
-            $total_value += $p["quantity"] * $p["livro"]->price;
-        }
 
-        $endereco = $end->destinatario . "<br>" .
-            $end->logradouro . ", " . $end->numero . " - " . $end->bairro . "<br>" .
-            $end->cep . " - " . $end->cidade . " - " . $end->uf . "<br>" .
-            $end->complemento . "<br>" .
-            $end->phone_number;
+        $total_value = $books->sum(function ($book) {
+            return $book->quantity * $book->price;
+        });
+
+        $endereco = "$end->destinatario<br>" .
+                    "$end->logradouro, $end->numero - $end->bairro<br>" .
+                    "$end->cep - $end->cidade - $end->uf<br>" .
+                    "$end->complemento<br>" .
+                    "$end->phone_number";
+        
         $order = Order::create([
-            'order_date'   => $dataPedido,
-            'endereco'      => $endereco,
-            'total_value'    => $total_value,
-            'servicoFrete'  => Correios::SERVICO_PAC,
-            'valorFrete'    => 10.00,
-            'status'        => OrderStatusEnum::PAID,
-            'cpf'           => $cliente->cpf,
-            'client_id'  => $cliente->id,
+            'order_date' => $dataPedido,
+            'endereco' => $endereco,
+            'total_value' => $total_value,
+            'servicoFrete' => Correios::SERVICO_PAC,
+            'valorFrete' => 10.00,
+            'status' => OrderStatusEnum::PAID,
+            'cpf' => $cliente->cpf,
+            'client_id' => $cliente->id,
         ]);
 
-        foreach ($books as $p) {
+        foreach ($books as $book) {
             OrderProduct::create([
-                'quantity'               => $p["quantity"],
-                'unit_value'    => $p["livro"]->price,
-                'item_value'        => $p["livro"]->price * $p["quantity"],
-                'book_id'        => $p["livro"]->id,
-                'order_id'         => $order->id,
+                'quantity' => $book->quantity,
+                'unit_value' => $book->price,
+                'item_value' => $book->price * $book->quantity,
+                'book_id' => $book->id,
+                'order_id' => $order->id,
             ]);
         }
     }

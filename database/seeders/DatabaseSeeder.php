@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
             AddressSeeder::class,
 
             AdminSeeder::class,
+            
             // =======================
 
             PublisherSeeder::class,
 
             GenreSeeder::class,
             CollectionSeeder::class,
-            CollectionGenreSeeder::class,
 
             BookSeeder::class,
 
