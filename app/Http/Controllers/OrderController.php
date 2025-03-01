@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function confirmarPedido(Request $request)
+    public function order_info(Request $request)
     {
 
         $cart = Cart::content();
@@ -42,10 +42,10 @@ class OrderController extends Controller
         $request->session()->put('endereco', $endereco);
         // $request->session()->put('frete_options', $frete_options);
 
-        return view('cart.confirm_order', compact('item_list', 'endereco'));
+        return view('cart.order_info', compact('item_list', 'endereco'));
     }
 
-    public function concluirPedido(Request $request)
+    public function confirm_order(Request $request)
     {
 
         $cart = Cart::content();
@@ -90,13 +90,13 @@ class OrderController extends Controller
         return redirect()->route('profile.orders.index')->with('message', 'Order realizado.');
     }
 
-    public function meusPedidos()
+    public function my_orders_page()
     {
         $item_list = Auth::guard('web')->user()->orders()->orderBy('order_date', 'DESC')->get();
         return view('profile.my_orders_page', compact('item_list'));
     }
 
-    public function cancelarPedido($id)
+    public function order_cancel($id)
     {
         try {
             $order_id = Operations::decryptId($id);

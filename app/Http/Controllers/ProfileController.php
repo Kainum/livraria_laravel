@@ -33,11 +33,11 @@ class ProfileController extends Controller
         return redirect()->route('profile.view');
     }
 
-    public function editPassword() {
+    public function password_edit() {
         return view('profile.edit_password');
     }
 
-    public function updatePassword(PasswordRequest $request) {
+    public function password_update(PasswordRequest $request) {
         $new_password = bcrypt($request->new_password);
         // $user_id = Auth::guard('web')->user()->id;
 

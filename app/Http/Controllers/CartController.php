@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
 
-    public function cartPage() {
+    public function view_cart_page() {
         $cart = Cart::content();
 
         $qtd_total = $cart?->items->sum(function ($q) {
@@ -106,7 +106,7 @@ class CartController extends Controller
         return redirect()->route('cart.page');
     }
 
-    public function selecionarEndereco() {
+    public function select_address() {
 
         if (Cart::content()?->items->count() == 0) { //se não tem nada então retorna
             return redirect()->route('cart.page')->with('message', 'Erro ao concluir pedido.');

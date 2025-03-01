@@ -15,7 +15,7 @@
                     <span>Telefone: {{ $item->phone_number }}</span>
                 </p>
 
-                <form action="{{ route('cart.confirmar') }}" method="post">
+                <form action="{{ route('cart.revisar') }}" method="post">
                     @csrf
 
                     <input type="hidden" name="endereco_id" value="{{ \Crypt::encrypt($item->id) }}">

@@ -13,7 +13,7 @@
         <p>{{ "$endereco->cidade, $endereco->uf - $endereco->cep" }}</p>
     </div>
 
-    <form action="{{ route('cart.concluir') }}" method="post">
+    <form action="{{ route('cart.confirm') }}" method="post">
         @csrf
 
         <div class="form-check">

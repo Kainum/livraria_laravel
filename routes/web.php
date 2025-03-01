@@ -42,18 +42,18 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('carrinho')->name('cart.')->group(function () {
         Route::controller(CartController::class)->group(function () {
-            Route::get('/', 'cartPage')->name('page');
+            Route::get('/', 'view_cart_page')->name('page');
             Route::post('/', 'store')->name('store');
             Route::get('/add/{id}', 'cart_add')->name('add');
             Route::get('/sub/{id}', 'cart_sub')->name('sub');
             Route::get('/exclude/{id}', 'cart_exclude')->name('exclude');
 
-            Route::post('/endereco', 'selecionarEndereco')->name('endereco');
+            Route::post('/endereco', 'select_address')->name('endereco');
         });
 
         Route::controller(OrderController::class)->group(function () {
-            Route::post('/confirmar_pedido', 'confirmarPedido')->name('confirmar');
-            Route::post('/concluir', 'concluirPedido')->name('concluir');
+            Route::post('/revisar_pedido', 'order_info')->name('revisar');
+            Route::post('/confirmar_pedido', 'confirm_order')->name('confirm');
         });
     });
 
@@ -64,8 +64,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit', 'edit')->name('edit');
             Route::post('/update', 'update')->name('update');
 
-            Route::get('/password/edit', 'editPassword')->name('password.edit');
-            Route::post('/password/update', 'updatePassword')->name('password.update');
+            Route::get('/password/edit', 'password_edit')->name('password.edit');
+            Route::post('/password/update', 'password_update')->name('password.update');
         });
 
         Route::prefix('wishlist')->controller(WishListController::class)->name('wishlist.')->group(function () {
@@ -83,8 +83,8 @@ Route::middleware('auth')->group(function () {
         });
         
         Route::prefix('my-orders')->controller(OrderController::class)->name('orders.')->group(function () {
-            Route::get('/', 'meusPedidos')->name('index');
-            Route::get('/cancelar/{id}', 'cancelarPedido')->name('cancel');
+            Route::get('/', 'my_orders_page')->name('index');
+            Route::get('/cancelar/{id}', 'order_cancel')->name('cancel');
         });
 
     });
